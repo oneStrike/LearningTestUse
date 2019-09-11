@@ -333,7 +333,7 @@ if(isNaN(num)){
 如何把其它数据类型转换为布尔类型?
 
 - Boolean
-- !
+- ! 取反
 - !!
 
 ```javascript
