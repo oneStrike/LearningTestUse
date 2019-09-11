@@ -1,21 +1,14 @@
 ## 浅聊前端发展史
 
-第一阶段：C/S（client server） -> B/S（browser server） 网页制作
-技术栈：PhotoShop、HTML、CSS
+第一阶段：C/S（client server） -> B/S（browser server） 网页制作技术栈：PhotoShop、HTML、CSS
 
-第二阶段：从静态到动态，从后端到前端 前端开发工程师
-前后端分离
-后台：完成数据的分析和业务逻辑编写（包含 API 接口编写）
-前端：网页制作、JS 交互效果、数据的交互和绑定
+第二阶段：从静态到动态，从后端到前端 前端开发工程师前后端分离后台：完成数据的分析和业务逻辑编写（包含 API 接口编写）前端：网页制作、JS 交互效果、数据的交互和绑定
 
 技术栈：JavaScript、AJAX（跨域技巧）、jQuery...
 
-第三阶段：从前端到全端（从 PC 端到移动端）
-技术栈：H5、CSS3、响应式布局开发、Zepto、Hybrid（混合 APP 开发）、微信小程序...
+第三阶段：从前端到全端（从 PC 端到移动端）技术栈：H5、CSS3、响应式布局开发、Zepto、Hybrid（混合 APP 开发）、微信小程序...
 
-第四阶段：从全端到全栈
-全栈开发：前后端都可以开发（严格意义讲，一种语言完成前后端开发）
-技术栈：NODE(基于 JS 编程语言开发服务器端程序)、Express/Koa...
+第四阶段：从全端到全栈全栈开发：前后端都可以开发（严格意义讲，一种语言完成前后端开发）技术栈：NODE(基于 JS 编程语言开发服务器端程序)、Express/Koa...
 
 为了迎合日益发展的前端开发，JS 中诞生很多有助于开发、维护、提高性能的框架：Vue、React、Angular、webpack...
 
@@ -25,18 +18,13 @@
 
 ### 关于浏览器的内核和引擎
 
-webkit（v8 引擎）：大部分浏览器
-gecko：火狐
-trident：IE
-...
+webkit（v8 引擎）：大部分浏览器 gecko：火狐 trident：IE ...
 
-W3C：万维网联盟，制定编程语言的规范与标准
-开发者按照规范编写代码，浏览器开发商也会开发一套按照规范把代码渲染成页面的东西（这个东西就是内核或者引擎）
+W3C：万维网联盟，制定编程语言的规范与标准开发者按照规范编写代码，浏览器开发商也会开发一套按照规范把代码渲染成页面的东西（这个东西就是内核或者引擎）
 
 浏览器内核作用：按照一定的规范，把代码基于 GPU(显卡)绘制出对应的图形和页面等
 
-为啥会出现浏览器兼容： 1.部分浏览器会提前开发一些更好的功能，后期这些功能会被收录到 W3C 规范中，但是在收录之前，会存在一定的兼容性 2.各个浏览器厂商，为了突出自己的独特性，用其它方法实现了 W3C 规范中的功能
-...
+为啥会出现浏览器兼容： 1.部分浏览器会提前开发一些更好的功能，后期这些功能会被收录到 W3C 规范中，但是在收录之前，会存在一定的兼容性 2.各个浏览器厂商，为了突出自己的独特性，用其它方法实现了 W3C 规范中的功能 ...
 
 ---
 
@@ -44,9 +32,7 @@ W3C：万维网联盟，制定编程语言的规范与标准
 
 JS：轻量级的客户端脚本编程语言
 
-1. 编程语言
-   HTML+CSS 是标记语言
-   编程语言是具备一定逻辑的，拥有自己的编程思想（面向对象编程 [OOP]、面向过程编程）
+1. 编程语言 HTML+CSS 是标记语言编程语言是具备一定逻辑的，拥有自己的编程思想（面向对象编程 [OOP]、面向过程编程）
 
 - 面向对象
   - C++
@@ -58,9 +44,9 @@ JS：轻量级的客户端脚本编程语言
 - 面向过程
   - C
 
-2.  目前的 JS 已经不仅仅是客户端语言了，基于 NODE 可以做服务器端程序，所以 JS 是全栈编程语言
+2. 目前的 JS 已经不仅仅是客户端语言了，基于 NODE 可以做服务器端程序，所以 JS 是全栈编程语言
 
-3.  学习 JS，我们学习它的几部分组成
+3. 学习 JS，我们学习它的几部分组成
 
 - ECMAScript（ES）：JS 的核心语法
 - DOM：document object model 文档对象模型，提供各种 API（属性和方法）让 JS 可以获取或者操作页面中的 HTML 元素(DOM 和元素)
@@ -176,8 +162,7 @@ a==b =>false
 
 ### 运行结果小扩展
 
-扩展：JS 代码如何被运行以及运行后如何输出结果
-[如何被运行]
+扩展：JS 代码如何被运行以及运行后如何输出结果 [如何被运行]
 
 - 把代码运行在浏览器中(浏览器内核来渲染解析)
 - 基于 NODE 来运行(NODE 也是一个基于 V8 引擎渲染和解析 JS 的工具)
@@ -228,9 +213,7 @@ if (flag) {
 
 ## 数据类型的详细剖析
 
-1. number 数字类型
-   NaN：not a number 但是它是数字类型的
-   isNaN：检测当前值是否不是有效数字，返回 true 代表不是有效数字，返回 false 是有效数字
+1. number 数字类型 NaN：not a number 但是它是数字类型的 isNaN：检测当前值是否不是有效数字，返回 true 代表不是有效数字，返回 false 是有效数字
 
 ```javascript
 //=>语法：isNaN([value])
@@ -555,39 +538,13 @@ switch case 中每一种 case 情况的比较都是基于"==="绝对相等来完
 '10'===10 绝对比较，如果两边的数据类型不一样，则直接不相等，它要求类型和值都完全一样才会相等（真实项目中为了保证代码的严谨性，我们应该更多使用绝对比较）
 ```
 
-function fn(){
-var total=10;
-total+=10;
-total/=2;
-total=total.toFixed(2);
-console.log(total);
-}
-fn();
-fn();
-...
-想用多少次，我们就执行多少次函数即可
+function fn(){ var total=10; total+=10; total/=2; total=total.toFixed(2); console.log(total); } fn(); fn(); ... 想用多少次，我们就执行多少次函数即可
 
-=====
-ES3 标准中：
-//=>创建函数
-function 函数名([参数]){
-函数体：实现功能的 JS 代码
-}
-//=>函数执行
-函数名();
+===== ES3 标准中： //=>创建函数 function 函数名([参数]){ 函数体：实现功能的 JS 代码 } //=>函数执行函数名();
 
-=====
-ES6 标准中创建箭头函数：
-let 函数名(变量名)=([参数])=>{
-函数体
-}
-函数名();
+===== ES6 标准中创建箭头函数： let 函数名(变量名)=([参数])=>{ 函数体 } 函数名();
 
-let fn=()=>{
-let total=10;
-...
-};
-fn();
+let fn=()=>{ let total=10; ... }; fn();
 
 ### BAT 面试题：
 
@@ -636,8 +593,7 @@ console.log(typeof typeof []);
 
 ## 运算符概述
 
-第 2 章：变量和数据类型，解决数据存放问题
-第 3 章：运算符，解决数据运算的问题，面试题密集
+第 2 章：变量和数据类型，解决数据存放问题第 3 章：运算符，解决数据运算的问题，面试题密集
 
 ### 操作符和操作数
 
@@ -695,9 +651,7 @@ console.log(typeof typeof []);
 
 console.log 函数调用的返回结果为 undefined
 
-> chrome 浏览器控制台的环境是 REPL 环境
-> REPL：Read Eval Print Loop，读-执行-打印-循环
-> 当直接在控制台书写代码时，除了运行代码之外，还会输出该表达式的返回值
+> chrome 浏览器控制台的环境是 REPL 环境 REPL：Read Eval Print Loop，读-执行-打印-循环当直接在控制台书写代码时，除了运行代码之外，还会输出该表达式的返回值
 
 ## 算术运算符
 
@@ -714,13 +668,9 @@ console.log 函数调用的返回结果为 undefined
 1. 数字运算是不精确的
 2. 除数为 0
 
-如果被除数是正数，得到结果 Infinity （正无穷）
-如果被除数是负数，得到结果 -Infinity （负无穷）
-如果被除数是 0，得到结果 NaN （Not a Number，非数字）
+如果被除数是正数，得到结果 Infinity （正无穷）如果被除数是负数，得到结果 -Infinity （负无穷）如果被除数是 0，得到结果 NaN （Not a Number，非数字）
 
-> typeof 函数返回类型为 string
-> isNaN 函数，该函数用于判断一个数据是否是 NaN，返回 boolean
-> isFinite 函数，该函数用于判断一个数据是否是有限的，返回 boolean
+> typeof 函数返回类型为 string isNaN 函数，该函数用于判断一个数据是否是 NaN，返回 boolean isFinite 函数，该函数用于判断一个数据是否是有限的，返回 boolean
 
 3. 求余
 
@@ -754,11 +704,7 @@ console.log 函数调用的返回结果为 undefined
 
 将另一边的其他类型，转换为字符串
 
-数字 -> 数字字符串
-boolean -> boolean 字符串
-null -> "null"
-undefined -> "undefined"
-对象 -> "[object Object]"
+数字 -> 数字字符串 boolean -> boolean 字符串 null -> "null" undefined -> "undefined" 对象 -> "[object Object]"
 
 - 加号两边都没有字符串，但一边有对象，将对象转换为字符串，然后按照上面的规则进行
 - 其他情况和上面的数学运算一致
@@ -811,22 +757,7 @@ if(num>0){
 
 ## JS 中数据类型转换汇总
 
-JS 中的数据类型分为
-【基本数据类型】
-数字 number
-字符串 string
-布尔 boolean
-空 null
-未定义 undefined
-【引用数据类型】
-对象 object
-普通对象
-数组对象 (Array)
-正则对象 (RegExp)
-日期对象 (Date)
-数学函数 (Math)
-...
-函数 function
+JS 中的数据类型分为【基本数据类型】数字 number 字符串 string 布尔 boolean 空 null 未定义 undefined 【引用数据类型】对象 object 普通对象数组对象 (Array) 正则对象 (RegExp) 日期对象 (Date) 数学函数 (Math) ... 函数 function
 
 真实项目中，根据需求，我们往往需要把数据类型之间进行转换
 
@@ -955,8 +886,7 @@ if ("3px" + 3) {
 }
 ```
 
-`2.转换的规律`
-只有“0/NaN/''/null/undefined”五个值转换为布尔的 false,其余都是转换为 true
+`2.转换的规律` 只有“0/NaN/''/null/undefined”五个值转换为布尔的 false,其余都是转换为 true
 
 ### 特殊情况：数学运算和字符串拼接 “+”
 
@@ -1014,21 +944,11 @@ obj1==obj2 =>true
 
 ==========================>上面是重点强调的
 
-对象==数字：把对象转换为数字
-对象==布尔：把对象转换为数字，把布尔也转换为数字
-对象==字符串：把对象转换为数字，把字符串也转换为数字
-字符串==数字：字符串转换为数字
-字符串==布尔：都转换为数字
-布尔==数字：把布尔转换为数字
-===========================>不同情况的比较，都是把其它值转换为数字，然后再进行比较的
+对象==数字：把对象转换为数字对象==布尔：把对象转换为数字，把布尔也转换为数字对象==字符串：把对象转换为数字，把字符串也转换为数字字符串==数字：字符串转换为数字字符串==布尔：都转换为数字布尔==数字：把布尔转换为数字 ===========================>不同情况的比较，都是把其它值转换为数字，然后再进行比较的
 
-null==undefined：true
-null===undefined：false
-null&&undefined 和其它值都不相等
+null==undefined：true null===undefined：false null&&undefined 和其它值都不相等
 
-NaN==NaN：false
-NaN 和谁都不相等包括自己
-===========================>以上需要特殊记忆
+NaN==NaN：false NaN 和谁都不相等包括自己 ===========================>以上需要特殊记忆
 
 ```javascript
 1==true =>true
@@ -1089,11 +1009,7 @@ var ary = [
 > - 方法的返回值
 > - 原有数组是否改变
 
-**`push`**
-作用：向数组“末尾”追加新的内容
-参数：追加的内容（可以是一个，也可是多个）
-返回值：新增后数组的长度
-原有数组改变
+**`push`** 作用：向数组“末尾”追加新的内容参数：追加的内容（可以是一个，也可是多个）返回值：新增后数组的长度原有数组改变
 
 ```javascript
 var ary = [12, 23, 34];
@@ -1101,41 +1017,19 @@ ary.push(100); //=>4  ary:[12,23,34,100]
 ary.push(100, { name: "xxx" }); //=>6  ary:[12,23,34,100,100,{...}]
 ```
 
-**`pop`**
-作用：删除数组最后一项
-参数：无
-返回：被删除的那一项内容
-原有数组改变
-![nNQTrF.png](https://s2.ax1x.com/2019/09/10/nNQTrF.png)
+**`pop`** 作用：删除数组最后一项参数：无返回：被删除的那一项内容原有数组改变 ![nNQTrF.png](https://s2.ax1x.com/2019/09/10/nNQTrF.png)
 
-**`shift`**
-作用：删除数组中的第一项
-参数：无
-返回：被删除的那一项内容
-原有数组改变
-![nNQv26.png](https://s2.ax1x.com/2019/09/10/nNQv26.png)
+**`shift`** 作用：删除数组中的第一项参数：无返回：被删除的那一项内容原有数组改变 ![nNQv26.png](https://s2.ax1x.com/2019/09/10/nNQv26.png)
 
-**`unshift`**
-作用：向数组开始位置追加新内容
-参数：要新增的内容
-返回：新增后数组的长度
-原有数组改变
-![nNlprD.png](https://s2.ax1x.com/2019/09/10/nNlprD.png)
+**`unshift`** 作用：向数组开始位置追加新内容参数：要新增的内容返回：新增后数组的长度原有数组改变 ![nNlprD.png](https://s2.ax1x.com/2019/09/10/nNlprD.png)
 
-**`splice`**
-基于 SPLICE 可以对数组进行很多的操作：删除指定位置的内容、向数组指定位置增加内容、还可以修改指定位置的信息
+**`splice`** 基于 SPLICE 可以对数组进行很多的操作：删除指定位置的内容、向数组指定位置增加内容、还可以修改指定位置的信息
 
-`删除：ary.splice(n,m)`
-从索引 n 开始，删除 m 个内容，把删除的部分以一个新数组返回，原有数组改变
-![nNlFIA.png](https://s2.ax1x.com/2019/09/10/nNlFIA.png)
+`删除：ary.splice(n,m)` 从索引 n 开始，删除 m 个内容，把删除的部分以一个新数组返回，原有数组改变 ![nNlFIA.png](https://s2.ax1x.com/2019/09/10/nNlFIA.png)
 
-`新增：ary.splice(n,0,x,...)`
-从索引 n 开始删除零项（没删除），把 X 或者更多需要插入的内容存放到数组中索引 N 的“前面”
-![nNlSKO.png](https://s2.ax1x.com/2019/09/10/nNlSKO.png)
+`新增：ary.splice(n,0,x,...)` 从索引 n 开始删除零项（没删除），把 X 或者更多需要插入的内容存放到数组中索引 N 的“前面” ![nNlSKO.png](https://s2.ax1x.com/2019/09/10/nNlSKO.png)
 
-`修改：ary.splice(n,m,x,...)`
-修改的原理就是把原有内容删除掉，然后用新的内容替换这部分信息即可
-![nNlPVH.png](https://s2.ax1x.com/2019/09/10/nNlPVH.png)
+`修改：ary.splice(n,m,x,...)` 修改的原理就是把原有内容删除掉，然后用新的内容替换这部分信息即可 ![nNlPVH.png](https://s2.ax1x.com/2019/09/10/nNlPVH.png)
 
 > 需求扩展：
 >
@@ -1154,50 +1048,21 @@ ary.splice(ary.length, 0, 100);
 ary[ary.length] = 100;
 ```
 
-![nNlAPI.png](https://s2.ax1x.com/2019/09/10/nNlAPI.png)
-![nNlZxf.png](https://s2.ax1x.com/2019/09/10/nNlZxf.png)
+![nNlAPI.png](https://s2.ax1x.com/2019/09/10/nNlAPI.png) ![nNlZxf.png](https://s2.ax1x.com/2019/09/10/nNlZxf.png)
 
 ![nNlEGt.png](https://s2.ax1x.com/2019/09/10/nNlEGt.png)
 
-**`slice`**
-作用：在一个数组中，按照条件查找出其中的部分内容
-参数：两个参数（n/m），从索引 n 开始，找到索引 m 处，但是不包含 m
-返回：以一个新数组存储查找的内容
-原有数组不会变
-![nNlnsS.png](https://s2.ax1x.com/2019/09/10/nNlnsS.png)
+**`slice`** 作用：在一个数组中，按照条件查找出其中的部分内容参数：两个参数（n/m），从索引 n 开始，找到索引 m 处，但是不包含 m 返回：以一个新数组存储查找的内容原有数组不会变 ![nNlnsS.png](https://s2.ax1x.com/2019/09/10/nNlnsS.png)
 
-**`concat`**
-作用：实现多个数组(或者值)的拼接
-参数：数组或者值
-返回：拼接后的新数组
-原有数组不变
-![nNlVRP.png](https://s2.ax1x.com/2019/09/10/nNlVRP.png)
+**`concat`** 作用：实现多个数组(或者值)的拼接参数：数组或者值返回：拼接后的新数组原有数组不变 ![nNlVRP.png](https://s2.ax1x.com/2019/09/10/nNlVRP.png)
 
-**`toString`**
-作用：把数组转换为字符串
-参数：无
-返回：数组中的每一项用逗号分隔的字符串
-原有数组不变
+**`toString`** 作用：把数组转换为字符串参数：无返回：数组中的每一项用逗号分隔的字符串原有数组不变
 
-**`join`**
-作用：和 toString 类似，也是把数组转换为字符串，但是我们可以设置变为字符串后，每一项之间的连接符
-参数：指定的链接符
-返回：字符串
-原有数组不变
-![nNlmM8.png](https://s2.ax1x.com/2019/09/10/nNlmM8.png)
+**`join`** 作用：和 toString 类似，也是把数组转换为字符串，但是我们可以设置变为字符串后，每一项之间的连接符参数：指定的链接符返回：字符串原有数组不变 ![nNlmM8.png](https://s2.ax1x.com/2019/09/10/nNlmM8.png)
 
-**`reverse`**
-作用：把数组倒过来排列
-参数：无
-返回：排列后的新数组
-原有数组改变
-![nNluqg.png](https://s2.ax1x.com/2019/09/10/nNluqg.png)
+**`reverse`** 作用：把数组倒过来排列参数：无返回：排列后的新数组原有数组改变 ![nNluqg.png](https://s2.ax1x.com/2019/09/10/nNluqg.png)
 
-**`sort`**
-作用：给数组排序
-参数：无/函数
-返回：排序后的新数组
-原有数组改变
+**`sort`** 作用：给数组排序参数：无/函数返回：排序后的新数组原有数组改变
 
 ```javascript
 //=>sort在不传递参数的情况下，只能处理10以内数字排序
@@ -1214,13 +1079,7 @@ ary.sort(function (a,b){
 });
 ```
 
-**`indexOf / lastIndexOf`**
-这两个方法不兼容 IE 低版本浏览器(IE6~8)
-作用：检测当前值在数组中第一次或者最后一次出现位置的索引
-参数：要检测的值
-返回：索引
-原有数组不变
-![nNlMZQ.png](https://s2.ax1x.com/2019/09/10/nNlMZQ.png)
+**`indexOf / lastIndexOf`** 这两个方法不兼容 IE 低版本浏览器(IE6~8) 作用：检测当前值在数组中第一次或者最后一次出现位置的索引参数：要检测的值返回：索引原有数组不变 ![nNlMZQ.png](https://s2.ax1x.com/2019/09/10/nNlMZQ.png)
 
 ```javascript
 //=>验证数组中是否包含某一项
@@ -1267,15 +1126,9 @@ for(var i=0;i<str.length;i++){
 
 字符串是基本数据类型，字符串的每一次操作都是值直接的进行操作，不像数组一样是基于空间地址来操作的，所以不存在原有字符串是否改变这一说，肯定都是不变的
 
-**`charAt/charCodeAt`**
-作用：charAt 根据索引获取指定位置的字符，charCodeAt 不仅仅获取字符，它获取的是字符对应的 Unicode 编码值(ASC II 码值)
-参数：索引
-返回：字符或者对应的编码
-![nNlsRx.png](https://s2.ax1x.com/2019/09/10/nNlsRx.png)
-![nNlrJ1.png](https://s2.ax1x.com/2019/09/10/nNlrJ1.png)
+**`charAt/charCodeAt`** 作用：charAt 根据索引获取指定位置的字符，charCodeAt 不仅仅获取字符，它获取的是字符对应的 Unicode 编码值(ASC II 码值) 参数：索引返回：字符或者对应的编码 ![nNlsRx.png](https://s2.ax1x.com/2019/09/10/nNlsRx.png) ![nNlrJ1.png](https://s2.ax1x.com/2019/09/10/nNlrJ1.png)
 
-**`indexOf/lastIndexOf`**
-基于这两个方法，可以获取字符在字符串中第一次或者最后一次出现位置的索引，有这个字符，返回大于等于零的索引，不包含这个字符，返回的结果是-1，所以可以基于这两个方法，验证当前字符串中是否包含某个字符
+**`indexOf/lastIndexOf`** 基于这两个方法，可以获取字符在字符串中第一次或者最后一次出现位置的索引，有这个字符，返回大于等于零的索引，不包含这个字符，返回的结果是-1，所以可以基于这两个方法，验证当前字符串中是否包含某个字符
 
 ```javascript
 var str = "zhufengpeixun";
@@ -1284,30 +1137,17 @@ if (str.indexOf("@") > -1) {
 }
 ```
 
-**`slice`**
-作用：str.slice(n,m) 从索引 n 开始找到索引为 m 处(不包含 m)，把找到的字符当做新字符串返回
-![nNlyz6.png](https://s2.ax1x.com/2019/09/10/nNlyz6.png)
+**`slice`** 作用：str.slice(n,m) 从索引 n 开始找到索引为 m 处(不包含 m)，把找到的字符当做新字符串返回 ![nNlyz6.png](https://s2.ax1x.com/2019/09/10/nNlyz6.png)
 
-**`substring`**
-和 slice 语法一模一样，唯一的区别在于：slice 支持负数索引，而 substring 不支持负数索引
-![nNl0o9.png](https://s2.ax1x.com/2019/09/10/nNl0o9.png)
+**`substring`** 和 slice 语法一模一样，唯一的区别在于：slice 支持负数索引，而 substring 不支持负数索引 ![nNl0o9.png](https://s2.ax1x.com/2019/09/10/nNl0o9.png)
 
-**`substr`**
-也是字符串截取的方法，用法是：str.substr(n,m)，从索引 n 开始截取 m 个字符
-![nNlwdJ.png](https://s2.ax1x.com/2019/09/10/nNlwdJ.png)
+**`substr`** 也是字符串截取的方法，用法是：str.substr(n,m)，从索引 n 开始截取 m 个字符 ![nNlwdJ.png](https://s2.ax1x.com/2019/09/10/nNlwdJ.png)
 
-**`toUpperCase/toLowerCase`**
-实现字母的大小写转换，toUpperCase 小写转大写，toLowerCase 大写转小写
-![nNlDiR.png](https://s2.ax1x.com/2019/09/10/nNlDiR.png)
+**`toUpperCase/toLowerCase`** 实现字母的大小写转换，toUpperCase 小写转大写，toLowerCase 大写转小写 ![nNlDiR.png](https://s2.ax1x.com/2019/09/10/nNlDiR.png)
 
-**`split`**
-和数组中的 join 相对应，数组中的 join 是把数组们一项按照指定的连接符变为字符串，而 split 是把字符串按照指定的分隔符，拆分成数组中每一项
-![nNlcQK.png](https://s2.ax1x.com/2019/09/10/nNlcQK.png)
+**`split`** 和数组中的 join 相对应，数组中的 join 是把数组们一项按照指定的连接符变为字符串，而 split 是把字符串按照指定的分隔符，拆分成数组中每一项 ![nNlcQK.png](https://s2.ax1x.com/2019/09/10/nNlcQK.png)
 
-**`replace`**
-作用：替换字符串中的原有字符
-参数：原有字符，要替换的新字符
-返回：替换后的字符串
+**`replace`** 作用：替换字符串中的原有字符参数：原有字符，要替换的新字符返回：替换后的字符串
 
 ```javascript
 //=>把“zhufeng”替换为“珠峰”
@@ -1376,12 +1216,7 @@ console.log(result);
 
 ### URL 地址问号传参解析
 
-> 有一个 URL 地址“http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man” 地址问号后面的内容是我们需要解析出来的参数信息
-> {
-> lx:1,
-> name:'AA',
-> sex:'man'
-> }
+> 有一个 URL 地址“http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man” 地址问号后面的内容是我们需要解析出来的参数信息 { lx:1, name:'AA', sex:'man' }
 
 ```javascript
 /*
@@ -1450,28 +1285,19 @@ typeof Math =>"object"
 
 ### Math 中提供的常用方法
 
-**`abs`**：取绝对值
-![nN1M6K.png](https://s2.ax1x.com/2019/09/10/nN1M6K.png)
-**`ceil/floor`**：向上或者向下取整
-![nN130e.png](https://s2.ax1x.com/2019/09/10/nN130e.png)
+**`abs`**：取绝对值 ![nN1M6K.png](https://s2.ax1x.com/2019/09/10/nN1M6K.png) **`ceil/floor`**：向上或者向下取整 ![nN130e.png](https://s2.ax1x.com/2019/09/10/nN130e.png)
 
-**`round`**：四舍五入
-![nN11mD.png](https://s2.ax1x.com/2019/09/10/nN11mD.png)
+**`round`**：四舍五入 ![nN11mD.png](https://s2.ax1x.com/2019/09/10/nN11mD.png)
 
-**`sqrt`**：开平方
-![nN1QOO.png](https://s2.ax1x.com/2019/09/10/nN1QOO.png)
+**`sqrt`**：开平方 ![nN1QOO.png](https://s2.ax1x.com/2019/09/10/nN1QOO.png)
 
-**`pow`**：取幂（N 的 M 次方）
-![nN1vnO.png](https://s2.ax1x.com/2019/09/10/nN1vnO.png)
+**`pow`**：取幂（N 的 M 次方） ![nN1vnO.png](https://s2.ax1x.com/2019/09/10/nN1vnO.png)
 
-**`max/min`**：获取最大值和最小值
-![nN1I74.png](https://s2.ax1x.com/2019/09/10/nN1I74.png)
+**`max/min`**：获取最大值和最小值 ![nN1I74.png](https://s2.ax1x.com/2019/09/10/nN1I74.png)
 
-**`PI`**：获取圆周率
-![nN1Kl6.png](https://s2.ax1x.com/2019/09/10/nN1Kl6.png)
+**`PI`**：获取圆周率 ![nN1Kl6.png](https://s2.ax1x.com/2019/09/10/nN1Kl6.png)
 
-**`random`**：获取 0~1 之间的随机小数
-![nN18TH.png](https://s2.ax1x.com/2019/09/10/nN18TH.png)
+**`random`**：获取 0~1 之间的随机小数 ![nN18TH.png](https://s2.ax1x.com/2019/09/10/nN18TH.png)
 
 `Math.round(Math.random()*(m-n)+n)`：获取 n-m 之间的随机整数
 
@@ -1479,8 +1305,7 @@ typeof Math =>"object"
 
 ### DOM 树
 
-> dom tree
-> 当浏览器加载 HTML 页面的时候，首先就是 DOM 结构的计算，计算出来的 DOM 结构就是 DOM 树（把页面中的 HTML 标签像树桩结构一样，分析出之间的层级关系）
+> dom tree 当浏览器加载 HTML 页面的时候，首先就是 DOM 结构的计算，计算出来的 DOM 结构就是 DOM 树（把页面中的 HTML 标签像树桩结构一样，分析出之间的层级关系）
 
 ```
 <!DOCTYPE html>
@@ -1636,27 +1461,15 @@ console.log(queryAllById("HAHA"));
 - nodeName：节点名称
 - nodeValue：节点值
 
-`元素节点`
-nodeType：1
-nodeName：大写标签名
-nodeValue：null
+`元素节点` nodeType：1 nodeName：大写标签名 nodeValue：null
 
-`文本节点`
-nodeType：3
-nodeName：'#text'
-nodeValue：文本内容
+`文本节点` nodeType：3 nodeName：'#text' nodeValue：文本内容
 
 在标准浏览器中会把空格/换行等都当做文本节点处理
 
-`注释节点`
-nodeType：8
-nodeName：'#comment'
-nodeValue：注释内容
+`注释节点` nodeType：8 nodeName：'#comment' nodeValue：注释内容
 
-`文档节点`
-nodeType：9
-nodeName：'#document'
-nodeValue：null
+`文档节点` nodeType：9 nodeName：'#document' nodeValue：null
 
 ### 描述节点之间关系的属性
 
@@ -1733,8 +1546,7 @@ console.log(children(course));
 
 需求二：获取当前元素的上一个哥哥元素节点
 
-> previousSibling：上一个哥哥节点
-> previousElementSibling：上一个哥哥元素节点，但是不兼容
+> previousSibling：上一个哥哥节点 previousElementSibling：上一个哥哥元素节点，但是不兼容
 
 ```javascript
 /*
@@ -1766,25 +1578,21 @@ function prev(curEle) {
 
 **`createElement`**
 
-> 创建一个元素标签(元素对象)
-> `document.createElement([标签名])`
+> 创建一个元素标签(元素对象) `document.createElement([标签名])`
 
 **`appendChild`**
 
-> 把一个元素对象插入到指定容器的末尾
-> `[container].appendChild([newEle])`
+> 把一个元素对象插入到指定容器的末尾 `[container].appendChild([newEle])`
 
 **`insertBefore`**
 
-> 把一个元素对象插入到指定容器中某一个元素标签之前
-> `[container].insertBefore([newEle],[oldEle])`
+> 把一个元素对象插入到指定容器中某一个元素标签之前 `[container].insertBefore([newEle],[oldEle])`
 
 **`cloneNode`**
 
 > 把某一个节点进行克隆
 >
-> `[curEle].cloneNode()`：浅克隆，只克隆当前的标签
-> `[curEle].cloneNode(true)`：深克隆，当前标签及其里面的内容都一起克隆了
+> `[curEle].cloneNode()`：浅克隆，只克隆当前的标签 `[curEle].cloneNode(true)`：深克隆，当前标签及其里面的内容都一起克隆了
 
 **`removeChild`**
 
@@ -1826,18 +1634,13 @@ oBox.removeAttribute('myColor'); //=>删除
 
 ### NODE 安装
 
-https://nodejs.org/zh-cn/
-推荐大家使用 LTS 稳定版本，把安装包下载下来后，直接一路下一步安装即可（最好把它安装到 C 盘 [默认盘符] ，记号安装目录）
+https://nodejs.org/zh-cn/ 推荐大家使用 LTS 稳定版本，把安装包下载下来后，直接一路下一步安装即可（最好把它安装到 C 盘 [默认盘符] ，记号安装目录）
 
 1. 如果安装不了，我们可以把别人安装完成的内容拷贝过来，通过修改环境变量完成安装
 
-> 高级系统设置 -> 环境变量 -> 系统变量 -> Path，把原有的变量值备份一份，在原有的基础上增加 node 的安装目录即可
-> ![nN3qaQ.png](https://s2.ax1x.com/2019/09/10/nN3qaQ.png)
+> 高级系统设置 -> 环境变量 -> 系统变量 -> Path，把原有的变量值备份一份，在原有的基础上增加 node 的安装目录即可 ![nN3qaQ.png](https://s2.ax1x.com/2019/09/10/nN3qaQ.png)
 
-2.验证安装是否成功
-WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
-在 DOS 窗口中，输入 node -v / node --version / npm -v 能出现版本号，则代表安装成功，不能出现版本号，提示 node 不是内部或者外部命令的，遵循第一步配置环境变量即可
-![nN37qS.png](https://s2.ax1x.com/2019/09/10/nN37qS.png)
+2.验证安装是否成功 WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口在 DOS 窗口中，输入 node -v / node --version / npm -v 能出现版本号，则代表安装成功，不能出现版本号，提示 node 不是内部或者外部命令的，遵循第一步配置环境变量即可 ![nN37qS.png](https://s2.ax1x.com/2019/09/10/nN37qS.png)
 
 ### NODE 基础概念
 
@@ -1867,27 +1670,11 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 > - 在当前目录地址栏中输入 cmd，快速在当前目录打开
 > - shift+鼠标右键，在此处打开命令窗口
 
-在 WB 中配置 node 环境
-![nN3Tr8.png](https://s2.ax1x.com/2019/09/10/nN3Tr8.png)
-![nN3bVg.png](https://s2.ax1x.com/2019/09/10/nN3bVg.png)
+在 WB 中配置 node 环境 ![nN3Tr8.png](https://s2.ax1x.com/2019/09/10/nN3Tr8.png) ![nN3bVg.png](https://s2.ax1x.com/2019/09/10/nN3bVg.png)
 
 ### 扫盲：常用的 DOS 命令
 
-`ping www.baidu.com -t`：测试网速
-`Ctrl+c`：结束当前正在运行的操作
-`exit`：退出当前窗口
-`ipconfig -all`：查看当前电脑的 物理地址/IP 地址/子网掩码/DNS 等信息
-`cls`：清屏
-`cd`：进入到指定的文件目录（windows 电脑需要先进入到对应的磁盘 `E:`）
-`cd ../`：返回上级目录
-`cd ./`：当前目录
-`cd /`：根目录
-`dir`：查看当前目录下所有的文件
-`mkdir`：创建文件夹
-`copy con xxx.xx`：创建文件并且给文件中输入内容，输入完成后，用 Ctrl+c 结束并保存
-`del xxx.xx`：删除文件
-`rmdir xxx`：删除文件夹
-...
+`ping www.baidu.com -t`：测试网速 `Ctrl+c`：结束当前正在运行的操作 `exit`：退出当前窗口 `ipconfig -all`：查看当前电脑的 物理地址/IP 地址/子网掩码/DNS 等信息 `cls`：清屏 `cd`：进入到指定的文件目录（windows 电脑需要先进入到对应的磁盘 `E:`） `cd ../`：返回上级目录 `cd ./`：当前目录 `cd /`：根目录 `dir`：查看当前目录下所有的文件 `mkdir`：创建文件夹 `copy con xxx.xx`：创建文件并且给文件中输入内容，输入完成后，用 Ctrl+c 结束并保存 `del xxx.xx`：删除文件 `rmdir xxx`：删除文件夹 ...
 
 ### NPM 模块管理
 
@@ -1898,10 +1685,7 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 - 百度搜索，找到下载地址，然后基于浏览器下载即可（资源比较混乱，不好搜索）
 - 也可以基于 npm 等第三方包管理器下载（yarn / bower ... 都是第三方模块管理器）
 
-  1.npm 下载的资源都是在https://www.npmjs.com/ 中下载的
-  `npm install xxx`：把资源或者第三方模块下载到当前目录下
-  `npm install xxx -g (--global)`：把资源或者第三方模块安装到全局环境下（目的：以后可以基于命令来操作一些事情）
-  `npm uninstall xxx / npm uninstall xxx -g`：从本地或者全局卸载
+  1.npm 下载的资源都是在https://www.npmjs.com/ 中下载的 `npm install xxx`：把资源或者第三方模块下载到当前目录下 `npm install xxx -g (--global)`：把资源或者第三方模块安装到全局环境下（目的：以后可以基于命令来操作一些事情） `npm uninstall xxx / npm uninstall xxx -g`：从本地或者全局卸载
 
 > 基于 npm 安装的一些细节点：
 >
@@ -1909,9 +1693,7 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 > - 下载成功后，当前目录中多增加一个 node_modules 文件夹，在这个文件夹中找到我们安装的模块
 > - 一般来说，下载下来的内容包含源码和最后供开发者使用的压缩版本
 
-2.解决下载慢的问题
-**`基于nrm切换到国内下载源（一般是淘宝镜像）`**
-首先安装 nrm，而且是把它安装到全局环境下（因为我们需要使用命令）
+2.解决下载慢的问题 **`基于nrm切换到国内下载源（一般是淘宝镜像）`** 首先安装 nrm，而且是把它安装到全局环境下（因为我们需要使用命令）
 
 > npm install nrm -g
 >
@@ -1922,27 +1704,21 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 >
 > 切完源，还是基于 npm 安装操作
 
-**`可以基于yarn来安装管理`**
-首先还是需要先安装 yarn，安装到全局，然后基于 yarn 安装我们需要的模块
+**`可以基于yarn来安装管理`** 首先还是需要先安装 yarn，安装到全局，然后基于 yarn 安装我们需要的模块
 
 > npm install yarn -g
 >
-> 基于 yarn 安装（只能安装在本地，不能安装到全局）
-> yarn add xxx
-> yarn remove xxx
+> 基于 yarn 安装（只能安装在本地，不能安装到全局） yarn add xxx yarn remove xxx
 
-**`基于cnpm淘宝镜像来处理`**
-自己回去尝试
+**`基于cnpm淘宝镜像来处理`** 自己回去尝试
 
 ---
 
 3.解决安装版本的问题
 
-> 首先查看当前模块的历史版本信息
-> `npm view jquery > jquery.version.json` ：把当前模块的历史信息输出到具体的某个文件中（文件名自己随便起的）
+> 首先查看当前模块的历史版本信息 `npm view jquery > jquery.version.json` ：把当前模块的历史信息输出到具体的某个文件中（文件名自己随便起的）
 >
-> 安装指定的版本模块
-> `yarn add jquery@1.11.3`：npm 和 yarn 都是这样来指定安装具体版本模块的
+> 安装指定的版本模块 `yarn add jquery@1.11.3`：npm 和 yarn 都是这样来指定安装具体版本模块的
 
 ---
 
@@ -1970,8 +1746,7 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 > - 记录当前产品代码的所有版本信息（历史修改信息）,而且方便快速回退到某一个具体的版本
 > - 方便团队协作开发，能够检测代码冲突，能够合并代码等
 
-`svn`：在 git 诞生前就已经存在的版本控制系统，不过它是“集中式”管理
-`git`：是分布式版本管理体统
+`svn`：在 git 诞生前就已经存在的版本控制系统，不过它是“集中式”管理 `git`：是分布式版本管理体统
 
 1.集中式版本控制系统
 
@@ -1983,11 +1758,7 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 
 **`在本地创建git仓库管理我们的代码`**
 
-> 初次使用 git，先在本地配置一些基础信息
-> \$ git config -l
-> \$ git config --global user.name xxx
-> \$ git config --global user.email xxx
-> 建议大家配置的用户名和邮箱和 gitHub 保持一致（这样以后在本地向 gitHub 推送内容的时候，能够展示出是谁推荐的）
+> 初次使用 git，先在本地配置一些基础信息 \$ git config -l \$ git config --global user.name xxx \$ git config --global user.email xxx 建议大家配置的用户名和邮箱和 gitHub 保持一致（这样以后在本地向 gitHub 推送内容的时候，能够展示出是谁推荐的）
 
 1. `git init`
 
@@ -1997,8 +1768,7 @@ WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口
 
 > 在当前目录（git 仓库根目录）创建一个 “.gitignore” 文件，这个文件中存储了当 git 提交的时候所忽略的文件
 >
-> 可以基于 WB 创建（new -> file -> .gitignore）
-> 可以基于 linux 命令 `$ touch .gitignore` （mac 终端、git bash、或者集成了 linux 的 dos，可以使用 linux 命令）
+> 可以基于 WB 创建（new -> file -> .gitignore）可以基于 linux 命令 `$ touch .gitignore` （mac 终端、git bash、或者集成了 linux 的 dos，可以使用 linux 命令）
 
 ```
 # dependencies
@@ -2038,53 +1808,39 @@ yarn-error.log*
 >
 > - 工作区：编辑代码的地方
 > - 暂存区：临时存储要生成版本代码的地方
-> - 历史区：存储的是生成的每一个版本代码
->   ![nN8MZD.png](https://s2.ax1x.com/2019/09/10/nN8MZD.png)
+> - 历史区：存储的是生成的每一个版本代码 ![nN8MZD.png](https://s2.ax1x.com/2019/09/10/nN8MZD.png)
 
 **`工作区提交到暂存区`**
 
-> \$ git status
-> 查看代码或者文件的状态（当前处于哪个区域）: 红色（当前处于工作区，还没有提交到暂存区）绿色（当前处于暂存区，还没有提交到历史区）如果没有文件，代表三个区域代码已经同步，历史版本也在历史区生成了
+> \$ git status 查看代码或者文件的状态（当前处于哪个区域）: 红色（当前处于工作区，还没有提交到暂存区）绿色（当前处于暂存区，还没有提交到历史区）如果没有文件，代表三个区域代码已经同步，历史版本也在历史区生成了
 
-`$ git add . / $ git add -A`
-把当前工作区中所有最新修改的文件，都提交到暂存区
+`$ git add . / $ git add -A` 把当前工作区中所有最新修改的文件，都提交到暂存区
 
-**`暂存区到历史区`**
-`$ git commit`
+**`暂存区到历史区`** `$ git commit`
 
 > 这样执行后，会弹出一个提交文本输入界面，需要我们编写本次提交到历史区，给当前版本编写的备注信息
 >
-> 先按 i 进入编辑插入模式
-> 输入备注信息
-> 按 ESC
-> 输入“ :wq ” 保存并退出
+> 先按 i 进入编辑插入模式输入备注信息按 ESC 输入“ :wq ” 保存并退出
 
 `$ git commit -m'自己需要编写的备注信息'`
 
-`$ git log`
-查看当前历史区提交的记录（查看版本信息）
+`$ git log` 查看当前历史区提交的记录（查看版本信息）
 
-`$ git diff`
-工作区 VS 暂存区
+`$ git diff` 工作区 VS 暂存区
 
-`$ git diff master`
-工作区 VS 历史区（master 分支）
+`$ git diff master` 工作区 VS 历史区（master 分支）
 
-`$ git diff --cached`
-暂存区 VS 历史区
+`$ git diff --cached` 暂存区 VS 历史区
 
 ### git 和 gitHub 同步
 
 1. 让本地的 git 仓库和远程仓库建立关联
 
-`$ git remote -v`
-查看所有的关联信息
+`$ git remote -v` 查看所有的关联信息
 
-`$ git remote add xxx [远程仓库git地址]`
-建立关联
+`$ git remote add xxx [远程仓库git地址]` 建立关联
 
-`$ git remote remove xxx`
-移除关联
+`$ git remote remove xxx` 移除关联
 
 我们远程仓库关联在一起的名字默认是：origin，当然自己可以随意修改
 
@@ -2092,12 +1848,9 @@ yarn-error.log*
 
 > 我们本地推送和拉取的信息，既有代码也有版本信息，所以说与其说是推送和拉取，不如说是和远程仓库保持信息的同步
 
-在推送之前，我们都应该先拉取
-`$ git pull origin（这个名字就是和远程仓库关联的这个名字，以自己设置的为主） master`
-从远程仓库的 master 分支拉取最新的信息
+在推送之前，我们都应该先拉取 `$ git pull origin（这个名字就是和远程仓库关联的这个名字，以自己设置的为主） master` 从远程仓库的 master 分支拉取最新的信息
 
-`$ git push origin master`
-把自己本地信息推送到远程仓库的 master 分支下
+`$ git push origin master` 把自己本地信息推送到远程仓库的 master 分支下
 
 ---
 
@@ -2106,25 +1859,16 @@ yarn-error.log*
 1. LEADER 会首先创建一个远程仓库（这个仓库可能是空的，也可能是包含了项目需要的基础的结构信息）
 2. 作为开发者，我们需要在本地创建一个本地仓库，还需要让当前本地的仓库和远程仓库保持关联
 
-> 原始做法：
-> git init
-> git remote add origin [GIT 仓库地址]
+> 原始做法： git init git remote add origin [GIT 仓库地址]
 >
-> 简单做法：
-> git clone [远程仓库地址][克隆后的名字：可以不设置，默认是仓库名]
+> 简单做法： git clone [远程仓库地址][克隆后的名字：可以不设置，默认是仓库名]
 
 3. 在本地开发产品，需要同步的时候，我们首先把工作区内容在本地仓库中放到历史区，生成版本信息（git add . / git commit -m''），在把本地历史区的信息推送到远程仓库上（git pull / git push）
-4. 在团队协作开发的时候，LEADER 会在自己的 gitHub 账号下创建一个远程仓库，那么团队其他成员在向这个远程仓库推送信息的时候，使用自己的账号是没有推送权限的，我们需要把当前这个远程仓库，在 github 中创建工作群组，让更多人用自己的账号也有操作权限
-   ![nN8Qde.png](https://s2.ax1x.com/2019/09/10/nN8Qde.png)
-   小组成员在自己的邮箱中收到一封邀请邮件，需要确认同意
-   ![nN8lIH.png](https://s2.ax1x.com/2019/09/10/nN8lIH.png)
-   这样就是加入成功了
-   ![nN8uqO.png](https://s2.ax1x.com/2019/09/10/nN8uqO.png)
+4. 在团队协作开发的时候，LEADER 会在自己的 gitHub 账号下创建一个远程仓库，那么团队其他成员在向这个远程仓库推送信息的时候，使用自己的账号是没有推送权限的，我们需要把当前这 ��� 远程仓库，在 github 中创建工作群组，让更多人用自己的账号也有操作权限 ![nN8Qde.png](https://s2.ax1x.com/2019/09/10/nN8Qde.png) 小组成员在自己的邮箱中收到一封邀请邮件，需要确认同意 ![nN8lIH.png](https://s2.ax1x.com/2019/09/10/nN8lIH.png) 这样就是加入成功了 ![nN8uqO.png](https://s2.ax1x.com/2019/09/10/nN8uqO.png)
 
 ## 堆栈内存
 
-> 堆内存：即全局作用域，基本数据类型因为数据比较简单，可以直接存储在栈内存当中运行，当栈内存销毁时，其所存在的值也会销毁
-> 堆内存：由于引用类型的数据比较复杂，所以数据类型的数据都放在堆内存中，一旦开辟出一个新的堆内存，就会产生一个 16 进制内存地址指向该内存空间，当没有任何一个内存地址指向该空间，那么会触发浏览器的垃圾回收机制，会自动销毁堆内存，
+> 堆内存：即全局作用域，基本数据类型因为数据比较简单，可以直接存储在栈内存当中运行，当栈内存销毁时，其所存在的值也会销毁堆内存：由于引用类型的数据比较复杂，所以数据类型的数据都放在堆内存中，一旦开辟出一个新的堆内存，就会产生一个 16 进制内存地址指向该内存空间，当没有任何一个内存地址指向该空间，那么会触发浏览器的垃圾回收机制，会自动销毁堆内存，
 
 ### 基本数据类型
 
@@ -2166,22 +1910,20 @@ console.log(obj2.name)//=>平野绫
 
 ### 函数
 
-   > 函数在创建的时候也会开辟出一个新的堆内存，堆内存中存储的是字符串格式的代码块
+> 函数在创建的时候也会开辟出一个新的堆内存，堆内存中存储的是字符串格式的代码块
 
 ## 变量提升
 
-   > 在作用域形成之后，js 代码自上而下执行之前，浏览器会把所有带`VAR`和`FUNCTION`的关键字提前，`VAR`会提前声明，但是不会赋值，`FUNCTION`会提前声明并定义
+> 在作用域形成之后，js 代码自上而下执行之前，浏览器会把所有带`VAR`和`FUNCTION`的关键字提前，`VAR`会提前声明，但是不会赋值，`FUNCTION`会提前声明并定义。
 
 **变量提升只会发生在当前作用域**
 
 1. 全局变量:
 
    > 在全局作用域中申请的即为全局变量，全局变量只会提升到全局作用域(window)中，函数在提升的时候会创建一个新的堆内存用来存储自身的代码块，当执行代码的时候，声明提前过的代码浏览器不会再次执行。**_在变量声明之前也可以使用，只不过对应的值是`undefined`_**
-   >
-   > 
 
 2. 局部变量:
-   
+
    > 在函数内的使用`VAR`申请的变量称之为局部变量，只有在函数执行的时候才会提升，并且只能提升到函数私有的作用域中，函数运行的时候会先给形参赋值，然后在进行变量提升
 
 ### 带 var 和不带的区别
@@ -2189,14 +1931,10 @@ console.log(obj2.name)//=>平野绫
 1. 全局使用`VAR`声明
 
    > 在全局中使用`VAR`关键字申明一个变量时会自动和`window`形成一个映射的机制，可以直接使用`window.变量名`获取相应的值，因此当改变一个时另外一个也会改变，但是函数中使用`VAR`关键字声明的私有变量，并不会和`window`形成映射机制，
-   >
-   > 
 
 2. 全局未使用`VAR`声明
 
    > 如果在全局中未使用`VAR`关键字声明一个变量，则不会变量提升，不使用关键字声明而直接赋值的话就相当于给`window`添加一个值，对象的机制是**即使没有这个属性，直接使用的话也不会报错，而是会显示 undefined**，因此在代码之前使用`window`访问的话得到的是`undefined`，但是不使用`window`而直接调用的话浏览器会报错
-   >
-   > 
 
 3. 函数内的`VAR`
 
@@ -2206,13 +1944,13 @@ console.log(obj2.name)//=>平野绫
 
 ### if 判断的函数提升
 
-1.  旧版本浏览器：
+1. 旧版本浏览器：
 
-    > 在旧版本的浏览器中会直接进行函数提升，会忽略条件判断的结果
+   > 在旧版本的浏览器中会直接进行函数提升，会忽略条件判断的结果
 
-2.  新版本浏览器：
+2. 新版本浏览器：
 
-    > 在新版本浏览器中为了同时兼容 ES5 和 ES6 的规则作了一些处理，同样会忽略条件判断的结果，但是并不会声明定义同时提前，只会提前声明，赋值为`undefined`，只有条件成立后代码执行到当前的时候才会定义为函数
+   > 在新版本浏览器中为了同时兼容 ES5 和 ES6 的规则作了一些处理，同样会忽略条件判断的结果，但是并不会声明定义同时提前，只会提前声明，赋值为`undefined`，只有条件成立时分数才会提前声明和定义
 
 ```javascript
 f = function() {
@@ -2238,3 +1976,130 @@ g = function() {
 console.log(f());
 console.log(g());
 ```
+
+### 变量重名
+
+- 在 js 中全局作用域中申请的变量其实可以理解成是`window`的属性，由于对象的属性名是不可以重复的，所以如果变量名相同的话在变量提升阶段后面的会直接把前面所有重名的覆盖掉，代码执行阶段也是如此，重复的变量名并不会重新定义，只会重新赋值，从而把前面的值覆盖掉
+
+* 在下列代码中由于函数名和变量名字重复，在变量提升阶段使用`VAR`关键字申请的只会定义，默认值是`undefined`，并不会赋值，而后面的函数则会声明和定义一起提前，所以代码未执行带赋值代码之前，`test`都是函数，当执行到赋值代码的时候，此时`test`的值重新赋值为了`100`，当`100`调用函数时会报错
+
+```javascript
+test(); //4
+function test() {
+  console.log(1);
+}
+test(); //4
+function test() {
+  console.log(2);
+}
+test(); //4
+var test = 100; //TypeError: test is not a function
+test();
+function test() {
+  console.log(3);
+}
+test();
+function test() {
+  console.log(4);
+}
+```
+
+### ES6 中变量提升
+
+1. 在 ES6 中基于 LET/Const 等方式创建变量或者函数，不存在变量提升机制。因此在申明变量之前使用，会报错！而且还会切断和全局作用域`window`的映射机制。
+
+2. 基于`LET`关键字申请的变量是不允许使用相同的变量名，即使不使用关键字申请变量，也会报错。
+
+3. 在代码执行之前，浏览器会检测当前作用域所有申明的变量，并且记录其变量名，如果检测到基于`LET`关键字申请的变量存在重名的情况下，则会直接报错。不使用关键字申请变量时，浏览器在代码执行阶段，如果发现存在同样的命名时也会报错，
+
+```javascript
+//LET 关键字申请的变量不存在变量提升机制，所以在声明之前使用会直接报错
+console.log(a); //ReferenceError: can't access lexical declaration `a' before initialization
+let a = 10;
+
+a = 20; //ReferenceError: can't access lexical declaration `a' before initialization
+let a = 10;
+console.log(a);
+
+//在下面这行代码中，a和b都是基于LET关键字申请的当函数运行的时候，
+//由于函数内部的a是使用LET申请的，所以不存在变量提升，所以在代码执行之前，
+//浏览器就会报错ReferenceError: can't access lexical declaration `a'beforeinitialization
+//假如注释掉函数内部中的第一行代码，对应的执行结果应该是20,20,10,20
+let a = 10,
+  b = 10;
+let test = () => {
+  console.log(a, b);
+  let a = (b = 20);
+  console.log(a, b);
+};
+test();
+console.log(a, b);
+```
+
+### 暂时性死区
+
+1. 在 ES6 语法规范中基于`LET`关键字关键字创建的变量在大部分的{}中都会形成一个块级作用域(类似于函数的私有作用域)，在块级作用域中基于`LET`创建的变量和全局作用域中的重名变量没有任何关系
+
+```javascript
+var a = 10;
+if (true) {
+  console.log(a); //会报错，但是报错的信息并不是变量命名冲突，而是语法错误，在a未申明之前无法访问，可以将使用 VAR 关键字创建的变量并不会影响当前这几行代码的错误信息
+  let a = 20;
+}
+```
+
+2.  直接使用 typeof 一个不存在的变量并不会报错。而是会返回`undefined`，但是在 ES6 中基于`LET`创建变量则改正了这一机制，在申明之前使用 typeof 检测类型是直接报错(ReferenceError: Cannot access 'c' before initialization);
+
+## 函数的创建及运行
+
+函数在 js 中属于是一等公民，函数就是将一些我们经常使用的功能或者经常重复性使用的代码封装在一起，当我们需要使用的时候直接调用即可，函数为我们的开发提供了不可或缺的遍历，同时函数中的形参和实参也让我们的开发更加的灵活多变，
+
+### 创建函数
+
+- 函数的创建的时候会自动开辟出一个新的堆内存，将函数的代码块以字符串形式的存储起来，栈内存与函数关联起来的是堆内存的内存地址。
+
+- 函数创建的方式：函数字面量，函数表达式，匿名函数。
+
+  - 函数字面量：基本格式为`function [函数名](){}`，函数字面量具有变量提升机制。
+  - 函数表达式：基本格式为`var [变量名]=function(){}`,函数表达式只会声明提前，
+  - 匿名函数：基本合适为`(function(){}())`,不具有变量提升，会直接执行，并且只能执行一次，除了不具有变量提升机制之外，和其他的函数都是一样的机制。
+
+### 函数运行
+
+- 函数字面量和函数表达式都需要使用`()`来调用， 但是匿名函数由于没有名字，所以当代码执行到当前的代码块的时候会直接执行，
+
+- 函数在运行的时候会产生一个私有作用域，在私有作用域当中只有使用关键字`VAR`关键字声明的变量和形参是私有变量，全局作用域当中是无法访问私有作用域中的私有变量，但是私有作用域经过**作用域链**却可以访问全局作用域中的变量。
+
+* **所有的函数都是一样的：运行时产生一个新的私有作用域，运行结束后值立即销毁自身的作用域，再次调用时会产生一个全新的私有作用域，每一次结束后都会销毁自身的作用域，每一次运行都会产生新的私有作用域**
+
+### 形参实参
+
+形参：形式上的参数，用于接收函数调用是传递的实参
+
+- 在函数创建的时候可以在`()`中填写形参，形参就相当于在函数内部创建了一个变量，只不过没有赋值，函数在调用的时候，如果有传递实参，则最优先给形参赋值，形参在函数内部属于私有变量，全局作用与无法访问，形参名可以和全局作用域中的任何变量重名，
+
+实参：函数调用时需要传递给形参的值
+
+- 在函数调用的时候可以在`()`中填写需要传递的实参，如果传递的是表达式则会先计算出值然后在传递，如果是引用类型的则是传递其内存地址，(此时函数内部的形参会和全局作用域中的变量指向同一块内存空间)
+
+形参和实参的数量可以不相等，在传递实参的时候，会按照顺序给形参赋值，如果实参数量少于形参数量，则多出来的形参值则是`undefined`,如果形参的数量少于实参，会先依次给形参赋值，多出来的形参并不会报错
+
+### arguments
+
+1. `arguments`是所有函数中都拥有的类数组对象（ES6 中的箭头函数没有），并不是真正的数组对象，但是可以转换成真正的数组，
+
+2. 他是函数所传递的实参的集合，并且拥有索引，索引从 0 开始，每传递一个实参会自动递加其索引值，将传递的值作为值存储起来，
+
+3. 无论有没有形参接收实参，`arguments`的值都会增加，如果有形参接收实参，那么`arguments`的值会和形参形成映射关系，他们其中一个改变的时候另外一个也会改变，
+
+4. 只有实参传递的值才会使`arguments`和形参形成映射关系，如果实参数量少于形参数量，那么后面手动给形参赋值并不会影响`arguments`,同时也不回递加自身的索引和值；
+
+5. 可以采用`arguments[索引]`的方式来访问其索引中存储的值
+
+6. 使用`typeof`时返回的是`object`,说明是一个对象
+
+- 扩展小知识
+
+  - `arguments`有一个属性叫做`callee`，他可以以返回当前函数的代码块，还有一个是`caller`,`caller`在使用前需要加上`callee`,正确的格式是`arguments.callee.caller`,如果直接使用`caller`则会返回`undefined`。他可以返回函数的执行的区域（也就是宿主环境，如果是在 window 下执行的则返回 null。
+
+**可以使用`Array.from(arguments)`将其转换成真正的数组**
