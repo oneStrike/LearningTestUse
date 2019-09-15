@@ -611,8 +611,8 @@ console.log(typeof typeof []);
 操作符出现在不同的位置，可能具有不同的含义
 
 ```js
-1 - 2;
--1.2;
+1 - 2;  //=>算数运算
+-1.2; //=> 只是一个负数
 ```
 
 目前接触的操作符：
@@ -713,6 +713,69 @@ console.log 函数调用的返回结果为 undefined
 
 - 加号两边都没有字符串，但一边有对象，将对象转换为字符串，然后按照上面的规则进行
 - 其他情况和上面的数学运算一致
+
+3. **in**
+
+`in`主要用于检测一个属性自身或这原型链中是否存在，如果存在则返回`true`,否则返回`false`。`in`需要两个参数，第一个是指定的变量，可以是数组，也可以是一个对象。第二个是指迭代的对象。在检测一个实例的时候直接书写的需要检测的属性（字符串格式）。
+
+**如果使用`for/in`语句来检测一个属性时，那么这个属性必须是`Enumerable` （可枚举）属性**
+
+检测数组
+
+```javascript
+var arr=[10,20,30,40,50]
+for(var x in arr){
+	console.log(arr[x]) //=>10,20,30,40,50
+	//这样我们可以直接输出数组的每一项的值
+	
+	console.log(x) //=>0,1,2,3,4
+	//直接输出x的话输出的就是数组的索引（下标）
+}
+
+```
+
+**不推荐`for/in`语句遍历数组**
+
+- 在js中我们有很多中遍历数组的方法，使用`for/in`遍历数组时得到的结果有时可能并不是我们所需要的，当我们使用`for/in`进行遍历数组时，如果我们在原型中添加了一些属性或者方法的话，那么他们也会被遍历出来，而且`for/in`得到的结果也是字符串形式的，有时候我们做一些运算的时候处理起来也会比较麻烦！`for/in`的查找机制是**无序查找**，所有在某些情况下我们得到的顺序可能会出现混乱，
+- js中遍历数组我们可以使用普通的`for`循环，还可以使用`forEach()`方法，在ES6中我们还可以使用`for of`来遍历数组
+
+检测对象
+
+```javascript
+//创建一个构造函数
+function Person(name,age){
+	this.name = name;
+	this.age = age;
+}
+var person = new Person('平野绫',18);
+
+console.log(person.name) //=>'平野绫'
+//我们可以使用in 来检测一个实例中是否拥有这个属性
+//语法 ： '属性'  in  实例   属性必须书写为字符串格式
+console.log('name' in person) //=>true
+//person中有name这个属性，所以返回的true
+//但是 in 还有一个特点 ： 如果一个实例没有这个属性，但是实例的原型拥有这个属性的话，
+//他也会返回true
+console.log('toString' in person) //=>true
+//我们创建的实例中并没有toString这个属性，但是实例的原形链中拥有这个属性
+//in 会查找实例的原型，而且是无序查找，只有当原型中没有时才会返回false
+
+
+//我们也可以使用 in 运算符来遍历我们的实例
+for (var key in person){
+	//我们只希望得到自身的属性，那么我们可以使用hasOwnProperty
+	if(person.hasOwnproperty('key')){
+		console.log(key)
+		
+		//console.log(person[key]) 
+		
+		//=>上面一行代码可以使我们获得每个属性的属性值，
+		//注意此处不要加引号，否则会得到undefined
+		//如果是加引号的话浏览器会认为是输出当前实例的某一个属性
+		//如果不加引号，那么[]中的就是一个变量，浏览器会计算出结果后输出
+	}
+}
+```
 
 ### 三元运算符
 
@@ -2523,4 +2586,54 @@ function Proson(name,age,sex){
 }
 var obj=new Person('平野绫',18,'20');
 //我们可以通过下面的一张图详细了解构造函数的运行机制
+```
+
+### 构造函数中的小细节
+
+
+> 当我们创建一个当前类的实例时，实例只能拥有this的属性，如果构造函数内部的变量并没有个this关联，那么它只是一个单纯的私有变量，我们创建的实例不用于也无法访问这个变量。
+
+```javascript
+function Person(name,age){
+	var n =10;
+	this.name =name;
+	this.age = age +n;
+}
+var person = new Person('平野绫',18);
+console.log(person.name) //=>'平野绫'
+console.log(person.n) //=>undefined
+//我们拥有并且可以访问和this相关联的变量，当前的n只是一个私有变量
+//和我们创建的实例没有任何关系，因为他没有和this进行关联
+```
+
+> 普通函数拥有`return`方法，可以返回任意我们需要的数据，在构造函数中也拥有这个方法，只是在构造函数中我们无法返回基本数据类型，如果我们返回的是一个基本数据类型的话，浏览器会自动忽略掉所返回的数据，只会结束当前的构造函数执行，如果我们返回的是一个引用数据类型的话那么我们返回的时什么，外面接受的就时什么，此时的this就和外面接收返回值的变量没有关系，
+
+```javascript
+function Test(a,b,c){
+	this.a = b +c ;
+	this.b = a+ c;
+	return 123;
+	//当我们使用return返回一个基本数据类型时，浏览器并不会给我们返回相应的值
+	//我们书写return返回一个基本数据类型时。其实就相当于只书写了一个return结束循环
+	this.c = a+ b;
+}
+var result = new Test(10,20,30);
+console.log(result.c) //=>undefined
+console.log(result) //=>{a:50,b:40}
+//其实result中并没有c这个属性，由于对象机制的原因，我们访问一个不存的属性时也会返回undefined
+
+
+function Test(a,b,c){
+	this.a = b +c ;
+	this.b = a+ c;
+	return [];
+	//当返回一个引用数据类型时，返回的是什么外面接收到的就是什么
+	//此时的this就和外面接受的变量没有关系了
+	this.c = a+ b;
+}
+var result = new Test(10,20,30);
+console.log(result.c) //=>undefined
+console.log(result) //=>[];
+
+
 ```
