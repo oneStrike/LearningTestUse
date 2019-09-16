@@ -2579,6 +2579,7 @@ function Proson(name, age, sex) {
 var obj = new Person("平野绫", 18, "20");
 //我们可以通过下面的一张图详细了解构造函数的运行机制
 ```
+[![nc5GLV.png](https://s2.ax1x.com/2019/09/15/nc5GLV.png)](https://imgchr.com/i/nc5GLV)
 
 ### 构造函数中的小细节
 
