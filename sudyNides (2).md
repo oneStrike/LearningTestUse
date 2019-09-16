@@ -1873,7 +1873,7 @@ yarn-error.log*
 
 > 每一个 git 仓库都划分为三个区域
 >
-> - 工作区：编辑代码的地方
+> - 工作区：编辑代码的地��
 > - 暂存区：临时存储要生成版本代码的地方
 > - 历史区：存储的是生成的每一个版本代码 ![nN8MZD.png](https://s2.ax1x.com/2019/09/10/nN8MZD.png)
 
@@ -2579,6 +2579,7 @@ function Proson(name, age, sex) {
 var obj = new Person("平野绫", 18, "20");
 //我们可以通过下面的一张图详细了解构造函数的运行机制
 ```
+
 [![nc5GLV.png](https://s2.ax1x.com/2019/09/15/nc5GLV.png)](https://imgchr.com/i/nc5GLV)
 
 ### 构造函数中的小细节
