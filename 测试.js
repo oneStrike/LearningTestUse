@@ -49,6 +49,7 @@
  */
 
 // var foo = 1;
+
 // function bar() {
 //     if (!foo) {
 //         var foo = 10;
@@ -65,8 +66,10 @@
  */
 
 // var n = 10;
+
 // function a() {
 //     var n = 10;
+
 //     function b() {
 //         n++;
 //         console.log(n);
@@ -85,7 +88,10 @@
  * D: 11 12 12
  */
 
-// var a = 10, b = 11, c = 12;
+// var a = 10,
+//     b = 11,
+//     c = 12;
+
 // function test(a) {
 //     a = 1;
 //     var b = 2;
@@ -118,6 +124,7 @@
 
 
 // var a = 4;
+
 // function b(x, y, a) {
 //     console.log(a);
 //     arguments[2] = 10;
@@ -127,7 +134,7 @@
 // console.log(a);
 
 /**
- * A:3  3  4
+ * A: 3  3  4
  * B: 3 10 4
  * C: 3 10 10
  * D: 3 10 undefined
@@ -166,6 +173,7 @@
 // console.log(f(5));
 // console.log(a);
 
+
 /**
  * A: 6 6 7 2
  * B: 5 6 7 3
@@ -175,7 +183,6 @@
  */
 
 // var arr = [1, 2, 3, 4];
-
 // function fn(arr) {
 //     arr[0] = 0;
 //     arr = [0];
@@ -188,7 +195,7 @@
 
 // function fn(i) {
 //     return function (n) {
-//         console.log(i++);
+//         console.log(n + (i++));
 //     }
 // }
 // var f = fn(10);
@@ -480,7 +487,7 @@
         for(var i=0;i<inpList.length;i++){
             var cur=inpList[i];
         cur.onmouseover=function(){
-            document.body.styel.backgroundColor=arr[i];
+            document.body.style.backgroundColor=arr[i];
         }
     }
     </script> */
