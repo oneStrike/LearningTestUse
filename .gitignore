@@ -25,3 +25,7 @@ yarn-error.log*
 # vscode
 .vscode
 launch.json
+
+/Repository/
+/.vscode/
+.launch.json

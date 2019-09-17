@@ -420,7 +420,7 @@ obj[name] =>此处的NAME是一个变量,我们要获取的属性名不叫做NAM
 
 一个对象中的属性名不仅仅是字符串格式的，还有可能是数字格式的
 
-```
+```javascript
 var obj = {
 	name:'珠峰培训',
 	0:100
@@ -1873,7 +1873,11 @@ yarn-error.log*
 
 > 每一个 git 仓库都划分为三个区域
 >
-> - 工作区：编辑代码的地��
+> <<<<<<< HEAD
+>
+> - # 工作区 �� 编辑代码的地 ��
+> - 工作区：编辑代码的地 ��
+>   > > > > > > 19f63ff5c407ea653e0731c9704d1b4ef051a6db
 > - 暂存区：临时存储要生成版本代码的地方
 > - 历史区：存储的是生成的每一个版本代码 ![nN8MZD.png](https://s2.ax1x.com/2019/09/10/nN8MZD.png)
 
@@ -2497,6 +2501,17 @@ console.log(li);
 
 4. 在构造函数中 this 时创建类的实例
 
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+var person = new Person("平野绫", 18);
+var person1 = new Person("钉宫", 20);
+//我们通过上面的代码分别创建了两个不同的实例，
+//当我们每一次创建的时候this就指向当前类的一个实例
+```
+
 ## 面向对象（Object Oriented Programming）
 
 js 就是根据面向对象编程思想所开发的一种语言，在面向对象的语言中万物皆为对象，在 js 中我们可以把`HTML`中所有的东西看作是对象，比如说标签名，空格，注释等等，
@@ -2626,4 +2641,70 @@ function Test(a, b, c) {
 var result = new Test(10, 20, 30);
 console.log(result.c); //=>undefined
 console.log(result); //=>[];
+```
+
+## 原型（prototype）
+
+1. 每一个函数在出生时都有一个属性`prototype`,它是一个对象，浏览器会自动为它创建一个堆内存，
+
+2. 函数的`prototype`属性天生就拥有一个属性`consturctor`,它存储的值就是当前函数本身
+
+3. 所有的对象都拥有一个属性`__proto__`,他指向当前这个对象的所属类，如果它的所属类不明确，那么它就是指向`Object.prototype`。
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+var person = new Person("绫"); //person是Person这个类的实例
+
+//既然person是Person的实例，那么person的隐式原型就应该指向
+//person的原型，那么下面的代码就应该返回true
+console.log(person.__proto__ === Person.prototype); //=>true
+
+//我们可以根据下面的一张图更加清晰的了解执行的步骤
+```
+
+![nhQuW9.png](https://s2.ax1x.com/2019/09/16/nhQuW9.png)
+
+当我们访问一个实例的属性是会优先寻找自身有没有这个属性，如果有则直接返回，没有的话则是去原型中寻找，找到则直接返回，我们拿数组对象举一个例子，我们自己创建的数组中并没有`pop`,`splice`,`sort`等等这一系列的方法，但是我们却可以直接使用，如果是原型中的属性，我们只能使用，并不能修改或者删除，我们又是也可以创建一个同名的属性来遮蔽原型中的属性，这样的话就只能访问自身拥有的这个属性，并不会去原型中查找
+
+![nhDpHe.png](https://s2.ax1x.com/2019/09/16/nhDpHe.png)
+
+我们可以根据这个机制将一些实例共有的属性或者方法添加到构造他们的类的原型中，这样可以减少代码的耦合。使用起来也很方便。
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sex = "女";
+var person = new Person("绫");
+var person2 = new Person("钉");
+console.log(person.name, person.sex); //=>'绫' '女'
+console.log(person2.name, person2.sex); //=>'钉' '女'
+//当我们给Person的原型中添加一个属性时，他的实例便都拥有这个属性，
+//如果实例中的属性和原型中的属性重名时，只会使用自身的，
+//实例无法修改原型中的所有属性，person.sex='男';只是给自身添加一个属性，
+//或者是自身属性的再赋值，和原型中的属性没有任何关系
+```
+
+`prototype`也是一个对象，是对象就拥有`__proto__`属性，我们就根据下面的一张图片来揭示原型链中的 Boss。
+
+### hasOwnProperty
+
+`hasOwnProperty`可以验证一个属性或者方法是否是为自身拥有
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sex = "女";
+var person = new Person("绫");
+var person2 = new Person("钉");
+console.log(person.name, person.sex); //=>'绫' '女'
+console.log(person2.name, person2.sex); //=>'钉' '女'
+console.log(person.hasOwnProperty("sex")); //=>false
+console.log(person.hasOwnProperty("name")); //=>true
+//当可以使用一个自身不拥有的属性或者是方法时，
+//那么这些属性或者方法就一定存在有原型找中
 ```
