@@ -290,7 +290,7 @@ parseInt('width:13.5px') =>NaN 从字符串最左边字符开始查找有效数�
 
 ### NaN 的比较
 
-```
+```javascript
 NaN==NaN：false NaN和谁都不相等，包括自己
 ```
 
@@ -486,18 +486,18 @@ console.log(num); //=>12
 ```javascript
 // >= / <= / == 常规比较
 if(0){
-	//=>不管你在条件判断中写什么，最后总要把其计算出TRUE/FALSE来判断条件是否成立（把其它类型的值转换为布尔类型，只有 0/NaN/''/null/undefined 是false，其余都是true）
+    //=>不管你在条件判断中写什么，最后总要把其计算出TRUE/FALSE来判断条件是否成立（把其它类型的值转换为布尔类型，只有 0/NaN/''/null/undefined 是false，其余都是true）
 }
 
 if('3px'+3){
-	//=>在JS中，+ - * / % 都是数学运算，除 + 以外，其余运算符在运算的时候，如果遇到了非数字类型的值，首先会转换为数字类型（Number），然后再进行运算
+      //=>在JS中，+ - * / % 都是数学运算，除 + 以外，其余运算符在运算的时候，如果遇到了非数字类型的值，首先会转换为数字类型（Number），然后再进行运算
 
-	//=>+ 在JS中除了数学相加，还有字符串拼接的作用（如果运算中遇到了字符串，则为字符串拼接，而不是数学相加）
+      //=>+ 在JS中除了数学相加，还有字符串拼接的作用（如果运算中遇到了字符串，则为字符串拼接，而不是数学相加）
 
-	'3px'+3 =>'3px3'
+    '3px'+3 =>'3px3'
 }
 if('3px'-3){
-	'3px'-3 =>NaN
+    '3px'-3 =>NaN
 }
 ```
 
@@ -548,7 +548,7 @@ function fn(){ var total=10; total+=10; total/=2; total=total.toFixed(2); consol
 
 let fn=()=>{ let total=10; ... }; fn();
 
-### BAT 面试题：
+### BAT 面试题
 
 ```javascript
 var num = parseInt("width:35.5px");
@@ -570,14 +570,14 @@ if (num == 35.5) {
 ### 检查数据类型
 
 > - instanceof
-
+>
 > - constructor
-
+>
 > - Object.prototype.toString.call()
-
+>
 > - typeof
 
-    - 用来检测一个数据的类型（是一个一元运算符，无法细分的检测数据）
+- `typeof`用来检测一个数据的类型（是一个一元运算符，无法细分的检测数据）
 
 ```javascript
 语法：typeof [value] =>检测value的数据类型
@@ -676,7 +676,7 @@ console.log 函数调用的返回结果为 undefined
 
 > typeof 函数返回类型为 string isNaN 函数，该函数用于判断一个数据是否是 NaN，返回 boolean isFinite 函数，该函数用于判断一个数据是否是有限的，返回 boolean
 
-3. 求余
+**求余**
 
 %，有的教程称之为求模
 
@@ -805,24 +805,24 @@ num >= 10 ? (num++, (num *= 10)) : null;
 
 ```javascript
 var num = 12;
-if(num>0){
-	if(num<10){
-		num++;
-	}else{
-		num--;
-	}
-}else{
-	if(num==0){
-		num++;
-		num=num/10;
-	}
+if (num > 0) {
+  if (num < 10) {
+    num++;
+  } else {
+    num--;
+  }
+} else {
+  if (num == 0) {
+    num++;
+    num = num / 10;
+  }
 }
-改写成三元运算符！
+//改写成三元运算符！
 ```
 
 ### 逻辑运算符
 
-**js 中的两个逻辑运算符都属于时短路运算符（存在的多个表达式时，只要有一个满足要求则不再运算其他的表达式）**
+**js 中的两个逻辑运算符都属于时短路运算符(存在的多个表达式时，只要有一个满足要求则不再运算其他的表达式)**
 
 **逻辑与`&&`的优先级大于逻辑或`||`**
 
@@ -1354,7 +1354,7 @@ console.log(result);
 
 ### URL 地址问号传参解析
 
-> 有一个 URL 地址“http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man” 地址问号后面的内容是我们需要解析出来的参数信息 { lx:1, name:'AA', sex:'man' }
+> 有一个 URL 地址“<http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man”> 地址问号后面的内容是我们需要解析出来的参数信息 { lx:1, name:'AA', sex:'man' }
 
 ```javascript
 /*
@@ -1445,7 +1445,7 @@ typeof Math =>"object"
 
 > dom tree 当浏览器加载 HTML 页面的时候，首先就是 DOM 结构的计算，计算出来的 DOM 结构就是 DOM 树（把页面中的 HTML 标签像树桩结构一样，分析出之间的层级关系）
 
-```
+```HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -1772,7 +1772,7 @@ oBox.removeAttribute('myColor'); //=>删除
 
 ### NODE 安装
 
-https://nodejs.org/zh-cn/ 推荐大家使用 LTS 稳定版本，把安装包下载下来后，直接一路下一步安装即可（最好把它安装到 C 盘 [默认盘符] ，记号安装目录）
+<https://nodejs.org/zh-cn/> 推荐大家使用 LTS 稳定版本，把安装包下载下来后，直接一路下一步安装即可（最好把它安装到 C 盘 [默认盘符] ，记号安装目录）
 
 1. 如果安装不了，我们可以把别人安装完成的内容拷贝过来，通过修改环境变量完成安装
 
@@ -1823,7 +1823,7 @@ https://nodejs.org/zh-cn/ 推荐大家使用 LTS 稳定版本，把安装包下�
 - 百度搜索，找到下载地址，然后基于浏览器下载即可（资源比较混乱，不好搜索）
 - 也可以基于 npm 等第三方包管理器下载（yarn / bower ... 都是第三方模块管理器）
 
-  1.npm 下载的资源都是在https://www.npmjs.com/ 中下载的 `npm install xxx`：把资源或者第三方模块下载到当前目录下 `npm install xxx -g (--global)`：把资源或者第三方模块安装到全局环境下（目的：以后可以基于命令来操作一些事情） `npm uninstall xxx / npm uninstall xxx -g`：从本地或者全局卸载
+  1.npm 下载的资源都是在<https://www.npmjs.com/> 中下载的 `npm install xxx`：把资源或者第三方模块下载到当前目录下 `npm install xxx -g (--global)`：把资源或者第三方模块安装到全局环境下（目的：以后可以基于命令来操作一些事情） `npm uninstall xxx / npm uninstall xxx -g`：从本地或者全局卸载
 
 > 基于 npm 安装的一些细节点：
 >
@@ -1869,7 +1869,7 @@ https://nodejs.org/zh-cn/ 推荐大家使用 LTS 稳定版本，把安装包下�
 
 ### gitHub
 
-> https://github.com/
+> <https://github.com/>
 >
 > 一个提供代码管理（托管）的公共平台，我们以及众多开发者，会把自己的生产的 组件/类库/插件/框架 等托管到这个平台中，供别人下载使用和研究
 >
@@ -1908,7 +1908,7 @@ https://nodejs.org/zh-cn/ 推荐大家使用 LTS 稳定版本，把安装包下�
 >
 > 可以基于 WB 创建（new -> file -> .gitignore）可以基于 linux 命令 `$ touch .gitignore` （mac 终端、git bash、或者集成了 linux 的 dos，可以使用 linux 命令）
 
-```
+```TXT
 # dependencies
 node_modules
 
@@ -1944,13 +1944,11 @@ yarn-error.log*
 
 > 每一个 git 仓库都划分为三个区域
 >
-> <<<<<<< HEAD
->
-> - # 工作区 �� 编辑代码的地 ��
-> - 工作区：编辑代码的地 ��
->   > > > > > > 19f63ff5c407ea653e0731c9704d1b4ef051a6db
+> - 工作区：编辑代码的地方
 > - 暂存区：临时存储要生成版本代码的地方
-> - 历史区：存储的是生成的每一个版本代码 ![nN8MZD.png](https://s2.ax1x.com/2019/09/10/nN8MZD.png)
+> - 历史区：存储的是生成的每一个版本代码
+
+![Alt text](./1523412523484.png)
 
 **`工作区提交到暂存区`**
 
