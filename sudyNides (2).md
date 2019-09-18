@@ -659,7 +659,7 @@ console.log 函数调用的返回结果为 undefined
 
 > chrome 浏览器控制台的环境是 REPL 环境 REPL：Read Eval Print Loop，读-执行-打印-循环当直接在控制台书写代码时，除了运行代码之外，还会输出该表达式的返回值
 
-## 算术运算符
+### 算术运算符
 
 数学运算符
 
@@ -669,10 +669,8 @@ console.log 函数调用的返回结果为 undefined
 4. `++ --` (下节课讨论)
 5. `**` 幂
 
-### 细节
-
-1. 数字运算是不精确的
-2. 除数为 0
+6. 数字运算是不精确的
+7. 除数为 0
 
 如果被除数是正数，得到结果 Infinity （正无穷）如果被除数是负数，得到结果 -Infinity （负无穷）如果被除数是 0，得到结果 NaN （Not a Number，非数字）
 
@@ -820,6 +818,79 @@ if(num>0){
 	}
 }
 改写成三元运算符！
+```
+
+### 逻辑运算符
+
+**js 中的两个逻辑运算符都属于时短路运算符（存在的多个表达式时，只要有一个满足要求则不再运算其他的表达式）**
+
+**逻辑与`&&`的优先级大于逻辑或`||`**
+
+**逻辑与`&&`**
+
+> 逻辑与：可以简单理解为寻找`false`,只要是第一个参数为`false`,则直接返回，如果第一个为`true`，则直接返回第二个。不做判断
+
+我们通常在项目中用来判断一个是否传递了一个回调函数
+
+```javascript
+function test(callback) {
+  //这种写法默认时要么不传函数，要传就要是一个回调函数
+  //但是这中写法并不严谨，如果传的不是一个函数则会报错
+  callback && callback();
+
+  //严谨的写法应该是使用if判断
+  if (typeof callback === "function") {
+    callback(); //只有当传入的是一个函数时才会执行
+  }
+}
+test(function() {
+  console.log(123);
+});
+```
+
+在判断体中使用逻辑与`&&`，则必须两边的条件都满足的话整体才满足
+
+```javascript
+var a = 12;
+if (a && typeof a === "number") {
+  console.log(123);
+}
+//上面的判断条件是a必须有值，而且a的值的类型还必须是number类型
+//只要这两个条件都满足时才能进入判断体
+```
+
+**逻辑或`||`**
+
+> 逻辑或：可以简单理解为寻找`true`,只要是第一个参数为`true`则直接返回，如果第一个为`false`，则直接返回第二个，不做判断
+
+项目中我们通常用于参数的赋值
+
+```javascript
+function test(x) {
+  x = x || 0;
+  //如果有传递实参则直接返回x，没有的话则给x赋值为0
+  //不严谨，如果我们传递的值转换为布尔值为false的话依然会赋值为0
+
+  //严谨的写法
+  if (typeof x === "undefined") {
+    x = 0;
+    //如果我们不传递实参，则x默认为undefined，就会进入判断
+    //如果传递的是false或者是null之类的也不会进入判断。
+    //但是传递undefined会进入判断
+  }
+}
+test();
+```
+
+在判断体中是第一个满足直接返回，否则直接返回第二个
+
+```javascript
+var a = 10;
+var b = 20;
+if (a || b) {
+  //只要a或者b有一个转换成布尔为true就可以进入判断
+  console.log(123);
+}
 ```
 
 ## JS 中数据类型转换汇总
@@ -1937,6 +2008,93 @@ yarn-error.log*
 3. 在本地开发产品，需要同步的时候，我们首先把工作区内容在本地仓库中放到历史区，生成版本信息（git add . / git commit -m''），在把本地历史区的信息推送到远程仓库上（git pull / git push）
 4. 在团队协作开发的时候，LEADER 会在自己的 gitHub 账号下创建一个远程仓库，那么团队其他成员在向这个远程仓库推送信息的时候，使用自己的账号是没有推送权限的，我们需要把当前这个远程仓库，在 github 中创建工作群组，让更多人用自己的账号也有操作权限 ![nN8Qde.png](https://s2.ax1x.com/2019/09/10/nN8Qde.png) 小组成员在自己的邮箱中收到一封邀请邮件，需要确认同意 ![nN8lIH.png](https://s2.ax1x.com/2019/09/10/nN8lIH.png) 这样就是加入成功了 ![nN8uqO.png](https://s2.ax1x.com/2019/09/10/nN8uqO.png)
 
+## 严格模式
+
+在 ES5 中使用严格模式需要在当前作用域内的第一行书写`use strict`;如果书写在全局作用域内的第一行则表示当前的整个文件使用的都是严格模式。
+
+> 全局作用域的严格模式只会影响当前的文件，并不会影响到其他的 js 文件，
+
+> 在实际多人开发的项目中，当我们完整开发之后会将所有人开发的代码合并压缩在一个 js 文件内，当我们想要在自己开发的 js 代码使用严格模式的话应该使用一个立即执行函数，将自己所有的代码放在一个单独的作用域内，这样就不会影响到其他人所书写的代码，因为`uer strict`只对当前的作用域有效果
+
+### 严格模式和非严格模式的区别
+
+- 我们应当在开发中尽可能的使用严格模式来书写代码，因为在严格模式中对语法的要求更加的严谨，更加的符合规范
+
+1. **`arguments`**
+
+在严格模式中`arguments`的`arguments.callee`和`arguments.callee.caller`无法使用，同时`arguments`不再和形参形成映射机制，
+
+```javascript
+function test() {
+  "use strict";
+  console.log(argument.callee);
+}
+test(); //=>报错：TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+//这两个方法是无法在严格模式中使用的，使用的话浏览器会直接报错
+
+function test(x, y) {
+  console.log(arguments[0]); //=>10
+  x = 100;
+  console.log(arguments[0]); //=>100
+}
+test(10, 20);
+//在非严格模式中arguments依旧和形参存在着映射关系，当一个改变时，另一个也会跟着改变
+
+function test(x, y) {
+  "use strict";
+  console.log(arguments[0]); //=>10
+  x = 100;
+  console.log(arguments[0]); //=>100
+  arguments[0] = 200;
+  console.log(x);
+}
+test(10, 20);
+//在严格模式中arguments和形参不存在映射关系，改变这两个的属性时另一个并不会改变
+//也就是说在严格模式中arguments只作为实参集合体，并不能做出改变
+```
+
+---
+
+2. **this**
+
+在非严格模式中`this`不能明确它的指向，那么它就会指向`window`,但时在严格模式中如果不明确`this`的指向，那么他就会指向`undefined`
+
+```javascript
+function test() {
+  console.log(this); //=>window
+}
+test();
+//=>在非严格模式中不指定this的指向，thsi就会自动指向window
+
+function test() {
+  "use strict";
+  console.log(this); //=>undefined
+}
+test();
+//在严格模式中this的指向不明确的话就会指向undefined，代表没有执行主体
+```
+
+3. 对象重名
+
+在非严格模式中对象的属性名如果重复的话只会由后面的覆盖前面的，但是在严格模中后面重复属性名设置的并不会生效，只有第一个才会生效
+
+```javascript
+function test() {
+  var obj = { n: 2, n: 4 };
+}
+test();
+console.log(obj.n); //=>4
+//非严格模式中重名的属性名会由后面的覆盖掉前面的
+
+function test() {
+  "use strict";
+  var obj = { n: 4, n: 8 };
+}
+test();
+console.log(obj.n); //=>4;
+//在严格模式中重名的属性名只有第一个设置的会生效，其他的都不会生效
+```
+
 ## 堆栈内存
 
 ### 栈内存（ stack ）
@@ -2214,6 +2372,22 @@ console.log(a); //1undefined
 
 形参和实参的数量可以不相等，在传递实参的时候，会按照顺序给形参赋值，如果实参数量少于形参数量，则多出来的形参值则是`undefined`,如果形参的数量少于实参，会先依次给形参赋值，多出来的形参并不会报错
 
+### ES6 中的形参
+
+**在 ES6 中可以直接给形参赋值(形参初始化)**
+
+```javascript
+function test(x = 0) {
+  //只有在没有传递值或者传递的是undefined时才会赋值为0
+  console.log(X);
+}
+test(null); //=>null
+test(false); //=>false
+test(undefined); //=>0  不传递实参x的值也是undefined，
+//只要有传递实参并且传递的实参不是undefined，
+//那么我们传递的是什么x就是什么
+```
+
 ### 返回值
 
 当我们基于函数实现一些功能的时候。我们有时候并不需要利用函数处理，只是单纯的希望函数能够把结果计算出来，至于计算的结果则由我们自由使用，或者是我们希望在外部仍然可以使用函数内部的东西，这时我们就可以使用`return`关键字来返回我们需要的东西，
@@ -2285,13 +2459,15 @@ console.log(result); //=>undefined
 
 ### arguments
 
+**`arguments`只在非严格模式中存在映射机制，在函数刚一开始运行的时候就已经决定好了。（只和当前传递的实参建立映射关系）。之后无论做什么样的操作，都没办法改变其映射关系**
+
 1. `arguments`是所有函数中都拥有的类数组对象（ES6 中的箭头函数没有），并不是真正的数组对象，但是可以转换成真正的数组，
 
 2. 他是函数所传递的实参的集合，并且拥有索引，索引从 0 开始，每传递一个实参会自动递加其索引值，将传递的值作为值存储起来，
 
 3. 无论有没有形参接收实参，`arguments`的值都会增加，如果有形参接收实参，那么`arguments`的值会和形参形成映射关系，他们其中一个改变的时候另外一个也会改变，
 
-4. 只有实参传递的值才会使`arguments`和形参形成映射关系，如果实参数量少于形参数量，那么后面手动给形参赋值并不会影响`arguments`,同时也不回递加自身的索引和值；
+4. 只有实参传递的值才会使`arguments`和形参形成映射关系，如果实参数量少于形参数量，那么后面手动给形参赋值并不会影`arguments`同时也不会递加自身的索引和值。
 
 5. 可以采用`arguments[索引]`的方式来访问其索引中存储的值
 
