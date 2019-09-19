@@ -2862,9 +2862,95 @@ console.log(person2.name, person2.sex); //=>'钉' '女'
 //或者是自身属性的再赋值，和原型中的属性没有任何关系
 ```
 
+### 原型大 Boss
+
+构造函数的原型也是一个对象，只要是对象就会拥有`__proto__`属性，但是原型不清楚自己的所属类是谁，那么它的`__proto__`就会指向`Object`的原型，`Object`也拥有原型，但是`Object`原型的`__proto__`指向的是`null`;
+
+![nOKH6f.png](https://s2.ax1x.com/2019/09/19/nOKH6f.png)
+
+### 原型重定向
+
+> 在实际的开发（构造原型设计模式）当中允许我们修改一些类的原型指向！但是更改原型指向的一系列问题应该在开发中着重注意
+
+1. 更改原型的指向那么原型中的`constructor`这个属性就不存在了。不单单是这个属性，先前所有的属性和方法都不能使用，原有的原型会触发浏览器的垃圾回收机制，自动清理掉，释放其内存空间，此时的`constructor`就会指向`Object`。
+
+```javascript
+function Fn() {
+  var n = 10;
+  this.m = 20;
+  this.aa = function() {
+    console.log(this.m);
+  };
+}
+//new实例的时候Fn的原型并没有改变
+//当前实例的__proto__仍然指向Fn先前的原型
+//在后面的代码中仍然可以使用先前原型中的所有属性和方法
+//因为当前的实例指向先前的原型，那么就不会触发浏览器的垃圾回收机制
+//重定向原型之前创建的实例无法访问重定之后的属性和方法
+var f1 = new Fn();
+Fn.prototype = {
+  aa: function() {
+    console.log(this.m + 10);
+  }
+};
+//此时Fn的原型已经被手动重定向了
+//重定向原型之后再次new实例的话，这个实例就只能使用之后新指向的原型
+//无法使用先前原型中所有的属性和方法，
+//如果不设置constructor，默认会访问到Object的原型
+var f2 = new Fn();
+```
+
+**手动设计`constructor`的指向**
+
+当我们重定向原型之后，也可以重新设置`constructor`的属性
+
+```javascript
+function Test(){
+  this.a = 100;
+};
+Test.prototype={
+  constructor:Test;//设置constructor的指向，让其指向当前的构造函数
+  this.b=200;
+}
+
+```
+
+> 一般只有需要大量向原型中添加一些属性或者方法的时候，才会改变其原型的指向，**由于浏览器的保护机制！默认类的原型无法被改变**
+
+```javascript
+
+Array.prototype={};
+//即使我们改变默认类的原型，但是依然不会生效
+
+
+function Test() {
+  //...
+}
+//需要大量添加一些属性和方法的时候可以直接重定向原型，
+Test.prototype = function() {
+  //...大量的属性和方法
+};
+
+//如果只是添加个别属性或者方法的话，可以直接添加到原型中，没必要重定向原型
+Test.prototype.a = function() {
+  //...   只是简单的添加一些属性或者方法的时候可以使用这个方法
+};
+
+//也可以把一些属性和方法放进一个对象中，一起添加进原型中，但是使用的时候会比较慢麻烦
+var aa = {
+  bb:function(){};
+  //...  属性或者方法
+};
+
+Test.prototype.bb = aa;
+//按照上面设置之后我们只能[实例].[对象].[属性名]这样访问
+var f = new Test();
+f.aa.bb()
+```
+
 ### hasOwnProperty
 
-`hasOwnProperty`可以验证一个属性或者方法是否是为自身拥有
+`hasOwnProperty`可以验证一个属性或者方法是否是为自身拥有，他不会去原型链中寻找
 
 ```javascript
 function Person(name) {
@@ -2941,4 +3027,33 @@ getName();
 new Foo.getName();
 new Foo().getName();
 new new Foo().getName();
+```
+
+---
+
+```javascript
+function Fn() {
+  var n = 10;
+  this.m = 20;
+  this.aa = function() {
+    console.log(this.m);
+  };
+}
+Fn.prototype.bb = function() {
+  console.log(this.n);
+};
+var f1 = new Fn();
+Fn.prototype = {
+  aa: function() {
+    console.log(this.m + 10);
+  }
+};
+var f2 = new Fn();
+console.log(f1.constructor);
+console.log(f2.constructor);
+f1.bb();
+f1.aa();
+f2.bb();
+f2.aa();
+f2.__proto__.aa();
 ```
