@@ -2862,8 +2862,6 @@ console.log(person2.name, person2.sex); //=>'钉' '女'
 //或者是自身属性的再赋值，和原型中的属性没有任何关系
 ```
 
-`prototype`也是一个对象，是对象就拥有`__proto__`属性，我们就根据下面的一张图片来揭示原型链中的 Boss。
-
 ### hasOwnProperty
 
 `hasOwnProperty`可以验证一个属性或者方法是否是为自身拥有
@@ -2881,4 +2879,65 @@ console.log(person.hasOwnProperty("sex")); //=>false
 console.log(person.hasOwnProperty("name")); //=>true
 //当可以使用一个自身不拥有的属性或者是方法时，
 //那么这些属性或者方法就一定存在有原型找中
+```
+
+### **\*归总练习题**
+
+```javascript
+function Fn() {
+  this.x = 100;
+  this.y = 200;
+  this.getX = function() {
+    console.log(this.x);
+  };
+}
+Fn.prototype.getX = function() {
+  console.log(this.x);
+};
+Fn.prototype.getY = function() {
+  console.log(this.y);
+};
+var f1 = new Fn();
+var f2 = new Fn();
+console.log(f1.getX === f2.getX);
+console.log(f1.getY === f2.getY);
+console.log(f1.__proto__.getY === Fn.prototype.getY);
+console.log(f1.__proto__.getX === f2.getX);
+console.log(f1.getX === Fn.prototype.getX);
+console.log(f1.constructor);
+console.log(Fn.prototype.__proto__.constructor);
+f1.getX();
+f1.__proto__.getX();
+f2.getY();
+Fn.prototype.getY();
+```
+---
+
+```javascript
+function Foo() {
+  getName = function() {
+    console.log(1);
+  };
+  return this;
+}
+Foo.getName = function() {
+  console.log(2);
+};
+Foo.prototype.getName = function() {
+  console.log(3);
+};
+var getName = function() {
+  console.log(4);
+};
+
+function getName() {
+  console.log(5);
+}
+Foo.getName();
+getName();
+Foo.getName();
+getName();
+new Foo.getName();
+new Foo().getName();
+new new Foo().getName();
 ```
