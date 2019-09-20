@@ -159,6 +159,7 @@
  */
 
 
+
 // var a = 9;
 
 // function fn() {
@@ -608,19 +609,22 @@
 // f(20);
 
 
-// var num = 10;
-// var obj = {
-//     num: 20
-// };
-// obj.fn = (function (num) {
-//     this.num += n;
-//     num--;
-//     console.log(num);
-// }(obj.num));
-// var fn = obj.fn;
-// fn(10);
-// obj.fn(20);
-// console.log(num, obj.num);
+var num = 10;
+var obj = {
+    num: 20
+};
+obj.fn = (function (num) {
+    this.num += 2;
+    return function(n){
+        this.num +=n; 
+        num--;
+        console.log(num)  
+    }
+}(obj.num));
+var fn = obj.fn;
+fn(10);
+obj.fn(20);
+console.log(num, obj.num);
 
 
 // Object.prototype.x = 100;
