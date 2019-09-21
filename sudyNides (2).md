@@ -582,7 +582,7 @@ if (num == 35.5) {
 ```javascript
 语法：typeof [value] =>检测value的数据类型
 
-返回值：使用typeof检测出的结果是一个字符串，字符串中包含着对应的数据类型，例如"number"/"string"/"boolen"/"undefined"/"object"/"function/symbol"
+返回值：使用typeof检测出的结果是一个字符串，字符串中包含着对应的数据类型，例如"number"/"string"/"boolean"/"undefined"/"object"/"function/symbol"
 
 typeof null =>"object" 因为null代表空对象指针（没有指向任何的内存空间）
 
@@ -1859,7 +1859,7 @@ oBox.removeAttribute('myColor'); //=>删除
 > 安装完成后，我们可以使用 nrm 命令
 >
 > - nrm ls 查看当前可用源
-> - nrm use xxx ��用某个源
+> - nrm use xxx ����用某个源
 >
 > 切完源，还是基于 npm 安装操作
 
