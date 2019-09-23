@@ -642,3 +642,4 @@ console.log(num, obj.num);
 // f.sum();
 // Fn.prototype.sum();
 // console.log(f.constructor);
+
