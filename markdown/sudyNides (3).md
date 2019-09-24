@@ -4020,7 +4020,7 @@ console.log(gender);
 //=>0 因为对象内没有供gender接收的数据，所以会被设置为我们默认设置的数据
 ```
 
-**解构赋值小应用**
+**解构赋值  小应用**
 
 ```javascript
 let value = { name: "xxx", age: 25, score: [12, 23, 34, 45] };
