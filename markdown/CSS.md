@@ -18,7 +18,7 @@ less 是 css 的预编译语言，就是让 css 拥有面向对象编程的思�
 <link rel="stylesheet/less" href="css/demo1.less">
 将link标签内的rel属性修改为"stylesheet/less"
 
-//=>导入 JS 文件即可
+//=>导入 JS 文件即可，导入的js文件必须在less文件下
 
 <script src="js/less-2.5.3.min.js"></script>
 ```
@@ -133,12 +133,15 @@ background: url("@{bg-src}/news_1.png") no-repeat;
 }
 ```
 
-**公共样式**
+**导入外部文件**
 
-- 对于一些公共的样式我们一般会书写在另外的一个文件内，然后在当前书写的 css 文件中引入公共的样式
+- 对于一些公共的样式我们一般会书写在另外的一个文件内，然后在当前书写的 less 文件中引入公共的样式
 
 ```css
+语法：@import "同文件下的文件名";
+
 /* 引入的书写方法 */
 @import (reference) "common";
 /*reference:只把内容导入过来使用,但是不会编译common中的内容*/
+
 ```
