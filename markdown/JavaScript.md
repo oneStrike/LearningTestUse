@@ -1,4 +1,4 @@
-# 
+#
 
 ## JS 语言概述
 
@@ -1679,9 +1679,11 @@ arr.pop();
 ```javascript
 var arr = [10, 20, 30, 40];
 arr.shift();
-//=>返回被删除的内容 ==>10
-//=>原有数组改变  ==>[20,30,40]
-//=>shift删除内容后，会使数组中后面所有项的索引向前位移一位
+/*
+ * 返回被删除的内容 ==>10
+ * 原有数组改变  ==>[20,30,40]
+ * shift删除内容后，会使数组中后面所有项的索引向前位移一位
+ */
 ```
 
 **unshift**
@@ -1711,7 +1713,7 @@ arr.unshift(9, 8, false, {});
 
 原有数组改变。
 
-splice 的操作是从一个参数的位置开始，会包含第一个参数的位置，并不是从后面参数位置的后面开始
+splice 的操作是从一个参数的位置开始，会包含第一个参数的位置上的数组元素，并不是从后面参数位置的后面开始
 
 删除：
 
@@ -1727,10 +1729,12 @@ arr.splice(1, 3);
 ```javascript
 var arr = [10, 20, 30, 40];
 arr.splice(1, 0, 15, 16, true);
-//=>在数组中添加传入的元素，
-//=>第一个参数表示添加的索引位置，第二个参数表示删除0项，其余的表示需要添加的内容
-//=>如果不删除则会返回一个空的数组
-//=>arr   ==>[ 10, 15, 16, true, 20, 30, 40 ]
+/*
+ * 在数组中添加传入的元素，
+ * 第一个参数表示添加的索引位置，第二个参数表示删除0项，其余的表示需要添加的内容
+ * 如果不删除则会返回一个空的数组
+ * arr   ==>[ 10, 15, 16, true, 20, 30, 40 ]
+ */
 ```
 
 修改：
@@ -1738,10 +1742,11 @@ arr.splice(1, 0, 15, 16, true);
 ```javascript
 var arr = [10, 20, 30, 40, 50, 60];
 arr.splice(2, 3, 1, 2, 3);
-//=>第一个参数表示起始位置（包含），第二个表示删除的个数，其余表示需要添加的内容
-//=>arr ==>[ 10, 20, 1, 2, 3, 60 ]
-//=>返回一个新的数组   ==>[ 30, 40, 50 ]
-//=>
+/*
+ * 第一个参数表示起始位置（包含），第二个表示删除的个数，其余表示需要添加的内容
+ * arr ==>[ 10, 20, 1, 2, 3, 60 ]
+ * 返回一个新的数组   ==>[ 30, 40, 50 ]
+ */
 ```
 
 > 需求扩展：
@@ -1785,7 +1790,9 @@ ary[ary.length] = 100;
 
 返回：拼接后的新数组
 
-原有数组不变 ![nNlVRP.png](https://s2.ax1x.com/2019/09/10/nNlVRP.png)
+原有数组不变
+
+![nNlVRP.png](https://s2.ax1x.com/2019/09/10/nNlVRP.png)
 
 **`toString`** 作用：把数组转换为字符串参数：无返回：数组中的每一项用逗号分隔的字符串原有数组不变
 
@@ -1848,7 +1855,15 @@ if (ary.indexOf(100) > -1) {
 
 **Array.from**
 
-`Array.from()`是一个静态方法，只有`Array`能调取使用，实例无法直接使用。（但是可以通过原型链的机制调取使用，不过其麻烦程度让我们完全没必要这样操作）。返回值是转换后的数组。不修改原有的类数组
+作用：将一个类数组转换成数组
+
+参数：需要转换的类数组
+
+返回：转换后的真数组
+
+原类数组不变
+
+`Array.from()` 是一个静态方法，只有`Array`能调取使用，实例无法直接使用。（但是可以通过原型链的机制调取使用，不过其麻烦程度让我们完全没必要这样操作）。返回值是转换后的数组。不修改原有的类数组
 
 ```javascript
 function test() {
@@ -1861,37 +1876,69 @@ console.log(test(1, 28, 2, 43, 42, 1));
 
 **forEach**
 
-作用：可以对数组中每一个元素执行执行一次函数。已删除或者未初始化的项将被跳过（例如在稀疏数组上）。多用于遍历数组中的每一项
+作用：可以对数组中每一个元素执行执行一次函数。已删除或者未初始化的项将被跳过（例如在稀疏数组上）
 
-除了抛出一个错误外，`forEach`无法被提前中断，如果不确定应该使用`for`循环，或者提前使用`filter`提前过滤一下数组
+除非抛出一个错误，否则`forEach`无法被提前中断，
 
-参数：callback回调函数
+参数：callback 回调函数
 
 返回：undefined
 
 原有数组不变
 
 ```javascript
-var arr=[10,20,30,50,40,50];
-arr.forEach(function(currentValue,index,arr,thisAry){
-//=>currentValue  ==>当前数组中的元素
-//=>index   ==>数组元素所在的索引（下标）
-//=>arr  ==>当前操作的数组本身
-//=>thisAry   ==>回调函数中this的指向
+var arr = [10, 20, 30, 50, 40, 50];
+arr.forEach(function(currentValue, index, arr, thisAry) {
+  //=>currentValue  ==>当前数组中的元素
+  //=>index   ==>数组元素所在的索引（下标）
+  //=>arr  ==>当前操作的数组本身
+  //=>thisAry   ==>回调函数中this的指向
 
-console.log(currentValue,index,arr)
-//=>分别输出数组中的每一项和每一项的索引，arr会输出数组本身
-})
+  console.log(currentValue, index, arr);
+  //=>分别输出数组中的每一项和每一项的索引，arr会输出数组本身
+});
 
 //=>如果是一个稀松数组，则会直接跳过，并不会输出，因为他没有值可供输出
 
-var arr=[10,20,,21,02,15,,,12];
-arr.forEach(function(value,index){
-	console.log(value,index);
-	//=>value  ==> 10 , 20 , 21 , 2 , 15 , 12
-	//=>index  ==>  0, 1 , 3 , 4 , 5 , 8
-})
+var arr = [10, 20, , 21, 02, 15, , , 12];
+arr.forEach(function(value, index) {
+  console.log(value, index);
+  //=>value  ==> 10 , 20 , 21 , 2 , 15 , 12
+  //=>index  ==>  0, 1 , 3 , 4 , 5 , 8
+});
 //=>并不会输出稀松数组的索引
+```
+
+大部分情况下`forEach`都会形成闭包
+
+```HTML
+<a>按钮1</a>
+<a>按钮2</a>
+<a>按钮3</a>
+<script>
+  //=>获取页面中的所有a标签
+  let linkList=document.getElementsByTagName('a');
+  //=>将获取的a标签集合（类数组）转化成真数组
+  linkList=Array.from(linkList);
+  //=>forEach循环绑定点击事件
+linkList.forEach(function (element, index) {
+element.onclick=function(){
+  console.log(index);
+  //=>点击不同的元素，会输出相应的索引
+}
+}
+//=>我们之所以可以输出不同的索引，就是因为forEach运行会形成闭包
+//=>会形成不同的空间来存储对应的数据，每个数组项的空间都不相同
+
+//=>普通for循环绑定事件并不会产生闭包
+for(var i=0;i<linkList.length;i++){
+	linkList[i].onclick=function(){
+		console.log(i);
+		//=>3
+		//=>只会输出3，因为当我们点击的时候for循环早已经运行结束了
+	}
+}
+</script>
 ```
 
 除了以上方法，数组中还包含很多常用的方法（Array.prototype）
@@ -2479,11 +2526,7 @@ for(var i=0;i<5;i++>){
 //=>我们之后操作的所有标签都只能是我们创建的这些
 ```
 
-js 中获取元素有着许多的方法，除了`querySelectorAll`以外都是动态获取。
-会根据页面的实时变化来动态的获取页面中的标签，`querySelectorAll`是静态获取的，
-即第一次获取的是什么内容，之后无论我们如何改变文档结构，他都不会发生变化，
-因为它不存在 DOM 映射机制。之后再次获取才能获得修改后的内容
-
+js 中获取元素有着许多的方法，除了`querySelectorAll`以外都是动态获取。会根据页面的实时变化来动态的获取页面中的标签，`querySelectorAll`是静态获取的，即第一次获取的是什么内容，之后无论我们如何改变文档结构，他都不会发生变化，因为它不存在 DOM 映射机制。之后再次获取才能获得修改后的内容
 
 ```javascript
 var div = document.getElementsByTagName("div");
@@ -2504,13 +2547,129 @@ appendChild 在追加元素对象的时候，如果这个元素之前容器中�
 
 此时不是克隆一份新的追加到末尾，而是把原有的元素移动到末尾位置
 
-### 阻止HTML标签默认行为
+我们不应过多的依赖映射机制，因为他不怎么符合我们正常的开发思维，
 
-有时候在我们操作页面的时候需要阻止一些标签的默认行为，比如a标签的默认跳转页面的行为
+### 阻止 HTML 标签默认行为
+
+有时候在我们操作页面的时候需要阻止一些标签的默认行为，比如 a 标签的默认跳转页面的行为
 
 ```HTML
 <a href="javascript:;">跳转不能</a>
 <!-- 我们在a标签内的href属性内书写javascript:;即可阻止a标签的默认跳转行为 -->
+```
+
+### DOM 回流（reflow）和重绘（repaint'）
+
+**浏览器的渲染机制**
+
+1. 加载 html 文档（DOM 树）。浏览器会把我们所有的 HTML 解析成一个 DOM 树，每一个 HTML 标签就是 DOM 树中的一个节点。包括我们使用 JS 添加的标签。
+
+2. 加载 CSS 样式表（主要包括浏览器自带的样式和我们自己书写的 CSS 样式，同时也会过滤掉不能解析的样式）。
+
+3. 生成渲染树（RENDER TREE）DOM 树和样式表结合后呈现出渲染树。render tree 不包含`display：none`和`head`标签，因为他们不会呈现出效果，也不会影响其他标签的呈现，但是会包含`visitility：hidden`的标签，因为他只是被隐藏起来，但仍然会影响布局，也会占据位置。
+
+4. 浏览器根据 render tree 渲染页面
+
+**回流（reflow）**
+
+- 当页面中的 HTML 文档结构发生变化时，（删除，增加，移动，修改...）都会造成回流，每一次的回流浏览器都是重新渲染页面，相当消耗性能
+
+```javascript
+let body = document.body;
+for (var i = 0; i < 10; i++) {
+  var div = document.createElement("DIV");
+  body.appendChild(div);
+}
+/*
+ * 上面的代码就会造成页面的回流,并且会对性能造成过多的消耗，
+ * 我们每次创建的div都会直接添加body中，添加一次就会造成一次页面的回流
+ * 如果我们添加的元素过多时，会极大的消耗性能
+ */
+```
+
+**重绘（repaint）**
+
+- 当页面中的某一个标签发生样式上的改变，就会造成重绘，但是发生影响布局的改变，同样会造成回流，**回流一定会造成重绘，但是重绘不一定会造成回流**
+
+```css
+div {
+  width: 200px;
+  height: 200px;
+  background: orangerd;
+  font-size: 14px;
+}
+
+/* 如果我们只修改一些不影响页面整体布局的样式，那么只会造成回流例如将
+background改变为green，这样只会造成重绘，但是我们修改width: 300px，
+那么他就会造成回流，因为div宽度的改变会影响真个页面的布局，其他的标签也会发生改变; */
+```
+
+我们应该尽可能的避免回流，以增加运行性能
+
+**createDocumenrFragment**
+
+- **文档碎片**。一个虚拟的文档节点，并不是主 DOM 树的一部分，它拥有一块独立的空间
+- 插入的元素会存储在内存空间中，所以它不会造成回流。
+- 只会在我们将其插入到 DOM 树中会造成一次回流，对性能更加的友好
+
+```javascript
+let frg = document.createDocumentFragment();
+for (var i = 0; i < 10; i++) {
+  var div = document.createElement("DIV");
+  frg.appendChild(div);
+  //=>将创建的div插入文档片段中
+}
+document.body.appendChild(frg);
+//=>将文档片段统一插入body中
+
+/*
+ *我们统一将需要创建的标签插入到文档片段中，然后在统一的插入到DOM树中
+ * 这样就只会造成一次回流，性能会比直接在循环内直接插入到DOM树中好很多
+ *
+ *它并不支持使用innerHTML添加文档片段，使用这个方法也只是给它添加一个属性而已
+ */
+
+/*
+ *创建的两种方式
+ *document.createDocumentFragment() ==>兼容所有的浏览器
+ *new Fragment()  ==>构造函数方法创建的IE并不支持
+ */
+```
+
+**读写分离**
+
+一些新版本的浏览器为了优化性能增加的一个机制
+
+```javascript
+//=>假如我们要修改一个元素的样式
+let body = document.body;
+body.style.backgroundColor = "red";
+body.style.width = 200 + "px";
+body.style.height = 300 + "px";
+/*
+ *当我们需要修改一个元素的多个样式是可以书写在一些
+ *浏览器在就解析时会将修改的样式先暂存起来，
+ *当遇到需要读取这些样式的时候才会应用到页面中
+ *这样会减少DOM重绘和回流的产生，
+ *
+ *如果我们在修改完背景颜色之后访问body的背景颜色，就会造成一次DOM重绘
+ *但是我们在修改完所有的样式之后再进行访问只会产生一次DOM回流
+ */
+```
+
+**对象添加样式**
+
+- 如果我们需要对一个元素进行多个样式的修改，那么我们可以将其封装到一个对象中，然后将对象名作为元素的 class 名添加，这样也可以减少性能消耗
+
+```javascript
+let style = {
+  color: "red",
+  width: "300px",
+  fontSize: "16px",
+  backgroundColor: "pink"
+};
+let body = document.body;
+body.className = "style";
 ```
 
 ---
@@ -3094,9 +3253,9 @@ console.log(a, b);
 ```javascript
 var a = 10;
 if (true) {
-  console.log(a); 
-//=>会报错，但是报错的信息并不是变量命名冲突，而是语法错误，在a未申明之前无法访问，
-//=>可以将使用 VAR 关键字创建的变量并不会影响当前这几行代码的错误信息
+  console.log(a);
+  //=>会报错，但是报错的信息并不是变量命名冲突，而是语法错误，在a未申明之前无法访问，
+  //=>可以将使用 VAR 关键字创建的变量并不会影响当前这几行代码的错误信息
   let a = 20;
 }
 ```
@@ -3723,14 +3882,14 @@ obj.fn();
 //=>但是箭头函数中没有this，this取决于箭头函数的执行上下文
 ```
 
-6. 实例方法中的回调函数也指向window
+6. 实例方法中的回调函数也指向 window
 
 ```javascript
-var arr=[10,20,30];
-arr.forEach(function(){
-	console.log(this)
-	//=>this ==>window
-})
+var arr = [10, 20, 30];
+arr.forEach(function() {
+  console.log(this);
+  //=>this ==>window
+});
 //=>回调函数的this也会指向window
 ```
 
@@ -3929,6 +4088,7 @@ console.log(person2.name, person2.sex); //=>'钉' '女'
 > 在实际的开发（构造原型设计模式）当中允许我们修改一些类的原型指向！但是更改原型指向的一系列问题应该在开发中着重注意
 
 1. 原型指向被更改后，原有的`constructor`会指向`Object`，因为他是存储在原型中的，原型指向改变，原有的原型中的一系列方法和属性都无法再使用，会触发浏览器的垃圾回收机制，自动被浏览器销毁其堆内存，释放空间，
+
 ```javascript
 function Fn() {
   var n = 10;
@@ -4273,7 +4433,7 @@ console.log(name);
 console.log(obj.name);
 //=>'钉宫'
 
-//=>它们连个任意一个改变都和另外一个没有任何关系
+//=>它们两个任意一个改变都和另外一个没有任何关系
 ```
 
 我们有时为了防止对象的属性名和全局的变量名冲突，我们还可以自定义用于接收的变量名
@@ -4289,6 +4449,32 @@ let { name: nameAA, age: ageAA, sex: sexAA } = obj;
 let { name, age, sex, gender = 0 } = obj;
 console.log(gender);
 //=>0 因为对象内没有供gender接收的数据，所以会被设置为我们默认设置的数据
+```
+
+**forEach 解构赋值**
+
+有时我们需要解析的对象都集合在一个数组中，此时我们可以使用`forEach`遍历数组结构赋值
+
+```javascript
+let arr = [
+  { name: "绫", age: 17 },
+  { name: "钉", age: 18 },
+  { name: "宫", age: 19 },
+  { name: "野", age: 20 }
+];
+
+forEach(element => {
+  let { name, age } = element;
+  //=>我们可以直接在forEach内遍历解构赋值
+  //=>箭头函数中只有一个形参的话可以省略小括号
+});
+
+//=>另外一种写法
+let str = arr.forEach(({ name, age }) => {
+  //=>直接在形参位置解构赋值的话需要使用小括号包裹起来
+  //=>之所以能够直接在形参位置解构赋值是因为forEach的机制
+  //=>forEach方法的回调函数中第一个参数代表的是数组中的每一项
+});
 ```
 
 **解构赋值小应用**
@@ -4311,9 +4497,9 @@ let {
 
 ### 模板字符串` ``` `
 
-ES6中的模板字符串比普通的字符串使用起来要高效许多，尤其是在拼接字符串的时候
+ES6 中的模板字符串比普通的字符串使用起来要高效许多，尤其是在拼接字符串的时候
 
 ```javascript
-var str =`102${代码}123`
-//=>模板字符串字符串拼接使用${}，不需要在使用+拼接
+var str = `102${代码}123`;
+//=>模板字符串字符串拼接使用${}，不需要再使用+拼接
 ```

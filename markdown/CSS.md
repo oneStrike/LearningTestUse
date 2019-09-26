@@ -1,4 +1,8 @@
-#
+# CSS ( Cascading Style Sheets )
+
+层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现 HTML（标准通用标记语言的一个应用）或 XML（标准通用标记语言的一个子集）等文件样式的计算机语言。CSS 不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。
+
+CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力
 
 ## LESS
 
@@ -18,7 +22,7 @@ less 是 css 的预编译语言，就是让 css 拥有面向对象编程的思�
 <link rel="stylesheet/less" href="css/demo1.less">
 将link标签内的rel属性修改为"stylesheet/less"
 
-//=>导入 JS 文件即可，导入的js文件必须在less文件下
+//=>导入 JS 文件即可，导入的 js 文件必须在 less 文件下
 
 <script src="js/less-2.5.3.min.js"></script>
 ```
@@ -138,7 +142,7 @@ background: url("@{bg-src}/news_1.png") no-repeat;
 - 对于一些公共的样式我们一般会书写在另外的一个文件内，然后在当前书写的 less 文件中引入公共的样式
 
 ```css
-语法：@import "同文件下的文件名";
+语法：@import "同文件夹下的文件名";
 
 /* 引入的书写方法 */
 @import (reference) "common";
