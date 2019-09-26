@@ -2657,20 +2657,7 @@ body.style.height = 300 + "px";
  */
 ```
 
-**对象添加样式**
-
-- 如果我们需要对一个元素进行多个样式的修改，那么我们可以将其封装到一个对象中，然后将对象名作为元素的 class 名添加，这样也可以减少性能消耗
-
-```javascript
-let style = {
-  color: "red",
-  width: "300px",
-  fontSize: "16px",
-  backgroundColor: "pink"
-};
-let body = document.body;
-body.className = "style";
-```
+- 如果我们需要对一个元素进行多个样式的修改，我们最好创建一个class类名，然后将这些样式添加在class类名中，然后通过js代码将这个class名添加到我们需要操作的元素中
 
 ---
 

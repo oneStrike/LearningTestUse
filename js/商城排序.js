@@ -68,9 +68,11 @@ let productRender = (function () {
                     return (aInn - bInn) * e.target.flag;
                 });
                 //重新添加
+               let frg = document.createDocumentFragment();
                 productList.forEach(function (element) {
-                    listBox.appendChild(element);
+                    frg.appendChild(element)
                 });
+                listBox.appendChild(frg);
             };
 
         });
