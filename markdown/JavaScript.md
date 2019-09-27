@@ -509,7 +509,8 @@ ary.0
 
 1. 声明语句：变量声明和函数声明
 2. 赋值语句：把值或者表达式计算的值赋值给变量
-3. 控制语句：能改变语句的执行顺序，包括条件语句和循环语句，当然还有比较特殊的标签语句。
+3. 控制语句：能改变语句的执行顺序，包括条件语句和循环语句，当然
+   有比较特殊的标签语句。
 4. 表达式语句：这些语句去掉最后分号，都也可当表达式用的。常见的有：对象操作（new、delete）、函数调用（函数执行，必有返回值）等。
 
 ### 操作符和操作数
@@ -1618,11 +1619,11 @@ for (var item in object) {
 
 ---
 
-## 内置方法
+## 标准库
 
 在 js 中给我们体供了很多内置方法，我们可以直接拿来使用
 
-### 数组中的常用方法
+### Number
 
 > 按照四个维度记忆：
 >
@@ -1796,11 +1797,11 @@ ary[ary.length] = 100;
 
 **`toString`** 作用：把数组转换为字符串参数：无返回：数组中的每一项用逗号分隔的字符串原有数组不变
 
-**`join`** 作用：和 toString 类似，也是把数组转换为字符串，但是我们可以设置变为字符串后，每一项之间的连接符参数：指定的链接符返回：字符串原有数组不变 
+**`join`** 作用：和 toString 类似，也是把数组转换为字符串，但是我们可以设置变为字符串后，每一项之间的连接符参数：指定的链接符返回：字符串原有数组不变
 
 ![nNlmM8.png](https://s2.ax1x.com/2019/09/10/nNlmM8.png)
 
-**`reverse`** 作用：把数组倒过来排列参数：无返回：排列后的新数组原有数组改变 
+**`reverse`** 作用：把数组倒过来排列参数：无返回：排列后的新数组原有数组改变
 
 ![nNluqg.png](https://s2.ax1x.com/2019/09/10/nNluqg.png)
 
@@ -1936,11 +1937,11 @@ element.onclick=function(){
 
 //=>普通for循环绑定事件并不会产生闭包
 for(var i=0;i<linkList.length;i++){
-	linkList[i].onclick=function(){
-		console.log(i);
-		//=>3
-		//=>只会输出3，因为当我们点击的时候for循环早已经运行结束了
-	}
+    linkList[i].onclick=function(){
+        console.log(i);
+            //=>3
+        //=>只会输出3，因为当我们点击的时候for循环早已经运行结束了
+    }
 }
 </script>
 ```
@@ -1959,7 +1960,7 @@ for(var i=0;i<linkList.length;i++){
 
 第一阶段咱们不深入研究这些方法，搞懂这些方法需要了解 OOP/作用域/回调函数等，第二阶段咱们在去研究这些
 
-### 字符串细节知识
+**字符串细节知识**
 
 > 在 JS 中所有用单引号或者双引号包起来的都是字符串，每一个字符串是由零到多个字符组成
 
@@ -1978,7 +1979,7 @@ for(var i=0;i<str.length;i++){
 }
 ```
 
-### 字符串中常用的方法
+### String
 
 字符串是基本数据类型，字符串的每一次操作都是值直接的进行操作，不像数组一样是基于空间地址来操作的，所以不存在原有字符串是否改变这一说，肯定都是不变的
 
@@ -1995,26 +1996,143 @@ if (str.indexOf("@") > -1) {
 
 **`slice`** 作用：str.slice(n,m) 从索引 n 开始找到索引为 m 处(不包含 m)，把找到的字符当做新字符串返回 ![nNlyz6.png](https://s2.ax1x.com/2019/09/10/nNlyz6.png)
 
-**`substring`** 和 slice 语法一模一样，唯一的区别在于：slice 支持负数索引，而 substring 不支持负数索引 ![nNl0o9.png](https://s2.ax1x.com/2019/09/10/nNl0o9.png)
+**`substring`** 和 slice 语法一模一样，唯一的区别在于：slice 支持负数索引，而 substring 不支持负数索引
 
-**`substr`** 也是字符串截取的方法，用法是：str.substr(n,m)，从索引 n 开始截取 m 个字符 ![nNlwdJ.png](https://s2.ax1x.com/2019/09/10/nNlwdJ.png)
+![nNl0o9.png](https://s2.ax1x.com/2019/09/10/nNl0o9.png)
 
-**`toUpperCase/toLowerCase`** 实现字母的大小写转换，toUpperCase 小写转大写，toLowerCase 大写转小写 ![nNlDiR.png](https://s2.ax1x.com/2019/09/10/nNlDiR.png)
+**`substr`** 也是字符串截取的方法，用法是：str.substr(n,m)，从索引 n 开始截取 m 个字符
 
-**`split`** 和数组中的 join 相对应，数组中的 join 是把数组们一项按照指定的连接符变为字符串，而 split 是把字符串按照指定的分隔符，拆分成数组中每一项 ![nNlcQK.png](https://s2.ax1x.com/2019/09/10/nNlcQK.png)
+![nNlwdJ.png](https://s2.ax1x.com/2019/09/10/nNlwdJ.png)
 
-**`replace`** 作用：替换字符串中的原有字符参数：原有字符，要替换的新字符返回：替换后的字符串
+**`toUpperCase/toLowerCase`** 实现字母的大小写转换，toUpperCase 小写转大写，toLowerCase 大写转小写
+
+![nNlDiR.png](https://s2.ax1x.com/2019/09/10/nNlDiR.png)
+
+**`split`** 和数组中的 join 相对应，数组中的 join 是把数组们一项按照指定的连接符变为字符串，而 split 是把字符串按照指定的分隔符，拆分成数组中每一项
+
+![nNlcQK.png](https://s2.ax1x.com/2019/09/10/nNlcQK.png)
+
+**replace**
+
+作用：使用字符串或者对象对象判断并替换字符串中的原有字符
+
+参数：原有字符或正则对象，要替换的新字符
+
+返回：一个部分或全部匹配由替代模式所取代的新的字符串
+
+原有字符串必变
+
+**普通替换**
+
+当使用一个固定的字符串检索并替换时并不会那么的完美。
+
+因为它每次只能替换一处，如果有多出需要替换，那么就会比较麻烦。
+
+而且有些时候不使用正则也无法完成我们的需求
+
+因为`replace`基本上都时结合正则使用的
 
 ```javascript
-//=>把“zhufeng”替换为“珠峰”
-var str = "zhufeng2017zhufeng2018";
-str = str.replace("zhufeng", "珠峰"); //=>在不使用正则的情况下，没执行一次replace只能替换一个 “珠峰2017zhufeng2018”
-str = str.replace("zhufeng", "珠峰"); //=>“珠峰2017珠峰2018”
+let str = "dogmonkycatandcatandpig";
+//=>将所有的cat替换成cats
+str.replace("cat", "cats");
+//=>'dogmonkycatsandcatandpig';
+//=>每执行一次只会替换一处，无法同时替换多出
+str.replce("cat", "cats");
+//=>'dogmonkycatssandcatandpig';
 
-//===================
-str = str.replace(/zhufeng/g, "珠峰");
+/**
+ * 当执行第二次时也只会增加一个s，后面我们执行几次就只会增加几个s
+ * 因为我们的检索值是一个字面量，并不能做任何的判断
+ * 替换值和检索值存在相似处就无法完成我们所需的操作
+ * 第一处替换成功时，再次进行替换时就会检索到我们的替换值
+ * 会把第一次替换的值再一次进行替换
+ */
 ```
-----
+
+**基于正则替换**
+
+当一个目标字符串中有多个需要替换的字符串时，`replace`每检索到一个
+
+需要替换的字符串时就会直接替换，如果替换值时函数就会执行依次函数
+
+目标字符串中有几处匹配项就会替换几次，同样的函数也会执行用样的次数
+
+```javascript
+let str = "dogmonkycatandcatandpig";
+let reg = /cat+/g;
+str.replace(reg, "cats");
+//=>dogmonkycatsandcatsandpig
+//=>使用正则对象可以直接替换所有匹配规则的字符串
+
+str.replace(reg, "@");
+//=>"dogmonky@and@andpig"
+
+//=>替换掉a或者b
+reg = /[ab]/g;
+str.replace(reg, "@");
+//=>"dogmonkyc@t@ndc@t@ndpig"
+```
+
+也可以使用函数作为第二个参数，`replace`会将函数`return`的值作为替换值
+
+```javascript
+let str = "abcbcdasdxyz";
+let reg = /[ac]/g;
+//=>匹配a,b,c中的任意一项
+str.replace(reg, (...arr) => {
+  //替换值是一个函数，replace会将函数的返回值作为替换值
+  return "A";
+});
+//=>'AbAbAdAsdxyz'
+
+str.replace(reg, function(...arr) {
+  console.log(arr);
+  //=>会输出类似于exec格式的一个数组
+  return "A";
+});
+
+/**
+ * 每一处匹配项都会使函数一次，并且将函数的返回值替换匹配项
+ * 同时replace也会基于exec将一些数据通过传参的形式传递给函数
+ *
+ * 如果我们return一个引用类型的数据时浏览器会自动调用toString()
+ * 方法，将其转换成字符串之后再进行替换，转换后如果是空字符串
+ * 那么就只会删除匹配，不会替换，空格字符串并不是空串
+ * 因此也会替换匹配项
+ */
+str.replace(reg, function() {
+  let arr = [12, 21];
+  return arr;
+});
+//=>"12,21b12,21b12,21d12,21sdxyz"
+
+str.replace(reg, function() {
+  let obj = { name: "绫" };
+  return obj;
+});
+//=>[object Object]b[object Object]b[object Object]d[object Object]sdxyz
+
+str.replace(reg, function() {
+  let arr = [];
+  return arr;
+});
+//=>"bbdsdxyz"
+```
+
+**特殊的替换值**
+
+`$$` 插入一个 "\$"。
+
+`$&` 插入匹配的子串。
+
+`$`\` 插入当前匹配的子串左边的内容。
+
+`$'` 插入当前匹配的子串右边的内容。
+
+`$n` 假如第一个参数是 RegExp 对象，并且 n 是个小于 100 的非负整数，那么插入第 n 个括号匹配的字符串。提示：索引是从 1 开始
+
+---
 
 **match**
 
@@ -2030,26 +2148,26 @@ str = str.replace(/zhufeng/g, "珠峰");
 - 如果传递的不是一个正则对象，会隐式的使用`new RegExp(对象)`将其转换成正则对象。
 - 也可以直接在调用方法的时候书写规则，但因注意不需要加`""`，否则只会返回`null`。
 - 传入的是`Number`类型的数字或者是值是纯数字的字符串都会被直接放入数组中返回。
-- 传入`undefined`也会返回`[""]`，初次之外都是`null`
+- 传入`undefined`也会返回`[""]`，初此之外都是`null`
 
 ```javascript
-let str='看看123匹配到了456几个';
-str.match(123);    	 //=>["123"]
-str.match('123');	   //=>["123"]
-str.match(null);		//=>null
-str.match(undefined);   //=>[""]
-str.match(true);		//=>null
-str.match(false);	   //=>null
-str.match('12sf');	  //=>null
-str.match('/\d+/g')	 //=>null
-str.match(/\d+/g);      //=>["123","456"]
+let str = "看看123匹配到了456几个";
+str.match(123); //=>["123"]
+str.match("123"); //=>["123"]
+str.match(null); //=>null
+str.match(undefined); //=>[""]
+str.match(true); //=>null
+str.match(false); //=>null
+str.match("12sf"); //=>null
+str.match("/d+/g"); //=>null
+str.match(/\d+/g); //=>["123","456"]
 ```
 
-如果使用g标志，则将返回与完整正则表达式匹配的所有结果（Array），但不会返回捕获组，或者未匹配 null。
+如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果（Array），但不会返回捕获组，或者未匹配 null。
 
-如果未使用g标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性，或者未匹配 null。
+如果未使用 g 标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性，或者未匹配 null。
 
->返回的数组中会包含捕获组，同时还拥有正则的一些方法
+> 返回的数组中会包含捕获组，同时还拥有一些额外的属性`input`,`index`。
 
 字符串中还有很多常用方法，回去后大家可以自己扩展一下：（String.prototype）
 
@@ -2697,7 +2815,7 @@ body.style.height = 300 + "px";
  */
 ```
 
-- 如果我们需要对一个元素进行多个样式的修改，我们最好创建一个class类名，然后将这些样式添加在class类名中，然后通过js代码将这个class名添加到我们需要操作的元素中
+- 如果我们需要对一个元素进行多个样式的修改，我们最好创建一个 class 类名，然后将这些样式添加在 class 类名中，然后通过 js 代码将这个 class 名添加到我们需要操作的元素中
 
 ---
 
@@ -3675,11 +3793,17 @@ obj.fn();
 
 ### 作用域链
 
-> 在函数执行创建时就会产生一个作用域链，作用域链是一个不可操作的类数据对象，函数创建的时候会在作用域链索引 0 的位置上和`widnow`全局作用域相关联， ![nymQLq.png](https://s2.ax1x.com/2019/09/14/nymQLq.png)
+> 在函数执行创建时就会产生一个作用域链，作用域链是一个不可操作的类数据对象，函数创建的时候会在作用域链索引 0 的位置上和`widnow`全局作用域相关联，
+>
+> ![nymQLq.png](https://s2.ax1x.com/2019/09/14/nymQLq.png)
 
-> 当函数执行的时候会自动将自身的作用域放在索引 0 的位置上，会将其他的依次向下位移一个索引，在查找一个数据时会按照作用域链优先查找索引 0 上的作用域，如果没有则依次向下查找，函数在执行完毕之后会销毁自身的作用域，作用域链会回到创建时的状态 ![nym3wV.png](https://s2.ax1x.com/2019/09/14/nym3wV.png)
+> 当函数执行的时候会自动将自身的作用域放在索引 0 的位置上，会将其他的依次向下位移一个索引，在查找一个数据时会按照作用域链优先查找索引 0 上的作用域，如果没有则依次向下查找，函数在执行完毕之后会销毁自身的作用域，作用域链会回到创建时的状态
+>
+> ![nym3wV.png](https://s2.ax1x.com/2019/09/14/nym3wV.png)
 
-> 如果在函数内部创建了一个函数，那么这个函数创建的时候作用域链就会和他的上一级函数相关链，此时索引 0 的位置上存放的是他上一级的作用域 window 全局作用域在作用域链中始终处于最底部，**函数的作用域链在创建的时候就已经决定好了。因此跟函数在哪运行没有任何关系** > ![nyuF58.png](https://s2.ax1x.com/2019/09/14/nyuF58.png)
+> 如果在函数内部创建了一个函数，那么这个函数创建的时候作用域链就会和他的上一级函数相关链，此时索引 0 的位置上存放的是他上一级的作用域 window 全局作用域在作用域链中始终处于最底部，**函数的作用域链在创建的时候就已经决定好了。因此跟函数在哪运行没有任何关系** >
+>
+> ![nyuF58.png](https://s2.ax1x.com/2019/09/14/nyuF58.png)
 
 ---
 
