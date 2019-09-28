@@ -1057,11 +1057,10 @@ isNaN(num);
 
 `typeof`用来检测一个数据的类型（是一个一元运算符，无法细分的检测数据）
 
-- `typeof`拥有两种写法`typeof 检测对象`或者`typeof(检测对象)`
+- `typeof`拥有两种写法`typeof 检测的对象`或者`typeof(检测的对象)`
+- 这两种方法并没有什么区别，使用效果是一样的
 - 会返回一个字符串格式的数据类型
 - 例如：`"number"`/`"string"`/`"boolean"`/`"object"`/`"function"`/`"undefined"`/`"symbol"`
-
-//=>例如:"number"/"string"/"boolean"/"undefined"/"object"/"function/symbol"
 
 ```javascript
 typeof null =>"object"
@@ -1081,11 +1080,17 @@ console.log(typeof typeof []);
 
 **直接使用 `typeof` 一个不存在的变量或者在变量声明之前都不会报错。而是会返回`undefined`**
 
-但是在 ES6 中基于`LET`创建变量则改正了这一机制，在声名之前使用 `typeof` 检测类型是直接报错(ReferenceError: Cannot access 'c' before initialization);
+在 ES6 中基于`LET`创建变量则改正了这一机制，在声明之前使用 `typeof` 检测类型是直接报错
+
+```javascript
+typeof a;
+//=>报错：(ReferenceError: Cannot access 'c' before initialization);
+let a = 10;
+```
 
 ### in
 
-`in`主要用于检测一个属性自身或这原型链中是否存在，如果存在则返回`true`,否则返回`false`。`in`需要两个参数，第一个是指定的变量，可以是数组，也可以是一个对象。第二个是指迭代的对象。在检测一个实例的时候直接书写的需要检测的属性（字符串格式）。
+`in`主要用于检测一个属性自身或这原型链中是否存在，`in`需要两个参数，第一个是指定的变量，可以是数组，也可以是一个对象。第二个是指迭代的对象。在检测一个实例的时候直接书写的需要检测的属性（字符串格式）。
 
 **如果使用`for/in`语句来检测一个属性时，那么这个属性必须是`Enumerable` （可枚举）属性**
 
@@ -1094,11 +1099,13 @@ console.log(typeof typeof []);
 ```javascript
 var arr = [10, 20, 30, 40, 50];
 for (var x in arr) {
-  console.log(arr[x]); //=>10,20,30,40,50
-  //这样我们可以直接输出数组的每一项的值
+  console.log(arr[x]);
+  //=>10,20,30,40,50
+  //=>这样我们可以直接输出数组的每一项的值
 
-  console.log(x); //=>0,1,2,3,4
-  //直接输出x的话输出的就是数组的索引（下标）
+  console.log(x);
+  //=>0,1,2,3,4
+  //=>直接输出x的话输出的就是数组的索引
 }
 ```
 
@@ -1116,17 +1123,19 @@ function Person(name, age) {
   this.age = age;
 }
 var person = new Person("平野绫", 18);
+console.log(person.name);
+//=>'平野绫'
 
-console.log(person.name); //=>'平野绫'
 //我们可以使用in 来检测一个实例中是否拥有这个属性
-//语法 ： '属性'  in  实例   属性必须书写为字符串格式
-console.log("name" in person); //=>true
-//person中有name这个属性，所以返回的true
-//但是 in 还有一个特点 ： 如果一个实例没有这个属性，但是实例的原型拥有这个属性的话，
-//他也会返回true
-console.log("toString" in person); //=>true
-//我们创建的实例中并没有toString这个属性，但是实例的原形链中拥有这个属性
-//in 会查找实例的原型，而且是无序查找，只有当原型中没有时才会返回false
+//语法 ： '属性'  in  实例   属性名必须书写为字符串格式
+console.log("name" in person);
+//=>true
+
+//=>in在查找的时候也会查找当前实例的原型链
+//=>如果原型链中拥有当前查找的属性，也会返回true
+console.log("toString" in person);
+//=>true
+//=>toString是存在在原型链中的，只有当自身和原型链中都没有当前查找的属性时才会返回false
 
 //我们也可以使用 in 运算符来遍历我们的实例
 for (var key in person) {
@@ -1174,17 +1183,16 @@ JS 中的数据类型分为
 6. 函数 function
 7. ...
 
-真实项目中，根据需求，我们往往需要把数据类型之间进行转换
-
 ### 转换为 number 类型
 
-[**Number**]
-
-可以直接将非数字类型转换成数字类型，但是只要遇到一个非法的字符就会返回 NaN
+基于`Number`方法可以直接将非数字类型转换成数字类型，但是只要遇到一个非法的字符就会返回 NaN
 
 ```javascript
 isNaN("3");
 //=>false
+//=>isNaN在检测的时候也会自动调用系统的Number方法来将非数字类型转换为数字类型
+//=>判断的是转换后的值，
+
 Number("3");
 //=>3
 isNaN(3);
@@ -1214,13 +1222,19 @@ parseFloat("13.5px");
 // =>13.5
 
 parseInt("width:13.5px");
-//=>NaN 从字符串最左边字符开始查找有效数字字符，并且转换为数字，
-//=>但是一但遇到一个非有效数字字符，查找结束。
-//=>parseFloat也是相同的机制
+//=>NaN
+
+/**
+ * parseInt()的查找机制
+ * parseInt()会从左往右依次转换
+ * 在遇到第一个非法字符的时候会将非法字符之前的字符返回
+ * 如果第一个就是非法字符，那么就会直接返回
+ *
+ * arseFloat()是同样的查找原理
+ */
 ```
 
-- 基于 parseInt/parseFloat/Number 去手动转换为数字类型
-- 数学运算：+ - \* / %，但是“+”不仅仅是数学运算，还可能是字符串拼接
+除了手动转换类型外，有些时候浏览器也会自动的帮我们转换
 
 ```javascript
 '3px'-1 =>NaN
@@ -3520,10 +3534,10 @@ function test() {
 
 ```javascript
 //LET 关键字申请的变量不存在变量提升机制，所以在声明之前使用会直接报错
-console.log(a); //ReferenceError: can't access lexical declaration `a' before initialization
+console.log(a); //报错:ReferenceError: can't access lexical declaration `a' before initialization
 let a = 10;
-
-a = 20; //ReferenceError: can't access lexical declaration `a' before initialization
+=====================================================
+a = 20; //报错：ReferenceError: can't access lexical declaration `a' before initialization
 let a = 10;
 console.log(a);
 

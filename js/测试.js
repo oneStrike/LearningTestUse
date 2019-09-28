@@ -15,15 +15,15 @@
  */
 
 
-// console.log(a);
-// var a = 12;
+console.log(a);
+var a = 12;
 
-// function fn() {
-//     console.log(a);
-//     a = 13;
-// }
-// fn();
-// console.log(a);
+function fn() {
+    console.log(a);
+    a = 13;
+}
+fn();
+console.log(a);
 /**
  * A：undefined 12 13
  * B: undefined undefined 12
@@ -609,22 +609,22 @@
 // f(20);
 
 
-var num = 10;
-var obj = {
-    num: 20
-};
-obj.fn = (function (num) {
-    this.num += 2;
-    return function(n){
-        this.num +=n; 
-        num--;
-        console.log(num)  
-    }
-}(obj.num));
-var fn = obj.fn;
-fn(10);
-obj.fn(20);
-console.log(num, obj.num);
+// var num = 10;
+// var obj = {
+//     num: 20
+// };
+// obj.fn = (function (num) {
+//     this.num += 2;
+//     return function(n){
+//         this.num +=n; 
+//         num--;
+//         console.log(num)  
+//     }
+// }(obj.num));
+// var fn = obj.fn;
+// fn(10);
+// obj.fn(20);
+// console.log(num, obj.num);
 
 
 // Object.prototype.x = 100;
@@ -643,3 +643,93 @@ console.log(num, obj.num);
 // Fn.prototype.sum();
 // console.log(f.constructor);
 
+// let n = 1;
+// let x = {
+//     n: 2,
+//     y: (function (n) {
+//         n = n || 3;
+//         return function (m) {
+//             m = m || 4;
+//             this.n += m++;
+//             n += ++m;
+//             console.log(n);
+//         };
+//     }(window.n))
+// };
+// let z = x.y;
+// x.y(5);
+// z(6);
+// console.log(n, x.n);
+
+// let n = 1,
+//     obj = {
+//         n: 2
+//     };
+// let fn = obj.fn = (function () {
+//     this.n += n;
+//     n *= 2;
+//     return function (m) {
+//         n -= 5 + (++m);
+//         this.n += n--;
+//         console.log(n);
+//     }
+// })(obj.n);
+// fn(3);
+// obj.fn(4);
+// console.log(n, obj.n, window.n);
+
+
+// let Fn = function (x = 0, y = 0) {
+//     this.x = x;
+//     this.y = y;
+//     this.getX = function () {
+//         console.log(this.x);
+//     }
+// };
+// Fn.prototype.getY = function () {
+//     console.log(this.y);
+// };
+// Fn.prototype = {
+//     setX: function (val) {
+//         this.x = val;
+//     },
+//     getX: function () {
+//         console.log(this.x);
+//     }
+// };
+// let f1 = new Fn;
+// let f2 = new Fn(1, 2);
+// console.log(f1.constructor);
+// f1.setX(3);
+// f1.getX();
+// f1.__proto__.getX();
+// f1.__proto__.setX(4);
+// f2.getX();
+// f2.__proto__.getX();
+// f2.getY();
+
+
+// let m = 20;
+// let Fn = function (n, m) {
+//     this.n = n;
+//     this.aa = function () {
+//         console.log(this.n + (++m));
+//     };
+// };
+// Fn.prototype.bb = function () {
+//     console.log(this.n + m);
+// };
+// let f1 = new Fn(10, 20);
+// Fn.prototype = {
+//     cc: function () {
+//         console.log(this.n + m);
+//     }
+// };
+// let f2 = new Fn(30);
+// console.log(f1.constructor === f2.constructor);
+// f1.aa();
+// f1.bb();
+// f1.cc();
+// f2.bb();
+// f2.cc();
+// f2.__proto__.cc();
