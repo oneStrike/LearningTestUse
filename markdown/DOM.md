@@ -28,7 +28,9 @@
 
 [![u8Q52n.png](https://s2.ax1x.com/2019/09/29/u8Q52n.png)](https://imgchr.com/i/u8Q52n)
 
-DOM 树描述了标签和标签之间的关系（节点间的关系），我们只要知道任何一个标签，都可以依据 DOM 中提供的属性和方法，获取到页面中任意一个标签或者节点
+DOM 树描述了标签和标签之间的关系（节点间的关系）
+我们只要知道任何一个标签，都可以依据 DOM 中提供的属性和方法，
+获取到页面中任意一个标签或者节点
 
 ## 获取 DOM 元素
 
@@ -491,3 +493,154 @@ body.style.height = 300 + "px";
 ```
 
 - 如果我们需要对一个元素进行多个样式的修改，我们最好在 css 文件中创建一个 class 类名，然后将这些样式添加在 class 类名中，然后通过 js 代码将这个 class 名添加到我们需要操作的元素中
+
+---
+
+## 盒子模型
+
+**`client`**
+
+都是只读属性，不可修改
+
+1.`clientTop` / `clientLeft`
+
+> 可以获取一个元素的上边框/下边框，不包括`padding`和`margin`
+
+3.`clientWidht` / `clientHeight`
+
+> 获取一个元素的可视宽高(width/height+padding),不包含边框，元素中的文本溢出和`overflow:hidden`不会影响获取到的数据。如果没有设置宽高，获取到的就是有内容撑开的宽度
+
+**`offset`**
+
+1.`offsetWidth` / `offsetHeight`
+
+都是只读属性，不可修改
+
+> 获取一个元素的布局宽高值。包含元素的边框`border`、内边距`padding`、滚动条`scrollbar`（如果存在的话）、以及 CSS 设置的宽高的值。不包含`::before` 或`::after` 等伪类元素的宽度。
+
+**`scroll`**
+
+`scrollWidth` / `scrollHeight`
+
+都是只读属性，不可修改
+
+> 可以获取一个元素内容高度的度量，包括由于溢出导致的视图中不可见内容。 没有垂直滚动条的情况下，获取的宽高值与元素视图填充所有内容所需要的最小值 `clientHeight` / `clientHeight` 相同。包括元素的 `padding`，但不包括元素的 `border` 和 `margin`。获取的宽高值也包括 `::before` 和 `::after` 这样的伪元素。
+
+1. 获取到的值都是只读的，无法修改，
+
+2. 获取到的值都是以像素单位获取的，但是获取到的值并不带像素单位`px`
+
+3. 获取的值都是符合的值，(经过对应的元素样式的值相加)，无法获取单一属性
+
+4. 获取的值都是整数（四舍五入），无法获得小数。
+
+## 获取元素单一属性值
+
+在标准浏览器中有两种方法可以获取到页面中元素样式的属性值
+
+**一.** `style`
+
+通过`style`可取获取页面中书写在行内样式的属性值，获取不到样式表内的属性,`style`也可以设置页面中元素的属性，设置的样式也是会添加到内联样式表中，基于`style`所作的操作无法修改样式表内的属性样式。只能操作内联样式。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      #box {
+        padding: 20px;
+        margin: 20px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box" style="width:100px;height:100px;background:orange;"></div>
+    <script>
+      let box = document.getElementById("box");
+      console.log(box.style.width);
+      //=>'100px';
+      /**
+       * 基于style获取一个元素的样式时
+       * 如果获取的属性名是一个带有-的属性时
+       * 书写时需要把-去掉，同时-后面的第一个首字母大写
+       */
+      console.log(box.style.backgroundColor);
+      //=>'orange'
+
+      //=>无法获取到样式表内的属性
+      console.log(box.style.padding);
+      //=>''  ==>返回的是一个空的字符串
+
+      //=>设置元素样式
+
+      box.style.backgroundColor = "blue";
+      //=>设置的属性书写格式为字符串形式
+
+      box.style.width = 200 + "px";
+      //=>如果设置的属性是带有单位的
+      //=>需要在后面拼接上所需要的单位
+    </script>
+  </body>
+</html>
+```
+
+**`getComputedStyle`**
+
+`getComputedStyle()`同样也可以获取页面中元素的样式属性，并且比`style`获取的更加详细，它可以获取到我们书写在任何地方的样式，还可以获取到浏览器给一些元素设置的默认样式，只要是浏览器渲染出来的样式都可以获取到，它是一个方法，返回的是一个对象，里面包含着元素所有的样式属性。
+
+返回的是一个实时的对象，当样式改变后，也会做出相应的改变
+
+语法：`var style = window.getComputedStyle('element',pseudoElt )`
+
+> `element`代表的是需要获取样式属性的元素
+> `pseudoElt` 代表的是匹配的伪元素的字符串。必须对普通元素省略（或 null）。
+
+`getComputedStyle()`是`window`的方法，不过书写的时候`window`可加可不加，也可以直接在后面书写需要获取的样式属性名，可以直接获取。
+`var style = window.getComputedStyle('element',null).样式属性名`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        background: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box" style="border:2px solid pink;font-size:16px;"></div>
+
+    <script>
+      let box = document.getElementById("box");
+      let style = window.getComputedStyle("box", null);
+
+      console.log(style.width);
+      //=>'100px'  返回的是一个字符串格式的值
+
+      //=> 同样在获取的样式属性名不允许出现-
+      //=> 如果出现直接忽略，并将-后面的第一个首字母大写
+      console.log(style.backgroundColor);
+      //=>'orange';
+
+      //=>也可以直接获取内联样式的样式
+      console.log(style.border);
+      //=>'2px solid pink'
+
+      //=>getComputedStyle()是动态获取的，当样式改变后，无须重新获取
+      console.log(style.backgroundColor);
+      //=>'red'  修改后的样式
+    </script>
+  </body>
+</html>
+```
+
+IE9 一下的低版本浏览器并不支持这个方法，使用会报错，在 IE 中具有相同功能的是一个属性，`currentStyle`，它不是方法，而是一个属性
