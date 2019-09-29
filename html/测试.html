@@ -10,7 +10,15 @@
 
 <body>
 
-<script src="../js/测试.js"></script>
+    <!-- <script src="../js/测试.js"></script> -->
+    <script>
+        var str = 'hello word js';
+        var reg = /\b[a-z]/g;
+
+        console.log(str.replace(reg, function (item) {
+            return item.toUpperCase();
+        }));
+    </script>
 </body>
 
 </html>

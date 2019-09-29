@@ -2,7 +2,7 @@
 
 ## JS 语言简史
 
-1. JS 语言的起源
+**一.** JS 语言的起源
 
 网景（Netscape Communications Corporation），1994 年，推出第一款商用浏览器，网景浏览器（Netscape Navigator）
 
@@ -14,7 +14,7 @@ LiveScript -> JavaScript (JS)
 
 [ **JS 语言之父：Brendan Eich** ]
 
-2. 第一次浏览器大战
+**二.** 第一次浏览器大战
 
 网景公司打算在浏览器中加入网络操作系统，影响到微软的利益，引起了微软的注意
 
@@ -34,7 +34,7 @@ IE3 发布，并绑定 windows 操作系统。
 
 - **ECMA 收录了 JavaScript，并提交给 ISO，经过修改，成为了第一个 JS 的标准版本，成为 ECMAScript，简称 ES**
 
-3. 第二次浏览器大战
+**三.** 第二次浏览器大战
 
 IE4、IE5、IE6（windows xp）
 
@@ -54,9 +54,9 @@ chrome 浏览器搭载 JS 执行引擎 V8（V8 引擎，可以将 JS 代码直�
 
 > Ryan Dahl 准备写一个服务器端的框架，直接利用 V8 引擎完成了该框架，该框架，称为 nodejs
 
-**V8，将 JS 的执行推向了一个新的台阶**
+**V8 引擎将 `JavaScript` 的执行推向了一个新的台阶**
 
-4. ES 标准的发展
+**四.** ES 标准的发展
 
 ES1，1997 年 ES2，1998 年 ES3，1999 年 ES5，2009 年，习惯上，不再区分 javascript （JS） 和 ECMAScript （ES） ES6， 2015 年，ECMA 宣布，从 ES6 开始，使用年号作为版本号，ES6 的真正称呼为：ES2015 ES7，2016 年，ES2016
 
@@ -130,7 +130,7 @@ W3C：万维网联盟，制定编程语言的规范与标准开发者按照规�
   - 函数 function
 - ES6 中新增加的一个特殊的类型：Symbol，唯一的值
 
-**基本数据类型**
+【 **基本数据类型** 】
 
 ```javascript
 var n = 13;
@@ -154,7 +154,7 @@ var f = undefined;
 //=>表示一个属性未定义，申请变量没有赋值就是undefined
 ```
 
-**引用数据类型**
+【 **引用数据类型** 】
 
 ```javascript
 
@@ -193,9 +193,9 @@ a==b =>false
 - 把代码运行在浏览器中(浏览器内核来渲染解析)
 - 基于 NODE 来运行(NODE 也是一个基于 V8 引擎渲染和解析 JS 的工具)
 
-**所有的输出语句都是宿主环境提供的**
+【 **所有的输出语句都是宿主环境提供的** 】
 
-1. alert：在浏览器中通过弹框的方式输出(浏览器提示框)
+**一.** alert：在浏览器中通过弹框的方式输出(浏览器提示框)
 
 ```javascript
 var num=12;
@@ -223,7 +223,7 @@ alert({name:'xxx'});
 //=>他们所属的类已经重写了toString()方法
 ```
 
-2. confirm：和 alert 的用法一致，只不过提示的框中有确定和取消两个按钮，所以它是确认提示框
+**二.** confirm：和 alert 的用法一致，只不过提示的框中有确定和取消两个按钮，所以它是确认提示框
 
 ```javascript
 var flag = confirm("确定要退出吗?");
@@ -234,9 +234,9 @@ if (flag) {
 }
 ```
 
-3. prompt：在 confirm 的基础上增加输入框
+**三.** prompt：在 confirm 的基础上增加输入框
 
-4. console.log：在浏览器控制台输出日志（按 F12(FN+F12)打开浏览器的控制台）
+**四.** console.log：在浏览器控制台输出日志（按 F12(FN+F12)打开浏览器的控制台）
 
 - Elements：当前页面中的元素和样式在这里都可以看到，还可以调节样式修改结构等
 - Console：控制台，可以在 JS 代码中通过.log 输出到这里，也可以在这里直接的编写 JS 代码
@@ -305,7 +305,7 @@ number 中有一个特殊的"数字"`NaN`(not a number),不是一个合法的有
 
 ### NaN 的比较
 
-**NaN 和谁都不相等，包括自己**
+【 **NaN 和谁都不相等，包括自己** 】
 
 ```javascript
 NaN == NaN;
@@ -411,19 +411,18 @@ obj["name"];
 //=>属性表达式。同样具有读取属性值的功能，某些时候比 . 使用起来更加的灵活
 
 //=>[ 增 ]
-obj.sex='女
+obj.sex = "女";
 //=>[对象.属性名=属性值]可以直接给对象添加属性
-obj['sex'] = '女'
+obj["sex"] = "女";
 //=>和上面具有相同的效果
 
 //=>[ 改 ]
 
 //=>如果已经拥有这个属性名，再次赋值只会修改值
-obj.age=18;
-
+obj.age = 18;
 
 //=>[删] 彻底删除：对象中不存在这个属性了
-delete obj['age'];
+delete obj["age"];
 ```
 
 - 读取一个不存在的属性名时浏览器并不会报错，而是会返回`undefined`。
@@ -595,7 +594,7 @@ js 中的数学计算是不准确的，我们在开发中应该着重注意
 
 ```
 
-**%（求余）**
+**`%`（求余）**
 
 `%`指的是一个数除以另一个数，不够除的部分就是余数
 
@@ -608,7 +607,7 @@ js 中的数学计算是不准确的，我们在开发中应该着重注意
 //=>除数大于被除数的话，结果是被除数
 ```
 
-**++(自增)/--(自减)**
+**`++`(自增)/`--`(自减)**
 
 - `++`和`--`的语法规范基本上是一样的，因此我们只拿`++`进行讲解
 
@@ -738,7 +737,7 @@ undefined -> "undefined"
 
 目前，对象转换为原始类型后，是字符串 "[object Object]"
 
-**NaN 与任何数字比较，得到的结果都是 false**
+**`NaN` 与任何数字比较，得到的结果都是 `false`**
 
 1. null 和 undefined， 它们之间相等， 和其他原始类型比较， 则不相等。
 2. 其他原始类型，比较时先转换为数字，再进行比较
@@ -746,7 +745,7 @@ undefined -> "undefined"
 4. Infinity 和-Infinity，自能和自身相等
 5. 对象比较时，要先转换为原始类型后，再进行比较
 
-【 **`null`和`undefined`他们相等，但是不全等** 】
+**`null`和`undefined`他们相等，但是不全等**
 
 ```javascript
 null == undefined;
@@ -756,11 +755,11 @@ null === undefined;
 //=>false  全等会比较数据类型
 ```
 
-【 **`Infinity` 和`-Infinity`只和自身相等** 】
+**`Infinity` 和`-Infinity`只和自身相等**
 
 ### 逻辑运算符
 
-【 **js 中的两个逻辑运算符都属于时短路运算符(存在的多个表达式时，只要有一个满足要求则不再运算其他的表达式)** 】
+**`JavaScript` 中的两个逻辑运算符都属于时短路运算符(存在的多个表达式时，只要有一个满足要求则不再运算其他的表达式)**
 
 **逻辑与`&&`的优先级大于逻辑或`||`**
 
@@ -883,7 +882,7 @@ num >= 10 ? (num++, (num *= 10)) : null;
 
 `...`在 ES6 中根据使用位置的不同可以作为剩余运算符也可以作为展开运算符，多用于**解构赋值**
 
-**展开运算符**
+**`...`展开运算符**
 
 可以获取到数组或者对象当中的所有项，可以用来克隆数组或者对象,在函数中也可以替代`arguments`的某一些功能，尤其在 ES6 中的箭头函数取消了`arguments`属性，那么我们就可以使用**展开/剩余运算符**
 
@@ -921,7 +920,7 @@ test(10,20,30,10,)
 //=>报错：SyntaxError: parameter after rest parameter
 ```
 
-**剩余预算符**
+**`...`剩余预算符**
 
 可以理解将剩余的数据压缩收集进一个新的数组或对象
 
@@ -996,7 +995,7 @@ isNaN(num);
 - `isNaN(/^$/)` **==>** `true`
 - `isNaN(function(){})` **==>** `true`
 
-**重要：isNaN 检测的机制**
+**重要：`isNaN` 检测的机制**
 
 ```javascript
 //=>首先验证当前要检测的值是否为数字类型的，如果不是，浏览器会默认的把值转换为数字类型
@@ -1145,10 +1144,12 @@ for (var key in person) {
 
     //console.log(person[key])
 
-    //=>上面一行代码可以使我们获得每个属性的属性值，
-    //注意此处不要加引号，否则会得到undefined
-    //如果是加引号的话浏览器会认为是输出当前实例的某一个属性
-    //如果不加引号，那么[]中的就是一个变量，浏览器会计算出结果后输出
+    /**
+     * 上面一行代码可以使我们获得每个属性的属性值，
+     * 注意此处不要加引号，否则会得到undefined
+     * 如果是加引号的话浏览器会认为是输出当前实例的某一个属性
+     * 如果不加引号，那么[]中的就是一个变量，浏览器会计算出结果后输出
+     */
   }
 }
 ```
@@ -1185,7 +1186,7 @@ JS 中的数据类型分为
 
 ### 转换为 number 类型
 
-基于`Number`方法可以直接将非数字类型转换成数字类型，但是只要遇到一个非法的字符就会返回 NaN
+基于`Number`方法可以直接将非数字类型转换成数字类型，但是只要遇到一个非法的字符就会返回 NaN，检测字符串的时候，只要字符串中存在一个非法字符就会转换成 NaN，不管这个字符出现在什么位置，它并不会直解析出数字部分。
 
 ```javascript
 isNaN("3");
@@ -1230,7 +1231,7 @@ parseInt("width:13.5px");
  * 在遇到第一个非法字符的时候会将非法字符之前的字符返回
  * 如果第一个就是非法字符，那么就会直接返回
  *
- * arseFloat()是同样的查找原理
+ * parseFloat()是同样的查找原理
  */
 ```
 
@@ -1242,8 +1243,6 @@ parseInt("width:13.5px");
 '3'-1 =>2
 //=> 3
 
-
-
 '3px'+1 =>'3px1'
 //=>字符串拼接
 
@@ -1254,7 +1253,7 @@ i+=1;
 //=>'31'
 i++;
 //=>4
-//=>i++就是单纯的数学运算，已经摒弃掉字符串拼接的规则
+//=>自增运算符就是单纯的数学运算，已经摒弃掉字符串拼接的规则
 ```
 
 - 在基于“==”比较的时候，有时候也会把其它值转换为数字类型
@@ -1287,7 +1286,7 @@ undefined ->NaN
 
 ### 转换为字符串
 
-`1.发生的情况`
+**一.** 发生的情况
 
 - 基于 alert/confirm/prompt/document.write 等方法输出内容的时候，会把输出的值转换为字符串，然后再输出
 
@@ -1308,9 +1307,7 @@ var ary=[12,23,34];
 ary.join('+') =>'12+23+34'
 ```
 
-- ...
-
-`2.转换规律`
+**二.** 转换规律
 
 ```javascript
 //=>调用的方法：toString
@@ -1332,11 +1329,10 @@ null ->'null'
 
 ### 转换为布尔类型
 
-`1.发生的情况`
+**一.** 发生的情况
 
 - 基于!/!!/Boolean 等方法转换
 - 条件判断中的条件表达式最后都会转换为布尔类型
-- ...
 
 ```javascript
 if (n) {
@@ -1348,9 +1344,11 @@ if ("3px" + 3) {
 }
 ```
 
-`2.转换的规律` 只有“0/NaN/''/null/undefined”五个值转换为布尔的 false,其余都是转换为 true
+**二.** 转换的规律
 
-### 特殊情况：数学运算和字符串拼接 “+”
+只有“0/NaN/''/null/undefined”五个值转换为布尔的 false,其余都是转换为 true
+
+### 数学运算和字符串拼接 “+”
 
 ```javascript
 //=>当表达式中出现字符串，就是字符串拼接，否则就是数学运算
@@ -1404,11 +1402,27 @@ obj1==obj2 =>true
 
 ```
 
-==========================>上面是重点强调的
+=============================================>上面是重点强调的
 
-对象==数字：把对象转换为数字对象==布尔：把对象转换为数字，把布尔也转换为数字对象==字符串：把对象转换为数字，把字符串也转换为数字字符串==数字：字符串转换为数字字符串==布尔：都转换为数字布尔==数字：把布尔转换为数字 ===========================>不同情况的比较，都是把其它值转换为数字，然后再进行比较的
+对象 == 数字：把对象转换为数字
 
-null==undefined：=>true null===undefined：=>false null&&undefined 和其它值都不相等
+对象 == 布尔：把对象转换为数字，把布尔也转换为数字
+
+对象 == 字符串：把对象转换为数字，把字符串也转换为数字
+
+字符串 == 数字：字符串转换为数字
+
+字符串 == 布尔：都转换为数字
+
+布尔==数字：把布尔转换为数字
+
+==========>不同情况的比较，都是把其它值转换为数字，然后再进行比较的
+
+null==undefined：=>true
+
+null===undefined：=>false
+
+null&&undefined 和其它值都不相等
 
 NaN==NaN：false NaN 和谁都不相等包括自己 ===========================>以上需要特殊记忆
 
@@ -1431,6 +1445,8 @@ NaN==NaN：false NaN 和谁都不相等包括自己 ===========================>
 ## 条件控制语句
 
 ### if / else if / else
+
+当指定条件为真，if 语句会执行一段语句。如果条件为假，并且仍有可执行的语句则执行另一段语句。
 
 ```javascript
 var num = -6;
@@ -1462,25 +1478,32 @@ console.log(num); //=>12
 
 ```javascript
 // >= / <= / == 常规比较
-if(0){
-    //=>不管你在条件判断中写什么，最后总要把其计算出TRUE/FALSE来判断条件是否成立（把其它类型的值转换为布尔类型，只有 0/NaN/''/null/undefined 是false，其余都是true）
+if (0) {
+  /**
+   * 如果在判断条件中书写值，则直接进行布尔值的准换
+   * 如果是表达式，则先计算表达式的值，然后再进行布尔转换
+   * 最终都会转换成布尔值
+   * 0/''/null/undefined/NaN都会转换成false
+   */
 }
+```
 
-if('3px'+3){
-      //=>在JS中，+ - * / % 都是数学运算，除 + 以外，其余运算符在运算的时候，如果遇到了非数字类型的值，首先会转换为数字类型（Number），然后再进行运算
+如果判断条件内书写的是一个对象，那么条件永远为真，即使对象的值是 false
 
-      //=>+ 在JS中除了数学相加，还有字符串拼接的作用（如果运算中遇到了字符串，则为字符串拼接，而不是数学相加）
-
-    '3px'+3 =>'3px3'
-}
-if('3px'-3){
-    '3px'-3 =>NaN
+```javascript
+var a = new Boolean(false);
+if (a) {
+  /**
+   * 如果条件判断中的变量时使用构造函数方式创建或者本身就是一个对象
+   * 那么即使它的值是false或者没有值，条件判断依然会判断为true
+   * 因为对象转换成布尔类型永远是true，和它存储的值无关
+   */
 }
 ```
 
 ### switch case
 
-> JS 中的一种判断方式
+witch 语句评估一个表达式，将表达式的值与 case 子句匹配，并执行与该情况相关联的语句。
 
 ```javascript
 var num = 12;
@@ -1503,27 +1526,36 @@ switch (num) {
   default:
     num = 0;
 }
-
-//=>switch case 应用于变量（或者表达式等）在不同值情况下的不同操作，每一种case结束后都要加break（结束整个判断）
+/**
+ * 如果每一个子表达式后没有书写break
+ * 那么如果一个会从匹配的字表达是开始执行下面所有的代码
+ * 不会判断条件是否匹配，知道语句结束，或者遇到break
+ *
+ * default会在没有任何子表达式匹配的时候执行
+ * 只要子表达式匹配成功，就很不会执行default后面的代码
+ */
+//=>switch case 应用于变量（或者表达式等）在不同值情况下的不同操作
 ```
 
 switch case 中每一种 case 情况的比较都是基于"==="绝对相等来完成的
 
 ```javascript
-'10'==10
-=>true 相等比较,如果等号左右两边的类型不一样，首先会转换为一样的数据类型，然后再进行比较
-=>当前案例中，就是把字符串'10'转换为数字了，然后再比较的
+"10" == 10;
+//=>true
+/**
+ * 相等比较,如果等号左右两边的类型不一样，首先会转换为一样的数据类型
+ * 然后再进行比较
+ * 当前案例中，就是把字符串'10'转换为数字了，然后再比较的
+ */
 
-'10'===10 绝对比较，如果两边的数据类型不一样，则直接不相等，它要求类型和值都完全一样才会相等（真实项目中为了保证代码的严谨性，我们应该更多使用绝对比较）
+"10" === 10;
+//=>false
+/**
+ * 绝对比较，如果两边的数据类型不一样，则直接不相等，
+ * 它要求类型和值都完全一样才会相等
+ * 真实项目中为了保证代码的严谨性，我们应该更多使用绝对比较）
+ **/
 ```
-
-function fn(){ var total=10; total+=10; total/=2; total=total.toFixed(2); console.log(total); } fn(); fn(); ... 想用多少次，我们就执行多少次函数即可
-
-===== ES3 标准中： //=>创建函数 function 函数名([参数]){ 函数体：实现功能的 JS 代码 } //=>函数执行函数名();
-
-===== ES6 标准中创建箭头函数： let 函数名(变量名)=([参数])=>{ 函数体 } 函数名();
-
-let fn=()=>{ let total=10; ... }; fn();
 
 ### BAT 面试题
 
@@ -1544,7 +1576,7 @@ if (num == 35.5) {
 }
 ```
 
-循环主要功能就是重复性的做一些相同的事情，但是如果我们不规定一些条件的话就会一直循环进行下去（死循环）!这个时候浏览器就会直接卡死，所以我们应该极力避免这种情况的发生
+循环主要功能就是重复性的做一些相同的事情，但是如果我们不规定一些条件的话就会一直循环进行下去（死循环）!这个时候浏览器就会直接卡死
 
 一般循环语句应该拥有`[初始表达式]` `[循环条件]` `[更新表达式]`这三个要素，这样才可以让我们的循环按照正常的逻辑运行，**每循环一次都会进行条件判断，条件为`true`才会继续循环**
 
@@ -1602,7 +1634,7 @@ do {
 } while (i < 5); //循环条件
 ```
 
-【 **`while`和`do/while`的区别** 】
+**`while`和`do/while`的区别**
 
 根据循环条件`while`可能一次也不会执行，而`do/while`则是不管条件是否成立，都会先执行一次循环
 
@@ -1610,10 +1642,11 @@ do {
 var i = 11;
 
 while (i < 10) {
-  //条件不成立，直接退出循环
+  //条件不成立，无法进入循环
   console.log(i);
 }
 //=>while一次都不会执行
+
 do {
   //先执行一次代码
   console.log(i);
@@ -1635,7 +1668,6 @@ for (var i = 0; i < 10; i++) {
     //当i等于2的时候会无视循环条件立即终止循环
   }
 }
-//=>控制台只会打印出0到2这三个数字
 ```
 
 ### continue 关键字
@@ -1686,11 +1718,11 @@ for (var item in object) {
 > - 方法的返回值
 > - 原有数组是否改变
 
-**push**
+**`push`**
 
 作用：向数组“末尾”追加新的内容
 
-参数：追加的内容（可以是一个，也可是多个）
+参数：追加的内容（一个或多个，任意数据类型）
 
 返回值：新增后数组的长度
 
@@ -1704,7 +1736,9 @@ ary.push(100, { name: "xxx" });
 //=>6  ary:[12,23,34,100,100,{...}]
 ```
 
-**pop**
+---
+
+**`pop`**
 
 作用：删除数组最后一项
 
@@ -1721,7 +1755,9 @@ arr.pop();
 //=>原有数组改变  ==>[10,20]
 ```
 
-**shift**
+---
+
+**`shift`**
 
 作用：删除数组中的第一项
 
@@ -1741,11 +1777,13 @@ arr.shift();
  */
 ```
 
-**unshift**
+---
+
+**`unshift`**
 
 作用：向数组开始位置追加新内容
 
-参数：要新增的内容
+参数：要添加的内容（一个或多个，任意数据类型）
 
 返回：新增后数组的长度
 
@@ -1758,7 +1796,9 @@ arr.unshift(9, 8, false, {});
 //=>新数组  ==>[9,8,false,{},10,20,30,40]
 ```
 
-**splice**
+---
+
+**`splice`**
 
 作用:删除指定位置内容、向指定位置增加内容、修改指定位置的信息
 
@@ -1776,7 +1816,8 @@ splice 的操作是从一个参数的位置开始，会包含第一个参数的�
 var arr = [10, 20, 30, 40, 50];
 arr.splice(1, 3);
 //=>返回一个新数组，内容是删除的元素  ==>[20,30,40]
-//=>如果不填写第二个参数或者第二个参数大于数组最大长度，则会从起始位置一直删除到数组的最后一项
+//=>如果不填写第二个参数或者第二个参数大于数组最大长度，
+//=>则会从起始位置一直删除到数组的最后一项
 ```
 
 新增：
@@ -1786,7 +1827,8 @@ var arr = [10, 20, 30, 40];
 arr.splice(1, 0, 15, 16, true);
 /*
  * 在数组中添加传入的元素，
- * 第一个参数表示添加的索引位置，第二个参数表示删除0项，其余的表示需要添加的内容
+ * 第一个参数表示添加的索引位置，第二个参数表示删除0项，
+ * 其余的表示需要添加的内容
  * 如果不删除则会返回一个空的数组
  * arr   ==>[ 10, 15, 16, true, 20, 30, 40 ]
  */
@@ -1798,9 +1840,10 @@ arr.splice(1, 0, 15, 16, true);
 var arr = [10, 20, 30, 40, 50, 60];
 arr.splice(2, 3, 1, 2, 3);
 /*
- * 第一个参数表示起始位置（包含），第二个表示删除的个数，其余表示需要添加的内容
+ * 第一个参数表示起始位置（包含），第二个表示删除的个数，
+ * 其余表示需要添加的内容
  * arr ==>[ 10, 20, 1, 2, 3, 60 ]
- * 返回一个新的数组   ==>[ 30, 40, 50 ]
+ * 返回被删除的数组元素   ==>[ 30, 40, 50 ]
  */
 ```
 
@@ -1831,7 +1874,9 @@ console.log(arr, arr.length);
 //=> arr [10,20,50,40,60]
 ```
 
-**slice**
+---
+
+**`slice`**
 
 作用：在一个数组中，按照条件查找出其中的部分内容
 
@@ -1859,9 +1904,12 @@ arr.slice(0);
 //=>支持使用负数作为参数
 arr.slice(-4, -1);
 //=>[30,50,40]
+//=>数组的length加上负数 = 操作的位置
 ```
 
-**concat**
+---
+
+**`concat`**
 
 作用：实现多个数组(或者值)的拼接
 
@@ -1888,7 +1936,9 @@ arr.concat(40,4,arr2,50,5)
 //=>[1,2,3,100,10,20,30,200]
 ```
 
-**toString**
+---
+
+**`toString`**
 
 作用：把数组转换为字符串
 
@@ -1898,11 +1948,19 @@ arr.concat(40,4,arr2,50,5)
 
 原有数组不变
 
-**join**
+```javascript
+var arr = [10, 20, 30, 40, 50];
+arr.toString();
+//=>'10,20,30,40,50';
+```
+
+---
+
+**`join`**
 
 作用：和 toString 类似，也是把数组转换为字符串，但是我们可以设置变为字符串后，每一项之间的连接符
 
-参数：指定的链接符
+参数：指定的连接符
 
 返回：转换后的字符串
 
@@ -1929,7 +1987,9 @@ eval(arr.join('+'));
  * 结果就是100
 ```
 
-**reverse**
+---
+
+**`reverse`**
 
 作用：把数组倒过来排列
 
@@ -1949,7 +2009,9 @@ arr.reverse().reverse();
 //=>arr:[1,2,3,4,5,6]
 ```
 
-**sort**
+---
+
+**`sort`**
 
 作用：给数组排序
 
@@ -1973,7 +2035,7 @@ ary.sort(); =>[1, 18, 2, 23, 27, 3, 35, 56]
 //=>真实项目中，基于sort排序，我们都需要传递参数
 var ary=[18,1,23,27,2,35,3,56];
 ary.sort(function (a,b){
-	return a-b;//=>升序  return b-a; 降序
+return a-b;//=>升序  return b-a; 降序
 });
 ```
 
@@ -1994,7 +2056,9 @@ arr.sort(() => {
 //=>每次执行所产生的的结果都是随机的
 ```
 
-**indexOf / lastIndexOf**
+---
+
+**`indexOf` / `lastIndexOf`**
 
 这两个方法不兼容 IE 低版本浏览器(IE6~8)
 
@@ -2019,12 +2083,14 @@ arr.indexOf(100);
 //=>  -1
 
 //=>验证数组中是否包含某一项
-if (ary.indexOf(100) > -1) {
-  //=>ARY中包含100这一项
+if (ary.indexOf(10) > -1) {
+  //=>ARY中包含10这一项
 }
 ```
 
-**Array.from**
+---
+
+**`Array.from`**
 
 作用：将一个类数组转换成数组
 
@@ -2034,7 +2100,7 @@ if (ary.indexOf(100) > -1) {
 
 原类数组不变
 
-`Array.from()` 是一个静态方法，只有`Array`能调取使用，实例无法直接使用。（但是可以通过原型链的机制调取使用，不过其麻烦程度让我们完全没必要这样操作）。返回值是转换后的数组。不修改原有的类数组
+`Array.from()` 是一个静态方法，只有`Array`能调取使用，实例无法直接使用。（可以通过原型链的机制调取使用，不过其麻烦程度让我们完全没必要这样操作）。返回值是转换后的数组。不修改原有的类数组
 
 ```javascript
 function test() {
@@ -2044,17 +2110,19 @@ console.log(test(1, 28, 2, 43, 42, 1));
 //=>返回的arguments转换后的真数组
 ```
 
-**forEach**
+---
+
+**`forEach`**
 
 作用：可以对数组中每一个元素执行执行一次函数。已删除或者未初始化的项将被跳过（例如在稀疏数组上）
-
-除非抛出一个错误，否则`forEach`无法被提前中断，
 
 参数：callback 回调函数
 
 返回：undefined
 
 原有数组不变
+
+除非抛出一个错误，否则`forEach`无法被提前中断
 
 ```javascript
 var arr = [10, 20, 30, 50, 40, 50];
@@ -2123,61 +2191,194 @@ for(var i=0;i<linkList.length;i++){
 - some
 - ...
 
-第一阶段咱们不深入研究这些方法，搞懂这些方法需要了解 OOP/作用域/回调函数等，第二阶段咱们在去研究这些
-
-**字符串细节知识**
-
-> 在 JS 中所有用单引号或者双引号包起来的都是字符串，每一个字符串是由零到多个字符组成
-
-```javascript
-var str = 'zhufengpeixun';
-str.length ->字符串长度
-str[0] ->'z'
-str[str.length-1] ->'n'
-str[100] ->undefined
-
-//=>字符串中的每一个字符都有一个自己对应位置的索引，也有类似于数组一样的length代表自己的长度
-
-//=>循环遍历字符串，输出每一项字符
-for(var i=0;i<str.length;i++){
-   cosole.log(str[i]);
-}
-```
-
 ### String
 
-字符串是基本数据类型，字符串的每一次操作都是值直接的进行操作，不像数组一样是基于空间地址来操作的，所以不存在原有字符串是否改变这一说，肯定都是不变的
+字符串是基本数据类型，字符串的每一次操作都是对值直接进行操作，不像数组一样是基于空间地址来操作的。所以**字符串中的方法都不会改变原有值**
 
-**`charAt/charCodeAt`** 作用：charAt 根据索引获取指定位置的字符，charCodeAt 不仅仅获取字符，它获取的是字符对应的 Unicode 编码值(ASC II 码值) 参数：索引返回：字符或者对应的编码 ![nNlsRx.png](https://s2.ax1x.com/2019/09/10/nNlsRx.png) ![nNlrJ1.png](https://s2.ax1x.com/2019/09/10/nNlrJ1.png)
+**`charAt`/`charCodeAt`**
 
-**`indexOf/lastIndexOf`** 基于这两个方法，可以获取字符在字符串中第一次或者最后一次出现位置的索引，有这个字符，返回大于等于零的索引，不包含这个字符，返回的结果是-1，所以可以基于这两个方法，验证当前字符串中是否包含某个字符
+作用：charAt 根据索引获取指定位置的字符，charCodeAt 不仅仅获取字符，它获取的是字符对应的 Unicode 编码值(ASC II 码值)
+
+参数：索引
+
+返回：字符或者对应的编码
 
 ```javascript
-var str = "zhufengpeixun";
-if (str.indexOf("@") > -1) {
-  //=>条件成立说明包含@符号
-}
+var str = "abcdefg";
+str.charAt();
+//=>'a' 不指定索引位置默认返回字符串中的第一位
+
+str.charAt(2);
+//=>'c'
+
+str.charAt(10);
+//=>''
+str[10];
+//=>undefined
+
+/**
+ * 使用[索引]也可以直接查询相应的索引上的值
+ * 如果索引超过字符串的最大长度会返回undefined
+ * 而charAt()超过最大长度后返回的是一个空的字符
+ */
+
+var str = "abcdefg";
+str.charCodeAt();
+//=>不指定位置默认返回第一位
+//=>对应的编码  a ==>97
+str.charCodeAt(5);
+//=>c ==>102
+str.charCodeAt(10);
+//=>NaN
+//=>超出最大长度后会返回NaN
 ```
 
-**`slice`** 作用：str.slice(n,m) 从索引 n 开始找到索引为 m 处(不包含 m)，把找到的字符当做新字符串返回 ![nNlyz6.png](https://s2.ax1x.com/2019/09/10/nNlyz6.png)
+---
 
-**`substring`** 和 slice 语法一模一样，唯一的区别在于：slice 支持负数索引，而 substring 不支持负数索引
+**`indexOf`/`lastIndexOf`**
 
-![nNl0o9.png](https://s2.ax1x.com/2019/09/10/nNl0o9.png)
+作用：基获取字符在字符串中第一次或者最后一次出现位置的索引，
 
-**`substr`** 也是字符串截取的方法，用法是：str.substr(n,m)，从索引 n 开始截取 m 个字符
+参数：需要检测的字符
 
-![nNlwdJ.png](https://s2.ax1x.com/2019/09/10/nNlwdJ.png)
+返回：返回相应的索引位置，没有这个字符返回-1；
 
-**`toUpperCase/toLowerCase`** 实现字母的大小写转换，toUpperCase 小写转大写，toLowerCase 大写转小写
+```javascript
+var str = "abcdefggfednba";
+str.indexOf();
+//=>-1  不书写字符会返回 -1
 
-![nNlDiR.png](https://s2.ax1x.com/2019/09/10/nNlDiR.png)
+str.indexOf("c");
+//=>2
 
-**`split`** 和数组中的 join 相对应，数组中的 join 是把数组们一项按照指定的连接符变为字符串，而 split 是把字符串按照指定的分隔符，拆分成数组中每一项
+str.lastIndexOf("a");
+//=>13 返回最后一次出现的位置
+```
 
-![nNlcQK.png](https://s2.ax1x.com/2019/09/10/nNlcQK.png)
+---
 
-**replace**
+**`slice`**
+
+作用：截取字符串
+
+参数：n,m 从索引 n 开始找到索引为 m 处(不包含 m)，
+
+返回：截取的字符串
+
+`slice`和数组中的`slice`的操作方法是一样的
+
+1. 不书写参数即截取真个字符串（克隆）
+2. 不书写第二个参数即从起始位置截取到末尾
+3. 参数支持负数
+
+```javascript
+var str = "abcdefg";
+str.slice();
+//=>'abcdefg';
+str.slice(2, 5);
+//=>'cde';
+str.slice(2);
+//=>'cedfg'
+str.slice(-4, -1);
+//=>'def'
+```
+
+---
+
+**`substring`**
+
+作用：截取字符串
+
+参数：n,m 从索引 n 开始找到索引为 m 处(不包含 m)，
+
+返回：截取的字符串
+
+和`slice`的用法基本一致，区别是不支持负数
+
+```javascript
+var str = "abcdefg";
+str.substring(2, 5);
+//=>'cde';
+str.substring(2);
+//=>'cedfg'
+str.substring(-4, -2);
+//=>''  不支持负数，只会返回空的字符串  ''
+```
+
+---
+
+**`substr`**
+
+作用：截取的字符串
+
+参数：n,m，从索引 n 开始截取 m 个字符
+
+返回：截取的字符串
+
+```javascript
+var str = "abcdefg";
+str.substr(2, 5);
+//=>'cdefg';
+str.substr(2);
+//=>'cedfg'
+str.substr(-4, 2);
+//=>'de'  支持第一个参数为负数，第二个不允许
+```
+
+---
+
+**`toUpperCase`/`toLowerCase`**
+
+作用：toUpperCase 小写转大写 toLowerCase 大写转小写
+
+参数：需要转换的字符串
+
+返回：转换后的字符串
+
+```javascript
+var str = "hello word";
+str.toUpperCase();
+//=>'HELLO WORD'
+
+var str = "HELLO WORD";
+str.toLowerCase();
+//=>'hello word';
+```
+
+将单词首字母大写或者小写
+
+```javascript
+let str = "hello word";
+let reg = /\b[a-z]/g;
+//=>\b匹配单词边界，通过正则获取到每个单词的首字母
+
+str.replace(reg, item => item.toUpperCase());
+/**
+ * replace()可以将正则获取到的字符替换成任意字符，参数可以是一个函数
+ * 如果参数是函数的话会将获取到的字符通过传参的形式传递给这个函数
+ * 我们在函数内return 的数据就我replace替换的数据
+ */
+```
+
+---
+
+**`split`**
+
+作用：将字符串按照指定的连接符进行拆分
+
+参数：指定的连接符
+
+返回：拆分后的数组
+
+```javascript
+var str = "abc,bcd,cdb,dbc";
+str.split(",");
+//=>['abc','bcd','cdb','dbc']
+```
+
+---
+
+**`replace`**
 
 作用：使用字符串或者对象对象判断并替换字符串中的原有字符
 
@@ -2185,17 +2386,9 @@ if (str.indexOf("@") > -1) {
 
 返回：一个部分或全部匹配由替代模式所取代的新的字符串
 
-原有字符串必变
+原有字符串不变
 
-**普通替换**
-
-当使用一个固定的字符串检索并替换时并不会那么的完美。
-
-因为它每次只能替换一处，如果有多出需要替换，那么就会比较麻烦。
-
-而且有些时候不使用正则也无法完成我们的需求
-
-因为`replace`基本上都时结合正则使用的
+> 当使用一个固定的字符串检索并替换时并不会那么的完美。因为它每次只能替换一处，如果有多出需要替换，那么就会比较麻烦。而且有些时候不使用正则也无法完成我们的需求因为`replace`基本上都时结合正则使用的
 
 ```javascript
 let str = "dogmonkycatandcatandpig";
@@ -2203,7 +2396,7 @@ let str = "dogmonkycatandcatandpig";
 str.replace("cat", "cats");
 //=>'dogmonkycatsandcatandpig';
 //=>每执行一次只会替换一处，无法同时替换多出
-str.replce("cat", "cats");
+str.replace("cat", "cats");
 //=>'dogmonkycatssandcatandpig';
 
 /**
@@ -2215,13 +2408,7 @@ str.replce("cat", "cats");
  */
 ```
 
-**基于正则替换**
-
-当一个目标字符串中有多个需要替换的字符串时，`replace`每检索到一个
-
-需要替换的字符串时就会直接替换，如果替换值时函数就会执行依次函数
-
-目标字符串中有几处匹配项就会替换几次，同样的函数也会执行用样的次数
+> 一个目标字符串中有多个需要替换的字符串时，`replace`每检索到一个需要替换的字符串时就会直接替换，如果替换值时函数就会执行依次函数目标字符串中有几处匹配项就会替换几次，函数也会执行用样的次数
 
 ```javascript
 let str = "dogmonkycatandcatandpig";
@@ -2244,7 +2431,7 @@ str.replace(reg, "@");
 ```javascript
 let str = "abcbcdasdxyz";
 let reg = /[ac]/g;
-//=>匹配a,b,c中的任意一项
+//=>匹配a,c中的任意一项
 str.replace(reg, (...arr) => {
   //替换值是一个函数，replace会将函数的返回值作为替换值
   return "A";
@@ -2280,12 +2467,13 @@ str.replace(reg, function() {
 
 str.replace(reg, function() {
   let arr = [];
+  //=>转换成字符串之后是空串，用空串替换相当于删除当前的匹配项
   return arr;
 });
 //=>"bbdsdxyz"
 ```
 
-**特殊的替换值**
+特殊的替换值
 
 `$$` 插入一个 "\$"。
 
@@ -2299,7 +2487,7 @@ str.replace(reg, function() {
 
 ---
 
-**match**
+**`match`**
 
 作用：利用正则表达式检测一个字符串是否拥有符合规则的字符
 
@@ -2309,11 +2497,11 @@ str.replace(reg, function() {
 
 原有数组不变
 
-- `match`接受的是一个正则表达式参数，如果没有传参直接调用会返回一个包含空字符串的数组`['']`。
+- `match`接收的是一个正则表达式参数，如果没有传参直接调用会返回一个包含空字符串的数组`['']`。
 - 如果传递的不是一个正则对象，会隐式的使用`new RegExp(对象)`将其转换成正则对象。
-- 也可以直接在调用方法的时候书写规则，但因注意不需要加`""`，否则只会返回`null`。
+- 也可以直接在调用方法的时候书写规则，但请注意不需要加`""`，否则只会返回`null`。
 - 传入的是`Number`类型的数字或者是值是纯数字的字符串都会被直接放入数组中返回。
-- 传入`undefined`也会返回`[""]`，初此之外都是`null`
+- 传入`undefined`也会返回`[""]`，除此之外都是`null`
 
 ```javascript
 let str = "看看123匹配到了456几个";
@@ -2328,7 +2516,7 @@ str.match("/d+/g"); //=>null
 str.match(/\d+/g); //=>["123","456"]
 ```
 
-如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果（Array），但不会返回捕获组，或者未匹配 null。
+如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果（Array），但不会返回捕获组
 
 如果未使用 g 标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性，或者未匹配 null。
 
@@ -2389,7 +2577,7 @@ console.log(result);
 })(String.prototype);
 ```
 
-### URL 地址问号传参解析
+URL 地址问号传参解析
 
 > 有一个 URL 地址“<http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man”> 地址问号后面的内容是我们需要解析出来的参数信息 { lx:1, name:'AA', sex:'man' }
 
@@ -2448,46 +2636,255 @@ var str = "http://www.zhufengpeixun.cn/stu/?lx=1&name=&sex=#teacher";
 console.log(str.queryURLParameter());
 ```
 
-### JS 中的数学函数 Math
+### Math
 
 Math 称为数学函数，但是它属于对象类型的
 
-```javascript
-typeof Math =>"object"
-```
-
 之所以叫做数学函数，是因为 Math 这个对象中提供了很多操作数字的方法
 
-### Math 中提供的常用方法
+> `Math`不是构造器，无法`new`出来一个实例，所以它的方法都是静态方法。只能通过`Math.方法`来调用。`Math`的方法会基于`Number`来转换那些不是数字的传参
 
-**`abs`**：取绝对值 ![nN1M6K.png](https://s2.ax1x.com/2019/09/10/nN1M6K.png) **`ceil/floor`**：向上或者向下取整 ![nN130e.png](https://s2.ax1x.com/2019/09/10/nN130e.png)
+**`abs`**：
 
-**`round`**：四舍五入 ![nN11mD.png](https://s2.ax1x.com/2019/09/10/nN11mD.png)
+作用：获取一个数字的取绝对值
 
-**`sqrt`**：开平方 ![nN1QOO.png](https://s2.ax1x.com/2019/09/10/nN1QOO.png)
+参数：需要取值的数字
 
-**`pow`**：取幂（N 的 M 次方） ![nN1vnO.png](https://s2.ax1x.com/2019/09/10/nN1vnO.png)
+返回：参数的绝对值
 
-**`max/min`**：获取最大值和最小值 ![nN1I74.png](https://s2.ax1x.com/2019/09/10/nN1I74.png)
+```javascript
+Math.abs(10);
+//=>10
+Math.abs(-10);
+//=>10
+Math.abs("10");
+//=>10 数字10
+Math.abs(null);
+//=>0
+Math.abs();
+//=>NaN
+Math.abs(0.2);
+//=>0.2
+Math.abs("10px");
+//=>NaN
+Math.abs(undefined);
+//=>NaN
+```
 
-**`PI`**：获取圆周率 ![nN1Kl6.png](https://s2.ax1x.com/2019/09/10/nN1Kl6.png)
+---
 
-**`random`**：获取 0~1 之间的随机小数 ![nN18TH.png](https://s2.ax1x.com/2019/09/10/nN18TH.png)
+**`ceil/floor`**：
 
-`Math.round(Math.random()*(m-n)+n)`：获取 n-m 之间的随机整数
+作用：向上或者向下取整
 
-回去后可以自己扩展 Math 中更多方法
+参数：需要取整的值
+
+返回：大于或等于给定数字的最小整数。
+
+```javascript
+//=>ceil向上取整
+Math.ceil(0.95);
+//=>1
+Math.ceil(4);
+//=>4
+Math.ceil(7.004);
+//=>7
+Math.ceil(-0.95);
+//=>0
+Math.ceil(-4);
+//=>-4
+Math.ceil(-7.004);
+//=>-7
+
+//=>floor向下取整
+Math.floor(45.95);
+//=> 45
+Math.floor(45.05);
+//=> 45
+Math.floor(4);
+//=> 4
+Math.floor(-45.05);
+//=> -46
+Math.floor(-45.95);
+//=> -46
+```
+
+---
+
+**`round`**：
+
+作用：四舍五入
+
+参数：计算的值
+
+返回：四舍五入到最接近的整数
+
+```javascript
+Math.round(10.49);
+//=>10
+Math.round(10.51);
+//=>51
+Math.round(-10.5);
+//=>10 小数点后面为0.5的负数并不会入而是会舍
+Math.round(-10.51);
+//=>11
+```
+
+---
+
+**`sqrt`**：
+
+作用：开平方
+
+参数：需要计算的值
+
+返回：计算后的平方根
+
+```javascript
+Math.sqrt(9);
+//=> 3
+Math.sqrt(2);
+//=> 1.414213562373095
+
+Math.sqrt(1);
+//=> 1
+Math.sqrt(0);
+//=> 0
+Math.sqrt(-1);
+//=> NaN
+```
+
+---
+
+**`pow`**：
+
+作用：取幂（N 的 M 次方）
+
+参数：需要计算的值
+
+返回：计算后的值
+
+```javascript
+Math.pow(x, y);
+//=>如果 x 是 2 ，且 y 是 7，则计算后的结果是128
+//=>x 是基数  y 是指数
+```
+
+---
+
+**`max/min`**：
+
+作用：获取最大值和最小值
+
+参数：多个数值
+
+返回：最大或者最小的数字
+
+`Math.max()`和`Math.min()`语法完全一样，唯一的区别就是一个获取最大值，一个是获取最小值
+
+如果给定的参数中至少有一个参数无法被转换成数字，则会返回 NaN。
+
+```javascript
+Math.max(10, 20, 45, 54);
+//=>54
+Math.max("10", "54", "45", "85", "97");
+//=>97
+Math.max("10", "54px", "45", "85", "97");
+//=>NaN
+```
+
+可以通过借用`Function`上的`apply`方法来实现获取数组的最大值
+
+```javascript
+let arr = [10, 54, 21, 421, 541, 54];
+Math.max.apply(null, arr);
+//=>541
+/**
+ * apply原有的功能是可以方便一个方法中this的指向
+ * 第一个参数是需要让this指向的对象，
+ * 其余参数都是传递给方法的实参
+ * 但是传入多个参数会自动拆分成单个的值出入
+ * 并不是将整个数据传入，如果传递的实参是一个数组，
+ * 则会把数组中的每一项解析出来一次传入
+ * 利用这种机制我们就可以实现用Math.max()方法寻找数组最大值
+ * Math.max()，不支持传入一个数组，而apply则可以将数组拆分
+ * 将拆分的单个数据传入Math.max()方法中
+ */
+```
+
+利用展开运算符会更加的方便
+
+```javascript
+let arr = [10, 54, 21, 421, 541, 54];
+Math.max(...arr);
+/**
+ * 展开运算符可以将一个数组中所有的元素进行解构
+ * 和apply都是将数组中的每一项拆分开
+ * 然后将拆分的单个数据一次传递给Math.ma()
+ */
+```
+
+---
+
+**`PI`**：
+
+作用:获取圆周率
+
+参数：无
+
+返回：3.141592653589793
+
+`Math.PI`是一个属性，并不是方法，不能使用`()`调用
+
+```javascript
+Math.PI;
+//=>3.141592653589793
+```
+
+---
+
+**`random`**：
+
+作用：获取 0~1(不包括 1) 之间的伪随机小数
+
+参数：无
+
+返回：伪随机数
+
+```javascript
+Math.random();
+//=>0.13578557492877397;
+Math.random();
+//=>0.8035755754005868;
+Math.random();
+//=>0.5826750677529821;
+Math.random();
+//=>0.2731206584424406;
+```
+
+我们也可以通过一些操作得到两个数之间的随机数
+
+```javascript
+function getRandomIntInclusive(max, min) {
+  max = Math.ceil(max);
+  min = Math.floor(min);
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
+}
+//=>这个方法获取随机数时也可以获取我们传入的最大数和最小数
+//=>但是通过Math.round()会导致获取到的随机数分布不均匀
+```
 
 ### 链式写法
 
 js 默认给我们提供了各种各样的实例方法供我们使用，这些方法大都会有一个返回值，我们就可以使用这个返回值来进行链式写法，但是我们应该熟悉每种方法的返回值，以免造成不必要的错误
 
-**我们必须要知道方法之后的返回值类型，才能继续书写链式写法**
+> 我们必须清楚的了解每一个方法的返回值后才能熟练的使用链式写法，因为在链式写法中当前方法操作的一直都是上一个方法的返回值。
 
 ```JavaScript
 var arr=[10,50,60,40,30,20];
 arr.sort(function(a,b){return b - a}).reverse().pop();
-//上面使用的方法会对数组进行升序降序排序，之后进行翻转，最后删除数组中的最后一项，也就是最大项。
+//上面使用的方法会对数组进行升序降序排序，之后进行翻转，
+//=>最后删除数组中的最后一项，也就是最大项。
 
 //只要我们了解各方法的返回值，我们就可以使用任何类型的链式写法
 
@@ -2501,736 +2898,11 @@ arr.sort(function(a,b){return b - a}).reverse().pop().toString().splice(1,3);
 
 ---
 
-## DOM 树
-
-> dom tree 当浏览器加载 HTML 页面的时候，首先就是 DOM 结构的计算，计算出来的 DOM 结构就是 DOM 树（把页面中的 HTML 标签像树桩结构一样，分析出之间的层级关系）
-
-```HTML
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>珠峰培训</title>
-</head>
-<body>
-<div class="box" id="box">
-    <ul>
-        <li>新闻</li>
-        <li>电影</li>
-        <li>音乐</li>
-    </ul>
-    <div>最新新闻</div>
-    <div>最新电影</div>
-    <div>最新音乐</div>
-</div>
-</body>
-</html>
-```
-
-![nN3GuT.png](https://s2.ax1x.com/2019/09/10/nN3GuT.png)
-
-DOM 树描述了标签和标签之间的关系（节点间的关系），我们只要知道任何一个标签，都可以依据 DOM 中提供的属性和方法，获取到页面中任意一个标签或者节点
-
-### 获取 DOM 元素
-
-**`getElementById`**
-
-> 通过元素的 ID 获取指定的元素对象，使用的时候都是 `document.getElementById('')` 此处的 document 是限定了获取元素的范围，我们把它称之为“上下文(context)”
-
-1. getElementById 的上下文只能是 document
-
-> 因为严格意义上，一个页面中的 ID 是不能重复的，浏览器规定在整个文档中既可以获取这个唯一的 ID
-
-2.如果页面中的 ID 重复了，我们基于这个方法只能获取到第一个元素，后面相同 ID 元素无法获取
-
-3.在 IE6~7 浏览器中，会把表单元素(input...)的 name 属性值当做 ID 来使用（建议：以后使用表单元素的时候，不要让 name 和 id 的值有冲突）
-
-**`getElementsByTagName`**
-
-> `[context].getElementsByTagName`在指定的上下文中，根据标签名获取到一组元素集合（HTMLCollection）
-
-1. 获取的元素集合是一个类数组（不能直接的使数组中的方法）
-
-![nN3YbF.png](https://s2.ax1x.com/2019/09/10/nN3YbF.png)
-
-2.它会把当前上下文中，子子孙孙（后代）层级内的标签都获取到（获取的不仅仅是儿子级的）
-
-3.基于这个方法获取到的结果永远都是一个集合（不管里面是否有内容，也不管有几项，它是一个容器或者集合），如果想操作集合中具体的某一项，需要基于索引获取到才可以
-
-**`getElementsByClassName`**
-
-> `[context].getElementsByClassName()`在指定的上下文中，基于元素的样式类名（class='xxx'）获取到一组元素集合
-
-1.真实项目中，我们经常是基于样式类来给元素设置样式，所以在 JS 中，我们也会经常基于样式类来获取元素，但是此方法在 IE6~8 下不兼容
-
-兼容处理方案参考：
-
-```javascript
-Node.prototype.queryElementsByClassName = function queryElementsByClassName() {
-  if (arguments.length === 0) return [];
-  var strClass = arguments[0],
-    nodeList = utils.toArray(this.getElementsByTagName("*"));
-  strClass = strClass.replace(/^ +| +$/g, "").split(/ +/);
-  for (var i = 0; i < strClass.length; i++) {
-    var reg = new RegExp("(^| +)" + strClass[i] + "( +|$)");
-    for (var k = 0; k < nodeList.length; k++) {
-      if (!reg.test(nodeList[k].className)) {
-        nodeList.splice(k, 1);
-        k--;
-      }
-    }
-  }
-  return nodeList;
-};
-```
-
-**`getElementsByName`**
-
-> `document.getElementsByName()`它的上下文也只能是 document，在整个文档中，基于元素的 name 属性值获取一组节点集合（也是一个类数组）
-
-1.在 IE 浏览器中（IE9 及以下版本），只对表单元素的 name 属性起作用（正常来说：我们项目中只会给表单元素设置 name，给非表单元素设置 name，其实是一个不太符合规范的操作）
-
-**`querySelector`**
-
-> `[context].querySelector()` 在指定的上下文中基于选择器（类似于 CSS 选择器）获取到指定的元素对象（获取的是一个元素，哪怕选择器匹配了多个，我们只获取第一个）
-
-**`querySelectorAll`**
-
-> 在 querySelector 的基础上，我们获取到选择器匹配到的所有元素，结果是一个节点集合（NodeList）
-
-1. querySelector/querySelectorAll 都是不兼容 IE6~8 浏览器的（不考虑兼容的情况下，我们能用 ById 或者其它方式获取的，也尽量不要用这两个方法，这两个方法性能消耗较大）
-
-**`document.head`**
-
-> 获取 HEAD 元素对象
-
-**`document.body`**
-
-> 获取 BODY 元素对象
-
-**`document.documentElement`**
-
-> 获取 HTML 元素对象
-
-```javascript
-//=>需求：获取浏览器一屏幕的宽度和高度（兼容所有的浏览器）
-document.documentElement.clientWidth || document.body.clientWidth;
-
-document.documentElement.clientHeight || document.body.clientHeight;
-```
-
-面试题：获取当前页面中所有 ID 为 HAHA 的和元素（兼容所有的浏览器）
-
-```javascript
-//=>不能使用querySelectorAll
-
-/*
- * 1.首先获取当前文档中所有的HTML标签
- * 2.依次遍历这些元素标签对象，谁的ID等于HAHA，我们就把谁存储起来即可
- */
-function queryAllById(id) {
-  //->基于通配符*获取到整个文档中所有的HTML标签
-  var nodeList = document.getElementsByTagName("*");
-
-  //->遍历集合中的每一项，把元素ID和传递ID相同的这一项存储起来
-  var ary = [];
-  for (var i = 0; i < nodeList.length; i++) {
-    var item = nodeList[i];
-    item.id === id ? ary.push(item) : null;
-  }
-  return ary;
-}
-console.log(queryAllById("HAHA"));
-```
-
-### 节点 （node）
-
-> 在一个 HTML 文档中出现的所有东西都是节点
->
-> - 元素节点（HTML 标签）
-> - 文本节点（文字内容）
-> - 注释节点（注释内容）
-> - 文档节点（document）
-> - ...
-
-每一种类型的节点都会有一些属性区分自己的特性和特征
-
-- nodeType：节点类型
-- nodeName：节点名称
-- nodeValue：节点值
-
-`元素节点` nodeType：1 nodeName：大写标签名 nodeValue：null
-
-`文本节点` nodeType：3 nodeName：'#text' nodeValue：文本内容
-
-在标准浏览器中会把空格/换行等都当做文本节点处理
-
-`注释节点` nodeType：8 nodeName：'#comment' nodeValue：注释内容
-
-`文档节点` nodeType：9 nodeName：'#document' nodeValue：null
-
-### 描述节点之间关系的属性
-
-**`parentNode`**
-
-> 获取当前节点唯一的父亲节点
-
-**`childNodes`**
-
-> 获取当前元素的所有子节点
->
-> - 子节点：只获取儿子级别的
-> - 所有：包含元素节点、文本节点等
-
-**`children`**
-
-> 获取当前元素所有的元素子节点
->
-> 在 IE6~8 中会把注释节点也当做元素节点获取到，所以兼容性不好
-
-**`previousSibling`**
-
-> 获取当前节点的上一个哥哥节点（获取的哥哥可能是元素也可能是文本等）
->
-> previousElementSibling：获取上一个哥哥元素节点（不兼容 IE6~8）
-
-**`nextSibling`**
-
-> 获取当前节点的下一个弟弟节点
->
-> nextElementSibling：下一个弟弟元素节点（不兼容）
-
-**`firstChild`**
-
-> 获取当前元素的第一个子节点（可能是元素或者文本等）
->
-> firstElementChild
-
-**`lastChild`**
-
-> 获取当前元素的最后一个子节点
->
-> lastElementChild
-
----
-
-需求一：获取当前元素的所有元素子节点
-
-> 基于 children 不兼容 IE 低版本浏览器（会把注释当做元素节点）
-
-```javascript
-/*
- * children：get all the element nodes of the current element
- * @parameter
- *    curEle：[object] current element
- * @return
- *    [Array] all the element nodes
- * by team on 2018/04/07 12:36
- */
-function children(curEle) {
-  //=>首先获取当前元素下所有的子节点,然后遍历这些节点,筛选出元素的(NODE-TYPE===1),把筛选出来的结果单独存储起来即可
-  var nodeList = curEle.childNodes,
-    result = [];
-  for (var i = 0; i < nodeList.length; i++) {
-    var item = nodeList[i];
-    if (item.nodeType === 1) {
-      result.push(item);
-    }
-  }
-  return result;
-}
-console.log(children(course));
-```
-
-需求二：获取当前元素的上一个哥哥元素节点
-
-> previousSibling：上一个哥哥节点 previousElementSibling：上一个哥哥元素节点，但是不兼容
-
-```javascript
-/*
- * prev：get the last elder brother element node of the current element
- * @parameter
- *    curEle：[object] current element
- * @return
- *    [object] last elder brother element
- * by team on 2018/04/07 12:44
- */
-function prev(curEle) {
-  //=>先找当前元素的哥哥节点,看是否为元素节点,不是的话,基于哥哥,找哥哥的上一个哥哥节点...一直到找到元素节点或者已经没有哥哥了(说明我就是老大)则结束查找
-  var pre = curEle.previousSibling;
-  while (pre && pre.nodeType !== 1) {
-    /*
-     * pre && pre.nodeType !== 1
-     *   pre是验证还有没有，这样写代表有，没有pre是null
-     *   pre.nodeType是验证是否为元素
-     */
-    pre = pre.previousSibling;
-  }
-  return pre;
-}
-```
-
-回去后扩展：next 下一个弟弟元素节点，prevAll 获取所有哥哥元素节点，nextAll 获取所有弟弟元素节点，siblings 获取所有兄弟元素节点，index 获取当前元素的索引...
-
-### DOM 的增删改
-
-**`createElement`**
-
-> 创建一个元素标签(元素对象) `document.createElement([标签名])`
-
-**`appendChild`**
-
-> 把一个元素对象插入到指定容器的末尾 `[container].appendChild([newEle])`在追加元素对象的时候，如果这个元素之前容器中已经存在，此时不是克隆一份新的追加到末尾，而是把原有的元素移动到末尾位置
-
-**`insertBefore`**
-
-> 把一个元素对象插入到指定容器中某一个元素标签之前 `[container].insertBefore([newEle],[oldEle])`
-
-**`cloneNode`**
-
-> 把某一个节点进行克隆
->
-> `[curEle].cloneNode()`：浅克隆，只克隆当前的标签 `[curEle].cloneNode(true)`：深克隆，当前标签及其里面的内容都一起克隆了
-
-**`removeChild`**
-
-> 在指定容器中删除某一个元素
->
-> `[container].removeChild([curEle])`
-
-**`set/get/removeAttribute`**
-
-> 设置/获取/删除 当前元素的某一个自定义属性
-
-```javascript
-var oBox=document.getElementById('box');
-
-//=>把当前元素作为一个对象，在对象对应的堆内存中新增一个自定义的属性
-oBox.myIndex = 10;//=>设置
-console.log(oBox['myIndex']);//=>获取
-delete oBox.myIndex; //=>删除
-
-//=>基于Attribute等DOM方法完成自定义属性的设置
-oBox.setAttribute('myColor','red'); //=>设置
-oBox.getAttribute('myColor'); //=>获取
-oBox.removeAttribute('myColor'); //=>删除
-
-上下两种机制属于独立的运作体制，不能互相混淆使用
-- 第一种是基于对象键值对操作方式，修改当前元素对象的堆内存空间来完成
-- 第二种是直接修改页面中HTML标签的结构来完成（此种办法设置的自定义属性可以在结构上呈现出来）
-
-基于setAttribute设置的自定义属性值都是字符串
-```
-
-![nN3JDU.png](https://s2.ax1x.com/2019/09/10/nN3JDU.png)
-
-需求：解析一个 URL 字符串问号传参和 HASH 值部分
-
-### DOM 映射机制
-
-页面中的 HTML 元素和 js 中通过相关方法获取的元素集合或者元素对象存在映射机制，一个修改另外一个也会修改
-
-我们在获取页面中的元素之后，会以对象的形式存入堆内存当中，当我们操作堆内存当中的数据时，页面中的文档也会发生相应的改变
-
-```javascript
-var body = document.body;
-body.style.backgroundColor = "red";
-//=>我们在js中操作的只是获取过来的元素的属性，这些属性都存放在堆内存当中
-//=>当我们改变堆内存中的值时，由于映射机制的关系，页面中的元素也会改变
-
-
-//=>创建一些div标签插入body标签内
-var body=document.body;
-for(var i=0;i<5;i++>){
-  var div=document.createElement('DIV');
-  body.appendChild(div);
-}
-//=>当我们在js中创建一些标签添加进页面中时，只要我们不再重新创建
-//=>我们之后操作的所有标签都只能是我们创建的这些
-```
-
-js 中获取元素有着许多的方法，除了`querySelectorAll`以外都是动态获取。会根据页面的实时变化来动态的获取页面中的标签，`querySelectorAll`是静态获取的，即第一次获取的是什么内容，之后无论我们如何改变文档结构，他都不会发生变化，因为它不存在 DOM 映射机制。之后再次获取才能获得修改后的内容
-
-```javascript
-var div = document.getElementsByTagName("div");
-var div2 = document.querySelectorAll("div");
-console.log(div);
-//=>空：[]
-console.log(div2);
-//=>空：[]
-document.body.appendChild(document.createElement("DIV"));
-console.log(div);
-//=>[div对象],动态获取可以根据页面实时的监控页面的变化
-console.log(div2);
-//=>空：[]，静态获取的并不会监控页面中的变化，
-//=>只要不重新获取，就会一直是空
-```
-
-appendChild 在追加元素对象的时候，如果这个元素之前容器中已经存在
-
-此时不是克隆一份新的追加到末尾，而是把原有的元素移动到末尾位置
-
-我们不应过多的依赖映射机制，因为他不怎么符合我们正常的开发思维，
-
-### 阻止 HTML 标签默认行为
-
-有时候在我们操作页面的时候需要阻止一些标签的默认行为，比如 a 标签的默认跳转页面的行为
-
-```HTML
-<a href="javascript:;">跳转不能</a>
-<!-- 我们在a标签内的href属性内书写javascript:;即可阻止a标签的默认跳转行为 -->
-```
-
-### DOM 回流（reflow）和重绘（repaint'）
-
-**浏览器的渲染机制**
-
-1. 加载 html 文档（DOM 树）。浏览器会把我们所有的 HTML 解析成一个 DOM 树，每一个 HTML 标签就是 DOM 树中的一个节点。包括我们使用 JS 添加的标签。
-
-2. 加载 CSS 样式表（主要包括浏览器自带的样式和我们自己书写的 CSS 样式，同时也会过滤掉不能解析的样式）。
-
-3. 生成渲染树（RENDER TREE）DOM 树和样式表结合后呈现出渲染树。render tree 不包含`display：none`和`head`标签，因为他们不会呈现出效果，也不会影响其他标签的呈现，但是会包含`visitility：hidden`的标签，因为他只是被隐藏起来，但仍然会影响布局，也会占据位置。
-
-4. 浏览器根据 render tree 渲染页面
-
-**回流（reflow）**
-
-- 当页面中的 HTML 文档结构发生变化时，（删除，增加，移动，修改...）都会造成回流，每一次的回流浏览器都是重新渲染页面，相当消耗性能
-
-```javascript
-let body = document.body;
-for (var i = 0; i < 10; i++) {
-  var div = document.createElement("DIV");
-  body.appendChild(div);
-}
-/*
- * 上面的代码就会造成页面的回流,并且会对性能造成过多的消耗，
- * 我们每次创建的div都会直接添加body中，添加一次就会造成一次页面的回流
- * 如果我们添加的元素过多时，会极大的消耗性能
- */
-```
-
-**重绘（repaint）**
-
-- 当页面中的某一个标签发生样式上的改变，就会造成重绘，但是发生影响布局的改变，同样会造成回流，**回流一定会造成重绘，但是重绘不一定会造成回流**
-
-```css
-div {
-  width: 200px;
-  height: 200px;
-  background: orangerd;
-  font-size: 14px;
-}
-
-/* 如果我们只修改一些不影响页面整体布局的样式，那么只会造成回流例如将
-background改变为green，这样只会造成重绘，但是我们修改width: 300px，
-那么他就会造成回流，因为div宽度的改变会影响真个页面的布局，其他的标签也会发生改变; */
-```
-
-我们应该尽可能的避免回流，以增加运行性能
-
-**createDocumenrFragment**
-
-- **文档碎片**。一个虚拟的文档节点，并不是主 DOM 树的一部分，它拥有一块独立的空间
-- 插入的元素会存储在内存空间中，所以它不会造成回流。
-- 只会在我们将其插入到 DOM 树中会造成一次回流，对性能更加的友好
-
-```javascript
-let frg = document.createDocumentFragment();
-for (var i = 0; i < 10; i++) {
-  var div = document.createElement("DIV");
-  frg.appendChild(div);
-  //=>将创建的div插入文档片段中
-}
-document.body.appendChild(frg);
-//=>将文档片段统一插入body中
-
-/*
- *我们统一将需要创建的标签插入到文档片段中，然后在统一的插入到DOM树中
- * 这样就只会造成一次回流，性能会比直接在循环内直接插入到DOM树中好很多
- *
- *它并不支持使用innerHTML添加文档片段，使用这个方法也只是给它添加一个属性而已
- */
-
-/*
- *创建的两种方式
- *document.createDocumentFragment() ==>兼容所有的浏览器
- *new Fragment()  ==>构造函数方法创建的IE并不支持
- */
-```
-
-**读写分离**
-
-一些新版本的浏览器为了优化性能增加的一个机制
-
-```javascript
-//=>假如我们要修改一个元素的样式
-let body = document.body;
-body.style.backgroundColor = "red";
-body.style.width = 200 + "px";
-body.style.height = 300 + "px";
-/*
- *当我们需要修改一个元素的多个样式是可以书写在一些
- *浏览器在就解析时会将修改的样式先暂存起来，
- *当遇到需要读取这些样式的时候才会应用到页面中
- *这样会减少DOM重绘和回流的产生，
- *
- *如果我们在修改完背景颜色之后访问body的背景颜色，就会造成一次DOM重绘
- *但是我们在修改完所有的样式之后再进行访问只会产生一次DOM回流
- */
-```
-
-- 如果我们需要对一个元素进行多个样式的修改，我们最好创建一个 class 类名，然后将这些样式添加在 class 类名中，然后通过 js 代码将这个 class 名添加到我们需要操作的元素中
-
----
-
-## git 和 node
-
-### NODE 安装
-
-<https://nodejs.org/zh-cn/> 推荐大家使用 LTS 稳定版本，把安装包下载下来后，直接一路下一步安装即可（最好把它安装到 C 盘 [默认盘符] ，记号安装目录）
-
-1. 如果安装不了，我们可以把别人安装完成的内容拷贝过来，通过修改环境变量完成安装
-
-> 高级系统设置 -> 环境变量 -> 系统变量 -> Path，把原有的变量值备份一份，在原有的基础上增加 node 的安装目录即可 ![nN3qaQ.png](https://s2.ax1x.com/2019/09/10/nN3qaQ.png)
-
-2.验证安装是否成功 WIN + R => 打开运行窗口 => 输入 cmd => 打开 DOS 窗口在 DOS 窗口中，输入 node -v / node --version / npm -v 能出现版本号，则代表安装成功，不能出现版本号，提示 node 不是内部或者外部命令的，遵循第一步配置环境变量即可 ![nN37qS.png](https://s2.ax1x.com/2019/09/10/nN37qS.png)
-
-### NODE 基础概念
-
-1. node 并不是一门语言，它是一个工具或者环境
-
-- 基于 V8 引擎（webkit）渲染和解析 JS 的
-- 单线程
-- 无阻塞 I/O 操作
-- 事件驱动
-- ...
-
-之所以把 node 称之为服务器端语言，是因为 node 给予 JS 操作服务器的能力：我们在服务器端安装 node，只用 js 完成服务器端需要处理的一些事情，最后把写好的 js 代码交给 node 环境运行即可
-
----
-
-2. 在 node 环境中把 JS 代码执行
-
-- REPL 命令（Read-Evaluate-Print-Loop：输入-求值-输出-循环）
-- 基于 node xxx.js 命令执行
-- 基于 WB 这类编辑工具直接执行
-
-基于 node 命令执行，我们需要先找到当前文件所在的文件夹，然后再这个目录下打开 DOS 窗口，在窗口中执行 node xxx.js，这样就相当于在 node 环境下把 JS 文件中的代码执行了
-
-> 如何在当前文件目录中打开 DOS 窗口
->
-> - 基于 DOS 命令中的“cd”一层层进入
-> - 在当前目录地址栏中输入 cmd，快速在当前目录打开
-> - shift+鼠标右键，在此处打开命令窗口
-
-在 WB 中配置 node 环境 ![nN3Tr8.png](https://s2.ax1x.com/2019/09/10/nN3Tr8.png) ![nN3bVg.png](https://s2.ax1x.com/2019/09/10/nN3bVg.png)
-
-### 扫盲：常用的 DOS 命令
-
-`ping www.baidu.com -t`：测试网速 `Ctrl+c`：结束当前正在运行的操作 `exit`：退出当前窗口 `ipconfig -all`：查看当前电脑的 物理地址/IP 地址/子网掩码/DNS 等信息 `cls`：清屏 `cd`：进入到指定的文件目录（windows 电脑需要先进入到对应的磁盘 `E:`） `cd ../`：返回上级目录 `cd ./`：当前目录 `cd /`：根目录 `dir`：查看当前目录下所有的文件 `mkdir`：创建文件夹 `copy con xxx.xx`：创建文件并且给文件中输入内容，输入完成后，用 Ctrl+c 结束并保存 `del xxx.xx`：删除文件 `rmdir xxx`：删除文件夹 ...
-
-### NPM 模块管理
-
-安装完成 node 后，基本上自带 npm 模块管理器
-
-我们需要一个第三方（别人写的）模块、插件、类库或者框架等，需要提前下载安装才可以使用
-
-- 百度搜索，找到下载地址，然后基于浏览器下载即可（资源比较混乱，不好搜索）
-- 也可以基于 npm 等第三方包管理器下载（yarn / bower ... 都是第三方模块管理器）
-
-  1.npm 下载的资源都是在<https://www.npmjs.com/> 中下载的 `npm install xxx`：把资源或者第三方模块下载到当前目录下 `npm install xxx -g (--global)`：把资源或者第三方模块安装到全局环境下（目的：以后可以基于命令来操作一些事情） `npm uninstall xxx / npm uninstall xxx -g`：从本地或者全局卸载
-
-> 基于 npm 安装的一些细节点：
->
-> - 需要连网（基于 npm 是从国外服务器上下载资源，所以下载速度较慢）
-> - 下载成功后，当前目录中多增加一个 node_modules 文件夹，在这个文件夹中找到我们安装的模块
-> - 一般来说，下载下来的内容包含源码和最后供开发者使用的压缩版本
-
-2.解决下载慢的问题 **`基于nrm切换到国内下载源（一般是淘宝镜像）`** 首先安装 nrm，而且是把它安装到全局环境下（因为我们需要使用命令）
-
-> npm install nrm -g
->
-> 安装完成后，我们可以使用 nrm 命令
->
-> - nrm ls 查看当前可用源
-> - nrm use xxx �� 用某个源
->
-> 切完源，还是基于 npm 安装操作
-
-**`可以基于yarn来安装管理`** 首先还是需要先安装 yarn，安装到全局，然后基于 yarn 安装我们需要的模块
-
-> npm install yarn -g
->
-> 基于 yarn 安装（只能安装在本地，不能安装到全局） yarn add xxx yarn remove xxx
-
-**`基于cnpm淘宝镜像来处理`** 自己回去尝试
-
----
-
-3.解决安装版本的问题
-
-> 首先查看当前模块的历史版本信息 `npm view jquery > jquery.version.json` ：把当前模块的历史信息输出到具体的某个文件中（文件名自己随便起的）
->
-> 安装指定的版本模块 `yarn add jquery@1.11.3`：npm 和 yarn 都是这样来指定安装具体版本模块的
-
----
-
-课后扩展：
-
-1. bower 是从 gitHub 下载安装，有兴趣同学回去研究一下它的使用
-2. 回去后向全局环境中安装：less / babel-cli ...
-
----
-
-### gitHub
-
-> <https://github.com/>
->
-> 一个提供代码管理（托管）的公共平台，我们以及众多开发者，会把自己的生产的 组件/类库/插件/框架 等托管到这个平台中，供别人下载使用和研究
->
-> 在 gitHub 中，我们可以创建仓库来管理自己的项目文件，而 gitHub 支持开发者通过 git 操作，把本地的项目代码推送到指定的仓库中，它还提供静态 web 页面的发布等
->
-> 在国内有一个和 gitHub 类似的网站：coding，和 gitHub 类似，也是提供代码管理的平台
-
-### git 的基础知识
-
-> git 是一个分布式代码版本管理控制系统
->
-> - 记录当前产品代码的所有版本信息（历史修改信息）,而且方便快速回退到某一个具体的版本
-> - 方便团队协作开发，能够检测代码冲突，能够合并代码等
-
-`svn`：在 git 诞生前就已经存在的版本控制系统，不过它是“集中式”管理 `git`：是分布式版本管理体统
-
-1.集中式版本控制系统
-
-2.分布式版本控制系统
-
----
-
-### git 的工作管理和基础操作
-
-**`在本地创建git仓库管理我们的代码`**
-
-> 初次使用 git，先在本地配置一些基础信息 \$ git config -l \$ git config --global user.name xxx \$ git config --global user.email xxx 建议大家配置的用户名和邮箱和 gitHub 保持一致（这样以后在本地向 gitHub 推送内容的时候，能够展示出是谁推荐的）
-
-1. `git init`
-
-> 会在当前目录中创建一个空的仓库，文件目录中生成一个 “.git” 的隐藏文件，这个文件很重要，我们本地仓库的版本信息等都存储在这里
-
-2. `.gitignore`
-
-> 在当前目录（git 仓库根目录）创建一个 “.gitignore” 文件，这个文件中存储了当 git 提交的时候所忽略的文件
->
-> 可以基于 WB 创建（new -> file -> .gitignore）可以基于 linux 命令 `$ touch .gitignore` （mac 终端、git bash、或者集成了 linux 的 dos，可以使用 linux 命令）
-
-```TEXT
-\# dependencies
-node_modules
-
-\# testing
-/coverage
-
-\# production
-/build
-
-\# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-\# npm or yarn
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-\# webStorm
-.idea
-```
-
-### GIT 工作原理及操作
-
-@(201802)
-
-当我们在本地创建一个 git 仓库后，我们可以基于这个仓库管理我们的代码
-
-**`git的工作流程`**
-
-> 每一个 git 仓库都划分为三个区域
->
-> - 工作区：编辑代码的地方
-> - 暂存区：临时存储要生成版本代码的地方
-> - 历史区：存储的是生成的每一个版本代码
-
-![Alt text](./1523412523484.png)
-
-**`工作区提交到暂存区`**
-
-> \$ git status 查看代码或者文件的状态（当前处于哪个区域）: 红色（当前处于工作区，还没有提交到暂存区）绿色（当前处于暂存区，还没有提交到历史区）如果没有文件，代表三个区域代码已经同步，历史版本也在历史区生成了
-
-`$ git add . / $ git add -A` 把当前工作区中所有最新修改的文件，都提交到暂存区
-
-**`暂存区到历史区`** `$ git commit`
-
-> 这样执行后，会弹出一个提交文本输入界面，需要我们编写本次提交到历史区，给当前版本编写的备注信息
->
-> 先按 i 进入编辑插入模式输入备注信息按 ESC 输入“ :wq ” 保存并退出
-
-`$ git commit -m'自己需要编写的备注信息'`
-
-`$ git log` 查看当前历史区提交的记录（查看版本信息）
-
-`$ git diff` 工作区 VS 暂存区
-
-`$ git diff master` 工作区 VS 历史区（master 分支）
-
-`$ git diff --cached` 暂存区 VS 历史区
-
-### git 和 gitHub 同步
-
-1. 让本地的 git 仓库和远程仓库建立关联
-
-`$ git remote -v` 查看所有的关联信息
-
-`$ git remote add xxx [远程仓库git地址]` 建立关联
-
-`$ git remote remove xxx` 移除关联
-
-我们远程仓库关联在一起的名字默认是：origin，当然自己可以随意修改
-
-2. 把本地的信息推送到远程仓库上，或者从远程仓库上拉取最新的信息到本地仓库
-
-> 我们本地推送和拉取的信息，既有代码也有版本信息，所以说与其说是推送和拉取，不如说是和远程仓库保持信息的同步
-
-在推送之前，我们都应该先拉取 `$ git pull origin（这个名字就是和远程仓库关联的这个名字，以自己设置的为主） master` 从远程仓库的 master 分支拉取最新的信息
-
-`$ git push origin master` 把自己本地信息推送到远程仓库的 master 分支下
-
----
-
-以上是操作知识点，真实项目开发流程
-
-1. LEADER 会首先创建一个远程仓库（这个仓库可能是空的，也可能是包含了项目需要的基础的结构信息）
-2. 作为开发者，我们需要在本地创建一个本地仓库，还需要让当前本地的仓库和远程仓库保持关联
-
-> 原始做法： git init git remote add origin [GIT 仓库地址]
->
-> 简单做法： git clone [远程仓库地址][克隆后的名字：可以不设置，默认是仓库名]
-
-3. 在本地开发产品，需要同步的时候，我们首先把工作区内容在本地仓库中放到历史区，生成版本信息（git add . / git commit -m''），在把本地历史区的信息推送到远程仓库上（git pull / git push）
-4. 在团队协作开发的时候，LEADER 会在自己的 gitHub 账号下创建一个远程仓库，那么团队其他成员在向这个远程仓库推送信息的时候，使用自己的账号是没有推送权限的，我们需要把当前这个远程仓库，在 github 中创建工作群组，让更多人用自己的账号也有操作权限 ![nN8Qde.png](https://s2.ax1x.com/2019/09/10/nN8Qde.png) 小组成员在自己的邮箱中收到一封邀请邮件，需要确认同意 ![nN8lIH.png](https://s2.ax1x.com/2019/09/10/nN8lIH.png) 这样就是加入成功了 ![nN8uqO.png](https://s2.ax1x.com/2019/09/10/nN8uqO.png)
-
----
-
 ## 严格模式
 
 在 ES5 中使用严格模式需要在当前作用域内的第一行书写`use strict`;如果书写在全局作用域内的第一行则表示当前的整个文件使用的都是严格模式。
 
-> 全局作用域的严格模式只会影响当前的文件，并不会影响到其他的 js 文件，
-
-> 在实际多人开发的项目中，当我们完整开发之后会将所有人开发的代码合并压缩在一个 js 文件内，当我们想要在自己开发的 js 代码使用严格模式的话应该使用一个立即执行函数，将自己所有的代码放在一个单独的作用域内，这样就不会影响到其他人所书写的代码，因为`uer strict`只对当前的作用域有效果
+> 全局作用域的严格模式只会影响当前的文件，并不会影响到其他的 js 文件，在实际多人开发的项目中，当我们完整开发之后会将所有人开发的代码合并压缩在一个 js 文件内，当我们想要在自己开发的 js 代码使用严格模式的话应该使用一个立即执行函数，将自己所有的代码放在一个单独的作用域内，这样就不会影响到其他人所书写的代码，因为`uer strict`只对当前的作用域有效果
 
 ### 严格模式和非严格模式的区别
 
@@ -3238,7 +2910,7 @@ yarn-error.log*
 
 ### arguments
 
-在严格模式中`arguments`的`arguments.callee`和`arguments.callee.caller`无法使用，同时`arguments`不再和形参形成映射机制，
+在严格模式中`arguments`的`arguments.callee`和`arguments.callee.caller`无法使用，同时`arguments`不再和形参形成映射机制，只是一个单纯的形参集合体。
 
 ```javascript
 function test() {
@@ -3246,7 +2918,7 @@ function test() {
   console.log(argument.callee);
 }
 test(); //=>报错：TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
-//这两个方法是无法在严格模式中使用的，使用的话浏览器会直接报错
+//=>这两个方法是无法在严格模式中使用的，使用的话浏览器会直接报错
 
 function test(x, y) {
   console.log(arguments[0]); //=>10
@@ -3258,11 +2930,14 @@ test(10, 20);
 
 function test(x, y) {
   "use strict";
-  console.log(arguments[0]); //=>10
+  console.log(arguments[0]);
+  //=>10
   x = 100;
-  console.log(arguments[0]); //=>100
+  console.log(arguments[0]);
+  //=>10
   arguments[0] = 200;
   console.log(x);
+  //=>100
 }
 test(10, 20);
 //在严格模式中arguments和形参不存在映射关系，改变这两个的属性时另一个并不会改变
@@ -3277,14 +2952,16 @@ test(10, 20);
 
 ```javascript
 function test() {
-  console.log(this); //=>window
+  console.log(this);
+  //=>window
 }
 test();
-//=>在非严格模式中不指定this的指向，thsi就会自动指向window
+//=>在非严格模式中不指定this的指向，this就会自动指向window
 
 function test() {
   "use strict";
-  console.log(this); //=>undefined
+  console.log(this);
+  //=>undefined
 }
 test();
 //在严格模式中this的指向不明确的话就会指向undefined，代表没有执行主体
@@ -3313,7 +2990,7 @@ console.log(obj.n); //=>4;
 
 ---
 
-## 变量提升
+## 变量提升(HoiSting)
 
 变量（variable）：它不是具体的值，只是一个用来存储具体值的容器或者代名词，因为它存储的值可以改变，所以称为变量
 
@@ -3361,12 +3038,12 @@ var a = 10,
 //=>我们所申请的每一个变量都是使用var申请的
 ```
 
-【 **我们在编写程序的时候操作的都是存储在变量内的数据** 】
+我们在编写代码的时候看似是在操作变量，其实不是，我们所书写的代码执行的时候都是把变量内存储的值取出然后执行，变量只是一个可读写的容器。
 
 ### 命名规范
 
 - 严格区分大小写
-- 遵循驼峰命名法：按照数字、字母、下划线或者\$来命名（数字不能做为名字的开头），
+- 遵循驼峰命名法：按照数字、字母、下划线或者`$`来命名（数字不能做为名字的开头），
 - 命名的时候基于英文单词拼接成一个完整的名字（第一个单词字母小写，其余每一个有意义单词的首字母都大写）
 - 不能使用关键字和保留字：在 JS 中有特殊含义的叫做关键词，未来可能会成为关键字的叫做保留字
 
@@ -3387,15 +3064,15 @@ var studentInfo / student_info / _studentInfo（下划线在前的，是公共�
 
 ---
 
-### 变量提升
+### 变量提升详解
 
 在作用域形成之后，js 代码自上而下执行之前，浏览器会把所有带`VAR`和`FUNCTION`的关键字提前，`VAR`会提前声明，但是不会赋值，`FUNCTION`会提前声明并定义。
 
-【 **变量提升只会发生在当前作用域** 】
+**`HoiSting`变量提升只会发生在当前作用域**
 
-1. 全局变量提升:
+**一.** 全局变量提升:
 
-   > 在全局作用域中申请的即为全局变量，全局变量只会提升到全局作用域(window)中，函数在提升的时候会创建一个新的堆内存用来存储自身的代码块，当执行代码的时候，声明提前过的代码浏览器不会再次执行。
+> 在全局作用域中申请的即为全局变量，全局变量只会提升到全局作用域`window`中，函数在提升的时候会创建一个新的堆内存用来存储自身的代码块，当执行代码的时候，声明提前过的代码浏览器不会再次执行。
 
 ```javascript
 console.log(a); //=>undefined
@@ -3404,7 +3081,8 @@ console.log(a); //=>undefined
 //因此我们在之前使用只能得到undefined
 var a = 123;
 
-test(); //=>123
+test();
+//=>123
 //函数的提升是声明+定义
 //因此我们在函数声明之前也可以正常使用
 
@@ -3415,50 +3093,73 @@ function test() {
 
 ---
 
-2. 局部变量提升:
+**二.** 局部变量提升:
 
-   > 在函数内的使用`VAR`申请的变量称之为局部变量，只有在函数执行的时候才会触发提提升机制，但是只能提升到函数私有的作用域中，函数运行的时候会先给形参赋值，然后在进行变量提升，
+> 在函数内的使用`VAR`申请的变量称之为局部变量，只有在函数执行的时候才会触发提提升机制，但是只能提升到函数私有的作用域中，函数运行的时候会先给形参赋值，然后在进行变量提升，
 
-**无法在全局中访问局部变量**
+**全局作用域`window`无法访问函数私有作用域中使用`var`关键字声明的变量**
+
+```javascript
+function test() {
+  var a = 12;
+}
+test();
+console.log(window.a);
+//=>undefined
+//=>对象机制的原因导致window访问不存在变量不会报错
+console.log(a);
+//=>报错：a is not defined
+//=>直接访问不存在的变量会直接报错
+```
 
 ### 带 var 和不带的区别
 
-1. 全局使用`VAR`声明
+**一.** 全局使用`VAR`声明
 
-   > 在全局中使用`VAR`关键字申明一个变量时会自动和`window`形成一个映射的机制，可以直接使用`window.变量名`获取相应的值，因此当改变一个时另外一个也会改变，但是函数中使用`VAR`关键字声明的私有变量，并不会和`window`形成映射机制。
+> 在全局中使用`VAR`关键字申明一个变量时会自动和`window`形成一个映射的机制，可以直接使用`window.变量名`获取相应的值，因此当改变一个时另外一个也会改变，但是函数中使用`VAR`关键字声明的私有变量，并不会和`window`形成映射机制。
 
 ```javascript
 var a = 123;
-console.log(a); //=>123
-console.log(window.a); //=>123
+console.log(a);
+//=>123
+console.log(window.a);
+//=>123
 window.a = 321;
-console.log(a); //=>321
-console.log(window.a); //=>321
+console.log(a);
+//=>321
+console.log(window.a);
+//=>321
 //由于映射机制的关系，改变其中一个另外一个也会改变
 ```
 
-2. 全局未使用`VAR`声明
+**二.** 全局未使用`VAR`声明
 
-   > 如果在全局中未使用`VAR`关键字声明一个变量，则不会变量提升，不使用关键字声明而直接赋值的话就相当于给`window`添加一个属性，对象的机制是**即使没有这个属性，直接使用的话也不会报错，而是会显示 undefined**，因此在代码之前使用`window`访问的话得到的是`undefined`，但是不使用`window`而直接调用的话浏览器会报错
+> 如果在全局中未使用`VAR`关键字声明一个变量，则不会变量提升，不使用关键字声明而直接赋值的话就相当于给`window`添加一个属性，对象的机制是**即使没有这个属性，直接使用的话也不会报错，而是会显示 undefined**，因此在代码之前使用`window`访问的话得到的是`undefined`，但是不使用`window`而直接调用的话浏览器会报错
 
-   ```javascript
-   console.log(window.a); //=>undefined
-   console.log(a); //=>报错  a is not defined
-   a = 123;
-   //不使用关键字var声明的变量并不会提升，因此我们在之前访问的话会直接报错，
-   //但是访问window.a的话即使没有a也不会报错，只会返回undefiend
-   ```
+```javascript
+console.log(window.a);
+//=>undefined
+console.log(a);
+//=>报错  a is not defined
+a = 123;
+//不使用关键字var声明的变量并不会提升，因此我们在之前访问的话会直接报错，
+//但是访问window.a的话即使没有a也不会报错，只会返回undefined
+```
 
-3. 函数内的`VAR`
+**三.** 函数内的`VAR`
 
-   > 函数内使用`VAR`关键字声明的变量为私有变量，全局作用域中无法访问，同时变量提升遵循私有作用域的提升机制,如果函数内不使用`VAR`,其实就相当于给全局作用域中的变量再次赋值，使用的也是全局作用域中的变量，
+> 函数内使用`VAR`关键字声明的变量为私有变量，全局作用域中无法访问，同时变量提升遵循私有作用域的提升机制。
+
+> 函数内部未使用`var`关键字申请的变量都是属于全局作用域，如果全局中不存在这个变量，那么代码执行的时候会自动给`window`添加一个属性。如果全局中存在这个变量，那么就是在给全局作用域中的这个变量再次赋值。
 
 ```javascript
 function test() {
   var a = 123;
 }
-console.log(a); //=>报错：a is not defined
-console.log(window.a); //=>undefined
+console.log(a);
+//=>报错：a is not defined
+console.log(window.a);
+//=>undefined
 //在函数的变量是无法在全局内访问的，直接访问会直接报错，使用window是得到undefined
 ```
 
@@ -3845,7 +3546,7 @@ function Test(a, b, c) {
 var result = new Test(10, 20, 30);
 console.log(result.c); //=>undefined
 console.log(result); //=>{a:50,b:40}
-//其实result中并没有c这个属性，由于对象机制的原因，我们访问一个不存的属性时也会返回undefined
+//其实result中并没有c这个属性，由于对象机制的原因，我们访问一��不存的属性时也会返回undefined
 
 function Test(a, b, c) {
   this.a = b + c;
