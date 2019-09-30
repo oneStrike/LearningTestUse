@@ -28,9 +28,7 @@
 
 [![u8Q52n.png](https://s2.ax1x.com/2019/09/29/u8Q52n.png)](https://imgchr.com/i/u8Q52n)
 
-DOM 树描述了标签和标签之间的关系（节点间的关系）
-我们只要知道任何一个标签，都可以依据 DOM 中提供的属性和方法，
-获取到页面中任意一个标签或者节点
+DOM 树描述了标签和标签之间的关系（节点间的关系）我们只要知道任何一个标签，都可以依据 DOM 中提供的属性和方法，获取到页面中任意一个标签或者节点
 
 ## 获取 DOM 元素
 
@@ -506,7 +504,7 @@ body.style.height = 300 + "px";
 
 > 可以获取一个元素的上边框/下边框，不包括`padding`和`margin`
 
-3.`clientWidht` / `clientHeight`
+3.`clientWidth` / `clientHeight`
 
 > 获取一个元素的可视宽高(width/height+padding),不包含边框，元素中的文本溢出和`overflow:hidden`不会影响获取到的数据。如果没有设置宽高，获取到的就是有内容撑开的宽度
 
@@ -589,17 +587,13 @@ body.style.height = 300 + "px";
 
 **`getComputedStyle`**
 
-`getComputedStyle()`同样也可以获取页面中元素的样式属性，并且比`style`获取的更加详细，它可以获取到我们书写在任何地方的样式，还可以获取到浏览器给一些元素设置的默认样式，只要是浏览器渲染出来的样式都可以获取到，它是一个方法，返回的是一个对象，里面包含着元素所有的样式属性。
-
-返回的是一个实时的对象，当样式改变后，也会做出相应的改变
+`window`下的一个方法，可以返回一个对象，里面包含着所需元素的所有样式包括浏览器默认的样式，包含的都是浏览器计算渲染后的样式 `getComputedStyle()`返回的是一个实时的对象，样式改变后，对象属性也会改变
 
 语法：`var style = window.getComputedStyle('element',pseudoElt )`
 
-> `element`代表的是需要获取样式属性的元素
-> `pseudoElt` 代表的是匹配的伪元素的字符串。必须对普通元素省略（或 null）。
+> `element`代表的是需要获取样式属性的元素 `pseudoElt` 代表的是匹配的伪元素的字符串。必须对普通元素省略（或 null）。
 
-`getComputedStyle()`是`window`的方法，不过书写的时候`window`可加可不加，也可以直接在后面书写需要获取的样式属性名，可以直接获取。
-`var style = window.getComputedStyle('element',null).样式属性名`
+`getComputedStyle()`是`window`的方法，不过书写的时候`window`可加可不加，也可以直接在后面书写需要获取的样式属性名 `var style = window.getComputedStyle('element',null).样式属性名`
 
 ```html
 <!DOCTYPE html>
@@ -643,4 +637,4 @@ body.style.height = 300 + "px";
 </html>
 ```
 
-IE9 一下的低版本浏览器并不支持这个方法，使用会报错，在 IE 中具有相同功能的是一个属性，`currentStyle`，它不是方法，而是一个属性
+IE9 以下的低版本浏览器并不支持这个方法，在 IE 中具有相同功能的是一个属性。 `currentStyle`，它不是方法，而是一个属性，返回的也是一个对象

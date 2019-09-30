@@ -26,5 +26,27 @@ let myPublic = (function () {
             return result;
         },
 
-    }
+        /**
+         * 获取一个对象的元素样式
+         * @param {Object} ele  需要获取样式的元素
+         * @param {style} sty   需要获取的样式
+         */
+        getStyle: function (ele, sty) {
+            if ('getComputedStyle' in window) {
+                let style = window.getComputedStyle(ele, null)[sty];
+                isNaN(parseFloat(style)) ? style : style = parseFloat(style)
+                return style;
+            };
+        },
+
+        /**
+         * 将字符串的首字母大写
+         * @param {String} str  需要转换的字符串
+         */
+        firstCapital: function (str) {
+            let reg = /\b[a-z]?/g;
+            str = str.replace(reg, element => element.toUpperCase());
+            return str;
+        },
+    };
 }());
