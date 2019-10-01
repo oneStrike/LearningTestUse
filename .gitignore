@@ -30,3 +30,7 @@ launch.json
 /.vscode/
 .launch.json
 git
+
+jQuery
+yarn.lock
+package.json
