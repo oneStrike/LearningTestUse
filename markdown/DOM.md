@@ -516,7 +516,24 @@ body.style.height = 300 + "px";
 
 > 获取一个元素的布局宽高值。包含元素的边框`border`、内边距`padding`、滚动条`scrollbar`（如果存在的话）、以及 CSS 设置的宽高的值。不包含`::before` 或`::after` 等伪类元素的宽度。
 
-**`scroll`**
+2.`offsetParent`
+
+获取当前元素的定位父元素，如果所有的父级元素都没有设置`position`属性，则是`body`。
+
+> 在 Webkit 内核中，如果元素为隐藏的（该元素或其祖先元素的 `style.display` 为 `none`），或者该元素的 `style.position` 被设为 `fixed`，则该属性返回 `null`。
+>
+> 在 IE 9 中，如果该元素的 `style.position` 被设置为 `fixed`，则该属性返回 `null`。（`display:none` 无影响。）
+
+3.`offsetTop` / `offsetLeft`
+
+返回当前元素相对于第一个定位元素的上/左偏移量
+
+> 计算方式是当前元素的外边框到定位父元素的内边框之间的距离，如果没有定位的父元素，则返回到 `body` 的偏移量
+>
+> 在 Webkit 内核中，如果元素为隐藏的（该元素或其祖先元素的 `style.display` 为 `none`），或者该元素的 `style.position` 被设为 `fixed`，则该属性返回 `null`。
+>
+> 在 IE 9 中，如果该元素的 `style.position` 被设置为 `fixed`，则该属性返回 `null`。（`display:none` 无影响。）
+> **`scroll`**
 
 `scrollWidth` / `scrollHeight`
 
@@ -525,12 +542,19 @@ body.style.height = 300 + "px";
 > 可以获取一个元素内容高度的度量，包括由于溢出导致的视图中不可见内容。 没有垂直滚动条的情况下，获取的宽高值与元素视图填充所有内容所需要的最小值 `clientHeight` / `clientHeight` 相同。包括元素的 `padding`，但不包括元素的 `border` 和 `margin`。获取的宽高值也包括 `::before` 和 `::after` 这样的伪元素。
 
 1. 获取到的值都是只读的，无法修改，
-
 2. 获取到的值都是以像素单位获取的，但是获取到的值并不带像素单位`px`
-
 3. 获取的值都是符合的值，(经过对应的元素样式的值相加)，无法获取单一属性
-
 4. 获取的值都是整数（四舍五入），无法获得小数。
+
+`scrollLeft` / `scrollTop`
+
+是一个`可读写`属性，可以获取和设置滚动条卷去的宽高度
+
+卷去的值 = 页面真实宽高 - 当前屏幕中页面显示的宽高
+
+- 当前元素没有滚动条，则为 0
+- 设置的值小于最小 0，则会被设为 0
+- 设置的值超过最大滚动值，则会被设为最大滚动值
 
 ## 获取元素单一属性值
 

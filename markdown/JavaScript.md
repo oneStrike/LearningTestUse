@@ -1698,8 +1698,9 @@ for (var i = 0; i < 10; i++) {
 ```javascript
 for (var item in object) {
   if (object.hasOwnProperty(item)) {
-    //只有是自身拥有的属性才会进入判断语句
+    //只有是自身拥有的属性才会进入判断语句\
   }
+  //=>支持break和continue
 }
 ```
 

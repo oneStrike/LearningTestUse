@@ -27,16 +27,32 @@ let myPublic = (function () {
         },
 
         /**
-         * 获取一个对象的元素样式
-         * @param {Object} ele  需要获取样式的元素
-         * @param {style} sty   需要获取的样式
+         * 获取/设置/批量设置页面元素的属性
+         * 
+         * 批量设置实参为对象
+         * 
+         * @param  {*} 页面元素
+         * @param  {*} 获取/设置：样式属性名。批量设置： 包含样式属性名和样式的对象
+         * @param  {*} 设置：设置的样式
          */
-        getStyle: function (ele, sty) {
+        css: function (...arr) {
+            let index = arr.length;
             if ('getComputedStyle' in window) {
-                let style = window.getComputedStyle(ele, null)[sty];
-                isNaN(parseFloat(style)) ? style : style = parseFloat(style)
-                return style;
-            };
+                if (index === 2 && typeof (arr[1]) === 'string') {
+                    let style = window.getComputedStyle(arr[0], null)[arr[1]];
+                    isNaN(parseFloat(style)) ? null : style = parseFloat(style);
+                    return style;
+                } else if (index === 2 && typeof (arr[1]) === 'object') {
+                    let ele = arr[0],
+                        sty = arr[1];
+                    for (var key in sty) {
+                        ele.style[key] = sty[key]
+                    }
+                } else {
+                    arr[0].style[arr[1]] = arr[2];
+                }
+            }
+            return;
         },
 
         /**
@@ -48,5 +64,26 @@ let myPublic = (function () {
             str = str.replace(reg, element => element.toUpperCase());
             return str;
         },
+
+
+        /**
+         * 获取元素距离body的左/上偏移量
+         * @param {*} ele 
+         */
+        distanceFromBody: function (ele) {
+            let top = ele.offsetTop,
+                left = ele.offsetLeft,
+                p = ele.offsetParent;
+            while (p.tagName !== 'BODY') {
+                top += p.offsetTop + p.clientTop;
+                left += p.offsetLeft + p.clientLeft;
+                p = p.offsetParent;
+            }
+
+            return {
+                top,
+                left
+            }
+        }
     };
 }());
