@@ -611,7 +611,7 @@ body.style.height = 300 + "px";
 
 **`getComputedStyle`**
 
-`window`下的一个方法，可以返回一个对象，里面包含着所需元素的所有样式包括浏览器默认的样式，包含的都是浏览器计算渲染后的样式 `getComputedStyle()`返回的是一个实时的对象，样式改变后，对象属性也会改变
+`window`下的一个方法，可以返回一个对象，里面包含着所需元素的所有样式包括浏览器默认的样式，所有样式都是浏览器计算渲染后的样式 `getComputedStyle()`返回的是一个实时的对象，样式改变后，对象属性也会改变
 
 语法：`var style = window.getComputedStyle('element',pseudoElt )`
 

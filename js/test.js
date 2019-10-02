@@ -733,3 +733,20 @@ console.log(a);
 // f2.bb();
 // f2.cc();
 // f2.__proto__.cc();
+
+function Point(x, y) {
+    this.x = x;
+    this.y = y;
+    this.moveTo = function (x, y) {
+        this.x = x;
+        this.y = y;
+        console.log(this.x + ',' + this.y);
+    }
+}
+var p1 = new Point(0, 0);
+var p2 = {
+    x: 0,
+    y: 0
+};
+p1.moveTo(1, 1); //'0,0'
+p1.moveTo.apply(p2, [10, 10]);
