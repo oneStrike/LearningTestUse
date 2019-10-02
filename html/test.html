@@ -11,13 +11,18 @@
 <body>
 
     <!-- <script src="../js/测试.js"></script> -->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script src="../jQuery/jquery/dist/jquery.js"></script>
     <script>
-        var str = 'hello word js';
-        var reg = /\b[a-z]/g;
-
-        console.log(str.replace(reg, function (item) {
-            return item.toUpperCase();
-        }));
+        $('ul li').click(function () {
+            $(this).css({
+                fontSize: '30px'
+            })
+        })
     </script>
 </body>
 
