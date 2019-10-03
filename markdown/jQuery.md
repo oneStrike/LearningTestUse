@@ -17,7 +17,133 @@ $(function() {
 });
 ```
 
-## jQuery 选择器
+## 原生 `js` 和`jQuery`的区别
+
+在原生`js`中使用`window.onload`会在页面文档全部加载完毕之后再执行相应的`js`代码。而`jQuery`只会在`DOM`文档元素加载完成之后就会执行代码，不会等耐图片的加载
+
+```javascript
+window.onload = function() {
+  let img = document.getElementsByTagName("img")[0];
+  let width = document.getComputedStyle(img, null).width;
+  //=>可以顺利的获取到图片的宽高
+};
+$(document).ready(function() {
+  let $img = $("img")[0];
+  let width = $img.width();
+  //=>在DOM页面文档加载完成之后就会执行，并不会等待图片的加载
+});
+```
+
+原生`js`书写多个相同的入口函数，后面的则会覆盖前面的，而`jQuery`则不会覆盖，而是会依次执行
+
+```javascript
+window.onload = function() {
+  alert(1);
+};
+window.onload = function() {
+  alert(2);
+};
+//=>浏览器最终只会弹出2，相同的入口函数会被会面的覆盖
+
+$(function() {
+  alert(1);
+});
+$(function() {
+  alert(2);
+});
+//=>会依次弹出，
+```
+
+## 细节
+
+**`$`的冲突使用**
+
+`$`并不是只有`jQuery`可以使用，自己书写的类库或者其他的类库也都可以使用这个符号。会根据引入的顺序决定`$`的使用权，后引入的将拥有使用权，如果前面的类库咋使用这个符号，就会报错。
+
+```javascript
+//=>jQuery提供的解决方案
+jQuery.noConflict();
+//=>释放$的使用权，之后无法使用$调用jQuery的方法和属性
+
+//=>也可以自定自定义的名称来操作jQuery
+let ￥=jQuery.noConflict();
+//=>之后我们就可以直接使用￥调用jQuery的属性和方法
+
+
+jQuery(function($){
+  console.log($);
+});
+//=> 可以打印出jQuery本身。可以基于这种机制来解决冲突问题
+
+
+let $=123;
+jQuery(function($){
+$(function(){
+  alert(1)
+  //=>正常弹出，不会报错
+})
+})
+/**
+ * 在调用jQuery的时候如果传递一个函数，jQuery会将自己做为实参传递
+ * 而函数内部的$是私有变量，无论全局怎么改变，都不会影响使用
+ * 因为jQuery在函数内部将自己本身作为实参传递给了$
+ */
+
+let $=123;
+$(function(){
+  alert(1)
+  //=>报错：$ is not a function
+})
+```
+
+## jQuery 核心函数
+
+`jQuery`的核心函数总共可以接手三种参数
+
+1. HTML 代码片段
+2. 字符串选择器
+3. 函数
+4. DOM 对象
+
+**一.** **HTML 代码片段**
+
+直接书写字符串格式的代码片段传递给`jQuery`,`jQuery`会自动的帮我们转换成`jQuery`对象返回，我们可以基于一些方法将返回的对象假如到页面中
+
+```javascript
+let $span = $("<span>123</span>");
+//=>可以创建span标签
+$span.appendTo(document.body);
+//=>将创建好的span标签插入到body中
+```
+
+**二.** **选择器**
+
+---
+
+**基础选择器.**
+
+| 名称       | 用法             | 描述                    |
+| ---------- | ---------------- | ----------------------- |
+| ID 选择器  | \$('#id')        | 获取指定 ID 的元素      |
+| 全选选择器 | \$('\*')         | 匹配所有元素            |
+| 类选择器   | \$('.class')     | 获取 class 名相同的元素 |
+| 标签选择器 | \$('div')        | 获取同一标签名的元素    |
+| 并集选择器 | \$('div,li,p')   | 获取相同标签名的元素    |
+| 交集选择器 | \$('li.current') | 交集元素                |
+
+---
+
+**筛选选择器.**
+
+| 名称 | 用法 | 描述 |
+| --- | --- | --- |
+| :first | \$('li:first') | 获取第一个 li 标签 |
+| :last | \$('li:last') | 索取最后一个 li 标签 |
+| :qp(index) | \$('li:eq(2)') | 获取到的 li 标签中，选择索引为 2 的 li， index 从 0 开始 |
+| :odd | \$('li:odd') | 获取到的 li 标签中，选择索引为奇数的 li |
+| :even | \$('li:even') | 获取到的 li 标签中，选择索引为偶数的 li |
+
+---
 
 `jQuery`可以使用绝大部分`css`中的选择器来获取页面中的元素，返回的是一个类数组，返回的类数组是`jQuery`的一个实例
 
@@ -35,6 +161,35 @@ $(document.body);
 $("div");
 //=> 返回的是一个类数组集合，获取到的元素依次存在类数组的索引中
 ```
+
+**三.** **函数**
+
+`jQuery`会将传递的函数执行，并且将自己本身作为实参传递给函数的形参`
+
+```javascript
+$(function() {
+  $(function($) {
+    console.log($);
+    //=>打印jQuery本身
+  });
+});
+```
+
+**四.** **DOM 对象**
+
+`jQuery`会将传入的原生`js`的`DOM`对象包裹成一个`jQuery`对象，包裹后的原生对象无法使用原生`js`的方法。
+
+```javascript
+let body = document.body;
+let $body = $(body);
+//=>返回jQuery的实例，返回后的jQuery实例无法使用原生js的方法
+
+//=>也可以直接书写表达式
+let $body = $(document.body);
+//=>返回jQUery的实例
+```
+
+## 对象互转
 
 由于原型链的机制，`jQuery`和原生的`js`中方法无法互用，如果要使用对方的方法，就需要转换成对方的一员
 
@@ -85,14 +240,6 @@ let div = $div.eq[0];
 //=>基于这种方法获取到的对象会转成jQuery实例对象
 ```
 
-如果在选择器中书写`HTML`标签，则可以基于`appendTo`插入到文档页面中
-
-```javascript
-let $div = $('<div id="AA">123</div>');
-$div.appendTo(document.body);
-//=>创建一个div标签然后插入到body中
-```
-
 如果判断一个对象是不是原生`js`的对象的话可以使用`nodeType`，只有原生`js`对象才拥有这个属性，`jQuery`的实例使用这个属性会返回`undefined`。
 
 ```javascript
@@ -107,18 +254,35 @@ body.nodeType;
 
 ## 常用方法
 
+### 筛选方法
+
+---
+
+| 名称 | 用法 | 描述 |
+| --- | --- | --- |
+| parent() | \$('li').parent | 查找最近一级的父元素 |
+| children(selector) | \$('li').children('a') | 获取最近一级的子元素 |
+| find(selector) | \$('li').find('a') | 查找层级下所有的子元素，（后代选择器） |
+| siblings(selector) | \$('li').siblings('li') | 获取所有的兄弟元素，不包含自己本身 |
+| prevtAll | \$('li').nextAll() | 获取 li 之前的同辈元素 |
+| nextAll | \$('li').nextAll() | 获取 li 之前的同辈元素 |
+| hasClass | \$('div').hasClass('box') | 检查当前元素是否含有某一个 class 名 |
+| eq(index) | \$('li').eq(2) | 根据索引获取元素集合中的某一项 |
+
+---
+
 **`each`**
 
 `jQuery`中的`each`方法有三种书写方式，都可以遍历数组、类数组、json、对象。类似于数组的`dorEach`方法
 
-1. `$.each()`
+**一.** `$.each()`
 
 直接调用`jQuery`中的私有`each`属性，和`for/in`循环作用一样
 
 ```javascript
 let obj = { name: "绫", age: 18, sex: "女" };
-$.each(obj,funciton(key,value){
-    console.log(key,value);
+$.each(obj, function(key, value) {
+  console.log(key, value);
 });
 /**
  * key输出的对象的属性名  value输出的是对应的值
@@ -126,8 +290,8 @@ $.each(obj,funciton(key,value){
  */
 
 //=>遍历数组
-$.each([10,20,30,40,50],funciton(index,item){
-    console.log(index,item);
+$.each([10, 20, 30, 40, 50], function(index, item) {
+  console.log(index, item);
 });
 /**
  * index会输出索引，item会输出数组对应的值
@@ -136,7 +300,7 @@ $.each([10,20,30,40,50],funciton(index,item){
  */
 ```
 
-2. `$().each()`
+**二.** `$().each()`
 
 使用`jQuery`原型中的`each()`方法,通常遍历`DOM`的节点时使用这种方法
 
@@ -181,4 +345,161 @@ $.each([10,20,30,40,50],funciton(index,item){
    * 大部分情况下jQuery都会把我们的元素集合进行each遍历
    */
 </script>
+```
+
+**`css`**
+
+`css`方法在`jQuery`中有三中不同的书写方法，都是用于操作`DOM`元素`。
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    $(selector).css("width");
+    //=>如果只书写一个参数，则会返回需要获取的样式
+
+    $(selector).css("width", "100px");
+    //=>书写两个参数是设置元素的样式，都是用引号包裹起来
+
+    $(selector).css({
+      width: "100px",
+      height: "100px",
+      backgroundColor: "orangered"
+    });
+    /**
+     * 书写一个对象可以批量设置该元素的多个样式
+     * 书写方式就是普通的对象语法
+     * 如果修改的是一个复合的样式
+     * 需要使用驼峰命名法
+     * 如果样式的值是纯数字可以不使用引号
+     */
+  });
+});
+```
+
+**`addClass`/`removeClass`/`toggleClass`**
+
+在我们使用`js`操作元素样式时，如果一次性操作过多的样式时最好是在 `css`文件内书写，然后通过`class`类名的方式添加到元素样式中。过多的操作样式对性能很不友好，会造成`DOM`回流，引发浏览器的重新渲染。
+
+```html
+<style>
+  .current {
+    width: 200px;
+    height: 200px;
+    background: orangered;
+    font-size: 18px;
+    text-align: center;
+    position: absolute;
+  }
+</style>
+<body>
+  <div>凌</div>
+  <script>
+    jQuery(function($) {
+      $(function() {
+        $("div").addClass("current");
+        //=>将一个类名添加到页面文档元素中
+
+        $("div").removeClass("current");
+        //=>将页面文档元素中的类名删除
+
+        $("div").toggleClass("current");
+        //=>如果元素中有这个类名，则删除，没有则添加
+      });
+    });
+  </script>
+</body>
+```
+
+**`show`/`hide`/`toggle`**
+
+操作页面中的元素，让其显示/隐藏
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    $(selector).show();
+    //=>可以将一个隐藏的元素显示
+    /**
+     * 可以传递三种参数，表示动画效果和回调函数
+     * 如果省略掉所有的参数就是直接显示，没有任何动画效果
+     * 1.速度：slow normal fast ，也可以使用字符串自定义
+     * 2.动画样式：默认是swing 可以修改为linear
+     * 3.回调函数：在动画完成之后执行
+     */
+
+    $(selector).hide();
+    //=>将显示的元素隐藏
+    //=>参数和show()一样
+
+    $(selector).toggle();
+    //=>元素处于隐藏状态就显示，处于显示状态就隐藏
+    //=>三种方法传递的传递都是一样的
+  });
+});
+```
+
+**`slideUp`/`slideDown`/`slideToggle`**
+
+动画滑动效果
+
+1. `slideDown`下拉滑动效果
+2. `slideUp`上拉滑动效果
+3. `slideToggle`滑动效果切换
+
+- 速度：slow normal fast ，也可以使用字符串自定义
+- 动画样式：默认是 swing 可以修改为 linear
+- 回调函数：在动画完成之后执行
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    $(selector).slideUp(‘100’，linear,function(){
+      alert(1);
+    });
+    //=>上拉动画
+    //=>第一个参数表示100毫秒执行完毕
+    //=>第二个参数表示动画的效果
+    //=>第三个表示动画结束之后执行函数，浏览器弹出1
+    $(selector).slideDown();
+    //=>下拉动画
+
+    $(selector).slideToggle();
+    //=>切换动画
+  });
+});
+```
+
+**`hover`**
+
+分别传递两个函数，可以在鼠标进入和鼠标离开执行传递的函数，也可以只传一个函数，那么鼠标进入和鼠标离开都会执行同一个函数
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    ${selector}.hover(function(){alert(0)},function(){alert(1)});
+    //=>鼠标进入弹出0，鼠标离开弹出1
+
+    //=>如果值书写一个函数，则鼠标进入和离开都会执行
+    $(selector).hover(function(){
+      alert(2)
+
+      //=>一共会弹出两个2
+    })
+  });
+});
+```
+
+**`stop`**
+
+停止当前正在运行的动画效果，有时候鼠标滑动或点击效果高频率触发的时候，会造成鼠标离开后依然会运行动画，直至触发的时间执行完毕，`stop`可以立即停止当前正在运行的动画
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    $(selector)
+      .stop()
+      .slideToggle();
+    //=>必须书写在动画函数之前，否则动画只会执行一次
+  });
+});
 ```
