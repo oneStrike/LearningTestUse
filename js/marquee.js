@@ -4,7 +4,6 @@ let ul = document.getElementsByTagName('ul')[0],
 ul.innerHTML += ul.innerHTML;
 myPublic.css(ul, 'width', (myPublic.css(ul, 'width') * 2) + 'px')
 btn.addEventListener('click', function () {
-    console.log(myPublic.css(ul, 'width') / 2)
     setInterval(() => {
         ulLeft -= 5;
         myPublic.css(ul, 'left', ulLeft + 'px')

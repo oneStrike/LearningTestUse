@@ -385,7 +385,7 @@ jQuery(function($) {
   .current {
     width: 200px;
     height: 200px;
-    background: orangered;
+    background: #7e00ff;
     font-size: 18px;
     text-align: center;
     position: absolute;
@@ -503,3 +503,6 @@ jQuery(function($) {
   });
 });
 ```
+
+**`ajax`**
+
