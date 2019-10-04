@@ -1408,7 +1408,7 @@ obj1==obj2 =>true
 
 对象 == 布尔：把对象转换为数字，把布尔也转换为数字
 
-对象 == 字符串：把对象转换为数字，把字符串也转换为数字
+对象 == 字符串：把对象先转换为字符串，然后再转换成数字，把字符串也转换为数字
 
 字符串 == 数字：字符串转换为数字
 
@@ -2180,10 +2180,39 @@ for(var i=0;i<linkList.length;i++){
 </script>
 ```
 
+**`filter`**
+
+作用：筛选数组中的每一项
+
+参数:回调函数
+
+返回：符合规则的数组项
+
+原数组不变
+
+```javascript
+let arr = [10, 21, 5, 4, 21, 854, 231, 4, 1, 24, 54, 5, 45, 42, 1];
+//=>筛选数组的每一项，规则是  >20 && <100
+arr = arr.filter(function(item, index) {
+  return item > 20 && item < 40;
+  //=>arr:[21,21,24]
+});
+
+/**
+ * 传递的回调函数中第一个参数代表数组中的每一项
+ * 第二个参数代表的是每一项的索引  （可选）
+ * 第三个参数代表数组本身，即哪一个数组再调用filter方法  （可选）
+ * 第四个参数代表this的指向，如果不传递非严格模式下this指向window
+ * 严格模式下指向undefined  （可选）
+ *
+ */
+```
+
+> `filter`会为数组中的每一项都执行依次回调函数，会自动跳过稀松数组，`filter`的遍历范围再第一次执行回调函数就已经确定了，之后再添加到数组中的元素不会遍历，如果原有已经存在的值发生变化，那么他们的值取决于执行回调函数的那一刻。
+
 除了以上方法，数组中还包含很多常用的方法（Array.prototype）
 
 - every
-- filter
 - find
 - includes
 - keys
@@ -2898,6 +2927,10 @@ arr.sort(function(a,b){return b - a}).reverse().pop().toString().splice(1,3);
 ```
 
 ---
+
+## 面向对象(Object Oriented,OO)
+
+是一种开发思想，`js`就是根据这种编程思想开发的。
 
 ## 严格模式
 
@@ -3904,10 +3937,14 @@ var person1 = new Person("钉宫", 20);
 5.箭头函数中没有`this`，使用`this`其实使用的是执行上下文中的`this`
 
 ```javascript
-let obj={fn:(function{
-  return ()=>{console.log(this)}
-  //=>this:window
-}())}
+let obj = {
+  fn: (function() {
+    return () => {
+      console.log(this);
+    };
+    //=>this:window
+  })()
+};
 obj.fn();
 //=>如果是普通的函数，那么我们打印的就是obj
 //=>但是箭头函数中没有this，this取决于箭头函数的执行上下文
@@ -3922,6 +3959,23 @@ arr.forEach(function() {
   //=>this ==>window
 });
 //=>回调函数的this也会指向window
+```
+
+7.小括号表达式会改变`this`的指向
+
+```javascript
+function fn() {
+  console.log(this);
+}
+let obj = {
+  fn: fn
+};
+obj.fn();
+//=>this  =>obj
+12, obj.fn();
+//=>this ==>obj
+(12, obj.fn)();
+//=>不会报错，而且this也会指向window
 ```
 
 ### 强制改变 this 指向
@@ -4026,7 +4080,7 @@ Function.prototype.call(fn1);
 Function.prototype.call.call(fn1);
 ```
 
-【 **`call`的性能要稍好于`apply`** 】
+> **`call`的性能要稍好于`apply`,如果不书写第一个参数，则默认是`window`，传递的是`undefined`和`null`也会指向`window`**
 
 强制改变`this`的指向，有时可以让类数组借用数组中的一些方法
 
@@ -4366,7 +4420,7 @@ Array.prototype.myNoRepeat = function myNoRepeat() {
   for (var i = 0; i < this.length; i++) {
     var item = this[i];
     if (obj[item]) {
-      this.splice(i, 1);
+      .splice(i, 1);
       i--;
       continue;
     }
@@ -4415,7 +4469,7 @@ let [a, , b] = arr;
 //=>中间使用空格表示不接收赋值
 ```
 
-如果左边用于赋值的变量多余右边，那么就会赋值`undefined`,我们也可以直接将其设置一个默认值
+如果左边用于赋值的变量多余右边，那么就会赋值`undefined`,再不确定是否有值的情况下可以设置一个默认值
 
 ```javascript
 let arr = [10, 20, 30];
@@ -4441,22 +4495,31 @@ a = a + b;
 b = a - b;
 a = a - b;
 
-//=>结构赋值
+//=>解构赋值
 [b, a] = [a, b];
 //=>将a和b两个变量放入一个数组中，
-//=>然后使用结构赋值依次交换，更加的简单快捷
+//=>然后使用解构赋值依次交换，更加的简单快捷
+```
+
+可以快速将一个类数组转换成真数组
+
+```javascript
+let div = document.getElementsByTagName("div");
+//=>获取到页面中所有的div标签
+div = [...div];
+//=>会转换成一个真数组，prototype指向Array
 ```
 
 **对象解构赋值.**
 
-对象的结构赋值和数组的语法是一样的，只不过我们在左边用于赋值的变量须和右边对象的属性名一致才可以，如果需要不同的名字，可以额外设置
+对象的解构赋值和数组的语法是一样的，只不过我们在左边用于赋值的变量须和右边对象的属性名一致才可以，如果需要不同的名字，可以额外设置
 
 ```javascript
 let obj = { name: "绫", age: 20, sex: "女" };
 let { name, age, sex } = obj;
 console.log(name, age, sex);
 //=>'绫',18，'女'
-//=>结构赋值操作完成之后，我们用于接收的变量和对象的属性就没有任何关系了
+//=>解构赋值操作完成之后，我们用于接收的变量和对象的属性就没有任何关系了
 
 obj.name = "钉宫";
 console.log(name);

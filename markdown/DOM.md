@@ -338,6 +338,50 @@ oBox.removeAttribute('myColor'); //=>删除
 
 ![nN3JDU.png](https://s2.ax1x.com/2019/09/10/nN3JDU.png)
 
+## 获取元素的属性
+
+**`innerHTML`**
+
+可以获取或者设置一个元素内的内容，包括他的后代标签，如果基于它设置元素的内容，默认情况下会将原有的内容覆盖
+
+```javascript
+let div = document.getElementsByTagName("div")[0];
+console.log(div.innerHTML);
+//=>获取div内的所有内容,包括空白文本，
+div.innerHTML = 123;
+//=>会把div内所有内容替换成123
+
+div.innerHTML += div.innerHTML;
+//=>相当于将div原有的内容重新克隆一份重新添加到div中
+```
+
+**`innerText`**
+
+获取或者设置一个元素的文本内容，包括后代标签内的文本内容
+
+```javascript
+let div = document.getElementsByTagName("div")[0];
+console.log(div.innerText);
+//=>获取div内的所有内容,包括空白文本，
+div.innerText = 123;
+//=>会把div内所有文本内容替换成123
+
+div.innerText += div.innerText;
+//=>相当于将div原有的文本内容重新克隆一份重新添加到div中
+```
+
+**`name`**
+
+获取元素`name`属性的值
+
+> 它只能应用于下列元素：`<a>, <applet>, <button>, <form>, <frame>, <iframe>, <img>, <input>, <map>, <meta>, <object>, <param>, <select>, and <textarea>`。如果其他标签设置`name`属性也无法获取值，可以使用`getAttribute()`方法获取
+
+`id`获取元素的`id`名
+
+`className`获取元素的`class`名
+
+`tagName`获取元素的标签名
+
 ## DOM 映射机制
 
 页面中的 HTML 元素和 js 中通过相关方法获取的元素集合或者元素对象存在映射机制，一个修改另外一个也会修改
@@ -662,3 +706,7 @@ body.style.height = 300 + "px";
 ```
 
 IE9 以下的低版本浏览器并不支持这个方法，在 IE 中具有相同功能的是一个属性。 `currentStyle`，它不是方法，而是一个属性，返回的也是一个对象
+
+```
+
+```

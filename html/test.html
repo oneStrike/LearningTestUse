@@ -6,38 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/reset.min.css">
-    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
-    <style>
-        button {
-            width: 80px;
-            height: 30px;
-            background: #941616;
-        }
-
-        div {
-            width: 200px;
-            height: 300px;
-            background: #6409af;
-            display: none;
-        }
-    </style>
+    <!-- <link rel="stylesheet" href="../css/reset.min.css">
+    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script> -->
 </head>
 
 <body>
-    <button>UP</button>
-    <button>DOWN</button>
-    <button>TOGGLE</button>
-    <div></div>
     <script>
-        /**
-         * 选项卡
-         * 排他想法
-         * 选项卡图片切换
-         * 
-         * 
-         * 
-         */
+        var arr = [12, 12, 12, 121, 21, 15, 4, 21, 3, 3, 3, 21, 212, 12, 12];
+        var obj = {};
+        for (var i = 0; i < arr.length; i++) {
+            var item = arr[i];
+            if (typeof obj[item] !== 'undefined') {
+                item = arr[arr.length - 1];
+                arr.pop();
+                i--;
+                continue;
+            }
+            obj[item] = true;
+        }
+
+        // for (var i = 0; i < arr.length; i++) {
+        //     for (var j = i + 1; j < arr.length; j++) {
+        //         if (arr[i] == arr[j]) {
+        //             arr.splice(j, 1);
+        //             j--;
+        //         }
+        //     }
+        // }
+        console.log(arr)
     </script>
 </body>
 
