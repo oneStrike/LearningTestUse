@@ -1,0 +1,56 @@
+.marquee() {
+    & ul li:nth-child(3n+1) {
+        background: pink;
+    }
+
+    & ul li:nth-child(3n+2) {
+        background: lightblue
+    }
+
+    & ul li:nth-child(3n+3) {
+        background: lightseagreen
+    }
+}
+
+.btn(@w: 40, @h: 20, @bg: #ccc) {
+    display: block;
+    width: unit(@w, px);
+    height: unit(@h, px);
+    position: relative;
+    margin: 50px auto;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.box {
+    position: relative;
+    margin: 20px auto;
+    width: 500px;
+    height: 100px;
+    border: 1px solid green;
+    overflow: hidden;
+
+    ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 900px;
+        height: 100px;
+    }
+
+    li {
+        float: left;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .marquee();
+}
+
+.btn-box {
+    .btn(80, 40);
+}

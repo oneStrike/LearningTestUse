@@ -7,17 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="../css/reset.min.css">
-    <style>
-        #box {
+    <link rel="stylesheet/less" href="../css/marquee.less">
+    <!-- <style>
+        .box {
             position: relative;
+            margin: 20px auto;
             width: 500px;
             height: 100px;
-            margin: 20px auto;
-            border: 3px solid black;
+            border: 1px solid green;
             overflow: hidden;
         }
 
-        .wrapper {
+        .ul {
             position: absolute;
             top: 0;
             left: 0;
@@ -25,7 +26,7 @@
             height: 100px;
         }
 
-        .wrapper li {
+        ul li {
             float: left;
             width: 100px;
             height: 100px;
@@ -34,32 +35,24 @@
             font-size: 20px;
         }
 
-        .wrapper li:nth-child(3n+1) {
+        ul li:nth-child(3n+1) {
             background: lightblue;
         }
 
-        .wrapper li:nth-child(3n+2) {
+        ul li:nth-child(3n+2) {
             background: lightcyan;
         }
 
-        .wrapper li:nth-child(3n+3) {
+        ul li:nth-child(3n+3) {
             background: lightpink;
         }
-
-        button {
-            width: 60px;
-            height: 30px;
-            background: #ccc;
-            font-size: 18px;
-            display: block;
-            margin: 100px auto;
-        }
-    </style>
+    </style> -->
+    <script src="../js/less-2.5.3.min.js"></script>
 </head>
 
 <body>
-    <div id="box">
-        <ul class="wrapper">
+    <div class="box">
+        <ul>
             <li>1</li>
             <li>2</li>
             <li>3</li>
@@ -71,8 +64,10 @@
             <li>9</li>
         </ul>
     </div>
-    <button>start</button>
-    <script src="../js/public.js"></script>
+    <div class="btn-box">
+        <button class="btn">start</button>
+    </div>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
     <script src="../js/marquee.js"></script>
 </body>
 
