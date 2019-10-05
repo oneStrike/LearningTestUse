@@ -3122,7 +3122,7 @@ B.prototype = Object.create(A.prototype)
 /**
  * 并不会执行父类的构造函数
  * 而是创建一个新的对象最为中转的原型
- * 并且让新创建的对象的___proto__指向父类的原型
+ * 并且让新创建的对象的__proto__指向父类的原型
  * 最后将创建好的新对象赋值给B.prototype
  * 这样B的原型就会通过中转的空对象指向父类的prototype
  * 同时并不会将父类的私有属性和方法继承到子类的原型中
@@ -3193,9 +3193,9 @@ function inherit(parent, son) {
   function temp() {}
   //=>创建一个空函数
   temp.prototype = parent.prototype;
-  //=>让空函数的原型指向父类的原型
+  //=>让空函数的prototype原型指向父类的prototype原型
   son.prototype = new temp();
-  //=>让子类的原型指向空函数的原型
+  //=>让子类的prototype原型指向空函数的prototype原型
   son.prototype.constructor = son;
   //=>重定向子类的constructor指向
   son.prototype.uber = parent;
