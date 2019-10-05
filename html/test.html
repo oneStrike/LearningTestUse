@@ -12,28 +12,30 @@
 
 <body>
     <script>
-        var arr = [12, 12, 12, 121, 21, 15, 4, 21, 3, 3, 3, 21, 212, 12, 12];
-        var obj = {};
-        for (var i = 0; i < arr.length; i++) {
-            var item = arr[i];
-            if (typeof obj[item] !== 'undefined') {
-                item = arr[arr.length - 1];
-                arr.pop();
-                i--;
-                continue;
+        function A(x, y) {
+            this.x = x;
+            this.y = function () {
+                console.log(this.x);
+                //=>10 继承是传递的参数，将参数赋值给x
+            };
+        };
+        A.prototype = {
+            aa: function () {
+                console.log(aa);
             }
-            obj[item] = true;
         }
 
-        // for (var i = 0; i < arr.length; i++) {
-        //     for (var j = i + 1; j < arr.length; j++) {
-        //         if (arr[i] == arr[j]) {
-        //             arr.splice(j, 1);
-        //             j--;
-        //         }
-        //     }
-        // }
-        console.log(arr)
+        function B(z) {
+            A.call(this, 10);
+            //=>实现继承的时候可以传递参数
+            this.z = z;
+        }
+        let b = new B();
+        //=>创建B的实例
+        b.y();
+        b.aa()
+        //=>报错：b无法使用父类原型上的方法
+        console.log(b)
     </script>
 </body>
 

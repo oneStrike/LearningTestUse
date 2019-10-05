@@ -1155,9 +1155,29 @@ for (var key in person) {
 ```
 
 > - instanceof
->
+
 > - constructor
->
+
+是实例继承自构造器原型中的一个属性，它存储的值是构造出当前这个实例的构造函数
+
+```javascript
+function Proson(name, age) {
+  this.name = name;
+  this.age = age;
+}
+let proson1 = new Proson("绫", 19);
+
+proson1.constructor;
+//=>Proson  构造出这个实例的构造函数
+
+//=>如果我们没有原始构造函数的引用，通过constructor也可以构造出实例
+let proson2 = new proson1.constructor("钉宫", 19);
+/**
+ * 因为constructor存储的是原始的构造函数，那么也可以直接使用
+ * constructor构造出一个实例
+ */
+```
+
 > - Object.prototype.toString.call()
 
 ---
@@ -2928,9 +2948,280 @@ arr.sort(function(a,b){return b - a}).reverse().pop().toString().splice(1,3);
 
 ---
 
-## 面向对象(Object Oriented,OO)
+## 面向对象(Object Oriented Programming)
 
-是一种开发思想，`js`就是根据这种编程思想开发的。
+js 是一门面向原型的编程语言，也叫作弱类化。但是 js 的核心支持面向对象编程思想，而面相对象编程思想是尽可能的模拟人类的思维方式，我们的程序就是一系列的对象组成的，类就相当于现实世界的一个抽象，而对象就是类的实例化，表示具体的某一个实物，在 js 中我们可以把页面中的标签，文本，注释都看做是一个对象，我们在编写程序，实际上就是在操作一系列的对象。而在 js 中没有真正意义上的类，`ES6`中的`class`关键字只是在模拟类，这其实是一种语法糖。
+
+### 封装(Encapsulation )
+
+> 我们可以将一些功能性的 js 代码进行封装，这样可以实现`高内聚，低耦合`，减少重复的代码。
+
+### 继承(Inheritance )
+
+js 中的继承是指父类下的所有子类都可以使用父类原型中的方法和属性，好处是可以减少代码的重用性
+
+**原型继承.**
+
+将父类的实例作为子类的原型`prototype`
+
+**优点：**
+
+- 子类的实例可以使用父类私有和公有（原型）属性和方法
+
+**缺点：**
+
+- 子类和父类公用同一个原型，子类或者父类只要有一个修改另一个也会修改
+- 不能同时继承多个父类
+
+```javascript
+function A(x, y) {
+  this.x = x;
+  this.y = function() {
+    console.log(this);
+    //=>b
+  };
+}
+function B(z) {
+  this.z = z;
+}
+B.prototype = new A();
+//=>将A的实例作为B的原型
+
+B.prototype = A.prototype;
+/**
+ * 这是最简单的继承方式之一，
+ * 只可以继承父类原型中的属性和方法
+ * 无法继承父类私有的属性和方法
+ *
+ * 此时使用instanceof无法检测一个实例
+ * 到底是父类的实例还是子类的实例
+ * 但是使用constructor可以检测出来
+ */
+
+let b = new B(10);
+b.y();
+//=>this  b
+```
+
+**`call`**
+
+使用`call`将父类中的私有属性和方法添加到子类实例的私有属性中，无法继承原型中的属性和方法
+
+**优点.**
+
+- 继承的属性和方法都是私有的，即使改变也不会影响其他的
+- 继承的时候可以向父类传递参数
+- 可以继承多个父类
+
+**缺点.**
+
+- 无法继承父类原型中的属性和方法
+- 无法实现代码复用，每一个子类创建的实例都是将父类私有的属性和方法复制一份
+- 实例只是子类的实例而不是父类的实例
+
+```javascript
+function A(x, y) {
+  this.x = x;
+  this.y = function() {
+    console.log(this.x);
+    //=>10 继承是传递的参数，将参数赋值给x
+  };
+}
+A.prototype = {
+  aa: function() {
+    console.log(aa);
+  }
+};
+function B(z) {
+  A.call(this, 10);
+  /**
+   * 继承的时候可以向父类传递参数
+   * 子类B每创建一个实例，都会将父类的私有属性和方法
+   * 继承到实例私有的属性和方法，
+   *
+   * 原理就是子类构造函数中的this是子类的实例，
+   * 调用父类A并且使用call改变父类中的this
+   * 将其变成子类构造函数的实例，
+   * 那么父类构造函数中的带有this的私有属性和方法
+   * 都会成为子类构造函数构造出的实例的属性和方法
+   */
+
+  this.z = z;
+}
+let b = new B();
+//=>创建B的实例
+b.y();
+b.aa();
+//=>报错：b无法使用父类原型上的方法
+console.log(b);
+/**
+ * b{
+ *    x:10,
+ *    y:function,
+ *    z:undefined
+ * }
+ */
+```
+
+**寄生组合.**
+
+将 **原型链继承** 和 **`call`继承** 结合在一起使用
+
+**优点.**
+
+- 可以继承多个父类的私有属性和方法
+- 既可以继承父类的私有属性和方法，也可以继承父类原型中的私有属性和方法
+- 父类原型中的代码可以复用
+- 父类原型中的值并不会共享
+
+**缺点.**
+
+- 父类构造函数执行两次，会造成内存浪费
+
+```javascript
+function A(x, y) {
+  this.x = x;
+  this.y = function() {
+    console.log(this);
+  };
+}
+function B(z) {
+  A.call(this, 10);
+  //=>会执行一次父类构造函数
+  this.z = z;
+}
+B.prototype = new A();
+//=>也会执行一次父类构造函数
+let b = new B(20);
+/**
+ * 这种继承既可以继承父类的私有属性和方法，
+ * 继承的私有属性和方法会成为实例的私有属性和方法
+ * 修改时并不会影响其他的实例
+ * 也可以继承父类原型中的属性和方法，
+ * 但是执行两次父类构造函数，
+ */
+```
+
+**改良版寄生组合:**
+
+```JavaScript
+function A(x, y) {
+  this.x = x;
+  this.y = function() {
+    console.log(this);
+  };
+}
+function B(z) {
+  A.call(this, 10);
+  //=>会执行一次父类构造函数
+  this.z = z;
+}
+B.prototype.constructor=B;
+//=>最好重新定向constructor的指向
+B.prototype = Object.create(A.prototype)
+/**
+ * 并不会执行父类的构造函数
+ * 而是创建一个新的对象最为中转的原型
+ * 并且让新创建的对象的___proto__指向父类的原型
+ * 最后将创建好的新对象赋值给B.prototype
+ * 这样B的原型就会通过中转的空对象指向父类的prototype
+ * 同时并不会将父类的私有属性和方法继承到子类的原型中
+ */
+let b = new B(20);
+```
+
+`Object.create(__proto__)`可以创建一个对象，并且将传递的参数作为创建的对象的`__proto__`
+
+**循环拷贝：**
+
+使用`in`运算符循环将父类及父类原型中的属性和方法作为属性赋值给子类的原型
+
+**优点：**
+
+- 可以继承多个父类
+- 可以继承父类及其原型中的属性和方法
+
+**缺点：**
+
+- 消耗性能，效率低
+- 创建的实例不属于父类的实例
+
+```javascript
+function A(x, y) {
+  this.x = x;
+  this.y = function() {
+    console.log(this);
+  };
+}
+A.prototype.h = function() {
+  console.log(this);
+};
+function B(z) {
+  this.b = b;
+  p = new A(10);
+  for (var prop in p) {
+    B.prototype[prop] = p[prop];
+    /**
+     * 创建一个父类的实例，然后循环遍历新创建的实例
+     * in 运算符也可以遍历出原型中的属性和方法
+     * 通过in运算符将遍历出的属性和方法通过属性表达式的方式
+     * 依次添加到子类的prototype原型中
+     * 消耗性能，效率低下， 不推荐！！！
+     */
+  }
+}
+let b = new B(20);
+console.log(b);
+//=>z:20
+```
+
+**圣杯模式继承：**
+
+等价于寄生组合继承，不过创建的是一个空函数作为中转，书写比较复杂
+
+**优点：**
+
+- 圣杯模式==寄生组合
+
+**缺点：**
+
+- 书写复杂，无法实现多继承
+
+```javascript
+//可以将圣杯模式封装，方便以后使用
+function inherit(parent, son) {
+  function temp() {}
+  //=>创建一个空函数
+  temp.prototype = parent.prototype;
+  //=>让空函数的原型指向父类的原型
+  son.prototype = new temp();
+  //=>让子类的原型指向空函数的原型
+  son.prototype.constructor = son;
+  //=>重定向子类的constructor指向
+  son.prototype.uber = parent;
+  //=>书写一个自定义的属性指向父类
+  //=>方便以后查询继承自哪一个父类
+}
+/**
+ * 以后可以直接调用这个函数实现继承
+ * son：需要传递一个子类
+ * parent：需要传递一个父类
+ */
+```
+
+**`ES5`中推荐使用寄生组合继承或者圣杯模式继承，他们都不可以实现多继承，只有循环拷贝可以完美实现多继承（同时继承父类的私有属性和方法，以及父类原型中的私有属性和方法），但是循环拷贝继承损耗性能，效率低下，一般不推荐使用**
+
+**ES6`class`**
+
+### 多态(Polymorphism )
+
+**重载.**
+
+js 并没有真正意义上的重载，牵强讲的话就是一个函数根据传递参数的不同，执行的方法也不相同
+
+**重写.**
+
+实例重写父类原型中的一些方法。
 
 ## 严格模式
 
@@ -3682,6 +3973,8 @@ let obj = {
 obj.fn();
 //=>箭头函数中的this使用的都是上下文中的this，因为箭头函数并没有执行主体
 ```
+
+## 算法
 
 ## 作用域
 
