@@ -14,22 +14,25 @@
  * D:程序报错
  */
 
+//=======================================================
 
-console.log(a);
-var a = 12;
+// console.log(a);
+// var a = 12;
 
-function fn() {
-    console.log(a);
-    a = 13;
-}
-fn();
-console.log(a);
+// function fn() {
+//     console.log(a);
+//     a = 13;
+// }
+// fn();
+// console.log(a);
 /**
  * A：undefined 12 13
  * B: undefined undefined 12
  * C: undefined undefined 13
  * D: 程序报错
  */
+
+//===========================================================
 
 // console.log(a);
 // a = 12;
@@ -48,6 +51,8 @@ console.log(a);
  * D: 程序报错
  */
 
+//=========================================================
+
 // var foo = 1;
 
 // function bar() {
@@ -65,11 +70,11 @@ console.log(a);
  * D: 程序报错
  */
 
-// var n = 10;
+//===========================================================
 
+// var n = 10;
 // function a() {
 //     var n = 10;
-
 //     function b() {
 //         n++;
 //         console.log(n);
@@ -88,10 +93,11 @@ console.log(a);
  * D: 11 12 12
  */
 
+//========================================================
+
 // var a = 10,
 //     b = 11,
 //     c = 12;
-
 // function test(a) {
 //     a = 1;
 //     var b = 2;
@@ -110,6 +116,8 @@ console.log(a);
  * 
  */
 
+//======================================================================
+
 // if (!'a' in window) {
 //     var a = 1;
 // }
@@ -122,6 +130,7 @@ console.log(a);
  * D: 以上都不对
  */
 
+//====================================================================
 
 // var a = 4;
 
@@ -141,6 +150,7 @@ console.log(a);
  * 
  */
 
+//===============================================================
 
 // var foo = 'hello';
 // (function (foo) {
@@ -155,10 +165,9 @@ console.log(a);
  * B: undefined world hello
  * C: hello world world
  * D: 以上都不正确
- * 
  */
 
-
+//===================================================================
 
 // var a = 9;
 
@@ -173,8 +182,6 @@ console.log(a);
 // console.log(fn()(5));
 // console.log(f(5));
 // console.log(a);
-
-
 /**
  * A: 6 6 7 2
  * B: 5 6 7 3
@@ -183,7 +190,10 @@ console.log(a);
  * 
  */
 
+//================================================================
+
 // var arr = [1, 2, 3, 4];
+
 // function fn(arr) {
 //     arr[0] = 0;
 //     arr = [0];
@@ -193,6 +203,8 @@ console.log(a);
 // var result = fn(arr);
 // console.log(arr);
 // console.log(result)
+
+//==========================================================
 
 // function fn(i) {
 //     return function (n) {
@@ -205,7 +217,10 @@ console.log(a);
 // fn(30)(50);
 // f(30);
 
+//===============================================================
+
 // var i = 10;
+
 // function fn() {
 //     return function (n) {
 //         console.log(n + (++i));
@@ -217,12 +232,15 @@ console.log(a);
 // fn()(30);
 // f(30);
 
+//==============================================================
 
-// var num = 10;
-// var obj = { num: 20 };
+// var num = 10; 
+// var obj = {
+//     num: 20 
+// };
 // obj.fn = (function (num) {
 //     this.num = num * 3;
-//     num++;
+//     num++; 
 //     return function (n) {
 //         this.num += n;
 //         num++;
@@ -232,8 +250,9 @@ console.log(a);
 // var fn = obj.fn;
 // fn(5);
 // obj.fn(10);
-// console.log(num, obj, num);
+// console.log(num, obj.num);
 
+//=======================================================================
 
 // function Fn() {
 //     this.x = 100;
@@ -249,18 +268,20 @@ console.log(a);
 //     console.log(this.y);
 // };
 // var f1 = new Fn();
-// var f2 = new f2();
-// console.log(f1.getX === f2.getX);
-// console.log(f1.getY === f2.getY);
-// console.log(f1.__proto__.getY === Fn.prototype.getY);
-// console.log(f1.__proto__.getX === f2.getX);
-// console.log(f1.getX === Fn.prototype.getX);
-// console.log(f1.constructor);
-// console.log(Fn.prototype.__proto__.constructor);
-// f1.getX();
-// f1.__proto__.getX();
-// f2.getY();
-// Fn.prototype.getY();
+// var f2 = new Fn();
+// console.log(f1.getX === f2.getX); //
+// console.log(f1.getY === f2.getY); //
+// console.log(f1.__proto__.getY === Fn.prototype.getY); //
+// console.log(f1.__proto__.getX === f2.getX); //
+// console.log(f1.getX === Fn.prototype.getX); //
+// console.log(f1.constructor); //
+// console.log(Fn.prototype.__proto__.constructor); //
+// f1.getX(); //
+// f1.__proto__.getX(); //
+// f2.getY(); //
+// Fn.prototype.getY(); //
+
+//================================================================================================================
 
 /**
  * 一下代码的功能是要实现5个input按钮循环绑定click点击事件
@@ -292,9 +313,11 @@ console.log(a);
     </script> */
 }
 
+//===============================================================================================================
+
 // var fullName = 'language';
 // var obj = {
-//     fullName='javascript';
+//     fullName: 'javascript',
 //     prop: {
 //         getFullName: function () {
 //             return this.fullName;
@@ -305,6 +328,7 @@ console.log(a);
 // var test = obj.prop.getFullName;
 // console.log(test());
 
+//==========================================================================
 
 // var name = 'window';
 // var Tom = {
@@ -319,6 +343,7 @@ console.log(a);
 // };
 // Tom.wait();
 
+//========================================================================
 
 // function Foo() {
 //     getName = function () {
@@ -339,33 +364,37 @@ console.log(a);
 // function getName() {
 //     console.log(5);
 // }
-// Foo.getName();
-// getName();
-// Foo.getName();
-// getName();
-// new Foo.getName();
-// new Foo().getName();
-// new new Foo().getName();
+// Foo.getName(); //
+// getName(); //
+// Foo.getName(); //
+// getName(); //
+// new Foo.getName(); //
+// new Foo().getName(); //
+// new new Foo().getName(); //
+
+//=============================================================================
 
 // function fun() {
 //     this.a = 0;
 //     this.b = function () {
-//         alert(this.a);
+//         console.log(this.a);
 //     }
 // }
 // fun.prototype = {
 //     b: function () {
 //         this.a = 20;
-//         alert(this.a);
+//         console.log(this.a);
 //     },
 //     c: function () {
 //         this.a = 30;
-//         alert(this.a);
+//         console.log(this.a);
 //     }
 // }
 // var my_fun = new fun();
 // my_fun.b();
 // my_fun.c();
+
+//==================================================================================
 
 //如何实现数组去重
 
@@ -734,19 +763,410 @@ console.log(a);
 // f2.cc();
 // f2.__proto__.cc();
 
-function Point(x, y) {
-    this.x = x;
-    this.y = y;
-    this.moveTo = function (x, y) {
-        this.x = x;
-        this.y = y;
-        console.log(this.x + ',' + this.y);
-    }
-}
-var p1 = new Point(0, 0);
-var p2 = {
-    x: 0,
-    y: 0
-};
-p1.moveTo(1, 1); //'0,0'
-p1.moveTo.apply(p2, [10, 10]);
+// function Point(x, y) {
+//     this.x = x;
+//     this.y = y;
+//     this.moveTo = function (x, y) {
+//         this.x = x;
+//         this.y = y;
+//         console.log(this.x + ',' + this.y);
+//     }
+// }
+// var p1 = new Point(0, 0);
+// var p2 = {
+//     x: 0,
+//     y: 0
+// };
+// p1.moveTo(1, 1); //'0,0'
+// p1.moveTo.apply(p2, [10, 10]);
+
+
+
+// let Fn = function (x = 0, y = 0) {
+//     this.x = x;
+//     this.y = y;
+//     this.getX = function () {
+//         console.log(this.x);
+//     };
+// };
+// Fn.prototype.getX = function () {
+//     console.log(this.x);
+// };
+// let f1 = new Fn();
+// Fn.prototype = {
+//     getY: function () {
+//         console.log(this.y);
+//     },
+// };
+// let f2 = new Fn(1, 2);
+// console.log(f1.constructor == f2.constructor);
+// f1.getX();
+// f1.getY();
+// f1.__proto__.getX();
+// f1.__proto__.getY();
+// f2.getX();
+// f2.getY();
+// f2.__proto__.getX();
+// f2.__proto__.getY();
+
+
+// 写出你所熟知的ES6新语法，说出它们和ES5的区别！
+
+// 请说出你对 “重排和重绘读写分离” 的理解！
+
+// 写出下面代码运行的结果
+// var str='abc123',
+//     num=parseFloat(str);
+// if(num===NaN){
+//     alert(NaN);
+// }else if(num===123){
+//     alert(123);
+// }else if(typeof num==='number'){
+//     alert('number');
+// }else{
+//     alert('str');
+// }
+
+// 写出代码执行的结果
+
+// var a='abc'+123+456;
+// alert(a);
+
+// var b='456'-'123';
+// alert(b);
+
+// var c=1,
+//     d='1';
+// var f=c>d?(c<d?c:d):(c==d?c:d);
+// alert(f);
+
+// 用户昵称规定只能是“数字、大小写字母”组成，而且不能少于2位，也不能超过20位，写个正则匹配这个需求
+
+// 谈谈你对面向对象的理解！
+
+// 写出代码运行结果
+// var point={
+//     x:10,
+//     y:20,
+//     moveTo:function(x,y){
+//         var moveX=function(x){ this.x=x; }
+//         var moveY=function(y){ this.y=y; }
+//         moveX(x);
+//         moveY(y);
+//     }
+// };
+// point.moveTo(100,200);
+// console.log(point.x, point.y);
+
+// 分析代码写结果
+// function fun(){
+//     this.a=10;
+//     this.b=function(){
+//         alert(this.a);
+//     }
+// }
+// fun.prototype={
+//     b:function(){
+//         this.a=20;
+//         alert(this.a);
+//     },
+//     c:function(){
+//         this.a=30;
+//         alert(this.a)
+//     }
+// }
+// var my_fun=new fun();
+// my_fun.b();
+// my_fun.c();
+
+// 分析代码写结果
+// var n=2;
+// function a(){
+//     var n=3;
+//     function b(m){
+//         alert(++n+m);
+//     }
+//     b(4);
+//     return b;
+// }
+// var c=a(5);
+// c(6);
+// alert(n);
+
+// 谈一下你对作用域链和原型链的理解
+
+// 实现 一个$attr(domId, name, value)遍历id是domId的，内部属性为name且值为value的元素？
+
+// 实现数组去重你都有哪些办法 ?
+
+// 说出你所掌握的算法
+
+// 写出你掌握的JS继承方式，项目中什么时候你用到了继承？
+
+// JS中有一个insertBefore方法，目的是实现把新元素插入到指定元素之前，现在你实现一个 InsertAfter 方法，把新元素插入到指定元素之后！
+// function insertAfter(newEle,originEle){
+//     //=>newEle:新插入的元素
+//     //=>originEle:指定的老元素
+// }
+
+// 英文字母汉字组成的字符串，用正则给英文单词前后加空格
+
+// jQuery的原理，怎么扩展插件
+
+
+// 看代码，回答问题
+// for(var i = 0;i<5;i++){ 
+//     setTimeout(function(){ 
+//         console.log(i) 
+//     },1000); 
+// } 
+// 这段代码输出什么？怎么才能输出01234？
+
+// 分析代码写结果
+// var a = {n:4};
+// var b = a;
+// b.x = a = {n: 10};
+// console.log(a.x);
+// console.log(b.x);
+
+
+// 你了解过闭包吗？
+
+
+// var fullName = 'language';
+// var obj={
+//    fullName:'javascript',
+//    prop:{
+//       getFullName:function(){
+//          return this.fullName;
+//       }
+//    }
+// };
+// console.log(obj.prop.getFullName());
+// var test=obj.prop.getFullName;
+// console.log(test());
+
+// let a = 3,
+//     b = 4;
+// function A(a) {
+//     A = function (b) {
+//         alert(a + (--b));
+//     };
+//     alert(++a);
+// }
+// A(5);
+// A(6);
+
+
+// window.val = 1;
+// let json = { 
+//     val: 10,
+//     dbl: function () {
+//         this.val *= 2;
+//     }
+// };
+// json.dbl();
+// let dbl = json.dbl;
+// dbl();
+// json.dbl.call(window);
+// alert(window.val + json.val);
+
+
+
+// (function () {
+//     let val = 1;
+//     let json = {
+//         val: 10,
+//         dbl: function () {
+//             val *= 2;
+//         }
+//     };
+//     json.dbl();
+//     alert(json.val + val);
+// })();
+
+
+// let test = (function (i) {
+//     return function () {
+//         alert(i *= 2);
+//     }
+// })(2);
+// test(5); 
+
+
+
+// let n = 2,
+//     fn = () => {
+//         this.n *= 3;
+//         n++;
+//         return m=>console.log((++n)+m);
+//     };
+// var f = fn(4);
+// f(5);
+// fn(4)(5);
+// f(6);
+// console.log(n);
+
+// 忽略报错阻碍代码的执行
+// let Fn = function (x = 0, y = 0) {
+//     this.x = x;
+//     this.y = y;
+//     this.getX = function () {
+//         console.log(this.x);
+//     }
+// };
+// Fn.prototype.getX = function () {
+//     console.log(this.x);
+// };
+// let f1 = new Fn;
+// Fn.prototype = {
+//     getY: function () {
+//         console.log(this.y);
+//     }
+// };
+// let f2 = new Fn(1, 2);
+// console.log(f1.constructor===f2.constructor);
+// f1.getX();
+// f1.getY();
+// f1.__proto__.getX();
+// f1.__proto__.getY();
+// f2.getX();
+// f2.getY();
+// f2.__proto__.getX();
+// f2.__proto__.getY();
+
+
+// 写出输出结果，说出原因
+// let fn1=function(){alert(1)},
+//     fn2=function(){alert(2)};
+// fn1.call(fn2);
+// fn1.call.call(fn2);
+
+// 如下一个字符串 “54389”，要求将字符串中的阿拉伯数字替换成我们的中文大写数字”伍肆叁捌玖”，请使用正则的方式进行处理
+
+// 在javascript对象上定义一个repeatify函数, 这个函数接受一个整数参数, 来明确子字符串需要重复几次, 这个函数要求字符串重复指定的次数, 比如: ’abc’.repeatify(3);//”abcabcabc”
+
+// var str = 'hello<img src="haha.png" alt="哈哈"/>world'; 正确匹配输出’hello[哈哈]world’
+
+// 一个url 后面好多key - value 如localhost ? key = val & key2=val2 & key3=val3 封装一个函数 getParam(‘key’) 通过key获得相应等号后面的值.
+
+// call、apply、bind的区别
+
+// 有两个升序数组，然后将他们合为 一个数组并进行升序排序？
+
+// 瀑布流的实现原理
+
+// 图片延迟加载怎么实现
+
+
+// 写出完整的验证函数
+// 1)长度不能小于6位
+// 2)首字母必须是字母
+// 3)合法字符只能是数字、字母、下划线
+
+// 使用jquery实现点击按钮弹出一个对话框（对话框在整个页面正中间，并且最初页面中没有任何的HTML标签）？
+
+// 怎么避免全局变量的污染？
+
+// function Foo() {
+//     getName = function () {
+//         console.log(1);
+//     };
+//     return this;
+// }
+// Foo.getName = function () {
+//     console.log(2);
+// };
+// Foo.prototype.getName = function () {
+//     console.log(3);
+// };
+// var getName = function () {
+//     console.log(4);
+// };
+// function getName() {
+//     console.log(5);
+// }
+// Foo.getName();
+// getName();
+// Foo().getName();
+// getName();
+// new Foo.getName();
+// new Foo().getName();
+// new new Foo().getName();
+
+
+// 在函数式编程当中有一个很重要的概念就是函数组合，实际上就是把处理数据的函数像管道一样连接起来，然后让数据穿过管道得到最终的结果。例如：
+// const add1 = (x) => x + 1;
+// const mul3 = (x) => x * 3;
+// const div2 = (x) => x / 2;
+// div2(mul3(add1(add1(0)))) //=>3
+// 而这样的写法可读性明显太差了。我们可以构建一个 compose 函数，它接受任意多个函数作为参数（这些函数都只接受一个参数），然后 compose 返回的也是一个函数，达到以下的效果：
+// const operate = compose(div2, mul3, add1, add1)
+// operate(0) //=>相当于div2(mul3(add1(add1(0)))) 
+// operate(2) //=>相当于div2(mul3(add1(add1(2))))
+
+// 简而言之：compose 可以把类似于 f(g(h(x))) 这种写法简化成 compose(f, g, h)(x) 。请你完成 compose 函数的编写。
+
+// 额外挑战：你能通过 1~2 行代码实现 compose 吗。
+
+// 点击每一个li可以创建出对应的对象（可以不兼容低版本浏览器）
+// [结构]
+// <ul>
+//   <li><a href='http://xxx'>xxx</a></li>
+//   <li><a href='http://sss'>sss</a></li>
+// </ul>
+
+// 点击第一个LI创建对象：
+// {
+//    index:1,
+//    name:'xxx',
+//    link:'http://xxx'
+// }
+// 同样点击第二个LI创建对象
+// {
+//    index:2,
+//    name:'sss,
+//    link:'http://sss'
+// }
+// ...
+
+// 分析此函数的作用，补全1/2处的代码
+//代码
+//代码
+// function fn(str) {
+//     this.str = str;
+// };
+// fn.prototype.format = function () {
+//     var arg = __1__;
+//     return this.str.replace(__2__, function (a, b) {
+//         return arg[b] || '';
+//     });
+// };
+// window.fn = fn;
+// })(window);
+
+// (function () {
+//     var t = new fn('<p><a> href="{0}">{1}</a><span>{2}</span></p>');
+//     console.log(t.format('http://www.alibaba.con', 'Alibaba', 'welcome'));
+// })();
+
+//获取数据中的最大值
+//编写一个函数，把一个列表中的每一项反序
+// 1.<ul id='target'>
+// 2.    <li>1</li>
+// 3.    <li>2</li>
+// 4.    <li>3</li>
+// 5.    <li>4</li>
+// 6.    <li>5</li>
+// 7.</ul>
+
+// 编写一个函数实现数组扁平化
+// let ary = [1,[2,[3,[4,5]]],6];  //=>[1,2,3,4,5,6]
+
+// 网页中实现一个计算，计算当年还剩多少时间的倒数计时程序，要求网页上显示 “xxxx年还剩xx天xx时xx分xx秒”；（获取当前时间采用new Data()即可）
+
+// offsetHeight / clientHeight / scrollHeight的区别
+
+// 获取字符串中出现次数最多的字符及出现的次数
+
+// 完成如图所示的文字横向无缝衔接滚动的“跑马灯”效果

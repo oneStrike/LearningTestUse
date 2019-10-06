@@ -130,7 +130,7 @@ W3C：万维网联盟，制定编程语言的规范与标准开发者按照规�
   - 函数 function
 - ES6 中新增加的一个特殊的类型：Symbol，唯一的值
 
-【 **基本数据类型** 】
+### 基本数据类型
 
 ```javascript
 var n = 13;
@@ -154,7 +154,7 @@ var f = undefined;
 //=>表示一个属性未定义，申请变量没有赋值就是undefined
 ```
 
-【 **引用数据类型** 】
+### 引用数据类型
 
 ```javascript
 
@@ -948,14 +948,16 @@ test(obj, 10, 30, 20);
 
 ### 复合的赋值运算符
 
-1. `+=`加等于
-2. `-=`减等于
-3. `/=`除等于
-4. `*=`乘等于
-5. `%=`余等于
-6. `**=`幂等于
-7. `>=`大于或等于
-8. `<=`小于或等于
+| 语法 | 含义       |
+| ---- | ---------- |
+| +=   | 加等于     |
+| -=   | 减等于     |
+| \*=  | 乘等于     |
+| /=   | 除等于     |
+| %=   | 余等于     |
+| \*\* | 幂等于     |
+| >=   | 大于或等于 |
+| <=>  | 小于或等于 |
 
 ### 运算符优先级
 
@@ -983,17 +985,19 @@ isNaN(num);
 //=>false  因为num是一个合法的有效数字
 ```
 
-- `isNaN('13')` **==>** `false`
-- `isNaN('珠峰')` **==>** `true`
-- `isNaN(true)` **==>** `false`
-- `isNaN(false)` **==>** `false`
-- `isNaN(null)` **==>** `false`
-- `isNaN(undefined)` **==>** `true`
-- `isNaN({age:9})` **==>** `true`
-- `isNaN([12,23])` **==>** `true`
-- `isNaN([12])` **==>** `false`
-- `isNaN(/^$/)` **==>** `true`
-- `isNaN(function(){})` **==>** `true`
+| 运算                | 类型           | 结果  |
+| ------------------- | -------------- | ----- |
+| isNaN('13')         | 纯数字字符串   | false |
+| isNaN('凌')         | 非数字字符串   | true  |
+| isNaN(true)         | 布尔类型 true  | false |
+| isNaN(false)        | 布尔类型 false | false |
+| isNaN(null)         | null           | false |
+| isNaN(undefined)    | undefined      | true  |
+| isNaN({age:9})      | 对象           | true  |
+| isNaN([12,13])      | 数组(多项)     | true  |
+| isNaN([12])         | 数组(单项)     | false |
+| isNaN(/^\$/)        | 正则           | true  |
+| isNaN(function(){}) | 函数           | true  |
 
 **重要：`isNaN` 检测的机制**
 
@@ -2413,7 +2417,7 @@ str.replace(reg, item => item.toUpperCase());
 
 **`split`**
 
-作用：将字符串按照指定的连接符进行拆分
+作用 �� 将字符串按照指定的连接符进行拆分
 
 参数：指定的连接符
 
@@ -3274,36 +3278,36 @@ let Fn = class {
 
 ```javascript
 //=>父类
-class Parnet{
-    constructor (x,y){
-        this.x=x;
-        this.y=funciotn(){
-            console.log(this.x);
-        };
+class Parent {
+  constructor(x, y) {
+    this.x = x;
+    this.y = function() {
+      console.log(this.x);
     };
-    getX(){
-        consoel.log(thsi.x);
-    };
-    //=>给父类添加静态方法
-    static getY(){
-        console.log('凌');
-    };
-};
+  }
+  getX() {
+    console.log(this.x);
+  }
+  //=>给父类添加静态方法
+  static getY() {
+    console.log("凌");
+  }
+}
 
 //=>子类
-let son=class son extends Parent {
-    constructor (q,y){
-        //=>exends关键字后书写需要继承的父类
-        super();
-        /**
-         * 使用super关键字调用父类
-         * 支持传递参数,父类中的this
-         * 默认是子类的实例
-         */
-        this.q=q;
-        this.y=y
-    }
-}
+let son = class son extends Parent {
+  constructor(q, y) {
+    //=>extends关键字后书写需要继承的父类
+    super();
+    /**
+     * 使用super关键字调用父类
+     * 支持传递参数,父类中的this
+     * 默认是子类的实例
+     */
+    this.q = q;
+    this.y = y;
+  }
+};
 ```
 
 ### 多态(Polymorphism )
@@ -3477,7 +3481,7 @@ var studentInfo / student_info / _studentInfo（下划线在前的，是公共�
 
 ---
 
-### 变量提升详解
+### 变量提升
 
 在作用域形成之后，js 代码自上而下执行之前，浏览器会把所有带`VAR`和`FUNCTION`的关键字提前，`VAR`会提前声明，但是不会赋值，`FUNCTION`会提前声明并定义。
 
@@ -4071,7 +4075,7 @@ obj.fn();
 
 ## 作用域
 
-在 ES5 中分为全局作用域和局部作用域。全局作用域指的是`window`所创建的栈内存，局部作用域指的是函数执行时所产生的局部作用域。在 ES6 中有了块级作用域，即大部分的{}都会产生一个块级作用域
+在 ES5 中分为全局作用域和局部作用域。全局作用域指的是`window`所创建的栈内存，局部作用域指的是函数执行时所产生的局部作用域。在 ES6 中有了块级作用域，即大部分的{}都会产生一个块级作用域。**对象无法产生作用域**
 
 1. 全局作用域：
 
@@ -4098,6 +4102,31 @@ obj.fn();
 > 如果在函数内部创建了一个函数，那么这个函数创建的时候作用域链就会和他的上一级函数相关链，此时索引 0 的位置上存放的是他上一级的作用域， window 全局作用域在作用域链中始终处于最底部，**函数的作用域链在创建的时候就已经决定好了。和函数的运行位置没有任何关系** >
 >
 > ![nyuF58.png](https://s2.ax1x.com/2019/09/14/nyuF58.png)
+
+**特殊.**
+
+```javascript
+let a = 10,
+  b = 20;
+function A(a) {
+  A = function(b) {
+    console.log(a + --b);
+    //=>第二次执行输出11
+  };
+  console.log(++a);
+  //=>第一次执行输出 6
+}
+A(5);
+A(6);
+/**
+ * 函数A第一次执行的时候重新指向了自己堆内存的空间
+ * 但是并不会销毁原有的作用域,回作为自己的上级作用域
+ * 所以第二次执行的时候会执行重定向后的A
+ * a+(--b)重定向后的A并没有a这个属性
+ * 通过作用域链向上一级查找,会找到自己原有
+ * 作用域中的a
+ */
+```
 
 ---
 
