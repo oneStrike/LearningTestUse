@@ -2,41 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="../css/reset.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<!-- <link rel="stylesheet" href="../css/reset.min.css">
     <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script> -->
 </head>
 
 <body>
-    <script>
-        function A(x, y) {
-            this.x = x;
-            this.y = function () {
-                console.log(this.x);
-                //=>10 继承是传递的参数，将参数赋值给x
-            };
-        };
-        A.prototype = {
-            aa: function () {
-                console.log(aa);
-            }
-        }
-
-        function B(z) {
-            A.call(this, 10);
-            //=>实现继承的时候可以传递参数
-            this.z = z;
-        }
-        let b = new B();
-        //=>创建B的实例
-        b.y();
-        b.aa()
-        //=>报错：b无法使用父类原型上的方法
-        console.log(b)
-    </script>
+	<script>
+		let str = "珠峰培训zhufeng哈哈，javascript高级程序设计，good good study!",
+			reg = /(?:([a-zA-Z]+)|( ))/g;
+		str = str.replace(reg, (...arr) => {
+			return arr[0]!==' '?` ${arr[0]} `:`${arr[0]}`;
+		});
+		console.log(str)
+	</script>
 </body>
 
 </html>

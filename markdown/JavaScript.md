@@ -1155,7 +1155,6 @@ for (var key in person) {
 ```
 
 > - instanceof
-
 > - constructor
 
 是实例继承自构造器原型中的一个属性，它存储的值是构造出当前这个实例的构造函数
@@ -3212,6 +3211,100 @@ function inherit(parent, son) {
 **`ES5`中推荐使用寄生组合继承或者圣杯模式继承，他们都不可以实现多继承，只有循环拷贝可以完美实现多继承（同时继承父类的私有属性和方法，以及父类原型中的私有属性和方法），但是循环拷贝继承损耗性能，效率低下，一般不推荐使用**
 
 **ES6`class`**
+
+`ES6`中的类实际上就是一个"特殊的函数",拥有类声明和类表达式,直接调用类浏览器会报错,它只能通过`new`关键字创建实例
+
+语法:类声明
+
+```javascript
+class Fn {
+  //=>Fn相当于函数名,后面没有小括号
+  constructor(n, m) {
+    //=>constructor代表的就是函数本身,紧跟的小括号可以书写形参
+    this.x = x;
+    //=>书写函数内的代码
+  }
+  //=>写在constructor外面的代码就相当于写在函数的原型中
+  //=>等价于  ==>Fn.prototype.xxx=xxx
+  getX() {
+    console.log(this.x);
+  }
+  /**
+   * 无法在class内把函数当做是一个对象添加属性
+   * 只能在class外部添加属性
+   * 如果要为函数添加静态属性需要使用static关键字
+   */
+  static AA() {
+    console.log(this);
+  }
+}
+```
+
+语法:类表达式
+
+```javascript
+let Fn = class {
+  constructor(形参) {
+    //=>代码
+  }
+  //=>添加原型方法
+  getX() {
+    //=>代码
+  }
+  //=>添加静态方法
+  static AA() {
+    //=>代码
+  }
+};
+```
+
+**细节.**
+
+> 1.不能重复申请相同的类,否则浏览器会抛出类型错误,之前使用的是类表达式也会报错
+>
+> 2.无法在`class`内部书写属性,只能书写方法,属性只能书写在外部,如果是往原型中添加则正常的使用`prototype`添加即可
+>
+> 3.类不具有普通函数的提升机制,如果在类声明之前使用浏览器会直接抛出`ReferenceError：`错误,类表达式会返回`undefined`,无法获取任何值
+>
+> 4.类声明和类表达式都是执行在严格模式下的,包括函数,方法,构造函数,`this`等,如果在类中不明确`this`的指向,那么`this`就是指向`undefined`
+
+**类的继承.**
+
+类的继承使用的是`extends`和`super`关键字
+
+```javascript
+//=>父类
+class Parnet{
+    constructor (x,y){
+        this.x=x;
+        this.y=funciotn(){
+            console.log(this.x);
+        };
+    };
+    getX(){
+        consoel.log(thsi.x);
+    };
+    //=>给父类添加静态方法
+    static getY(){
+        console.log('凌');
+    };
+};
+
+//=>子类
+let son=class son extends Parent {
+    constructor (q,y){
+        //=>exends关键字后书写需要继承的父类
+        super();
+        /**
+         * 使用super关键字调用父类
+         * 支持传递参数,父类中的this
+         * 默认是子类的实例
+         */
+        this.q=q;
+        this.y=y
+    }
+}
+```
 
 ### 多态(Polymorphism )
 
