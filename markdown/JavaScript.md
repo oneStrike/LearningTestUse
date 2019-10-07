@@ -3481,6 +3481,168 @@ var studentInfo / student_info / _studentInfo（下划线在前的，是公共�
 
 ---
 
+### `let`
+
+`let`是`ES6`中新增的语法，用于申请一个变量，使用`let`声明的变量会产生一个块级作用域
+
+- 不存在变量提升机制，只会在代码执行到`let`后才可以访问。
+
+```javascript
+console.log(x);
+//=>报错：ReferenceError: can't access lexical declaration `name' before initialization
+let x = 10;
+```
+
+- 不允许存在相同的变量名,浏览器会在代码执行之前进行词法解析,发现基于`let`声明的变量存在重复时,会直接抛出错误,并不会执行代码
+
+```javascript
+let x = 10;
+let x = 20;
+console.log(x);
+//=>报错：SyntaxError: redeclaration of let x
+
+//=>使用var声明相同名字的变量也会报错
+let x = 10;
+var x = 20;
+//=>报错：SyntaxError: redeclaration of let x
+```
+
+- 隐式的变量名重复
+
+```javascript
+let a = 10;
+{
+  var a = 20;
+}
+/**
+ * 报错：SyntaxError: redeclaration of let a
+ * 因为使用var声明的变量存在提升机制
+ * 在初始化的时候会自动提升到最顶部
+ * 这样就会和使用let声明的变量产生隐式的冲突
+ */
+```
+
+- 允许在不同的作用域内声明相同的变量名
+
+```javascript
+let a = 10;
+//=>全局作用域
+function test() {
+  //=>函数作用域
+  let a = 20;
+  console.log(a);
+  //=>20
+  {
+    //=>块级作用域
+    let a = 30;
+    console.log(a);
+    //=>30;
+  }
+}
+console.log(a);
+//=>10
+```
+
+- 会切断和`window`之间的映射机制
+
+```javascript
+let a = 10;
+var b = 20;
+console.log(window.a);
+//=>undefined
+console.log(window.b);
+//=>20;
+```
+
+- 只可以访问自身作用域和全局作用域内基于`let`声明的变量
+
+```javascript
+let a = 20;
+console.log(a);
+//=>20
+{
+  let a = 30;
+  console.log(a);
+  //=>30
+}
+{
+  console.log(a);
+  //=>20  可以访问全局u作用域中的a
+}
+
+==========================================================
+{
+  let a =20;
+  console.log(a)
+  //=>20;
+}
+{
+  let a =30;
+  console.log(30);
+  //=>30
+};
+console.log(a);
+//=>报错：a is not defined   全局作用域内并没有a
+
+===========================================================
+{
+  let a =30;
+  console.log(a)
+  //=>30;
+};
+{
+  let a =40;
+  console.log(a);
+  //=>40;
+};
+{
+  console.log(a)
+  //=>报错：a is not defined
+  //=>全局作用域和自身块级作用域都没有a
+}
+```
+
+- 基于`let`声明的变量会存储在当前页面的最顶部到初始化变量之间的一个`暂存死区`中，在`暂存死区`中访问都会报错，包括`typeof`
+
+```javascript
+typeof a;
+var a = 20;
+//=>undefined  即使a不存在也不会报错
+
+typeof b;
+let b = 20;
+//=>报错：ReferenceError: can't access lexical declaration `b' before initialization
+
+================================================
+for(let a of a.n){
+  console.log(a);
+}
+/**
+ * 报错：ReferenceError: can't access lexical declaration `a' before initialization
+ * 除非声明语句执行完毕，
+ * 否则基于let声明的变量依旧存在于暂存死区中
+ */
+
+==================================================
+/*
+ * 从视觉上看for循环后面的小括号并不属于块级作用域内
+ * 但其实是已经处于块级作用域内了,
+ * 所以下面的代码并不会报错
+ */
+function test(){
+  let a =10;
+  console.log(a)
+  //=>10
+  for(let a =20;a<21;a++){
+    console.log(a);
+    //=>21
+  };
+};
+test();
+```
+
+---
+
 ### 变量提升
 
 在作用域形成之后，js 代码自上而下执行之前，浏览器会把所有带`VAR`和`FUNCTION`的关键字提前，`VAR`会提前声明，但是不会赋值，`FUNCTION`会提前声明并定义。
@@ -3647,59 +3809,6 @@ function test() {
   console.log(4);
 }
 ```
-
-### ES6 中变量提升
-
-1. 在 ES6 中基于 let/const 等方式创建变量或者函数，不存在变量提升机制。因此在申明变量之前使用会报错！而且还会切断和全局作用域`window`的映射机制。
-
-2. 基于`LET`关键字申请的变量是不允许使用相同的变量名，即使不使用关键字申请变量，也会报错。
-
-3. 在代码执行之前，浏览器会检测当前作用域所有申明的变量，并且记录其变量名，如果检测到基于`LET`关键字申请的变量存在重名的情况下，则会直接报错。不使用关键字申请变量时，浏览器在代码执行阶段，如果发现存在同样的命名时也会报错，
-
-```javascript
-//LET 关键字申请的变量不存在变量提升机制，所以在声明之前使用会直接报错
-console.log(a); //报错:ReferenceError: can't access lexical declaration `a' before initialization
-let a = 10;
-=====================================================
-a = 20; //报错：ReferenceError: can't access lexical declaration `a' before initialization
-let a = 10;
-console.log(a);
-
-/**
- * 下面的代码会直接在语法解析就会报错
- * ReferenceError: can't access lexical declaration `a' before initialization
- * 基于let声明的变量可以在不用的作用域中重名
- * let声明的变量虽然不存在变量提升机制
- * 但是存在语法解析机制，声明前读取使用会直接报错，
- * 报错的原因并不是因为使用let声明两个 a 重名
- * 而是因为在声明之前就读取使用
- * 注释掉函数内的第一行，输出结果是 ==>20,20,10,20
- */
-let a = 10,
-  b = 10;
-let test = () => {
-  console.log(a, b);
-  let a = (b = 20);
-  console.log(a, b);
-};
-test();
-console.log(a, b);
-```
-
-### 暂时性死区
-
-1.在 ES6 语法规范中基于`LET`关键字关键字创建的变量在大部分的{}中都会形成一个块级作用域(类似于函数的私有作用域)，在块级作用域中基于`LET`创建的变量和全局作用域中的重名变量没有任何关系
-
-```javascript
-var a = 10;
-if (true) {
-  console.log(a);
-  //=>会报错，但是报错的信息并不是变量命名冲突，而是语法错误，在a未申明之前无法访问，
-  let a = 20;
-}
-```
-
-2.直接使用 typeof 一个不存在的变量并不会报错。而是会返回`undefined`，但是在 ES6 中基于`LET`创建变量则改正了这一机制，在申明之前使用 typeof 检测类型是直接报错(ReferenceError: Cannot access 'c' before initialization);
 
 ---
 
