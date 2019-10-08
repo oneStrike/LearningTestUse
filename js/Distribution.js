@@ -1,8 +1,7 @@
 $(function () {
-    let page = 0,
-        imgData = null,
-        $liList = $('.flowBox li'),
-        isRun = false;
+    let imgData = null,
+        page = 0,
+        liList = document.getElementsByTagName('li');
     let getData = function () {
         page++;
         $.ajax({
@@ -15,43 +14,41 @@ $(function () {
             }
         });
     };
-    getData();
-
     let setData = function () {
-        for (var i = 0; i < imgData.length; i += 3) {
-            $liList.sort(function (a, b) {
-                return $(a).outerHeight() - $(b).outerHeight();
-            }).each(function (index, item) {
-                if (!(imgData[i + index])) return;
-                let {
-                    title,
-                    pic,
-                    link,
-                    id
-                } = imgData[i + index];
-                $(`<a href="${link}">
-                    <div><img src="${pic}" alt=""></div>
-                    <span>${title}</span>
-                </a>`).appendTo($(item));
-            })
-        };
-        isRun = false;
-    };
-    setData();
-
-    $(window).on('scroll', function () {
-        let $winH = $(window).outerHeight(),
-            pageH = document.documentElement.scrollHeight || document.body.scrollHeight,
-            $scrollT = $(window).scrollTop();
-        if (($scrollT + 100) >= (pageH - $winH)) {
-            if (isRun) return;
-            isRun = true;
-            if (page > 5) {
-                alert('没有更多数据了');
+        let createHTML = function (img) {
+            if (!img) {
                 return;
-            }
-            getData();
-            setData();
+            };
+            let {
+                title,
+                pic,
+                id,
+                link,
+            } = img;
+            return `<a href="${link}">
+            <div><img src="${pic}" alt=""></div>
+            <span>${title}</span>
+        </a>`
+        };
+        for (let i = 0, len = imgData.length; i < len; i += 3) {
+            let item1 = imgData[i],
+                item2 = imgData[i + 1],
+                item3 = imgData[i + 2];
+            liList[0].innerHTML += createHTML(item1);
+            liList[1].innerHTML += createHTML(item2);
+            liList[2].innerHTML += createHTML(item3);
+        };
+    };
+
+    getData();
+    setData();
+    let maxNumberImg = function () {
+        window.onscroll = function () {
+            let body = document.documentElement || document.body,
+                winH = body.scrollHeight + body.clientHeight,
+                imgH = body.scrollTop;
         }
-    })
+
+    };
+    maxNumberImg();
 })

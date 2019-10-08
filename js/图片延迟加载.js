@@ -1,39 +1,64 @@
-$(function () {
-    let $body = $('body'),
-        $imgList = null;
-    (function () {
+function offset(ele) {
+    let H = ele.offsetTop;
+    if (ele.parentNode.tagName !== 'BODY') {
+        H += ele.parentNode.clientHeight + ele.parentNode.offsetTop;
+    }
+    return H;
+}
+let delayImg = (() => {
+    "use strict";
+    let img = document.getElementsByTagName('img'),
+        box = document.getElementsByClassName('box');
+    let setData = () => {
         let str = ``;
         for (let i = 0; i < 100; i++) {
             let ran = Math.floor(Math.random() * (4 + 1 - 1) + 1);
             str += `<div class="box"><img src="" data-src="../images/${ran}.png" alt=""></div>`;
-        }
-        $body.html(str);
-        $imgList = $('img');
-    }());
-
-    let showImg = function (img) {
-        let $img = $(img),
-            $trueSrc = $img.attr('data-src'),
-            tempImg = new Image();
-        tempImg.onload = function () {
-            $img.attr('src', $trueSrc).stop().fadeIn(300);
-            $tempImg = null;
-            img.isLoad = true;
         };
-        tempImg.src = $trueSrc;
+        document.body.innerHTML = str;
     };
 
-    let startShow = () => {
-        $imgList.each((index, item) => {
-            let A = $(item).parent().offset().top + $(item).parent().outerHeight(),
+    let setShow = () => {
+        let setImg = (img) => {
+            let trueSrc = img.getAttribute('data-src'),
+                temp = new Image();
+            temp.onload = () => {
+                img.src = trueSrc;
+                img.style.display = 'block';
+                temp = null;
+                img.load = true;
+            };
+            temp.src = trueSrc;
+        };
+
+        for (let i = 0, len = img.length; i < len; i++) {
+            let item = img[i];
+            setImg(item);
+        }
+
+    };
+
+    let loadImg = () => {
+
+        for (let i = 0, len = box.length; i < len; i++) {
+            let item = box[i],
+                A = $(item).offset().top + $(item).outerHeight(),
                 B = document.documentElement.scrollTop + document.documentElement.clientHeight;
-            if ((A - 100) <= B) {
-                if (item.isLoad) {
+            if (A <= B) {
+                if (img.load) {
                     return;
                 }
-                showImg(item);
-            }
-        })
+                setData();
+                setShow();
+            };
+        };
     };
-    $(window).on('load scroll', startShow);
-});
+    return {
+        init: function () {
+            loadImg();
+        }
+    };
+})();
+window.onload = window.onscroll = () => {
+    delayImg.init();
+}
