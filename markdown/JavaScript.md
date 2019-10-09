@@ -4502,6 +4502,8 @@ obj.fn();
 //=>不会报错，而且this也会指向window
 ```
 
+8.定时器中的`this`
+
 ### 强制改变 this 指向
 
 改变 this 的方法都是通过原型链的查找机制，使用的是 `Function.prototype` 上面的方法,他们的功能都是相同的。只是存在一些细微的区别
@@ -4510,7 +4512,7 @@ obj.fn();
 
 - 在严格模式中`this`永远指向我们传递的参数，包括`undefined`和`null`，如果不传递会自动指向`undefined`。
 
-  1.**`call`**
+#### `call`
 
 语法：函数.call(param,arg1,arg2,...)
 
@@ -4563,7 +4565,7 @@ test.call();
 //=>undefined.name 报错
 ```
 
-2.**apply`**
+#### `apply`
 
 语法:函数.apply(param,[arg1,arg2,...])
 
@@ -4585,7 +4587,7 @@ var max = Math.max(...arr);
 //=>将arr数组解析后依次传入
 ```
 
-3.**`bind`**
+#### `bind`
 
 `bind`和`call`语法是一样的，不过`bind`并不会直接执行函数，而是让`this`预指向我们传递的对象，而`call`则会直接执行函数
 
@@ -5123,6 +5125,233 @@ var str = `102${代码}123`;
 //=>模板字符串字符串拼接使用${}，不需要再使用+拼接
 ```
 
-### 图片延迟加载(懒加载)
+## 定时器
 
-前端重要的优化手段,当页面中所有的数据加载完成之后再加载图片
+**定时器都是异步.**
+
+**定时器中的`this`指向有另一个规则.**
+
+### `setTimeout` / `setInterval`
+
+- `setTimeout`根据设置的时长执行一次
+- `setInterval`根据设置的时间间隔执行多次
+
+**时间都是按照毫秒.**
+
+```javascript
+setTimeout(funciton(){
+	console.log(123);
+	//=>在1秒钟之后执行
+},1000);
+
+setInterval(function(){
+	consoel.log(123)
+	//=>每间隔1秒钟执行一次
+},1000)
+
+```
+
+### 返回值
+
+定时器的返回值是一个正整数,返回值从数字 1 开始一次累加,无论是`setTimerout`还是`setInterval`共用一个编号池,因此增加任意一种的定时器都会使返回值自动累加 1
+
+```javascript
+	let timer=setTimerout(function(){
+		consoel.log(timer)
+		//=>序号  1
+	},1000);
+
+	let timer2=setInterval(funciton(){
+		console.log(timer2)
+		//=>序号  2
+	},1000);
+
+	let timer3=setInterval(function(){
+		console.log(timer3)
+		//=>序号  3
+	},1000)
+
+	//=>每设置一个定时器都会累加1,不论是那种定时器
+```
+
+### `clearTimeout` / `clearInterval`
+
+根据定时器的返回值清除定时器的两种方法,`clearTimeout`和`clearInterval`都可以清除`setTimerout`和`setInterval`这两个定时器,并没有区别,但是为了避免混淆,还是应该正确的使用
+
+```javascript
+let timer = setTimerout(function() {
+  clearTimerout(timer);
+  clearInterval(timer);
+  //=>这两中方法都可以清除定时器
+}, 1000);
+```
+
+## 同步异步
+
+- 同步:一次之能执行一个任务,当前任务结束之后才会执行下一个任务
+- 异步:可以同时执行多个任务,当前任务没有完成也会执行下一个任务
+
+浏览器是多进程的,而 js 是单线程的,每次只能执行一个任务,并且当前任务不完成则无法执行下一个任务,而 js 中之所以存在异步编程,则是通过一些机制伪装的,并不是真正意义
+上的异步编程.
+
+在浏览器执行 js 代码时分为主任务队列和等耐任务队列,当主任务队列完成后,才会执行等耐任务队列.
+
+**浏览器执行流程.**
+
+1. 自上而下执行主任务队列中的代码,
+2. 碰到异步的任务时将其放入等待任务队列
+3. 继续执行其他主任务队列中的任务
+4. 主任务队列执行完毕后,去等待任务队列查找满足条件的代码
+5. 如果存在多个满足条件的会优先将最先满足的执行
+6. 将满足条件的任务拉回到主任务队列执行
+7. 执行完毕后继续在等待任务队列查找,将满足条件的任务依次拉入主任务队列执行
+8. 只要主任务队列的任务没有完成,无论等耐任务中的条件是否满足,都不会执行,
+
+```javascript
+setTimeout(() => {
+  console.log(1);
+}, 20);
+console.log(2);
+setTimeout(() => {
+  console.log(3);
+}, 10);
+setTimeout(() => {
+  console.log(4);
+}, 100);
+for (let i = 0; i < 90000000; i++) {}
+console.log(5);
+
+/**
+ * 执行流程
+ * 1.自上而下执行代码
+ * 2.碰到异步任务,将其放入等待任务队列
+ * 3.输出语句:2
+ * 4.碰到异步任务,将其放入等待任务队列
+ * 5.碰到异步任务,将其放入等待任务队列
+ * 6.执行for循环,执行耗时约100ms
+ * 7.输出语句:5
+ * 主任务队列执行完毕,去等待任务队列查找满足条件的异步任务,
+ * 此时所有的异步任务都已满足执行条件,则将最优先满足的执行
+ * 8.将执行等待时间为10ms的定时器拉入主任务队列执行,输出:3
+ * 9.执行完当前的定时器后,继续查找满足条件的等待任务
+ * 10.将执行等待时间为20ms的定时器拉入主任务队列执行,输出:1
+ * 11.重复第9步
+ * 12.将等待时间为100ms的定时器拉入主任务队列执行,输出:4
+ *
+ * 最终的输出结果2 5 3 1 4
+ */
+```
+
+```javascript
+let n = 0;
+setTimeout(function() {
+  n++;
+  console.log(n);
+}, 100);
+while (1 === 1) {}
+/**
+ * 定时器中的输出语句永远不会执行
+ * 因为whiel是一个死循环,并不会结束运行
+ * 主任务不结束,等待任务永远不会执行
+ */
+```
+
+浏览器只会将最优先满足条件的等待任务执行,等待任务的等待时间并不会完全会影响执行顺序
+
+```javascript
+setTimeout(() => {
+  console.log(1);
+}, 20);
+console.log(2);
+setTimeout(() => {
+  console.log(3);
+}, 10);
+console.log(4);
+for (let i = 0; i < 90000000; i++) {}
+console.log(5);
+setTimeout(() => {
+  console.log(6);
+}, 8);
+console.log(7);
+setTimeout(() => {
+  console.log(8);
+}, 15);
+console.log(9);
+
+/**
+ * 如果按照定时器的等耐时间应该是 2 4 5 7 9 6 8 3 1
+ * 而结果是:2 4 5 7 9 3 1 6 8,
+ * 主任务队列并没有变化,依旧是2 4 5 7 9
+ * 之所以定时器会产生变化最主要的原因就是for循环
+ * for循环执行完毕后损耗了大量的时间
+ * 所以就改变了定时器满足条件的先后顺序
+ * 当for循环执行完毕后定时器10ms优先满足条件,其次是20ms
+ * 浏览器继续执行主任务队列的任务,碰到定时器后将其放入等待任务队列
+ * 而此时先前的两个定时器就已经满足条件了
+ * 当所有的主任务执行完毕后,开始讲满足条件的等待任务拉入主线程执行
+ * 最优先满足的是10ms和20ms分别输出:3  1
+ * 执行完毕后才可以执行8ms和15ms,分别输出:6 8
+ */
+```
+
+## `Promise`
+
+`Promise`是一个对象,主要是管理异步编程,它代表的是一个异步操作的成功或者失败,`Promise`本身是同步的,
+
+语法:
+
+```javascript
+let p = new Promise(function(resolve, reject) {
+  //=>异步操作
+});
+```
+
+`Peomise`拥有三个状态
+
+`pending`初始状态,既不代表成功,也不代表失败,会根据异步操作的执行来修改为`fulfilled`或者`rejected`,
+
+`fulfilled`代表操作成功完成
+
+`rejected`代表操作失败
+
+### 参数
+
+在创建`Promise`对象的时候,同时也会创建一个函数,`Promise`在执行的时候回立即执行这个函数,同时将`resolve`和`reject`两个函数作为参数传递给这个函数
+
+**`resolve`**
+
+代表异步操作执行完毕,并且操作成功,就会调用执行`resolve`这个参数,并且会将`Peomise`的状态修改为`fulfilled`,`
+
+**`reject`**
+
+代表的是操作执行完毕,但是操作失败,此时就会调用`reject`这个参数,同时将`Promise`的状态修改为`rejected`,
+
+### 方法
+
+**`then()`**
+
+`then()`会返回一个`Promise`对象,它最多拥有两个参数,分别代表`Promise`状态所执行的回调函数,`fulfilled`状态会执行第一个回调函数,`rejected`状态会执行第二个回调函数,
+
+```javascript
+new Promise(function(resolve, rejected) {
+  setInterval(function() {
+    resolve(100);
+  }, 1000);
+}).then(
+  function(value) {
+    console.log(value);
+    //=>100
+    /**
+     *Peomise为fulfilled状态时作为回调函数被调用
+     *接收的是Promise执行成功fulfilled函数的返回值
+     */
+  },
+  function(value) {
+    /**
+     * Promise对为rejected状态时作为回调函数被调用
+     * 就收的是Promise执行失败rejected函数的返回值
+     * 该返回值返回的是失败的原因
+     */
+  }
+);
+```
