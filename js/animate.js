@@ -1,5 +1,5 @@
 (function () {
-    let utils = (function () {
+    window.utils = (function () {
         let getCss = function (ele, sty) {
             let val = null,
                 reg = /^-?\d+(\.\d+)?(px|rem|em|pt)?$/g;
@@ -44,7 +44,11 @@
             return t / d * c + b;
         }
     };
-    window.animate = function (ele, target = {}, duration = 1000) {
+    window.animate = function (ele, target = {}, duration = 1000, callback = new Function()) {
+        if (typeof (duration) === 'function') {
+            callback = duration;
+            duration = 1000;
+        }
         let time = 0,
             change = {},
             begin = {};
@@ -62,6 +66,7 @@
             if (time >= duration) {
                 clearInterval(ele.timer);
                 utils.css(ele, target);
+                callback();
                 return;
             }
             for (let key in target) {
