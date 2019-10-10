@@ -1,6 +1,6 @@
 (function () {
     let utils = (function () {
-        let getCss = function (ele,sty) {
+        let getCss = function (ele, sty) {
             let val = null,
                 reg = /^-?\d+(\.\d+)?(px|rem|em|pt)?$/g;
             if ('getComputedStyle' in window) {
@@ -17,14 +17,14 @@
                 val += 'px';
             }
             ele['style'][sty] = val;
-        }
+        };
         let setGroupCss = function (ele, obj) {
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     setCss(ele, key, obj[key])
                 }
             }
-        }
+        };
         let css = function (...arr) {
             let fn = getCss,
                 len = arr.length;
@@ -73,37 +73,3 @@
         }, 17)
     }
 }());
-let div = document.getElementsByClassName('box')[0];
-animate(div, {
-    width: 200,
-    height: 200,
-    left: document.documentElement.clientWidth-div.clientWidth-220  ``,
-    top: document.documentElement.clientHeight-div.clientHeight-220,
-    backgroundColor: 'pink'
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

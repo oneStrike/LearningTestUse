@@ -22,8 +22,23 @@
 
 <body>
 	<div class="box"></div>
-	<script src="../js/动画库.js"></script>
+	<!-- <script src="../js/动画库.js"></script> -->
 	<!-- <script src="../js/test.js"></script> -->
+	<script>
+		let myReplace = function (obj, reg, callback) {
+			let rep = callback;
+			if (typeof (reg) === 'string') {
+				reg = new RegExp(obj);
+				let i = reg.exec(obj).index;
+				obj[i] = reg.exec(obj)[1];
+			}
+		};
+		let str = 'abc123bcd456dcb789';
+		console.log(str)
+		myReplace(str, /(\d+)/g, function () {
+
+		})
+	</script>
 </body>
 
 </html>

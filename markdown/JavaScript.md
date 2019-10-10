@@ -4180,6 +4180,59 @@ obj.fn();
 //=>箭头函数中的this使用的都是上下文中的this，因为箭头函数并没有执行主体
 ```
 
+### 回调函数
+
+把一个函数作为实参传递给另外一个函数,就叫做回调函数,
+
+```javascript
+function test(fn) {
+  fn("123");
+}
+function test2(str) {
+  console.log(str);
+  //=>'123'
+}
+test(test2);
+```
+
+重写数组中`forEach`方法
+
+```javascript
+let each = function(obj, callback) {
+  let flag = Array.isArray(obj);
+  //=>验证传递的是不是数组
+  if (flag) {
+    for (let i = 0, len = obj.length; i < len; i++) {
+      let item = obj[i];
+      let result = callback && callback.call(item, item, i);
+      /**
+       * 执行回调函数，并将this修改为数组中的每一项
+       * 同时将数组项以及数组索引传递给回调函数
+       * 同时回调函数支持返回值，我们可以做条件判断
+       * 在满足一定条件的时候就可以停止遍历
+       * js默认的forEach不支持终止遍历
+       */
+      if (result === false) {
+        break;
+      }
+    }
+  } else {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let result = callback && callback.call(key, key, obj[key]);
+        if (result === false) {
+          break;
+        }
+      }
+    }
+  }
+};
+let arr = [10, 20, 30, 40, 50];
+each(arr, function(item, index) {
+  console.log(item, index);
+});
+```
+
 ## 算法
 
 ## 作用域
@@ -5191,8 +5244,7 @@ let timer = setTimerout(function() {
 - 同步:一次之能执行一个任务,当前任务结束之后才会执行下一个任务
 - 异步:可以同时执行多个任务,当前任务没有完成也会执行下一个任务
 
-浏览器是多进程的,而 js 是单线程的,每次只能执行一个任务,并且当前任务不完成则无法执行下一个任务,而 js 中之所以存在异步编程,则是通过一些机制伪装的,并不是真正意义
-上的异步编程.
+浏览器是多进程的,而 js 是单线程的,每次只能执行一个任务,并且当前任务不完成则无法执行下一个任务,而 js 中之所以存在异步编程,则是通过一些机制伪装的,并不是真正意义上的异步编程.
 
 在浏览器执行 js 代码时分为主任务队列和等耐任务队列,当主任务队列完成后,才会执行等耐任务队列.
 
@@ -5339,10 +5391,10 @@ new Promise(function(resolve, rejected) {
   }, 1000);
 }).then(
   function(value) {
-    console.log(value);
+    ~console.log(value);
     //=>100
     /**
-     *Peomise为fulfilled状态时作为回调函数被调用
+     *Promise为fulfilled状态时作为回调函数被调用
      *接收的是Promise执行成功fulfilled函数的返回值
      */
   },
