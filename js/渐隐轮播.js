@@ -12,7 +12,7 @@ $(function () {
             speed = 300,
             index = 0,
             lastIndex = 0;
-
+            
         //获取数据
         let queryData = function () {
             return new Promise((resolve, reject) => {

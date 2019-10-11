@@ -84,6 +84,37 @@ let myPublic = (function () {
                 top,
                 left
             }
-        }
+        },
+
+        /**
+         * 检测一个元素是否拥有这个类名
+         * @param {*} ele  需要检测的元素
+         * @param {*} str   需要检测的类名
+         */
+        hasClass: function (ele, str) {
+            return ele.className.trim().split(/ +/).indexOf(str) >= 0;
+        },
+
+        /**
+         * 添加类名
+         * @param {*} ele 
+         * @param {*} str 
+         */
+        addClass: function (ele, str) {
+            ele.className.trim().split(/ +/).indexOf(str) >= 0 ? null : ele.className += ` ${str}`;
+        },
+
+        /**
+         * 删除类名
+         * @param {*} ele 
+         * @param {*} str 
+         */
+        removeClass: function (ele, str) {
+            let boo = ele.className.trim().split(/ +/).indexOf(str) >= 0;
+            if (!boo) {
+                return;
+            };
+            ele.className = ele.className.trim().split(/ +/).filter(item => item !== str).join(' ');
+        },
     };
 }());
