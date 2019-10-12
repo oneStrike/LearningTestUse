@@ -207,9 +207,9 @@ alert(str);
 //=>字符串 '绫'
 
 
-alert(1+1); =>'2'
-alert(true); =>'true'
-alert([12,23]); =>'12,23'
+alert(1+1); //=>'2'
+alert(true); //=>'true'
+alert([12,23]); //=>'12,23'
 //=>基于alert输出的结果都会转换为字符串：把值(如果是表达式先计算出结果)
 //=>通过toString这个方法转换为字符串，然后再输出
 
@@ -226,7 +226,7 @@ alert({name:'xxx'});
 **二.** confirm：和 alert 的用法一致，只不过提示的框中有确定和取消两个按钮，所以它是确认提示框
 
 ```javascript
-var flag = confirm("确定要退出吗?");
+let flag = confirm("确定要退出吗?");
 if (flag) {
   //=>flag:true 用户点击的是确定按钮
 } else {
@@ -5391,7 +5391,7 @@ new Promise(function(resolve, rejected) {
   }, 1000);
 }).then(
   function(value) {
-    ~console.log(value);
+    console.log(value);
     //=>100
     /**
      *Promise为fulfilled状态时作为回调函数被调用

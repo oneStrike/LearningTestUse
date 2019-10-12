@@ -576,8 +576,7 @@ body.style.height = 300 + "px";
 >
 > 在 Webkit 内核中，如果元素为隐藏的（该元素或其祖先元素的 `style.display` 为 `none`），或者该元素的 `style.position` 被设为 `fixed`，则该属性返回 `null`。
 >
-> 在 IE 9 中，如果该元素的 `style.position` 被设置为 `fixed`，则该属性返回 `null`。（`display:none` 无影响。）
-> **`scroll`**
+> 在 IE 9 中，如果该元素的 `style.position` 被设置为 `fixed`，则该属性返回 `null`。（`display:none` 无影响。） **`scroll`**
 
 `scrollWidth` / `scrollHeight`
 
@@ -707,6 +706,128 @@ body.style.height = 300 + "px";
 
 IE9 以下的低版本浏览器并不支持这个方法，在 IE 中具有相同功能的是一个属性。 `currentStyle`，它不是方法，而是一个属性，返回的也是一个对象
 
+## 事件
+
+### 事件绑定及事件对象
+
+**事件绑定.**
+
+事件绑定有两种写法,还有一种是兼容 IE6-8 的写法
+
+事件绑定的两种方法
+
+```javascript
+let body = document.body;
+//=>第一种
+body.onclick = function() {};
+
+//=>第二种
+body.addEventListener("click", function() {});
+
+//=>IE6-8兼容写法
+body.attachEvent("click", function() {});
 ```
 
+**事件对象.**
+
+在触发事件时浏览器会传递给执行事件的函数一个实参,不同的事件类型包含着不同的属性和方法
+
+通用的属性和方法
+
+```javascript
+let body = document.body;
+body.onclick = function(e) {
+  //=>e  代表用来接收浏览器传递到的参数,里面有一些通用的属性
+  console.log(e.type);
+  //=>当前的事件类型（鼠标事件，键盘事件等...）
+  console.log(e.target);
+  //=>当前的事件源,(即哪个对象触发的事件)
+  e.preventDefault();
+  //=>阻止浏览器的默认行为（如a标签的跳转）
+  e.stopPropagation();
+  //=>阻止事件的冒泡
+};
 ```
+
+### 鼠标事件
+
+| 事件        | 描述         |
+| ----------- | ------------ |
+| click       | 鼠标点击     |
+| dblclick    | 鼠标双击     |
+| mouseover   | 鼠标经过     |
+| mouseout    | 鼠标移出     |
+| mouseenter  | 鼠标进入     |
+| mouseleave  | 鼠标离开     |
+| mousemove   | 鼠标移动     |
+| mousedown   | 鼠标按下     |
+| mouseup     | 鼠标抬起     |
+| mousewheel  | 鼠标滚轮滚动 |
+| contextmenu | 鼠标右键点击 |
+
+**鼠标事件对象.**
+
+```javascript
+let body = document.body;
+body.onclick = function(e) {
+  e.clientX;
+  //=>鼠标点击时基于浏览器窗口所处的X坐标
+  e.clientY;
+  //=>鼠标点击时基于浏览器窗口所处的Y坐标
+  e.pageX;
+  //=>鼠标点击时基于body所处的X坐标
+  e.pageY;
+  //=>鼠标点击时基于body所处的Y坐标
+
+  /**
+   * clientX和clientY返回的都是触发鼠标点击事件时鼠标距离当前浏览器窗口
+   * 左上角的坐标,而pageX和pageY返回的是基于整个body真实大小的左上角的坐标
+   * 包括body内容卷去的部分，如果body的大小和浏览器当前的窗口大小一直，
+   * 那么client和page返回的偏移量也是相同的，如果body拥有卷去的部分
+   * 那么page获取的偏移量回比client获得偏移量数值要大
+   */
+};
+```
+
+### 键盘事件
+
+| 事件    | 描述     |
+| ------- | -------- |
+| keydown | 键盘按下 |
+| keyup   | 键盘抬起 |
+
+**键盘事件对象.**
+
+```javascript
+let input = document.getElementsByTagName("input")[0];
+input.onkeydown = function(e) {
+  e.key;
+  //=>返回当前的按键字符
+  e.keyCode;
+  //=>返回当前案件的键盘码
+};
+```
+
+### 表单事件
+
+| 事件   | 描述           |
+| ------ | -------------- |
+| focus  | 文本框聚焦     |
+| blur   | 文本框失去焦点 |
+| change | 文本内容改变   |
+| reset  | 点击重置按钮   |
+| submit | 点击提交按钮   |
+
+### 其他事件
+
+| 事件         | 描述                     |
+| ------------ | ------------------------ |
+| load         | 页面文档加载完成之后     |
+| unload       | 页面关闭之后             |
+| scroll       | 滚动条滚动时             |
+| resize       | 浏览器窗口大小发生改变时 |
+| beforeunload | 浏览器窗口关闭或者刷新时 |
+
+**事件类型参考：**
+
+<https://developer.mozilla.org/zh-CN/docs/Web/Events>
