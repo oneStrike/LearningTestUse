@@ -9,35 +9,64 @@
 	<!--  <link rel="stylesheet" href="../css/reset.min.css"> -->
 	<script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
 	<style>
-		.box {
-			width: 100px;
-			height: 100px;
+		body {
+			width: 1000px;
+			height: 1000px;
+		}
+
+		.maxBox {
+			width: 300px;
+			height: 300px;
 			background: orangered;
 			position: absolute;
+			margin: 50px auto;
+		}
+
+		.minBox {
+			width: 200px;
+			height: 200px;
+			background: pink;
+			position: relative;
+			top: 50px;
+			bottom: 0;
 			left: 0;
-			top: 0;
+			right: 0;
+			margin: auto;
 		}
 	</style>
 </head>
 
 <body>
-	<div class="box"></div>
 	<!-- <script src="../js/动画库.js"></script> -->
 	<!-- <script src="../js/test.js"></script> -->
-	<script>
-		let myReplace = function (obj, reg, callback) {
-			let rep = callback;
-			if (typeof (reg) === 'string') {
-				reg = new RegExp(obj);
-				let i = reg.exec(obj).index;
-				obj[i] = reg.exec(obj)[1];
-			}
-		};
-		let str = 'abc123bcd456dcb789';
-		console.log(str)
-		myReplace(str, /(\d+)/g, function () {
+	<div class="maxBox">
+		<div class="minBox">
 
-		})
+		</div>
+	</div>
+	<script>
+		var maxBox = document.getElementsByTagName('div')[0],
+			minBox = document.getElementsByTagName('div')[1],
+			body = document.body,
+			html = document.documentElement;
+		window.onclick = function (e) {
+			console.log('window');
+		};
+		html.onclick = function (e) {
+			console.log('html');
+		};
+		body.onclick = function (e) {
+			console.log('body');
+		};
+		maxBox.oncontextmenu = function (e) {
+			// e = e || window.event;
+			// e.cancelBubble = true;
+
+			console.log('maxBox');
+		};
+		minBox.onclick = function (e) {
+			console.log('minBox');
+		};
 	</script>
 </body>
 
