@@ -28,8 +28,40 @@
         <a href="javascript:;" class="arrow arrowLeft"></a>
         <a href="javascript:;" class="arrow arrowRight"></a>
     </section>
-<!--    <script src="../js/animate.js"></script>-->
-    <script src="../js/轮播图.js"></script>
+    <!--    <script src="../js/animate.js"></script>-->
+    <!-- <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script> -->
+    <!-- <script src="../js/轮播图.js"></script> -->
+    <script>
+        (function () {
+            //获取需要使用的元素
+            let container = document.getElementById('container'),
+                wrapper = container.getElementsByClassName('wrapper'),
+                focus = container.getElementsByClassName('focus'),
+                arrowLeft = container.getElementsByClassName('arrowLeft'),
+                arrowRight = container.getElementsByClassName('arrowRight');
+            //获取数据
+            let queryData = function () {
+                return new Promise(function (resolve, reject) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('get', '../json/banner.json', true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            let data = window.JSON.parse(xhr.responseText);
+                            resolve(data);
+                        }
+                    };
+                    xhr.send(null);
+                });
+            };
+
+            //绑定数据
+
+            let promise = queryData();
+            promise.then(function (data) {
+                console.log(data);
+            })
+        }());
+    </script>
 </body>
 
 </html>
