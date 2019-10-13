@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/reset.min.css">
+    <style>
+        .container {
+            position: relative;
+            margin: 50px 500px;
+            width: 1000px;
+        }
+
+        .container ul li img {
+            width: 200px;
+            height: 130px;
+            float: left;
+            margin: 3px;
+            cursor: pointer;
+        }
+
+        .max-box {
+            position: absolute;
+        }
+
+        .flow-img {
+            width: 400px;
+            height: 330px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li><img src="../images/1.png" alt=""></li>
+        <li><img src="../images/2.png" alt=""></li>
+        <li><img src="../images/3.png" alt=""></li>
+        <li><img src="../images/4.png" alt=""></li>
+    </ul>
+    <!--    <div class="max-box">-->
+    <!--        <img class="flow-img" src="../images/1.png" alt="">-->
+    <!--    </div>-->
+</div>
+<script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        let $container = $('.container'),
+            $liList = $container.children('ul').children('li'),
+            $imgList = $liList.children("img"),
+            flowBox = null,
+            flowSrc = null;
+        $liList.each((index, item) => {
+            $(item).on('mousemove', function (e) {
+                if (!flowBox) {
+                    flowSrc = $(item).children('img').attr('src');
+                    flowBox = $(`<div class="max-box">
+                    <img class="flow-img" src="${flowSrc}" alt="">
+                      </div>`);
+                    flowBox.appendTo($container);
+
+                }
+                let {top: conTop, left: conLeft} = $container.offset(),
+                    curL = e.pageX - conLeft + 20,
+                    curT = e.pageY - conTop + 20;
+                flowBox.animate({
+                    top: curT,
+                    left: curL
+                }, 0);
+            }).on('mouseleave', function () {
+                if (flowBox) {
+                    $(flowBox).remove();
+                    flowBox = null;
+                }
+            })
+        })
+    });
+</script>
+</body>
+</html>

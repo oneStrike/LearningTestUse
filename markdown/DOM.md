@@ -424,15 +424,6 @@ console.log(div2);
 
 > appendChild 在追加元素对象的时候，如果这个元素之前容器中已经存在,此时不是克隆一份新的追加到末尾，而是把原有的元素移动到末尾位置
 
-## 阻止 HTML 标签默认行为
-
-有时候在我们操作页面的时候需要阻止一些标签的默认行为，比如 a 标签的默认跳转页面的行为
-
-```HTML
-<a href="javascript:;">跳转不能</a>
-<!-- 我们在a标签内的href属性内书写javascript:;即可阻止a标签的默认跳转行为 -->
-```
-
 ## DOM 回流（reflow）和重绘（repaint）
 
 浏览器的渲染机制
@@ -708,6 +699,8 @@ IE9 以下的低版本浏览器并不支持这个方法，在 IE 中具有相同
 
 ## 事件
 
+当用户和网页进行交互的时候,比如鼠标点击,键盘按下,网页刷新,浏览器给予用户的反馈,浏览器会有事件监听者,当监听到用户执行的操作时,浏览器就会执行我们书写的事件方法.
+
 ### 事件绑定及事件对象
 
 **事件绑定.**
@@ -718,10 +711,10 @@ IE9 以下的低版本浏览器并不支持这个方法，在 IE 中具有相同
 
 ```javascript
 let body = document.body;
-//=>第一种
+//=>第一种  DOM0
 body.onclick = function() {};
 
-//=>第二种
+//=>第二种  DOM2
 body.addEventListener("click", function() {});
 
 //=>IE6-8兼容写法
@@ -764,6 +757,46 @@ body.onclick = function(e) {
 | mouseup     | 鼠标抬起     |
 | mousewheel  | 鼠标滚轮滚动 |
 | contextmenu | 鼠标右键点击 |
+
+**`mouseover/mouseout`和`mouseenter/mouseleave`**
+
+这两对事件大致的功能都是相同的,区别是`mouseenter/mouseleave`阻止了事件的冒泡,如果需要在嵌套关系的元素的中使用鼠标划入划出应该使用`mouseenter/mouseleave`,因为他们阻止了事件的冒泡,并不会过多的产生事件,如果使用`mouseover/mouseout`则会触发事件的冒泡,会过多的触发不必要的事件
+
+```javascript
+//=>假设一个大的元素中包裹着一个小的元素,同时两个元素都拥有鼠标划入划出事件
+
+maxBox.onmouseover = function() {
+  console.log("maxBox  over");
+};
+maxBox.onmouseout = function() {
+  console.log("maxBox  out");
+};
+minBox.onmouseover = function() {
+  console.log("minBox  over");
+};
+minBox.onmouseout = function() {
+  console.log("minBox  out");
+};
+/**
+ * 当我们从maxBox的左侧进入,右侧划出的话一共会触发8次鼠标事件
+ * 1.'maxBox  over'  左侧进入maxBox,触发maxBox  over
+ * 2.'maxBox  out'   离开maxBox,触发maxBox  out
+ * 3.'minBox  over'  进入minBox,触发minBox  over
+ * 4.'maxBox  over'  事件冒泡,触发maxBox  over
+ * 5.'minBox  out'   离开minBox,触发minBox out
+ * 6.'maxBox  out'   事件冒泡,触发maxBox  out
+ * 7.'maxBox  over'  进入maxBox,触发maxBox over
+ * 8.'maxBox  out'   右侧离开maxBox,触发maxBox out
+ */
+
+//=>如果使用mouseenter和mouseleave则不会产生冒泡,只会触发四次
+/**
+ * 1.'maxBox enter' 左侧进入maxBox,触发maxBox  enter
+ * 2.'minBox enter' 离开maxBox,进入minBox,触发minBox enter
+ * 3.'minBox leave' 离开minBox,进入maxBox,触发minBox leave
+ * 4.'maxBox leave' 离开maxBox,触发maxBox leave
+ */
+```
 
 **鼠标事件对象.**
 
@@ -831,3 +864,222 @@ input.onkeydown = function(e) {
 **事件类型参考：**
 
 <https://developer.mozilla.org/zh-CN/docs/Web/Events>
+
+### 兼容处理
+
+IE6-8 浏览器和高版本浏览器之间有些属性和方法并不通用,我们需要额外的处理兼容性处理
+
+第一种兼容处理是将 IE 低版本浏览器不支持的属性或者方法全部重写一遍,以后再使用的时候直接使用,不需要再做额外的兼容处理
+
+```javascript
+//=>常用的兼容性处理
+document.body.onclick = function(e) {
+  if (!e) {
+    e = window.event;
+    pageX =
+      e.clientX +
+      (document.documentElement.scrollLeft || document.body.scrollLeft);
+    e.pageY =
+      e.clientY +
+      (document.documentElement.scrollTop + document.body.scrollTop);
+    //=>低版本浏览器并不支持page
+    e.target = e.srcElement;
+    //=>获取事件源时低版本浏览器只支持srcElement
+    e.preventDefault = function() {
+      e.returnValue = false;
+      //=>低版本浏览器使用returnValue=fasle来阻止浏览器的默认行为
+    };
+    e.e.stopPropagation(); = function() {
+      ev.cancelBubble = true;
+      //=>低版本阻止时间冒泡
+    };
+  }
+  /**
+   * 兼容思想是将低版本浏览器所不支持的属性和方法全部重新定义
+   * 将书写的兼容处理放入判断中,如果使用的是低版本浏览器就执行兼容处理
+   * 如果是高版本浏览器则不做任何处理
+   * 处理完之后可以直接使用高版本浏览器的属性,
+   * 不需要再做额外的兼容性处理
+   */
+};
+```
+
+第二种兼容处理的方案需要使用少数的带有兼容性的属性或者方法,我们直接在书写代码的时候做兼容处理
+
+```javascript
+var body = document.body;
+body.onclick = function(e) {
+  //=>低版本浏览器并不会向事件函数中传递参数,而是捆绑在window全局中
+  consoel.log(e);
+  //=>undefined
+  //=>兼容性处理
+  e = e || window.e;
+  /**
+   * 低版本浏览器中并没有传递的参数,此时事件函数的形参就是undefined
+   * e = e || window.e;
+   * 表示如果e有值就直接使用,如果没有就代表的是低版本浏览器
+   * 那么就使用window.event来代替兼容处理
+   */
+
+  e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+  //=>preventDefault是高版本浏览器支持的,而低版本浏览器只支持returnValue=false或者直接return  false
+
+  e = e.target || e.srcElement;
+  //=>target为高版本浏览器使用,低版本浏览器使用srcElement
+};
+```
+
+### 默认行为
+
+有些 HTML 标签拥有自主的默认行为,比如 a 标签的跳转,submit 标签的提交,input 标签的书写,大部分可以和用户产生交互的标签都拥有默认行为,我们可以在 js 中处理来阻止这些默认行为
+
+可以直接在 HTML 文档阻止,只需要在 a 标签的 href 属性中书写 js 代码即可,只要是书写为假的 js 代码都可以阻止,比如 `fasle`,`null`,`undefined`,`0` 等等...
+
+```html
+<a href="javascript:;"></a>
+```
+
+在 js 文件中也可以阻止默认的行为
+
+```javascript
+var a = document.getElementsByTagName("a")[0];
+a.onclick = function(e) {
+  e = e || window.event;
+
+  return fasle;
+  //=>通用阻止方法
+
+  e.pervenDefault();
+  //=>高版本浏览器阻止默认行为方法
+
+  e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+  //=>兼容性写法
+};
+
+var input = document.getElementsByTagName("input")[0];
+input.onkeydown = function(e) {
+  e = e || window.event;
+  e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+  //=>限制后文本框将不可以书写任何东西
+};
+```
+
+### 事件的传播
+
+**事件的捕获.**
+
+当某一个元素触发某一个事件的时候,捕获阶段会从 html 标签开始一次向下检索该目标元素的祖先元素是否拥有相同的事件,如果存在,则会依次执行,最后再执行事件对象的事件,只有基于`addEventListener`绑定事件,并且第三个参数书写`true`才会在捕获阶段执行祖先元素绑定的相同的事件,现代浏览器并不会默认执行捕获阶段
+
+```html
+<html>
+  <head>
+    <title>Document</title>
+    <style>
+      body {
+        width: 1000px;
+        height: 1000px;
+      }
+
+      .maxBox {
+        width: 300px;
+        height: 300px;
+        background: orangered;
+        position: absolute;
+        margin: 50px auto;
+      }
+
+      .minBox {
+        width: 200px;
+        height: 200px;
+        background: pink;
+        position: relative;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="maxBox">
+      <div class="minBox"></div>
+    </div>
+    <script>
+      let maxBox = document.querySelector(".maxBox"),
+        minBox = document.querySelector(".minBox"),
+        body = document.body,
+        html = document.documentElement;
+      html.onclick = function(e) {
+        console.log("html");
+      };
+      body.onclick = function(e) {
+        console.log("body");
+      };
+      maxBox.onclick = function(e) {
+        console.log("maxBox");
+      };
+      minBox.onclick = function(e) {
+        console.log("minBox");
+      };
+      /*
+       * 当我们点击minBox这个元素时会触发它所有的祖先元素的相同的事件
+       * 捕获阶段是从最上级的祖先元素开始一次向下触发
+       * 最后再触发事件的目标源,现代的浏览器默认的并不会使用这种机制
+       */
+    </script>
+  </body>
+</html>
+```
+
+**冒泡阶段.**
+
+和捕获阶段相反,他是从目标源对象开始触发事件,然后依次查找该目标元素的祖先元素是否拥有相同的事件,如果拥有则会立即执行,直至查找到 html 标签,即使我们没有给事件对象的祖先元素设置事件,也依然会产生冒泡阶段,只是冒泡到当前的元素时并没有相应的事件可以执行,浏览器默认是执行冒泡阶段,并不会执行捕获阶段,但是我们也可以取消这种机制
+
+```javascript
+html.onclick = function(e) {
+  console.log("html");
+};
+body.onclick = function(e) {
+  console.log("body");
+};
+maxBox.onclick = function(e) {
+  e = e || window.event;
+  e.stopPropagation();
+  //=>该方法可以阻止是事件冒泡,
+  ev.cancelBubble = true;
+  //=>低版本使用该属性阻止时间冒泡
+  console.log("maxBox");
+  //=>一旦阻止了冒泡阶段,那么从阻止的元素开始,当前元素所有的
+  //=>祖先元素都不会再次触发相同的事件
+};
+minBox.onclick = function(e) {
+  console.log("minBox");
+};
+
+//=>冒泡阶段是从minBox开始执,依次向上执行它祖先元素上的点击事件
+```
+
+### 事件的委托(event delegation)
+
+根据冒泡传播的机制产生出的一种现象,当一个父元素及其子元素都需要绑定相同的事件的时候,我们只需要单独给父元素绑定事件即可,然后通过事件源来判断当前触发事件的是哪一个元素,通常用于经常性改变一个父元素的结构,并且这些元素都需要绑定相同的事件
+
+```javascript
+//=>假如一个ul下面的li都需要绑定点击事件,但是ul的元素结构经常性的发生变化
+//=>此时就可以使用事件委托(事件代理)
+let ul=document.getElementsByTagName('ul')[0];
+ul.onclick=function(e){
+    e= e || window.e;
+    if(e.target.tagName === 'LI'){
+        /**
+        * 通过子元素的一些特征(类名,标签名)等来判断当前点击的事件源
+        * 只有当条件成立的时候我们才给点击的事件源绑定事件
+        * 否则不做任何处理,这样就可以实现事件的委托
+        * 当父元素的结构发生变化时,新添加的同样也会绑定相同的事件
+        * 并不需要在额外的绑定
+        * */
+    }
+}
+
+```
