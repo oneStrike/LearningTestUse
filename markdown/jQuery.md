@@ -1,5 +1,7 @@
 # jQuery
 
+官方中文文档 <https://www.jquery123.com/>
+
 **原理：**
 
 ## 书写规范
@@ -21,7 +23,7 @@ $(function() {
 
 ## 原生 `js` 和`jQuery`的区别
 
-在原生`js`中使用`window.onload`会在页面文档全部加载完毕之后再执行相应的`js`代码。而`jQuery`只会在`DOM`文档元素加载完成之后就会执行代码，不会等耐图片的加载
+在原生`js`中使用`window.onload`会在页面文档全部加载完毕(html 结构,css 样式,js 代码)之后再执行相应的`js`代码。而`jQuery`只会在`DOM`文档元素加载完成之后就会执行代码，不会等待图片的加载
 
 ```javascript
 window.onload = function() {
@@ -44,8 +46,13 @@ window.onload = function() {
 };
 window.onload = function() {
   alert(2);
+  //=>只有2会被弹出
 };
-//=>浏览器最终只会弹出2，相同的入口函数会被会面的覆盖
+/**
+ * 因为原生js的window.onload使用的是DOM1的事件绑定方法
+ * 就相当于给window的onload私有属性绑定一个方法
+ * 所以会面的的方法会将前面的给覆盖掉
+ */
 
 $(function() {
   alert(1);
@@ -53,7 +60,12 @@ $(function() {
 $(function() {
   alert(2);
 });
-//=>会依次弹出，
+//=>会依次弹出
+/**
+ * jQuery中的函数入口使用的是DOM2中的绑定机制
+ * DOM会将一个事件的方法添加进事件池中,不同的方法并不会覆盖
+ * 等到方法执行的时候会根据添加进事件池的顺序依次执行
+ */
 ```
 
 ## 细节
@@ -72,11 +84,16 @@ let ￥=jQuery.noConflict();
 //=>之后我们就可以直接使用￥调用jQuery的属性和方法
 
 
+let $=123;
+$(function(){
+  alert(1)
+  //=>报错：$ is not a function
+})
+
 jQuery(function($){
   console.log($);
+  //=>jQuery本身
 });
-//=> 可以打印出jQuery本身。可以基于这种机制来解决冲突问题
-
 
 let $=123;
 jQuery(function($){
@@ -90,12 +107,6 @@ $(function(){
  * 而函数内部的$是私有变量，无论全局怎么改变，都不会影响使用
  * 因为jQuery在函数内部将自己本身作为实参传递给了$
  */
-
-let $=123;
-$(function(){
-  alert(1)
-  //=>报错：$ is not a function
-})
 ```
 
 ## jQuery 核心函数
@@ -109,7 +120,7 @@ $(function(){
 
 **一.** **HTML 代码片段**
 
-直接书写字符串格式的代码片段传递给`jQuery`,`jQuery`会自动的帮我们转换成`jQuery`对象返回，我们可以基于一些方法将返回的对象假如到页面中
+直接书写字符串格式的代码片段传递给`jQuery`,`jQuery`会自动的帮我们转换成`jQuery`对象返回，对象中包含的就是 HTML 标签,我们可以基于一些方法将返回的对象假如到页面中
 
 ```javascript
 let $span = $("<span>123</span>");
@@ -166,14 +177,12 @@ $("div");
 
 **三.** **函数**
 
-`jQuery`会将传递的函数执行，并且将自己本身作为实参传递给函数的形参`
+`jQuery`会将传递的函数执行，并且将自己本身作为实参传递给函数的形参,我们通常会将`jQuery`书写在传递给`jQuery`的一个函数中
 
 ```javascript
-$(function() {
-  $(function($) {
-    console.log($);
-    //=>打印jQuery本身
-  });
+jQuery(function($) {
+  console.log($);
+  //=>jQuery本身
 });
 ```
 
@@ -209,7 +218,7 @@ $(body);
 body.tagName;
 //=>'BODY'
 
-$(body);
+$(body).tagName;
 //=>undefined
 
 //=>方法无法互用
@@ -217,7 +226,7 @@ $(body);
 
 **`jQuery`转原生**
 
-`jQuery`获取到的类数组中存储的就是原生`js`对象，哦我们只需要将索引位置上的原生对象取出即可。
+`jQuery`获取到的类数组中存储的就是原生`js`对象，我们只需要将索引位置上的原生对象取出即可。
 
 ```javascript
 let $div = $("div");
@@ -256,13 +265,14 @@ body.nodeType;
 
 ## 常用方法
 
-### 筛选方法
+### 筛选和获取
 
 ---
 
 | 名称 | 用法 | 描述 |
 | --- | --- | --- |
 | parent() | \$('li').parent | 查找最近一级的父元素 |
+| parents() | \$('li').parents | 查找所有的父元素 |
 | children(selector) | \$('li').children('a') | 获取最近一级的子元素 |
 | find(selector) | \$('li').find('a') | 查找层级下所有的子元素，（后代选择器） |
 | siblings(selector) | \$('li').siblings('li') | 获取所有的兄弟元素，不包含自己本身 |
@@ -349,6 +359,61 @@ $.each([10, 20, 30, 40, 50], function(index, item) {
 </script>
 ```
 
+### 动画和样式
+
+**`width()`/`height()`**
+
+- 获取/设置元素的宽高(不包含 padding,margin,border)
+
+```javascript
+//=>返回的是纯数字,css获取的是带有单位的
+$element.width();
+$element.height();
+
+//=>如果书写参数则是设置元素的样式属性
+$element.width("100px");
+$element.height("100px");
+```
+
+**`innerWidth()`/`innerHeight()`**
+
+- 获取元素的宽高(包含 padding),不接收参数,==>`clientWidth`/`clientHeight`
+
+```javascript
+$element.innerWidth();
+//=>获取元素的宽度
+$element.innerHeight();
+//=>获取元素的高度
+```
+
+**`outerWidth`/`outerHeight`**
+
+- 返回元素的宽高(包含 padding,border,选择性 margin)
+
+```javascript
+$element.outerWidth();
+$element.outerHeight();
+//=>获取元素的宽高,默认不获取margin
+//=>  不书写参数的情况下==>offsetWidth/offsetHeight
+
+//=>可以书写参数以获取margin值(参数为boolean值)
+$element.outerWidth(true);
+$element.outerHeight(true);
+//=>获取包含padding,border,margin值得宽高
+```
+
+**`offset()`**
+
+- 获取元素距离`document`的坐标(偏移量),返回一个对象
+
+```javascript
+$element.offset();
+//=>{top:value,left:value}
+
+//=>也可以直接获取某个值
+$element.offset().top;
+```
+
 **`css`**
 
 `css`方法在`jQuery`中有三中不同的书写方法，都是用于操作`DOM`元素`。
@@ -380,7 +445,9 @@ jQuery(function($) {
 
 **`addClass`/`removeClass`/`toggleClass`**
 
-在我们使用`js`操作元素样式时，如果一次性操作过多的样式时最好是在 `css`文件内书写，然后通过`class`类名的方式添加到元素样式中。过多的操作样式对性能很不友好，会造成`DOM`回流，引发浏览器的重新渲染。
+1. `addClass`添加类名
+2. `removeClass`删除类名
+3. `toggleClass`切换类型(拥有则删除,没有则添加)
 
 ```html
 <style>
@@ -414,7 +481,9 @@ jQuery(function($) {
 
 **`show`/`hide`/`toggle`**
 
-操作页面中的元素，让其显示/隐藏
+1. `show`显示元素
+2. `hide`隐藏元素
+3. `toggle`切换(显示则隐藏,隐藏则显示)
 
 ```javascript
 jQuery(function($) {
@@ -441,8 +510,6 @@ jQuery(function($) {
 ```
 
 **`slideUp`/`slideDown`/`slideToggle`**
-
-动画滑动效果
 
 1. `slideDown`下拉滑动效果
 2. `slideUp`上拉滑动效果
@@ -471,26 +538,6 @@ jQuery(function($) {
 });
 ```
 
-**`hover`**
-
-分别传递两个函数，可以在鼠标进入和鼠标离开执行传递的函数，也可以只传一个函数，那么鼠标进入和鼠标离开都会执行同一个函数
-
-```javascript
-jQuery(function($) {
-  $(function() {
-    ${selector}.hover(function(){alert(0)},function(){alert(1)});
-    //=>鼠标进入弹出0，鼠标离开弹出1
-
-    //=>如果值书写一个函数，则鼠标进入和离开都会执行
-    $(selector).hover(function(){
-      alert(2)
-
-      //=>一共会弹出两个2
-    })
-  });
-});
-```
-
 **`stop` / `finish`**
 
 - 停止当前正在运行的动画效果，有时候鼠标滑动或点击效果高频率触发的时候，会造成鼠标离开后依然会运行动画，直至触发的时间执行完毕，`stop`可以立即停止当前正在运行的动画
@@ -507,4 +554,80 @@ jQuery(function($) {
 });
 ```
 
-**`ajax`**
+### 事件
+
+**`on`/`off`/`bind`/`unbind`/`one`**
+
+1. `on`/`bind`绑定事件
+2. `off`/`unbind`删除事件
+3. `click`/`mousemove`...快捷写法
+4. `one`绑定的事件执行一次之后就会被移除
+
+```javascript
+$(function() {
+  //=>通过元素的类名获取jQuery对象
+  $box = $(".box");
+
+  //=>绑定点击事件的方法
+  $box.on("click", function() {
+    console.log(1);
+    //=>jQuery中所有的事件绑定都是以 on 为基础
+  });
+  $box.on("click mousemove", function() {
+    console.log(2);
+    //=>on可以同时为两个事件绑定同一个方法
+  });
+
+  $box.bind("click", function() {
+    console.log(1);
+    //=>使用bind绑定
+  });
+
+  $box.click(function() {
+    console.log(1);
+    //=>以on绑定方法衍生的快捷书写方法
+  });
+
+  //=>删除事件的方法,(事件绑定的方法必须是具名函数,无法移除匿名函数)
+  $box.off("click", test1);
+  $box.unbind("click", test1);
+});
+
+$box.one("click", function() {
+  console.log(1);
+  //=>只会执行一次,执行完毕之后会立即删除这个事件
+});
+```
+
+**`delegate`**
+
+事件委托,1.7 版本之前使用`live`方法
+
+语法: `$(委托对象).delegate(事件源,事件,事件方法)`
+
+```javascript
+$body = $("body");
+$body.delegate(".box", "click", function() {
+  console.log(1);
+  //=>body所有子元素的标签中带有类名.box的标签都可以执行点击事件
+});
+```
+
+**`hover`**
+
+相当于给一个元素同时绑定`mouseenter`和`mouseleave`两个事件,需要传递两个函数,如果只传递一个函数,则代表鼠标进入和离开都执行同一个函数
+
+```javascript
+jQuery(function($) {
+  $(function() {
+    ${selector}.hover(function(){alert(0)},function(){alert(1)});
+    //=>鼠标进入弹出0，鼠标离开弹出1
+
+    //=>如果值书写一个函数，则鼠标进入和离开都会执行
+    $(selector).hover(function(){
+      alert(2)=
+      //=>一共会弹出两个2
+    })
+  });
+});
+```

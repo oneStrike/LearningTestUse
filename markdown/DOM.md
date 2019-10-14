@@ -714,18 +714,165 @@ let body = document.body;
 //=>第一种  DOM0
 body.onclick = function() {};
 
-//=>第二种  DOM2
-body.addEventListener("click", function() {});
+//=>第二种  DOM2  不需要加on
+body.addEventListener("click", function() {}, false);
 
-//=>IE6-8兼容写法
-body.attachEvent("click", function() {});
+//=>IE6-8兼容写法,需要加上on
+body.attachEvent("onclick", function() {});
 ```
+
+---
+
+**绑定方式的区别:**
+
+DOM0 是根据给元素私有属性赋值的机制绑定,相同的事件只允许绑定一个方法,即使绑定多个也会有后面绑定的将前面的覆盖,那是因为绑定的事件都是的当前元素的私有属性,删除元素绑定的事件只需要将事件设为`null`即可
+
+```javascript
+let box = document.querySelector(".box");
+box.onclick = function() {
+  console.log(1);
+};
+box.onclick = function() {
+  console.log(2);
+  //=>相同的事件存在多个方法时只有第二个会生效,
+  //=>其余的会被覆盖掉,跟绑定的方法无关,
+  //=>即使是不同的方法也会被覆盖
+};
+
+box.onclick = null;
+//=>取消绑定的事件
+```
+
+DOM2 中的事件绑定是基于**事件池机制**绑定的,当基于 DOM2 给一个元素绑定事件时,浏览器会将该元素以及改元素绑定的事件,事件的方法,方法的阶段(捕获或冒泡),添加进事件池中,当为同一个元素同一个事件添加多个方法的时候,浏览器会检测新添加的方法是有和已有的重复,如果重复则不做添加,如果`元素,事件,方法,方法阶段`中有一个不相同都会再次为改元素添加一个方法,使用的是严格不叫,必须所有的都相同才会判定会重复添加,执行的顺序是按照添加的顺序执行的,删除需要使用`removeEventListener`方法
+
+```javascript
+let box = document.querySelector("box");
+function test1() {
+  console.log(1);
+}
+function test2() {
+  console.log(2);
+}
+box.addEventListener("click", test1, true);
+//=>第三个参数的true表示在捕获阶段执行
+box.addEventListener("click", test1, false);
+//=>false表示执行冒泡阶段,不书写默认为冒泡阶段
+上面绑定的两种方法都会执行, 因为他们的执行阶段不同;
+
+box.removeEventListener("click", test1, true);
+/**
+ * 删除绑定的元素,如果是捕获阶段执行的方法,必须书写true才可以删除
+ * 在基于DOM2绑定事件的方法时应当尽量绑定具名函数
+ * 而不是绑定匿名函数,因为匿名函数绑定的事件无法被移除
+ */
+
+box.addEventListener("click", function() {
+  console.log(1);
+  //=>如果绑定的是一个匿名函数,基于DOM2则没办法删除
+});
+
+box.addEventListener("click", test1, false);
+box.addEventListener("click", test1, false);
+//=>如果所有的条件都相等,则会有后面的覆盖前面的
+```
+
+**兼容情况.**
+
+标准浏览器 VS IE 高版本
+
+1. 如果同一个元素拥有多个相同事件的方法,如果需要在一个方法执行之前删除的话,标准浏览器会立即删除,一次都不会执行,而 IE 高版本浏览器中则会执行一遍,其次再删除
+
+```javascript
+let box = document.querySelector(".box");
+function test1() {
+  console.log(1);
+}
+function test2() {
+  console.log(2);
+  box.removeEventListener("click", test4);
+}
+function test3() {
+  console.log(3);
+}
+function test4() {
+  console.log(4);
+}
+box.addEventListener("click", test1);
+box.addEventListener("click", test2);
+box.addEventListener("click", test3);
+box.addEventListener("click", test4);
+/**
+ * 在标准浏览器中会一直输出1 2 3 ,
+ * 而IE高版本浏览器首次会输出1 2 3 4
+ * 其次才会输出1 2 3
+ * 对于删除的事件方法高版本IE会先执行一次在做删除
+ * 标准浏览器则会直接删除,并不会自行
+ */
+```
+
+标准浏览器 VS IE 低版本
+
+- `addEventListener`/`removeEventListener` 标准浏览器
+- `attachEvent`/`detachEvent` IE 低版本
+
+1. 语法区别
+
+> IE 地版本使用的`attachEvent`中所绑定的事件需要在前面加`on`,而标准浏览器的`addEventListener`则不需要加`on`,直接书写事件即可
+
+```javascript
+var box = document.getElementsByTagName("div")[0];
+box.attachEvent("onclick", function() {});
+//=>IE低版本书写方式
+box.addEventListener("click", function() {});
+//=>标准浏览器书写方式
+```
+
+2.`this`
+
+> 在标准浏览器中事件方法中的`this`会指向绑定方法的元素,而 IE 低版本则会指向`window`
+
+```javascript
+var box = document.getElementsByTagName("div")[0];
+
+box.addEventListener("click", function() {
+  console.log(this);
+  //=>this  ==>box
+});
+box.attachEvent("onclick", function() {
+  console.log(this);
+  //=>this  ==>window
+});
+```
+
+3.反复重复
+
+> 在标准浏览器中浏览会在将方法添加进事件池之前进行判断,会将相同事件的相同方法过滤掉,而 IE 低版本浏览器中并不会判断,只要是添加给当前元素的方法都会执行,不会过滤掉重复绑定的方法
+
+```javascript
+var box = document.getElementsByTagName("div")[0];
+
+function test() {
+  console.log(1);
+}
+
+box.attachEvent("onclick", test);
+box.attachEvent("onclick", test);
+//=>会执行两次,并不会去除重读的方法
+
+box.addEventListener("click", test);
+box.addEventListener("click", test);
+//=>只会执行一次,会将严格比较下的重复项过滤掉,
+```
+
+4.执行顺序
+
+> 标准浏览器的执行顺序是根据添加进事件池的顺序决定的,先添加的先执行,而 IE 低版本浏览器则是无序执行,没有规律
 
 **事件对象.**
 
-在触发事件时浏览器会传递给执行事件的函数一个实参,不同的事件类型包含着不同的属性和方法
-
 通用的属性和方法
+
+在触发事件时浏览器会传递给执行事件的函数一个实参,不同的事件类型包含着不同的属性和方法,
 
 ```javascript
 let body = document.body;
@@ -887,7 +1034,7 @@ document.body.onclick = function(e) {
     //=>获取事件源时低版本浏览器只支持srcElement
     e.preventDefault = function() {
       e.returnValue = false;
-      //=>低版本浏览器使用returnValue=fasle来阻止浏览器的默认行为
+      //=>低版本浏览器使用returnValue=false来阻止浏览器的默认行为
     };
     e.e.stopPropagation(); = function() {
       ev.cancelBubble = true;
@@ -910,7 +1057,7 @@ document.body.onclick = function(e) {
 var body = document.body;
 body.onclick = function(e) {
   //=>低版本浏览器并不会向事件函数中传递参数,而是捆绑在window全局中
-  consoel.log(e);
+  console.log(e);
   //=>undefined
   //=>兼容性处理
   e = e || window.e;
@@ -933,7 +1080,7 @@ body.onclick = function(e) {
 
 有些 HTML 标签拥有自主的默认行为,比如 a 标签的跳转,submit 标签的提交,input 标签的书写,大部分可以和用户产生交互的标签都拥有默认行为,我们可以在 js 中处理来阻止这些默认行为
 
-可以直接在 HTML 文档阻止,只需要在 a 标签的 href 属性中书写 js 代码即可,只要是书写为假的 js 代码都可以阻止,比如 `fasle`,`null`,`undefined`,`0` 等等...
+可以直接在 HTML 文档阻止,只需要在 a 标签的 href 属性中书写 js 代码即可,只要是书写为假的 js 代码都可以阻止,比如 `false`,`null`,`undefined`,`0` 等等...
 
 ```html
 <a href="javascript:;"></a>
@@ -946,10 +1093,10 @@ var a = document.getElementsByTagName("a")[0];
 a.onclick = function(e) {
   e = e || window.event;
 
-  return fasle;
+  return false;
   //=>通用阻止方法
 
-  e.pervenDefault();
+  e.preventDefault();
   //=>高版本浏览器阻止默认行为方法
 
   e.preventDefault ? e.preventDefault() : (e.returnValue = false);
@@ -1061,7 +1208,6 @@ minBox.onclick = function(e) {
 //=>冒泡阶段是从minBox开始执,依次向上执行它祖先元素上的点击事件
 ```
 
-<<<<<<< HEAD
 ### 事件的委托(event delegation)
 
 根据冒泡传播的机制产生出的一种现象,当一个父元素及其子元素都需要绑定相同的事件的时候,我们只需要单独给父元素绑定事件即可,然后通过事件源来判断当前触发事件的是哪一个元素,通常用于经常性改变一个父元素的结构,并且这些元素都需要绑定相同的事件
@@ -1069,23 +1215,17 @@ minBox.onclick = function(e) {
 ```javascript
 //=>假如一个ul下面的li都需要绑定点击事件,但是ul的元素结构经常性的发生变化
 //=>此时就可以使用事件委托(事件代理)
-let ul=document.getElementsByTagName('ul')[0];
-ul.onclick=function(e){
-    e= e || window.e;
-    if(e.target.tagName === 'LI'){
-        /**
-        * 通过子元素的一些特征(类名,标签名)等来判断当前点击的事件源
-        * 只有当条件成立的时候我们才给点击的事件源绑定事件
-        * 否则不做任何处理,这样就可以实现事件的委托
-        * 当父元素的结构发生变化时,新添加的同样也会绑定相同的事件
-        * 并不需要在额外的绑定
-        * */
-    }
-}
-
+let ul = document.getElementsByTagName("ul")[0];
+ul.onclick = function(e) {
+  e = e || window.e;
+  if (e.target.tagName === "LI") {
+    /**
+     * 通过子元素的一些特征(类名,标签名)等来判断当前点击的事件源
+     * 只有当条件成立的时候我们才给点击的事件源绑定事件
+     * 否则不做任何处理,这样就可以实现事件的委托
+     * 当父元素的结构发生变化时,新添加的同样也会绑定相同的事件
+     * 并不需要在额外的绑定
+     * */
+  }
+};
 ```
-=======
-### 事件委托
-
-基于事件的冒泡可以实现事件的委托
->>>>>>> 50a30b898b7512246d22f6ae6cbaa04ea29e5659

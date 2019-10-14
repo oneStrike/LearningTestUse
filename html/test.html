@@ -6,101 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-<<<<<<< HEAD
     <!--  <link rel="stylesheet" href="../css/reset.min.css"> -->
     <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
     <style>
-        body {
-            width: 1000px;
-            height: 1000px;
-        }
-
-        .maxBox {
-            width: 300px;
-            height: 300px;
-            background: orangered;
-            position: absolute;
-            margin: 50px auto;
-        }
-
-        .minBox {
-            width: 200px;
-            height: 200px;
-            background: pink;
-            position: relative;
-            top: 50px;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-=======
-    <link rel="stylesheet" href="../css/reset.min.css">
-    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
-    <style>
-        .container {
-            margin: 20px auto;
-            width: 600px;
-            height: 300px;
-        }
-
-        .smallBox {
-            float: left;
-            width: 300px;
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .smallBox img {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .smallBox .mark {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .box {
             width: 100px;
             height: 100px;
-            cursor: move;
-            background: rgba(188, 0, 0, 0.2);
-            z-index: 10;
->>>>>>> 50a30b898b7512246d22f6ae6cbaa04ea29e5659
+            background: orangered;
+            padding: 10px;
+            margin: 10px;
+            border: 10px solid pink;
         }
     </style>
 </head>
 
 <body>
-<!-- <script src="../js/动画库.js"></script> -->
-<!-- <script src="../js/test.js"></script> -->
-<<<<<<< HEAD
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<script>
-    let ul = document.getElementsByTagName('ul')[0];
-    ul.onclick = function (e) {
-        e = e || window.event;
-        if (e.target.tagName === 'LI') {
-            console.log(1)
-        }
-    }
-=======
-<section class="container">
-    <div class="smallBox">
-        <img src="../img/small.jpg" alt="">
-        <div class="mark"></div>
-    </div>
-</section>
-<script>
-	let smallBox = document.querySelector('smallBox');
->>>>>>> 50a30b898b7512246d22f6ae6cbaa04ea29e5659
-</script>
+    <!-- <script src="../js/动画库.js"></script> -->
+    <!-- <script src="../js/test.js"></script> -->
+    <div class="box"></div>
+    <script>
+        $(function () {
+            $('.box').on('mouseenter mouseleave', function () {
+                console.log(2)
+            }, function () {
+                console.log(1)
+            })
+        })
+    </script>
 </body>
 
 </html>
