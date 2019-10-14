@@ -31,32 +31,31 @@
         </li> -->
         </ul>
     </div>
-    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
-    <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script>
+    <!-- <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
+    <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script> -->
     <script>
         ~(function () {
             let container = document.querySelector('.container'),
                 header = container.querySelector('.header'),
                 list = container.querySelector('.list'),
                 linkList = header.querySelectorAll('a'),
-                liList = null;
+                liList = null,
+                data = null;
             //获取数据
             let queryData = function () {
-                return new Promise((resolve, reject) => {
-                    let xhr = new XMLHttpRequest();
-                    xhr.open('get', '../json/mallSort.json', true);
-                    xhr.onreadystatechange = () => {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            let data = window.JSON.parse(xhr.responseText);
-                            resolve(data);
-                        }
-                    };
-                    xhr.send(null);
-                })
+                let xhr = new XMLHttpRequest;
+                xhr.open('GET', '../json/mallSort.json', false);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        data = JSON.parse(xhr.responseText);
+                    }
+                };
+                xhr.send(null);
             };
-
+            queryData();
             //绑定数据
             let bindHTML = function (data) {
+                console.log(1)
                 let str = ``;
                 data.forEach((item, index) => {
                     let {
@@ -77,6 +76,7 @@
                          </li>`
                 });
                 list.innerHTML = str;
+                console.log(str)
                 liList = Array.from(list.querySelectorAll('li'));
             };
 
@@ -110,11 +110,9 @@
                 });
             };
 
-            let promise = queryData();
-            promise.then((data) => {
-                bindHTML(data);
-                bindClick();
-            })
+            bindHTML(data);
+            bindClick();
+
         })();
     </script>
 

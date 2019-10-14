@@ -60,15 +60,34 @@
         <img src="../images/1.png" alt="">
     </div>
     <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
-    <!-- <script src="../js/放大镜.js"></script> -->
+    <script src="../js/放大镜.js"></script>
     <script>
-        let smallBox = document.getElementsByClassName('small-box')[0],
-            smallMark = smallBox.getElementsByClassName('small-mark')[0],
-            bigBox = document.getElementsByClassName('big-box')[0];
-        //显示mark和大图
-        smallBox.onmousemove = function () {
-            smallMark.style.display = 'block';
-        }
+        (function () {
+            let smallBox = document.querySelector('.small-box'),
+                smallMark = smallBox.querySelector('.small-mark'),
+                bigBox = document.querySelector('.big-box'),
+                bigImg = bigBox.querySelector('img');
+            smallBox.onmousemove = function (e) {
+                smallMark.style.display = 'block';
+                bigBox.style.display = 'block';
+                let top = e.clientY - smallBox.offsetTop - smallMark.clientHeight / 2,
+                    left = e.clientX - smallBox.offsetLeft - smallMark.clientWidth / 2,
+                    minL = 0,
+                    minT = 0,
+                    maxL = smallBox.clientWidth - smallMark.clientWidth,
+                    maxT = smallBox.clientHeight - smallMark.clientHeight;
+                top = top < minT ? minT : (top > maxT ? maxT : top);
+                left = left < minL ? minL : (left > maxL ? maxL : left);
+                smallMark.style.top = top + 'px';
+                smallMark.style.left = left + 'px';
+                bigImg.style.top = -top * 3 + 'px';
+                bigImg.style.left = -left * 3 + 'px';
+            };
+            smallBox.onmouseleave = function (e) {
+                smallMark.style.display = 'none';
+                bigBox.style.display = 'none';
+            }
+        })();
     </script>
 </body>
 

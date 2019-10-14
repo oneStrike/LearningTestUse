@@ -198,22 +198,21 @@ a==b =>false
 **一.** alert：在浏览器中通过弹框的方式输出(浏览器提示框)
 
 ```javascript
-var num=12;
+var num = 12;
 alert(num);
 //=> '12'
 
-var str='绫';
+var str = "绫";
 alert(str);
 //=>字符串 '绫'
 
-
-alert(1+1); //=>'2'
+alert(1 + 1); //=>'2'
 alert(true); //=>'true'
-alert([12,23]); //=>'12,23'
+alert([12, 23]); //=>'12,23'
 //=>基于alert输出的结果都会转换为字符串：把值(如果是表达式先计算出结果)
 //=>通过toString这个方法转换为字符串，然后再输出
 
-alert({name:'xxx'});
+alert({ name: "xxx" });
 //=>'[object Object]'
 //=>alert会先使用toString()把数据转换成字符串再输出
 //=>当自定义一个对象的时候如果不重写它的toString()
@@ -2403,7 +2402,7 @@ str.toLowerCase();
 ```javascript
 let str = "hello word";
 let reg = /\b[a-z]/g;
-//=>\b匹配单词边界，通过正则获取到每个单词的首字母
+//=>\b匹配单词��界，通过正则获取到每个单词的首字母
 
 str.replace(reg, item => item.toUpperCase());
 /**
@@ -4394,7 +4393,7 @@ var obj = (function() {
 
 //上面这种我们就是用了高级单例模式，如果外部需要使用内部的功能，
 //我们只需要将其放在一个对象中，然后返回，
-//我们就可以直接在外部调用这些功能，这样可以减少我们全局变量的污染
+//我们就可以直接在外部调用这些功能，这样可以减少��们全局变量的污染
 ```
 
 ### 工厂模式（Factory Pattern）
@@ -4642,7 +4641,44 @@ var max = Math.max(...arr);
 
 #### `bind`
 
-`bind`和`call`语法是一样的，不过`bind`并不会直接执行函数，而是让`this`预指向我们传递的对象，而`call`则会直接执行函数
+`bind`是预处理`this`的指向,并不会执行执行当前的函数,而是会改变下一次函数执行时`this`的指向,每一次预处理都会返回一个全新的函数,执行的时候执行的也是预处理后返回的新函数,同一个函数多次预处理`this`返回的都是独立的新函数,`bind`预处理`this`返回的函数都不相同
+
+```javascript
+let box = document.querySelector(".box");
+function test() {
+  console.log(1);
+}
+test.bind(box);
+//=>预处理完成之后并不会执行这个函数
+
+test.bind(box) == test.bind(box);
+//=>false  每次返回的都是不同的函数
+```
+
+**`bind`机制**
+
+```javascript
+function test() {
+  console.log(this);
+}
+Function.prototype.bind = function(context, ...arr) {
+  //=>bind本身的this指向它的调用者   this ==>调用者
+  let _this = this;
+
+      //=>返回的这个匿名函数会赋值给外面的接收者,接收者可以传递参数
+  return function(...innerArr) {
+    //=>innerArr的值取决于bind返回的这个匿名函数是否有接收到值
+    _this.apply(context, ...arr.concat(innerArr));
+    /**
+     * 在bind内部返回的这个匿名函数中,会基于apple()这个方法
+     * 将函数中的this指向传递的第一个参数,同时将其他的参数依次传递
+     * 在传递的时候通过concat()这个方法将匿名函数接收到的值拼接到
+     * 参数中的最后一位,如果匿名函数没有接收到任何值,那么也只会拼接空的字符串
+     * 并不会对参数有任何影响
+     */
+  };
+};
+```
 
 ### 练习题
 

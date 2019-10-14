@@ -33,13 +33,15 @@
     <!-- <script src="../js/轮播图.js"></script> -->
     <script>
         (function () {
-            //获取需要使用的元素
             let container = document.getElementById('container'),
-                wrapper = container.getElementsByClassName('wrapper'),
-                focus = container.getElementsByClassName('focus'),
-                arrowLeft = container.getElementsByClassName('arrowLeft'),
-                arrowRight = container.getElementsByClassName('arrowRight');
-            //获取数据
+                wrapper = container.querySelector('.wrapper'),
+                focus = container.querySelector('.focus'),
+                arrowLeft = container.querySelector('.arrowLeft'),
+                arrowTop = container.querySelector('.arrowTop'),
+                showImg = null,
+                focusList = null;
+
+            //=>获取数据
             let queryData = function () {
                 return new Promise(function (resolve, reject) {
                     let xhr = new XMLHttpRequest();
@@ -51,16 +53,29 @@
                         }
                     };
                     xhr.send(null);
-                });
+                })
             };
 
             //绑定数据
+            let bindHTML = function (data) {
+                let showStr = ``,
+                    focusStr = ``;
+                data.forEach(function (item, index) {
+                    let {
+                        img
+                    } = item;
+                    showStr += `<div class="slide"><img src="${img}" alt=""></div>`;
+                    focusStr += `<li class="${index===0?"active":''}"></li>`;
+                });
+                wrapper.innerHTML = showStr;
+                focus.innerHTML = focusStr;
+            };
 
             let promise = queryData();
             promise.then(function (data) {
-                console.log(data);
+                bindHTML(data);
             })
-        }());
+        })();
     </script>
 </body>
 

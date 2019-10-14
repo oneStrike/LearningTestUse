@@ -25,13 +25,12 @@
     <!-- <script src="../js/test.js"></script> -->
     <div class="box"></div>
     <script>
-        $(function () {
-            $('.box').on('mouseenter mouseleave', function () {
-                console.log(2)
-            }, function () {
-                console.log(1)
-            })
-        })
+        function test(context, ...arr) {
+            let _this = this;
+            return function (...innerArr) {
+                _this.apply(context, arr.concat(innerArr));
+            }
+        }
     </script>
 </body>
 
