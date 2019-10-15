@@ -28,54 +28,84 @@
         <a href="javascript:;" class="arrow arrowLeft"></a>
         <a href="javascript:;" class="arrow arrowRight"></a>
     </section>
-    <!--    <script src="../js/animate.js"></script>-->
+    <script src="../js/animate.js"></script>
     <!-- <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script> -->
     <!-- <script src="../js/轮播图.js"></script> -->
     <script>
-        (function () {
+        let banner = (function () {
             let container = document.getElementById('container'),
                 wrapper = container.querySelector('.wrapper'),
                 focus = container.querySelector('.focus'),
                 arrowLeft = container.querySelector('.arrowLeft'),
-                arrowTop = container.querySelector('.arrowTop'),
+                arrowRight = container.querySelector('.arrowRight'),
                 showImg = null,
-                focusList = null;
-
-            //=>获取数据
+                focusList = null,
+                imgW = null,
+                imgL = null,
+                imgData = null,
+                autoTimer = null,
+                speed = 300,
+                interval = 3000,
+                index = 0,
+                target = null,
+                time = 0;
+            //获取数据
             let queryData = function () {
-                return new Promise(function (resolve, reject) {
-                    let xhr = new XMLHttpRequest();
-                    xhr.open('get', '../json/banner.json', true);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            let data = window.JSON.parse(xhr.responseText);
-                            resolve(data);
-                        }
-                    };
-                    xhr.send(null);
-                })
-            };
+                let xhr = new XMLHttpRequest();
+                xhr.open('get', '../json/banner.json', false);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        imgData = window.JSON.parse(xhr.responseText);
+                    }
+                };
+                xhr.send(null);
+            }
 
             //绑定数据
-            let bindHTML = function (data) {
-                let showStr = ``,
+            let bindHTML = function () {
+                let imgStr = ``,
                     focusStr = ``;
-                data.forEach(function (item, index) {
-                    let {
-                        img
-                    } = item;
-                    showStr += `<div class="slide"><img src="${img}" alt=""></div>`;
-                    focusStr += `<li class="${index===0?"active":''}"></li>`;
+                imgData.forEach(function (item, index) {
+                    imgStr += `<div class="slide"><img src="${item.img}" alt=""></div>`;
+                    focusStr += `<li class="${index===0?"active":""}"></li>`;
                 });
-                wrapper.innerHTML = showStr;
+                wrapper.innerHTML = imgStr;
                 focus.innerHTML = focusStr;
+                showImg = wrapper.querySelectorAll('.slide');
+                focusList = focus.querySelectorAll('li');
+                wrapper.appendChild(showImg[0].cloneNode(true));
+                showImg = wrapper.querySelectorAll('.slide');
+                imgW = parseFloat(getComputedStyle(showImg[0]).width);
+                imgH = parseFloat(getComputedStyle(showImg[0]).height);
+                wrapper.style.width = imgW * showImg.length + 'px';
             };
 
-            let promise = queryData();
-            promise.then(function (data) {
-                bindHTML(data);
-            })
+            //设置轮播
+            let autoMove = function () {
+                autoTimer = setInterval(function () {
+                    index++;
+                    if (index == showImg.length) {
+                        index = 1;
+                        wrapper.style.left = 0 + 'px';
+                    };
+
+                    clearInterval(wrapper.timer);
+                    let begin = parseFloat(window.getComputedStyle(wrapper).left);
+                    change = -index * imgW;
+                    time = 0;
+
+                }, interval);
+            };
+
+            return {
+                init: function () {
+                    queryData();
+                    bindHTML();
+                    autoMove();
+                }
+            }
         })();
+        banner.init();
     </script>
 </body>
 
