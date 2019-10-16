@@ -25,9 +25,153 @@
         <a href="javascript:;" class="arrow arrowLeft"></a>
         <a href="javascript:;" class="arrow arrowRight"></a>
     </section>
-    <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
     <!--    <script src="../js/animate.js"></script>-->
-    <script src="../js/渐隐轮播.js"></script>
+    <!-- <script src="../js/渐隐轮播.js"></script> -->
+    <script>
+        $(function () {
+            let banner = (function () {
+                let $container = $('#container'),
+                    $wrapper = $container.find('.wrapper'),
+                    $focus = $container.find('.focus'),
+                    $arrowLeft = $container.find(".arrowLeft"),
+                    $arrowRight = $container.find('.arrowRight'),
+                    $imgList = null,
+                    $focusList = null,
+                    data = null,
+                    $imgLen = null,
+                    $imgW = null,
+                    autoTimer = null,
+                    speed = 300,
+                    interval = 3000,
+                    index = 0,
+                    lastIndex = 0;
+
+                //获取数据
+                let queryData = function () {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('get', '../json/banner.json', false);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            data = window.JSON.parse(xhr.responseText);
+                        }
+                    };
+                    xhr.send(null);
+                };
+
+                //绑定数据
+                let bindHTML = function () {
+                    let imgStr = ``,
+                        focusStr = ``;
+                    data.forEach((item, index) => {
+                        imgStr += `<div class="slide"><img src="${item.img}" alt=""></div>`;
+                        focusStr += `<li class="${index===0?'active':''}"></li>`;
+                    });
+                    $wrapper.html(imgStr);
+                    $focus.html(focusStr);
+                    $imgList = $wrapper.find('.slide');
+                    $focusList = $focus.find('li');
+                    $imgList.eq(0).clone(true).appendTo($wrapper);
+                    $imgList = $wrapper.find('.slide');
+                    $imgLen = $imgList.length;
+                    $imgW = parseFloat($imgList.eq(0).outerWidth());
+                };
+
+                let gradientFn = function () {
+                    index++;
+                    if (index >= $imgLen) {
+                        index = 1
+                    }
+                    $imgList.eq(index).css('zIndex', 1).animate({
+                        opacity: 1,
+                    }, speed);
+                    $imgList.eq(lastIndex).css('zIndex', 0).animate({
+                        opacity: 0,
+                    });
+                    lastIndex = index;
+                    setFocus();
+                };
+
+                //设置渐变
+                let autoGradient = function () {
+                    autoTimer = setInterval(() => {
+                        gradientFn()
+                    }, interval)
+                };
+
+                //鼠标划入划出
+                let mouseEvent = function () {
+                    $container.hover(() => {
+                        $arrowLeft.add($arrowRight).css('display', 'block');
+                        clearInterval(autoTimer)
+                    }, () => {
+                        $arrowLeft.add($arrowRight).css('display', 'none');
+                        autoGradient();
+                    })
+                };
+
+                //设置焦点
+                let setFocus = function () {
+                    $index = index;
+                    $index === $imgLen - 1 ? $index = 0 : null;
+                    $focusList.each((i, item) => {
+                        i === $index ? $(item).addClass('active') : $(item).removeClass(
+                            'active');
+                    })
+                }
+
+                //焦点点击
+                let focusClick = function () {
+                    $focusList.each((ind, item) => {
+                        $(item).on('click', () => {
+                            index = $(item).index();
+                            $imgList.eq(index).css('zIndex', 1).animate({
+                                opacity: 1,
+                            }, speed);
+                            $imgList.eq(lastIndex).css('zIndex', 0).animate({
+                                opacity: 0,
+                            });
+                            lastIndex = index;
+                            setFocus();
+                        })
+                    });
+                }
+
+                //侧边点击
+                let slidClick = function () {
+                    $arrowRight.on('click', () => {
+                        gradientFn();
+                    });
+                    $arrowLeft.on('click', function () {
+                        index--;
+                        if (index < 0) {
+                            index = $imgLen - 2;
+                        }
+                        $imgList.eq(index).css('zIndex', 1).animate({
+                            opacity: 1,
+                        }, speed);
+                        $imgList.eq(lastIndex).css('zIndex', 0).animate({
+                            opacity: 0,
+                        });
+                        lastIndex = index;
+                        setFocus();
+                    });
+                };
+
+                return {
+                    init: function () {
+                        queryData();
+                        bindHTML();
+                        autoGradient();
+                        mouseEvent();
+                        focusClick();
+                        slidClick();
+                    }
+                }
+            })();
+            banner.init()
+        });
+    </script>
 </body>
 
 </html>
