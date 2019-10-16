@@ -6,10 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.min.css">
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background: orangered;
+            position: absolute;
+            top: 30px;
+            left: 60px;
+        }
+    </style>
 </head>
+<div class="box"></div>
 
 <body>
-
+    <script src="../js/subscribe.js"></script>
+    <script src="../js/drag-publick.js"></script>
+    <script>
+        let box = document.querySelector('.box');
+        new drag('1');
+    </script>
 </body>
 
 </html>

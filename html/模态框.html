@@ -70,58 +70,28 @@
     </div>
     <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
     <script>
-        $(function () {
+        (function () {
             let modalBox = (function () {
-                let $body = $('body'),
-                    $dialogbox = $('.dialogbox'),
-                    $title = $dialogbox.find('.title'),
-                    $con = $dialogbox.find('.con'),
-                    $winH = $(window).outerHeight(),
-                    $winW = $(window).outerWidth(),
-                    $diaW = $dialogbox.width(),
-                    $diaH = $dialogbox.height(),
-                    move = null;
-                $dialogbox.css({
-                    left: $winW / 2 - $diaW / 2 + 'px',
-                    top: $winH / 2 - $diaH / 2 + 'px'
-                });
-                //设置拖拽
-                let dragMove = function () {
-                    function down(e) {
-                        $title.css({
-                            'backgroundColor': 'pink',
-                            'color': 'orangered'
-                        });
-                        let cliX = e.clientX,
-                            cliY = e.clientY;
-
-                        let move = function (e) {
-                            let left = $winW / 2 - $diaW / 2 + e.clientX - cliX,
-                                top = $winH / 2 - $diaH / 2 + e.clientY - cliY;
-                            $dialogbox.css({
-                                left: left + 'px',
-                                top: top + 'px'
-                            });
-                        };
-                        $body.on('mousemove', move);
-                    };
-
-
-                    $title.on('mousedown', down);
-                    $title.on('mouseup', () => {
-                        $title.off('mousedown', down);
-                        $body.off('mousemove', move);
-                    })
+                let title = document.querySelector('.title')，
+                dialog=document.querySelector('')
+                //设置居中
+                let gentered = function () {
+                    let winT = document.body.clientHeight,
+                        winL = document.body.clientWidth,
+                        eleStyle = window.getComputedStyle(title),
+                        eleT = parseFloat(eleStyle.height),
+                        eleL = parseFloat(eleStyle.width);
+                    // title.style.top = winT - eleT / 2 + 'px';
+                    // title.style.left = winL - eleL / 2 + 'px';
                 }
-
                 return {
                     init: function () {
-                        dragMove();
+                        gentered()
                     }
                 }
-            })()
-            modalBox.init()
-        })
+            })();
+            modalBox.init();
+        })();
     </script>
 </body>
 
