@@ -41,6 +41,7 @@
             border-bottom: 1px solid #aaaaaa;
             cursor: move;
             position: relative;
+            -moz-user-select: none;
         }
 
         .dialogbox .title i {
@@ -71,26 +72,31 @@
     <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
     <script>
         (function () {
-            let modalBox = (function () {
-                let title = document.querySelector('.title')，
-                dialog=document.querySelector('')
-                //设置居中
-                let gentered = function () {
-                    let winT = document.body.clientHeight,
-                        winL = document.body.clientWidth,
-                        eleStyle = window.getComputedStyle(title),
-                        eleT = parseFloat(eleStyle.height),
-                        eleL = parseFloat(eleStyle.width);
-                    // title.style.top = winT - eleT / 2 + 'px';
-                    // title.style.left = winL - eleL / 2 + 'px';
+            let dialogBox = document.querySelector('.dialogbox'),
+                title = dialogBox.querySelector('.title'),
+                winT = document.documentElement.clientHeight,
+                winL = document.documentElement.clientWidth,
+                eleStyle = window.getComputedStyle(dialogBox),
+                eleH = parseFloat(eleStyle.height),
+                eleW = parseFloat(eleStyle.width);
+            dialogBox.style.left = (winL - eleW) / 2 + 'px';
+            dialogBox.style.top = (winT - eleH) / 2 + 'px';
+
+            title.onmousedown = function (e) {
+                if (e.target.tagName === 'I' && e.target.parentNode.className === 'title') {
+                    dialogBox.remove();
+                };
+                let curT = e.clientY,
+                    curL = e.clientX,
+                    eleT = parseFloat(eleStyle.top),
+                    eleL = parseFloat(eleStyle.left);
+                document.body.onmousemove = function (e) {
+                    let left = e.clientX - curL + eleL,
+                        top = e.clientY - curT + eleT;
+                    dialogBox.style.left = left + 'px';
+                    dialogBox.style.top = top + 'px';
                 }
-                return {
-                    init: function () {
-                        gentered()
-                    }
-                }
-            })();
-            modalBox.init();
+            }
         })();
     </script>
 </body>
