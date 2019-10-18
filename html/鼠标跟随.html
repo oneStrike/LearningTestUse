@@ -34,14 +34,14 @@
             height: 284px;
             border: 2px solid red;
             position: absolute;
-            top: 220px;
-            left: 200px;
+            top: 0;
+            left: 0;
+            display: none;
         }
 
         #container .big img {
             width: 100%;
             display: block;
-            top: initial
         }
     </style>
 </head>
@@ -51,22 +51,22 @@
 
         <div class="box">
             <ul>
-                <li><img src="../images/1.png" alt=""></li>
+                <li><img data-src="../images/1.png" src="../images/1.png" alt=""></li>
             </ul>
         </div>
         <div class="box">
             <ul>
-                <li><img src="../images/2.png" alt=""></li>
+                <li><img data-src="../images/2.png" src="../images/2.png" alt=""></li>
             </ul>
         </div>
         <div class="box">
             <ul>
-                <li><img src="../images/3.png" alt=""></li>
+                <li><img data-src="../images/3.png" src="../images/3.png" alt=""></li>
             </ul>
         </div>
         <div class="box">
             <ul>
-                <li><img src="../images/4.png" alt=""></li>
+                <li><img data-src="../images/4.png" src="../images/4.png" alt=""></li>
             </ul>
         </div>
         <div class="big">
@@ -75,7 +75,20 @@
     </div>
     <script>
         ~ function () {
-            let container = document.querySelector('#container');
+            let container = document.querySelector('#container'),
+                imgList = container.querySelectorAll('.box ul li'),
+                bigImg = document.querySelector('.big');
+            imgList = Array.from(imgList);
+            imgList.forEach((item, index) => {
+                item.onmousemove = function test(e) {
+                    let src = item.getAttribute('data-src');
+                    bigImg.src = src;
+                    bigImg.style.display = 'block';
+                };
+                item.addEventListener('onmouseleave', function (e) {
+                    item.onmousemove = null;
+                })
+            })
         }();
     </script>
 </body>

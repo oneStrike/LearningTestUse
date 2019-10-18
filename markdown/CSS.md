@@ -4,6 +4,178 @@
 
 CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力
 
+## 选择器
+
+## 样式属性
+
+**background**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: orangered;
+        background-image: url("../images/1.png");
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>
+```
+
+> background-color ==>设置背景颜色,(颜色单词,rgb,十六进制颜色码)
+>
+> background-image ==>设置背景图片
+>
+> background-attachment ==>图片是否跟随滚动条滚动(scroll 默认,根据元素进行滚动)(fixed 根据浏览器窗口进行滚动)
+>
+> background-repeat ==>设置图片是否平铺(no-repeat 不平铺)(repeat-x,x 轴平铺)(repeat-y,y 轴平铺)
+>
+> background-position ==>设置背景图的位置(第一个值是水平位置)==>(left.right,center)(第二个值是垂直位置)(top,bottom,center)如果只书写一个值,那么第二个值就是 center。 使用 % (第一个值是水平位置，第二个值是垂直。左上角是 0％0％。右下角是 100％100％。如果仅指定了一个值，其他值将是 50％。 。默认值为：0％0％)。使用 px 第一个值是水平位置，第二个值是垂直。左上角是 0。单位可以是像素（0px0px）或任何其他 CSS 单位。如果仅指定了一个值，其他值将是 50％。你可以混合使用％和 positions
+
+**border.**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 0px;
+        height: 0px;
+        border-left-style: solid;
+        border-left-color: transparent;
+        border-left-width: 100px;
+        border-right-style: solid;
+        border-right-color: transparent;
+        border-right-width: 100px;
+        border-top-style: solid;
+        border-top-color: transparent;
+        border-top-width: 100px;
+        border-bottom-style: solid;
+        border-bottom-color: orangered;
+        border-bottom-width: 100px;
+        /*页面展示一个三角形,*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>
+```
+
+> border-style ==>设置边框的样式(solid 实线,dashed 虚线,dotted 点线)可以单独设置某一边的边框`border-left-style:solid`,
+>
+> border-color ==>设置边框的颜色
+>
+> border-width ==>设置边框的大小(px)
+>
+> transparent ==>透明色
+
+## 文本属性
+
+**font.**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      span {
+        font-family: "Candara Light", "Adobe Arabic", serif;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: initial;
+        color: #db192a;
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <span></span>
+  </body>
+</html>
+```
+
+> font-family ==>调用用户系统的字体库显示网页,通常书写多个,以确保网页中的字体可以正常调用用户系统中的文字,如果没有会一次向后调取使用,全都没有则会使用默认的字体,多个字体之间使用,分割,带有空格的字体需要使用""包裹。
+>
+> font-size ==>设置字体的大小
+>
+> font-weight ==>设置字体是否加粗,(normal 默认样式)(bold 加粗),也可以使用数字,100-900;(根据数字大小决定加粗的样式)
+>
+> font-style ==>设置字体是否斜体(normal 默认样式)(initial 斜体)(oblique 斜体,不推荐,会将不支持斜体的字体同样倾斜)
+>
+> color ==>设置字体的颜色 letter-spacing ==>设置字体间隔
+>
+> letter-spacing ==>设置字体间距(px)
+>
+> word-spacing ==>设置词间距,(只适用于英文))
+>
+> word-break ==>设置英文文本折行 break-all; (强制折行,会产生断词)
+>
+> word-wrap ==>设置英文文本折行 break-word;(不是那么强烈的折行 ，会产生一些空白区域)
+
+**文本.**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      span {
+        text-decoration: none;
+        text-transform: lowercase;
+        text-indent: 2rem;
+        text-align: justify;
+        line-height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <span></span>
+  </body>
+</html>
+```
+
+> text-decoration ==>下划线 : underline; 删除线 :line-through 上划线 : overline; 不添加任何装饰 : none; 注：添加多个文本修饰：line-through underline overline;
+>
+> text-transform ==>字母小写:lowercase; 字母大写:uppercase;首字母大写:capitalize
+>
+> text-indent ==>首行缩进,一般使用 rem 作为单位
+>
+> text-align ==>文本对齐方式:左对齐:left;右对齐:right;居中:center;两端对齐:justify;
+>
+> line-height ==>行高;number(px) | scale(比例值,跟文字大小成正比)
+
+## 浮动
+
+## 定位
+
+## 盒子模型
+
+## 弹性盒子
+
 ## LESS
 
 由于 css 是标记语言，并不是编程语言，并不拥有函数，变量，判断等一系列编程语言具有的特性，由此就产生了我们在书写 css 代码的时候会产生大量的重复性的代码
