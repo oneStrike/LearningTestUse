@@ -7,33 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="../css/reset.min.css">
-    <style>
-        body {
-            height: 20000px;
-            width: 20000px;
-        }
 
-        .box {
-            width: 0px;
-            height: 0px;
-            border-left-style: solid;
-            border-left-color: transparent;
-            border-left-width: 100px;
-            border-right-style: solid;
-            border-right-color: transparent;
-            border-right-width: 100px;
-            border-top-style: solid;
-            border-top-color: transparent;
-            border-top-width: 100px;
-            border-bottom-style: solid;
-            border-bottom-color: orangered;
-            border-bottom-width: 100px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="box"></div>
+    <script>
+        let myArray = ["zero", "one", "two"];
+
+        myArray.myMethod = function (str) {
+            console.log(arguments.length > 0 ? this[str] : this);
+        };
+        let a = myArray.myMethod.bind(myArray)
+        a()
+    </script>
 </body>
 
 </html>

@@ -2402,7 +2402,7 @@ str.toLowerCase();
 ```javascript
 let str = "hello word";
 let reg = /\b[a-z]/g;
-//=>\b匹配单词��界，通过正则获取到每个单词的首字母
+//=>\b匹配单词���界，通过正则获取到每个单词的首字母
 
 str.replace(reg, item => item.toUpperCase());
 /**
@@ -2972,7 +2972,7 @@ js 中的继承是指父类下的所有子类都可以使用父类原型中的�
 
 **缺点：**
 
-- 子类和父类公用同一个原型，子类或者父类只要有一个修改另一个也会修改
+- 子类和父类公用同一个原型，子类修改原型中的属性父类的原型也会改变
 - 不能同时继承多个父类
 
 ```javascript
@@ -2992,6 +2992,7 @@ B.prototype = new A();
 B.prototype = A.prototype;
 /**
  * 这是最简单的继承方式之一，
+ * 直接让子类的原型指向父类的原型
  * 只可以继承父类原型中的属性和方法
  * 无法继承父类私有的属性和方法
  *
@@ -3123,7 +3124,7 @@ B.prototype.constructor=B;
 B.prototype = Object.create(A.prototype)
 /**
  * 并不会执行父类的构造函数
- * 而是创建一个新的对象最为中转的原型
+ * 而是创建一个新的对象作为中转的原型
  * 并且让新创建的对象的__proto__指向父类的原型
  * 最后将创建好的新对象赋值给B.prototype
  * 这样B的原型就会通过中转的空对象指向父类的prototype
@@ -4295,6 +4296,32 @@ A(6);
 
 闭包是一种现象，在代码执行的时候产生一个不销毁的私有作用域（栈内存）就叫做闭包，闭包可以保护其内部的变量不受外部污染，还可以保存内部的值，方便我们以后调用，
 
+在定时器、事件监听器、 Ajax 请求、跨窗口通信、Web Workers 或者任何其他的异步（或者同步）任务中，只要使 用了回调函数，实际上就是在使用闭包！
+
+当一个函数不是在自己定义的作用于中执行,通常就会形成一个闭包,比如在一个函数内部定义了另外的一个函数,并且将这个函数返回到另外的作用域中,在别的作用域中执行通常就会产生闭包
+
+```javascript
+function test() {
+  let a="one";
+  function test2() {
+    console.log(a);
+  }
+  return test2;
+}
+let fn = test();
+fn();
+// ==>"one"
+
+/**
+ * 这就是一个简单的闭包,
+ * test2定义在test的作用域中,
+ * 但是test2所绑定的这个函数则被return
+ * 到外部,并且被另外一个名称绑定并且执行
+ * 所以这个函数的执行环境就是在全局作用域中
+ * 但是这个函数仍然关联着test这个函数的作用域
+ */
+```
+
 - 过多的使用闭包会造成性能上的缺失，因为会造成过多的栈内存无法被释放，因此我们在开发中应该尽量避免使用闭包。
 
 - 过多的使用全局变量会造成**全局变量污染**，因此有时候我们可以将一些功能封装在闭包当中，使其变成私有变量，减少全局变量的污染。
@@ -5142,13 +5169,13 @@ var str = `102${代码}123`;
 
 ```javascript
 setTimeout(funciton(){
-	console.log(123);
-	//=>在1秒钟之后执行
+ console.log(123);
+ //=>在1秒钟之后执行
 },1000);
 
 setInterval(function(){
-	consoel.log(123)
-	//=>每间隔1秒钟执行一次
+ consoel.log(123)
+ //=>每间隔1秒钟执行一次
 },1000)
 
 ```
@@ -5158,22 +5185,81 @@ setInterval(function(){
 定时器的返回值是一个正整数,返回值从数字 1 开始一次累加,无论是`setTimerout`还是`setInterval`共用一个编号池,因此增加任意一种的定时器都会使返回值自动累加 1
 
 ```javascript
-	let timer=setTimerout(function(){
-		consoel.log(timer)
-		//=>序号  1
-	},1000);
+ let timer=setTimerout(function(){
+  consoel.log(timer)
+  //=>序号  1
+ },1000);
 
-	let timer2=setInterval(funciton(){
-		console.log(timer2)
-		//=>序号  2
-	},1000);
+ let timer2=setInterval(funciton(){
+  console.log(timer2)
+  //=>序号  2
+ },1000);
 
-	let timer3=setInterval(function(){
-		console.log(timer3)
-		//=>序号  3
-	},1000)
+ let timer3=setInterval(function(){
+  console.log(timer3)
+  //=>序号  3
+ },1000)
 
-	//=>每设置一个定时器都会累加1,不论是那种定时器
+ //=>每设置一个定时器都会累加1,不论是那种定时器
+```
+
+**定时器中的`this`**
+
+> 直接书写在定时器中的代码会让代码中的`this`指向`window`,如果是在严格模式下则会指向`undefined`,如果传递的是一个回调函数,即使是在严格模式下,`this`也会指向`window`
+
+```javascript
+let myArray = ["zero", "one", "two"];
+
+myArray.myMethod = function(str) {
+  console.log(arguments.length > 0 ? this[str] : this);
+};
+//==> 直接调用
+myArray.myMethod();
+// ==>["zero","one","two"];
+myArray.myMethod(1);
+//==>"one"
+
+// ==>定时器调用
+setTimeout(myArray.myMethod, 1000);
+// ==>window
+setTimeout(myArray.myMethod, 1000, 1);
+//==>undefined
+```
+
+**改变定时器中的`this`**
+
+- 使用包装函数,
+
+```javascript
+let myArray = ["zero", "one", "two"];
+
+myArray.myMethod = function(str) {
+  console.log(arguments.length > 0 ? this[str] : this);
+};
+
+setTimeout(function() {
+  myArray.myMethod();
+}, 1000);
+//=>["zero","one","two"]
+
+// ==>使用箭头函数也可以
+
+setTimeout(() => {
+  myArray.myMethod(2);
+}, 1000);
+//==>"two"
+```
+
+- 使用 `bind` 预处理`this`
+
+```javascript
+let myArray = ["zero", "one", "two"];
+
+myArray.myMethod = function(str) {
+  console.log(arguments.length > 0 ? this[str] : this);
+}.bind(myArray);
+
+setTimeout(myArray.myMethod, 1000);
 ```
 
 ### `clearTimeout` / `clearInterval`
@@ -5190,23 +5276,23 @@ let timer = setTimerout(function() {
 
 ## 同步异步
 
-- 同步:一次之能执行一个任务,当前任务结束之后才会执行下一个任务
+- 同步:一次只能执行一个任务,当前任务结束之后才会执行下一个任务
 - 异步:可以同时执行多个任务,当前任务没有完成也会执行下一个任务
 
-浏览器是多进程的,而 js 是单线程的,每次只能执行一个任务,并且当前任务不完成则无法执行下一个任务,而 js 中之所以存在异步编程,则是通过一些机制伪装的,并不是真正意义上的异步编程.
+浏览器是多进程的,而 js 是单线程的,每次只能执行一个任务,并且当前任务不完成则无法执行下一个任务, js 中之所以存在异步编程,则是通过一些机制伪装的,并不是真正意义上的异步编程.
 
-在浏览器执行 js 代码时分为主任务队列和等耐任务队列,当主任务队列完成后,才会执行等耐任务队列.
+在浏览器执行 js 代码时分为主任务队列和等待任务队列,当主任务队列完成后,才会执行等待任务队列.
 
 **浏览器执行流程.**
 
 1. 自上而下执行主任务队列中的代码,
 2. 碰到异步的任务时将其放入等待任务队列
 3. 继续执行其他主任务队列中的任务
-4. 主任务队列执行完毕后,去等待任务队列查找满足条件的代码
+4. 主任务队列执行完毕后,去等待任务队列查找满足条件的任务
 5. 如果存在多个满足条件的会优先将最先满足的执行
 6. 将满足条件的任务拉回到主任务队列执行
 7. 执行完毕后继续在等待任务队列查找,将满足条件的任务依次拉入主任务队列执行
-8. 只要主任务队列的任务没有完成,无论等耐任务中的条件是否满足,都不会执行,
+8. 只要主任务队列的任务没有完成,无论等待任务中的条件是否满足,都不会执行,
 
 ```javascript
 setTimeout(() => {
@@ -5288,7 +5374,7 @@ console.log(9);
  * 所以就改变了定时器满足条件的先后顺序
  * 当for循环执行完毕后定时器10ms优先满足条件,其次是20ms
  * 浏览器继续执行主任务队列的任务,碰到定时器后将其放入等待任务队列
- * 而此时先前的两个定时器就已经满足条件了
+ * 在将8ms和15ms的定时器添加进等待任务的时候,10ms和20ms的定时器就已经满足执行条件了
  * 当所有的主任务执行完毕后,开始讲满足条件的等待任务拉入主线程执行
  * 最优先满足的是10ms和20ms分别输出:3  1
  * 执行完毕后才可以执行8ms和15ms,分别输出:6 8
@@ -5335,7 +5421,7 @@ let p = new Promise(function(resolve, reject) {
 
 ```javascript
 new Promise(function(resolve, rejected) {
-  setInterval(function() {
+  setTimerout(function() {
     resolve(100);
   }, 1000);
 }).then(
@@ -5343,8 +5429,9 @@ new Promise(function(resolve, rejected) {
     console.log(value);
     //=>100
     /**
+     * value接收的就是Peomise执行成功,resolve传递的参数
      *Promise为fulfilled状态时作为回调函数被调用
-     *接收的是Promise执行成功fulfilled函数的返回值
+     *接收的是Promise执行成功resolve函数的返回值
      */
   },
   function(value) {

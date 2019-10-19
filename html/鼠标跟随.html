@@ -11,7 +11,7 @@
         #container {
             width: 900px;
             height: 600px;
-            overflow: hidden;
+            /* overflow: hidden; */
             margin: 50px auto;
             border: 2px solid black;
         }
@@ -75,19 +75,21 @@
     </div>
     <script>
         ~ function () {
-            let container = document.querySelector('#container'),
-                imgList = container.querySelectorAll('.box ul li'),
-                bigImg = document.querySelector('.big');
-            imgList = Array.from(imgList);
-            imgList.forEach((item, index) => {
-                item.onmousemove = function test(e) {
+            let container = document.getElementById('container'),
+                li = container.querySelectorAll('img'),
+                bigBox = container.querySelector('.big'),
+                big = container.querySelector('.big img');
+            [].forEach.call(li, function (item, index) {
+                item.onmousemove = function (e) {
                     let src = item.getAttribute('data-src');
-                    bigImg.src = src;
-                    bigImg.style.display = 'block';
+                    big.src = src;
+                    bigBox.style.display = 'block';
+                    bigBox.style.top = e.clientY +30+ 'px';
+                    bigBox.style.left = e.clientX +30+ 'px';
                 };
-                item.addEventListener('onmouseleave', function (e) {
-                    item.onmousemove = null;
-                })
+                item.onmouseleave = function (e) {
+                    bigBox.style.display = 'none';
+                }
             })
         }();
     </script>
