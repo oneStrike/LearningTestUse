@@ -48,32 +48,23 @@ span {
 
 **ID 选择器:**
 
-> 根据页面中标签的 ID 进行选择,css 中以#开头(#ID 名{})
-> 一个页面中不允许出现相同的 ID 名,具有唯一性
-> ID 可以使用字母,数字,下划线,中划线,命名(不能以数字开头)
-> 可以使用小驼峰命名
+> 根据页面中标签的 ID 进行选择,css 中以#开头(#ID 名{}) 一个页面中不允许出现相同的 ID 名,具有唯一性 ID 可以使用字母,数字,下划线,中划线,命名(不能以数字开头) 可以使用小驼峰命名
 
 **CLASS 选择器:**
 
-> 根据页面标签的 class 类名进行选择,css 中以.开头(.class 类名)
-> class 类名同一个页面中可以出现对此,不具有唯一性
-> 一个标签可以拥有多个 class 类名
-> 可以使用标签名筛选 class 类名(标签.class{}),标签与类名之间不存在空格
+> 根据页面标签的 class 类名进行选择,css 中以.开头(.class 类名) class 类名同一个页面中可以出现对此,不具有唯一性一个标签可以拥有多个 class 类名可以使用标签名筛选 class 类名(标签.class{}),标签与类名之间不存在空格
 
 **标签选择器:**
 
-> 根据页面中的标签名进行选择,css 中直接书写标签名(标签名)
-> 通常是给所有相同的标签添加或删除一些样式是使用
+> 根据页面中的标签名进行选择,css 中直接书写标签名(标签名) 通常是给所有相同的标签添加或删除一些样式是使用
 
 **群组选择器:**
 
-> 混合使用选择器,多个选择器之间使用,分割
-> 通常给多个不同的标签添加相同的样式时使用
+> 混合使用选择器,多个选择器之间使用,分割通常给多个不同的标签添加相同的样式时使用
 
 **通配符:**
 
-> \* 表示通配符,可以选择页面中所有的标签
-> 不建议使用
+> \* 表示通配符,可以选择页面中所有的标签不建议使用
 
 **层级选择器:**
 
@@ -96,17 +87,13 @@ div + span {
 }
 ```
 
-> 后代:N M { }; 选择 N 下面所有匹配的 M 标签
-> 无论嵌套多少层,只要匹配 M 都会被选择
+> 后代:N M { }; 选择 N 下面所有匹配的 M 标签无论嵌套多少层,只要匹配 M 都会被选择
 >
-> 子代:N > M { };选择 N 下一个层级的 M 标签
-> 不会选择 M 标签的下一个层级内符合的标签
+> 子代:N > M { };选择 N 下一个层级的 M 标签不会选择 M 标签的下一个层级内符合的标签
 >
-> 兄弟:N ~ M { }; 选择 N 标签兄弟中(同级)所有匹配的 M 标签
-> 只会选择 N 标签下面的兄弟标签,并不会选择上面的
+> 兄弟:N ~ M { }; 选择 N 标签兄弟中(同级)所有匹配的 M 标签只会选择 N 标签下面的兄弟标签,并不会选择上面的
 >
-> 相邻:N + M { }; 选择 N 同一级中第一个匹配 M 标签
-> 只会选择一个第一个匹配的标签
+> 相邻:N + M { }; 选择 N 同一级中第一个匹配 M 标签只会选择一个第一个匹配的标签
 
 **属性选择器:**
 
@@ -133,20 +120,15 @@ div[class][id] {
 }
 ```
 
-> \[class=box]:完全匹配
-> 标签的 class 类名必须完全相等,并且是唯一的,不能出现多个,即使是不同的类名
+> \[class=box]:完全匹配标签的 class 类名必须完全相等,并且是唯一的,不能出现多个,即使是不同的类名
 >
-> \[class^=box]:开头匹配
-> 标签的 class 类名起始位置符合,不会验证整个类名,只要起始位置的字符匹配就会被选中
+> \[class^=box]:开头匹配标签的 class 类名起始位置符合,不会验证整个类名,只要起始位置的字符匹配就会被选中
 >
-> \[class\$=box]:结尾匹配
-> 标签的 class 类名结束的位置匹配,不会验证整个类名,只要最后结尾处的字符匹配就会被选中
+> \[class\$=box]:结尾匹配标签的 class 类名结束的位置匹配,不会验证整个类名,只要最后结尾处的字符匹配就会被选中
 >
-> \[class\*=box]:不完全匹配
-> 标签的 class 类名包含就会被选中,不会验证整个类名,类名中出现相同的字符就会被选中
+> \[class\*=box]:不完全匹配标签的 class 类名包含就会被选中,不会验证整个类名,类名中出现相同的字符就会被选中
 >
-> \[class][id]:混合匹配
-> 标签必须同时拥有 class 和 id 名才会被选中
+> \[class][id]:混合匹配标签必须同时拥有 class 和 id 名才会被选中
 
 **伪类选择器:**
 
@@ -210,7 +192,7 @@ a:active {
 
 | 选择器              | 描述                                                   |
 | ------------------- | ------------------------------------------------------ |
-| :nth-child(n)       | 从头部开始筛选所有的后代标签                           |
+| :nth-child()        | 从头部开始筛选所有的后代标签                           |
 | :nth-last-child()   | 从尾部开始筛选所有的后代标签                           |
 | :last-child         | 选择父标签内的最后一个子元素                           |
 | :first-child        | 选择父元素内第一个子元素                               |
@@ -303,15 +285,36 @@ div {
 }
 ```
 
-> background-color ==>设置背景颜色,(颜色单词,rgb,十六进制颜色码)
->
-> background-image ==>设置背景图片
->
-> background-attachment ==>图片是否跟随滚动条滚动(scroll 默认,根据元素进行滚动)(fixed 根据浏览器窗口进行滚动)
->
-> background-repeat ==>设置图片是否平铺(no-repeat 不平铺)(repeat-x,x 轴平铺)(repeat-y,y 轴平铺)
->
-> background-position ==>设置背景图的位置(第一个值是水平位置) ==>(left.right,center)(第二个值是垂直位置)(top,bottom,center)如果只书写一个值,那么第二个值就是 center。 使用 % (第一个值是水平位置，第二个值是垂直。左上角是 0％0％。右下角是 100％100％。如果仅指定了一个值，其他值将是 50％。 。默认值为：0％0％)。使用 px 第一个值是水平位置，第二个值是垂直。左上角是 0。单位可以是像素（0px0px）或任何其他 CSS 单位。如果仅指定了一个值，其他值将是 50％。你可以混合使用％和 positions
+> background-color :设置背景颜色
+
+1. 颜色单词,rgb,十六进制颜色码,
+2. rgba(0,0,0,0.5)可以设置背景图的透明度,最有以为书写的是透明度
+
+> background-image :设置背景图片
+
+1. url()内书写背景图的路径,背景图不占据布局空间
+
+> background-attachment :图片是否跟随滚动条滚动
+
+1. scroll 默认,根据元素进行滚动
+
+2. fixed 根据浏览器窗口进行滚动
+
+> background-repeat ==>设置图片是否平铺
+
+1. no-repeat 不平铺
+
+2. repeat-x, x 轴平铺
+
+3. repeat-y, y 轴平铺
+
+> background-position ==>设置背景图的位置
+
+1. 第一个值是水平位置)(left.right,center)(第二个值是垂直位置)(top,bottom,center)如果只书写一个值,那么第二个值就是 center。
+
+2. 使用 % (第一个值是水平位置，第二个值是垂直。左上角是 0％0％。右下角是 100％100％。如果仅指定了一个值，其他值将是 50％。 。默认值为：0％0％)。
+
+3. 使用 px 第一个值是水平位置，第二个值是垂直。左上角是 0。单位可以是像素（0px0px）或任何其他 CSS 单位。如果仅指定了一个值，其他值将是 50％。你可以混合使用％和 positions
 
 **border.**
 
@@ -341,13 +344,21 @@ div {
 }
 ```
 
-> border-style ==>设置边框的样式(solid 实线,dashed 虚线,dotted 点线)可以单独设置某一边的边框`border-left-style:solid`,
->
+> border-style ==>设置边框的样式
+
+1. solid 实线,
+
+2. dashed 虚线,
+
+3. dotted 点线
+
+4. 可以单独设置某一边的边框`border-left-style:solid`,
+
 > border-color ==>设置边框的颜色
->
+
 > border-width ==>设置边框的大小(px)
->
-> transparent ==>透明色
+
+> transparent ==>设置边框为透明色
 
 ## 文本属性
 
@@ -367,23 +378,41 @@ span {
 }
 ```
 
-> font-family ==>调用用户系统的字体库显示网页,通常书写多个,以确保网页中的字体可以正常调用用户系统中的文字,如果没有会一次向后调取使用,全都没有则会使用默认的字体,多个字体之间使用,分割,带有空格的字体需要使用""包裹。
->
+> font-family ==>调用用户系统的字体库显示网页,
+
+1. 通常书写多个,以确保网页中的字体可以正常调用用户系统中的文字,
+
+2. 如果没有会一次向后调取使用,全都没有则会使用默认的字体,多个字体之间使用,分割
+
+3. 带有空格的字体需要使用""包裹。
+
 > font-size ==>设置字体的大小
->
-> font-weight ==>设置字体是否加粗,(normal 默认样式)(bold 加粗),也可以使用数字,100-900;(根据数字大小决定加粗的样式)
->
-> font-style ==>设置字体是否斜体(normal 默认样式)(initial 斜体)(oblique 斜体,不推荐,会将不支持斜体的字体同样倾斜)
->
+
+> font-weight ==>设置字体是否加粗,
+
+1. normal 默认样式
+2. bold 加粗
+3. 也可以使用数字,100-900;(根据数字大小决定加粗的样式)
+
+font-style ==>设置字体是否斜体
+
+1. normal 默认样式
+2. initial 斜体
+3. oblique 斜体,不推荐,会将不支持斜体的字体同样倾斜
+
 > color ==>设置字体的颜色
->
+
 > letter-spacing ==>设置字体间距(px)
->
+
 > word-spacing ==>设置词间距,(只适用于英文))
->
-> word-break ==>设置英文文本折行 break-all; (强制折行,会产生断词)
->
-> word-wrap ==>设置英文文本折行 break-word;(不是那么强烈的折行 ，会产生一些空白区域)
+
+> word-break ==>设置英文文本折行
+
+1. break-all; (强制折行,会产生断词)
+
+> word-wrap ==>设置英文文本折行
+
+1. break-word;(不是那么强烈的折行 ，会产生一些空白区域)
 
 **文本.**
 
@@ -394,18 +423,54 @@ span {
   text-indent: 2rem;
   text-align: justify;
   line-height: 20px;
+  overflow: visible;
+  vertical-align: bottom;
 }
 ```
 
-> text-decoration ==>下划线 : underline; 删除线 :line-through 上划线 : overline; 不添加任何装饰 : none; 注：添加多个文本修饰：line-through underline overline;
->
-> text-transform ==>字母小写:lowercase; 字母大写:uppercase;首字母大写:capitalize
->
-> text-indent ==>首行缩进,一般使用 rem 作为单位
->
-> text-align ==>文本对齐方式:左对齐:left;右对齐:right;居中:center;两端对齐:justify;
->
-> line-height ==>行高;number(px) | scale(比例值,跟文字大小成正比)
+> text-decoration ==>文本装饰线
+
+1. underline; 删除线
+2. line-through 上划线
+3. overline; 中线
+4. none: 不添加任何装饰
+5. 加多个文本修饰：line-through underline overline;
+
+> text-transform ==>字母小写
+
+1. lowercase: 字母小写
+2. uppercase: 字母大写
+3. capitalize: 首字母大写
+
+> text-indent ==>首行缩进,
+
+1. 一般使用 rem 作为单位
+
+> text-align ==>文本对齐方式
+
+1. left: 左对齐
+2. right: 右对齐
+3. center: 居中
+4. justify: 两端对齐
+
+> line-height ==>文字行高
+
+1. number(px)
+2. scale(比例值,跟文字大小成正比)
+
+> overflow ==>文本溢出隐藏
+
+1. visible: 默认,不隐藏
+2. hidden: 隐藏
+3. scroll: 滚动,文本不溢出也会显示滚动条
+4. auto 自动,不溢出不做任何处理,溢出则显示滚动条
+5. overflow-x;overflow-y: 可以单独设置 x 和 y 轴的文本溢出
+
+> vertical-align ==>改变文字的对其方式
+
+1. baseline: 默认,使用基线对其
+2. bottom: 使用底线对齐(可解决图片间隙)
+3. middle: 使用中线对齐(可解决图片间隙)
 
 ## 盒子模型
 
@@ -429,7 +494,7 @@ span {
 
 > 文本内容只会处于 content 内容区域
 >
-> paddign 不可以设置为负数,margin 可以设置为负数
+> padding 不可以设置为负数,margin 可以设置为负数
 >
 > 背景图和背景颜色只会填充至 border 位置(border 有边框颜色则会覆盖),不会涵盖 margin
 
@@ -498,8 +563,7 @@ span {
 
 1. 使用 BFC 规范
 2. 给父元素添加边框
-3. 使用 padding 替代 margin
-   padding 是给父元素设置,在标准盒模型下需要修改 height 值,否则会改变高度
+3. 使用 padding 替代 margin padding 是给父元素设置,在标准盒模型下需要修改 height 值,否则会改变高度
 
 ```css
 .box {
@@ -518,8 +582,8 @@ span {
   height: 100px;
   background: lightpink;
   margin-top: 100px;
-  /* 如果使用父元素的padding替代,则子元素不需要再设置marign */
-}
+  /* 如果使用父元素的padding替代,则子元素不需要再设置margin */
+
 ```
 
 **margin 和 width 自适应:**
@@ -550,12 +614,83 @@ margin 自适应只适用与左右 margin,width 自适应会默认占据整个�
    * 如果padding + border 的值超过了父元素的width
    * 仍然会产生溢出
    *
-   * 如果子元素的widht设置为父元素的100%
+   * 如果子元素的width设置为父元素的100%
    * 那么只要添加padding或者border
    * 子元素就会产生溢出情况
    */
 }
 ```
+
+**img 底部间隙:**
+
+> inline 元素的 vertical-align 属性默认为 baseline，baseline 意味着元素的基线通父元素的基线对齐，父元素的基线为字母 I 和 v 的下边缘(线)，但是像图片或者输入框这种元素，本身没有基线，则是将其底端通父元素的基线对齐。
+
+![KKSvJU.png](https://s2.ax1x.com/2019/10/20/KKSvJU.png)
+
+解决方案:
+
+1. 转换为块级元素
+1. vertical-align:bottom
+
+```css
+img {
+  display: block;
+  /* 块级元素不受基线的影响 */
+
+  vertical-align: bottom;
+  /* 底线对齐 */
+
+  vertical-align: middle;
+  /* 使用中线对齐也可以解决 */
+}
+```
+
+### 盒子属性
+
+**cursor:**
+
+> 改变鼠标的默认样式
+
+```css
+box {
+  cursor: pointer;
+  /* 当鼠标移动至box盒子上
+   * 光标会变成指示链接的指针(一只小手)
+   */
+  cursor: url(./img/1.ico), auto;
+  /* 采用自定义的光标,auto表示引用失败做的处理
+   * 如果引用失败,自动采用系统默认的样式
+   */
+}
+```
+
+1. pointer: 指示链接的指针(一只小手)
+2. move: 移动
+3. help: 帮助
+4. url: 自定义,只能使用 ico 或 cur 格式的图片
+
+**opacity:**
+
+> 改变元素的透明度,0 =>完全透明, 1 =>不透明
+
+```css
+box {
+  opacity: 0.5;
+  /* 半透明 */
+}
+```
+
+**min-height/max-height:**
+
+> min-height 设置盒子的最小高度,当内容超出最小高度时盒子会被内容撑开,而不会造成内容溢出,一般不确定一个盒子的内容时使用
+
+> max-height 设置盒子的最大高度,不会被内容撑开,内容超出会溢出,使用 overflow:hidden 可以将溢出的内容隐藏,极少使用
+
+**min-width/max-width:**
+
+> min-width 设置盒子的最小宽度,一般用于设置图片,不知道图片尺寸的时候用来规定图片的最小尺寸,如果图片的最小尺寸超过设置的值则会被压缩
+
+> max-width 设置盒子的最大宽度,当图片的尺寸小于设置的最大宽度时,图片会被拉伸
 
 **box-sizing:**
 
@@ -567,11 +702,268 @@ margin 自适应只适用与左右 margin,width 自适应会默认占据整个�
 
 ## 标签分类
 
-## 浮动
+### 类型分类
 
-## 定位
+**块元素(block):**
 
-## 弹性盒子
+特点:
+
+1. 独占一行,每一个块级元素都会默认上下排列,
+2. 可以使用所有的 css 样式属性,如 padding,margin,border....
+3. 如果不设置宽高,宽度会根据父元素自适应,和父元素同宽,高度有内容决定
+
+| 标签                | 注释                  |
+| ------------------- | --------------------- |
+| div                 | 分区                  |
+| h1~h6               | 标题                  |
+| ol                  | 有序列表              |
+| ul                  | 无序列表              |
+| li                  | 列表内容              |
+| dl                  | 自定义列表            |
+| dd                  | dl 中的 dt 描述       |
+| from                | 表单                  |
+| hr                  | 水平分割线            |
+| p                   | 段落                  |
+| table               | 表格                  |
+| thead               | 表格头部              |
+| tbody               | 表格内容              |
+| tfoot               | 表格末尾              |
+| article ==(H5)==    | 独立或可复用的区域    |
+| aside ==(H5)==      | 侧边栏或标注框        |
+| canvas ==(H5)==     | 绘制图形              |
+| figure ==(H5)==     | 图片,插图等信息组     |
+| figcaption ==(H5)== | 图片,插图等信息组标题 |
+| section ==(H5)==    | 独立意义的分区        |
+| audio ==(H5)==      | 音频                  |
+| video ==(H5)==      | 视频                  |
+| header ==(H5)==     | 头部                  |
+| footer ==(H5)==     | 头部                  |
+
+**行元素(inline):**
+
+特点:
+
+1. 共处一行,不会自动换行
+2. 无法设置宽高,无法设置设置上下 padding 和 margin(左右 padding 和 margin 可以设置)
+3. 宽高自适应,由内容决定
+
+| 标签                | 注释       |
+| ------------------- | ---------- |
+| i                   | 斜体       |
+| b                   | 加粗       |
+| em                  | 强调斜体   |
+| strong              | 强调加粗   |
+| span                | 文本修饰   |
+| sub                 | 文字上标   |
+| sup                 | 文字下标   |
+| code                | 计算机代码 |
+| a                   | 超链接     |
+| button              | 空按钮     |
+| input ==(特殊)==    | 表单       |
+| img ==(特殊)==      | 图片       |
+| select ==(特殊)==   | 下拉选项   |
+| textarea ==(特殊)== | 文本域     |
+| label               | 表单       |
+
+**行内快元素(inline-block):**
+
+特点:
+
+1. 可以设置宽高,padding 和 margin
+2. 不会独占一行,共处一行
+
+| 标签             | 注释 |
+| ---------------- | ---- |
+| input ==(特殊)== | 表单 |
+| img ==(特殊)==   | 图片 |
+
+**使用 display 可以标签的三种特点:**
+
+- display:block ==>将标签转换为块级元素
+- display:inline ==>将标签转换为内联元素
+- display:inline-block ==>将标签转换成内联块元素
+- display:none ==>将标签隐藏(不占据布局空间)
+
+### 显示分类
+
+**可替换元素:**
+
+> 显示的内容根据标签的属性来决定显示的内容
+
+| 标签                | 注释     |
+| ------------------- | -------- |
+| input ==(特殊)==    | 表单     |
+| img ==(特殊)==      | 图片     |
+| select ==(特殊)==   | 下拉选项 |
+| textarea ==(特殊)== | 文本域   |
+
+> 可替换元素拥有浏览器内置的宽高,例如 img 标签可以直接设置宽高,以为 img 拥有内置的 width 和 height,如果不设置宽高,就会按照图片的默认尺寸展示,表单元素也有默认的宽高
+
+**不可替换元素:**
+
+> 浏览器根据标签的内容直接显示,如 div,p,span,大部分的标签都是不可替换元素
+
+### 内容分类
+
+![Kusqs0.png](https://s2.ax1x.com/2019/10/20/Kusqs0.png)
+
+<https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories>
+
+## 布局
+
+**display:**
+
+> 可以改变一个元素的显示类型
+
+1. block: 将内联元素修改为块级元素,
+2. inline: 将块级元素修改为内联元素
+3. inline-block: 将一个元素修改为内联块级元素
+
+**float:**
+
+> 可以使元素脱离正常的文本流进行显示
+
+1. left: 让元素浮动至所在块级容器的左侧
+2. right: 让元素浮动至所在块级容器的右侧
+
+> 浮动会让一个元素脱离正常的文本流,并且不再占据布局空间,浮动元素后面的元素会默认位移至该浮动元素浮动之前的位置,浮动元素会遮盖住位移上去未浮动的元素,但是并不会遮盖住文字内容
+
+```css
+.box1,
+.box2 {
+  width: 318px;
+  height: auto;
+  border: 2px solid orangered;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+.box1 li:nth-child(1) {
+  width: 100px;
+  height: 100px;
+  background: brown;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+  float: left;
+}
+
+.box1 li:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  background: lightgreen;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+
+.box2 {
+  margin-left: 50px;
+}
+
+.box2 li:nth-child(1) {
+  width: 100px;
+  height: 100px;
+  background: brown;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+
+.box2 li:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  background: lightgreen;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+```
+
+![KKhoCV.png](https://s2.ax1x.com/2019/10/20/KKhoCV.png)
+
+> 一个父容器内多个子元素存在浮动时,会依次从浮动的位置排列,如果超出了父容器的宽度时则会向下排列,如果高度超过则会溢出
+
+```css
+ul {
+  width: 318px;
+  height: 300px;
+  border: 2px solid orangered;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  width: 100px;
+  height: 100px;
+  background: brown;
+  float: left;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+```
+
+> 设置了浮动的子元素不再具有宽高自适应,会以实际的内容大小展示
+
+```css
+ul {
+  width: 318px;
+  height: 300px;
+  border: 2px solid orangered;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li:nth-child(1),
+li:nth-child(2),
+li:nth-child(3) {
+  width: 100px;
+  height: 100px;
+  background: brown;
+  float: left;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+
+li:nth-child(4) {
+  background: brown;
+  float: left;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+```
+
+![KKRDhT.png](https://s2.ax1x.com/2019/10/20/KKRDhT.png)
+
+> 如果父容器没有设置宽高,浮动的子元素也不会撑起父容器的大小
+
+```css
+ul {
+  width: 318px;
+  border: 2px solid orangered;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  width: 100px;
+  height: 100px;
+  background: brown;
+  float: left;
+  box-sizing: border-box;
+  border: 2px solid black;
+  margin: 3px;
+}
+```
+
+![KKggGF.png](https://s2.ax1x.com/2019/10/20/KKggGF.png)
 
 ## LESS
 
@@ -614,7 +1006,7 @@ less 是 css 的预编译语言，就是让 css 拥有面向对象编程的思�
 
 ### LESS 语法
 
-**变量**
+**变量:**
 
 - 在 less 中也可以使用变量存储一些公共的值，我们使用的时候直接调用这个变量就可以了，如果后期需要修好一些公共的值，我们直接修改这个变量内的值就可以了
 
@@ -634,7 +1026,7 @@ a:hover {
 background: url("@{bg-src}/news_1.png") no-repeat;
 ```
 
-**函数**
+**函数:**
 
 - 和 js 中的函数语法类似。同样也是为了将一些公共的样式封装到一个函数中，需要的时候直接调用函数即可。
 
@@ -663,7 +1055,7 @@ background: url("@{bg-src}/news_1.png") no-repeat;
 }
 ```
 
-**层级嵌套**
+**层级嵌套:**
 
 - less 中的选择后代元素更加的简单，可以直接书写到父元素内
 
@@ -706,7 +1098,7 @@ background: url("@{bg-src}/news_1.png") no-repeat;
 }
 ```
 
-**导入外部文件**
+**导入外部文件:**
 
 - 对于一些公共的样式我们一般会书写在另外的一个文件内，然后在当前书写的 less 文件中引入公共的样式
 

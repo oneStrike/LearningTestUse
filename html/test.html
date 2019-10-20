@@ -6,20 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/reset.min.css">
+    <!-- <link rel="styleshe    et" href="../css/reset.min.css"> -->
+    <style>
+        .box1,
+        .box2 {
+            width: 318px;
+            height: auto;
+            border: 2px solid orangered;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            float: left;
+        }
 
+        .box1 li:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: brown;
+            box-sizing: border-box;
+            border: 2px solid black;
+            margin: 3px;
+            float: left;
+        }
+
+        .box1 li:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: lightgreen;
+            box-sizing: border-box;
+            border: 2px solid black;
+            margin: 3px;
+        }
+
+        .box2 {
+            margin-left: 50px;
+        }
+
+        .box2 li:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: brown;
+            box-sizing: border-box;
+            border: 2px solid black;
+            margin: 3px;
+        }
+
+        .box2 li:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: lightgreen;
+            box-sizing: border-box;
+            border: 2px solid black;
+            margin: 3px;
+        }
+    </style>
 </head>
 
 <body>
-    <script>
-        let myArray = ["zero", "one", "two"];
+    <ul class="box1">
+        <li>浮动</li>
+        <li>未浮未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动动</li>
+    </ul>
+    <ul class="box2">
+        <li>浮动</li>
+        <li>未浮未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动未浮动动</li>
 
-        myArray.myMethod = function (str) {
-            console.log(arguments.length > 0 ? this[str] : this);
-        };
-        let a = myArray.myMethod.bind(myArray)
-        a()
-    </script>
+    </ul>
 </body>
 
 </html>
