@@ -160,6 +160,14 @@ a:hover {
   text-decoration: underline;
   /* 鼠标滑过的样式 */
 }
+div:hover span {
+  text-transform: lowercase;
+  /* 鼠标滑过div后改变span的样式 */
+  /* 当hover后面书写一个选择器时
+   * 表示的是当前元素滑过后改变
+   * hover后面元素的样式
+   */
+}
 a:active {
   transform: capitalize;
   /* 鼠标点击的样式 */
@@ -251,7 +259,7 @@ div {
 
 > 选择器的优先级是根据选择器的权重换算的,权重越高,优先级越大
 
-| 选择器      | 优先级       |
+| 选择器      | 权重         |
 | ----------- | ------------ |
 | !important  | 最大(非规范) |
 | style(行间) | 1000         |
@@ -282,17 +290,21 @@ div {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  /* 符合写法 */
+  background: url(../img/1.png) no-repeat center center;
 }
 ```
 
 > background-color :设置背景颜色
 
 1. 颜色单词,rgb,十六进制颜色码,
-2. rgba(0,0,0,0.5)可以设置背景图的透明度,最有以为书写的是透明度
+2. rgba(0,0,0,0.5)可以设置背景色的透明度,最后一位书写的是透明度(0-1),0.5属于半透明,数值越小透明度越高
 
 > background-image :设置背景图片
 
 1. url()内书写背景图的路径,背景图不占据布局空间
+2. 可以同时设置多个背景图,多个背景图之间使用`,`隔开;越靠前的背景图层级越高,会覆盖后面的背景图
+3. background:url(./img/1.png) no-repeat center left,url(./img/2.png) repeat center center;
 
 > background-attachment :图片是否跟随滚动条滚动
 
@@ -471,6 +483,23 @@ span {
 1. baseline: 默认,使用基线对其
 2. bottom: 使用底线对齐(可解决图片间隙)
 3. middle: 使用中线对齐(可解决图片间隙)
+
+**添加省略号:**
+
+> 必须设置宽度
+
+```css
+box {
+  /* 每一个属性都是必须设置的 */
+  width: 100px;
+  white-space: nowrap;
+  /* 设置文本不换行 */
+  overflow: hidden;
+  /* 将溢出的文本隐藏 */
+  text-overflow: ellipsis;
+  /* 添加省略号 */
+}
+```
 
 ## 盒子模型
 
@@ -819,6 +848,8 @@ box {
 2. inline: 将块级元素修改为内联元素
 3. inline-block: 将一个元素修改为内联块级元素
 
+### 浮动
+
 **float:**
 
 > 可以使元素脱离正常的文本流进行显示
@@ -941,7 +972,7 @@ li:nth-child(4) {
 
 ![KKRDhT.png](https://s2.ax1x.com/2019/10/20/KKRDhT.png)
 
-> 如果父容器没有设置宽高,浮动的子元素也不会撑起父容器的大小
+> 如果父容器没有设置宽高,由于浮动的子元素会脱离正常的文档流,所以并不会撑起父容器的高度
 
 ```css
 ul {
@@ -964,6 +995,174 @@ li {
 ```
 
 ![KKggGF.png](https://s2.ax1x.com/2019/10/20/KKggGF.png)
+
+**清除浮动:**
+
+**clear:**
+
+> 可以规定一个元素那一侧不允许出现浮动元素
+
+1. left: 规定左侧不允许出现浮动元素
+2. right: 规定右侧不允许出现浮动元素
+3. both: 规定左右两侧都不允许出现浮动元素
+
+> 在一些自适应的布局当中,浮动的特性很难做到让父容器的高度自适应,因为浮动的子元素会脱离文档里,因此无法使用子元素来撑起父容器的高度,所以需要将子元素的浮动清除
+
+- 给父容器也设置浮动,可以解决高度自适应的问题,但是会影响到父容器后其他元素的布局
+
+```css
+#parent {
+  float: left;
+}
+```
+
+- 设置父元素 display:inline-block 来触发 BFC 规范;但是会影响到后续元素的布局
+
+```css
+#parent {
+  display: inline-block;
+}
+```
+
+- 给父元素设置固定的宽高,虽然可以让父容器拥有高度,但是无法做到高度自适应
+
+```css
+#parent {
+  width: 100px;
+  height: 100px;
+}
+```
+
+- 给父元素设置 overflow:hidden 来触发 BFC 规范;较为完美的解决方案,唯一的缺点是父容器溢出的内容会被隐藏
+
+```css
+#parent {
+  overflow: hidden;
+}
+```
+
+- 给父容器增加一个空的块级标签,由空的标签撑起父容器的高度,较为完美的做法,缺点就是需要书写一个空的标签
+
+```css
+empty-label {
+  clear: both;
+}
+```
+
+- 使用伪类:after 清除浮动,最为完美的做法,实际中也推荐这种
+
+```css
+#parent:after {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+```
+
+### 定位
+
+**positon:**
+
+> 让元素按照 top,bottom,left,right 四个属性的值来改变其在页面中的展示位置,有四种不同的定位方式
+
+1. absolute: 绝对定位
+2. relative: 相对定位
+3. fixed: 固定定位
+4. sticky: 粘性定位
+
+**absolute:**
+
+> 根据其定位的祖先元素进行位移,如果所有的祖先元素都没有设置定位,则默认是根据文档(浏览器窗口)进行位移!祖先元素只要设置了 absolute,relative,fixed 其中一项就会按照祖先元素进行位移
+
+1. 会是元素完全脱离文档流
+2. 内联元素使用定位后可以直接设置宽高(拥有块级元素的特点)
+3. 不书写宽高的情况下不会再默认根据父容器自适应,而是由内容撑开
+4. 不会独占一行(具备内联元素的特点)
+
+**relative:**
+
+> 根据自身所处的位置进行偏移位移,祖先元素有没有设置定位并不会影响位移的位置
+
+1. 不会脱离文档流
+2. 不会影响其他元素的布局
+
+**fixed:**
+
+> 根据文档(浏览器窗口)进行偏移定位,祖先元素有没有设置宽高并不会影响位移的位置
+
+1. 根据当前的可视窗口进行定义,不受浏览器滚动条影响,会始终处于当前定位在可视窗口的位置
+2. 完全脱离文档流
+3. 内联可以设置宽高,并且拥有块级元素的特点
+4. 块级元素的宽高有内容撑开,具备内联元素的特点
+
+**sticky:**
+
+> 根据浏览器的滚动条进行的特殊定位,根据浏览器的可视窗口进行定位,需要设置一个阀值,当窗口出现滚动条并且滑动时,元素设置的阀值达到浏览器和元素的偏移量时会始终定位在当前的位置
+
+1. 必须设置 top,bottom,left,right 中的一个才会生效
+2. 父元素不能设置 overflow:hidden;
+3. 脱离文档流
+4. 父元素不能设置固定的宽高,否则当浏览器滚动条滚动的距离大于父元素的宽高时,sticky 会失效
+5. 兼容性不够良好
+
+**z-index:**
+
+> 可以改变定位元素的显示层级,当多个定位元素重叠在一起时,z-index 的值将会改变显示的优先级,默认是 0,数值越大优先级越高,
+
+```css
+.box1,
+.box2,
+.box3 {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+.box1 {
+  background: red;
+  z-index: 10;
+}
+.box2 {
+  background: blue;
+  z-index: 20;
+}
+.box3 {
+  background: green;
+  z-index: 30;
+}
+/* 根据z-index的值
+ * 显示的顺序是.box3  .box2  .box1
+ */
+```
+
+**border-radius:**
+
+> 可以设置盒子的四个圆角,也可以单独设置每一个
+
+| 属性                              | 位置                                            |
+| --------------------------------- | ----------------------------------------------- |
+| border-radius:10px                | 四个角都设置 10px                               |
+| border-radius:10px 20px           | 左上右下 10px ==右上左下 20px==                 |
+| borderradius:10px 20px 30px       | 左上 10px==右上左下 20px== 右下 30px            |
+| border-radius:10px 20px 30px 40px | 左上 10px ==右上 20px== 右下 30px ==左下 40px== |
+| border-radius:10px/20px           | 水平半径 10px ==垂直半径 20px==                 |
+
+**元素水平垂直居中:**
+
+> 使用定位让元素水平和垂直位置分别偏移 50%;然后再设置水平和垂直位置的 margin 值为负的元素宽高值的一半,(absolute 和 fixed 都可以实现)
+
+```css
+box {
+  width: 200px;
+  height: 200px;
+  background: orangered;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+```
 
 ## LESS
 
