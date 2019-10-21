@@ -10,24 +10,24 @@
     <script src="../js/less-2.5.3.min.js"></script>
     <script>
         ~ function () {
-            let computedREM = function () {
-                let screenW = document.documentElement.clientWidth,
-                    designW = 640;
-                if (screenW >= designW) {
+            function computedREM() {
+                let winW = document.documentElement.clientWidth;
+                if (winW >= 640) {
+                    document.documentElement.style.fontSize = 100 + 'px';
                     return;
-                };
-                document.documentElement.style.fontSize = screenW / designW * 100 + 'px';
+                }
+                document.documentElement.style.fontSize = winW / 640 * 100 + 'px';
             };
             computedREM();
-            window.addEventListener('resize', computedREM);
+            window.addEventListener('resize', computedREM)
         }();
     </script>
 </head>
 
 <body>
-    <main id="mainBox">
-        <!-- 首页加载 -->
-        <section class="loadingBox">
+
+    <main id="main-box">
+        <section class="loading-box clearfix">
             <div class="title">
                 <h1>珠峰培训</h1>
                 <h2>H5场景交互型简历</h2>
@@ -37,6 +37,8 @@
             </div>
         </section>
     </main>
+    <script src="../zepto/zepto/dist/zepto.js"></script>
+    <script src="../js/移动端.js"></script>
 </body>
 
 </html>
