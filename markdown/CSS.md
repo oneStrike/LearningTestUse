@@ -298,7 +298,7 @@ div {
 > background-color :设置背景颜色
 
 1. 颜色单词,rgb,十六进制颜色码,
-2. rgba(0,0,0,0.5)可以设置背景色的透明度,最后一位书写的是透明度(0-1),0.5属于半透明,数值越小透明度越高
+2. rgba(0,0,0,0.5)可以设置背景色的透明度,最后一位书写的是透明度(0-1),0.5 属于半透明,数值越小透明度越高
 
 > background-image :设置背景图片
 
@@ -1062,7 +1062,7 @@ empty-label {
 
 ### 定位
 
-**positon:**
+**position:**
 
 > 让元素按照 top,bottom,left,right 四个属性的值来改变其在页面中的展示位置,有四种不同的定位方式
 
@@ -1139,13 +1139,13 @@ empty-label {
 
 > 可以设置盒子的四个圆角,也可以单独设置每一个
 
-| 属性                              | 位置                                            |
-| --------------------------------- | ----------------------------------------------- |
-| border-radius:10px                | 四个角都设置 10px                               |
-| border-radius:10px 20px           | 左上右下 10px ==右上左下 20px==                 |
-| borderradius:10px 20px 30px       | 左上 10px==右上左下 20px== 右下 30px            |
+| 属性 | 位置 |
+| --- | --- |
+| border-radius:10px | 四个角都设置 10px |
+| border-radius:10px 20px | 左上右下 10px ==右上左下 20px== |
+| border-radius:10px 20px 30px | 左上 10px==右上左下 20px== 右下 30px |
 | border-radius:10px 20px 30px 40px | 左上 10px ==右上 20px== 右下 30px ==左下 40px== |
-| border-radius:10px/20px           | 水平半径 10px ==垂直半径 20px==                 |
+| border-radius:10px/20px | 水平半径 10px ==垂直半径 20px== |
 
 **元素水平垂直居中:**
 

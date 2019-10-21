@@ -1,0 +1,91 @@
+@import "reset.min.less";
+
+.container {
+    width: 1082px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#logo {
+    @height: 81;
+    height: unit(@height, px);
+
+    .logo {
+        float: left;
+        margin-top: 19px;
+    }
+
+    .menu-list {
+        float: right;
+
+        li {
+            float: left;
+            margin-left: 58px;
+            line-height: unit(@height, px);
+
+            a {
+                color: #646464;
+                font-size: 14px;
+            }
+
+        }
+    }
+}
+
+#banner {
+    width: 1352px;
+    height: 469px;
+    overflow: hidden;
+
+    .show-img {
+        width: 5408px;
+        overflow: hidden;
+        height: 469px;
+
+        .slide {
+            width: 1352px;
+            height: 469px;
+            float: left;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+#service {
+    height: 407px;
+
+    .ser-title {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+
+        img {
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            top: 67px;
+        }
+
+        h2 {
+            margin: 0 auto;
+            font-size: 20px;
+            font-weight: initial;
+            text-align: center;
+            position: relative;
+            top: 48px;
+        }
+
+        span {
+            display: block;
+            text-align: center;
+            position: relative;
+            top: 55px;
+            font-size: 14px;
+
+        }
+    }
+}

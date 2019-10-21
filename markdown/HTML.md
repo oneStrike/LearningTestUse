@@ -269,3 +269,55 @@ HTML 称为超文本标记语言，是一种标识性的语言。它包括一系
 > div 充当一个功能或者一小块内容的容器
 >
 > span 对单独的几个文字进行修饰
+
+### 不常用的标签
+
+**iframe:**
+
+> 可以引用其他的 HTML 文件到当前的页面中,也可以使用 url 地址
+
+```html
+<iframe src="https://www.taobao.com" frameborder="0" scrolling="no"></iframe>
+```
+
+> src ==>引入文件的地址
+>
+> frameborder ==>是否现在周围框架
+
+1. "1" 显示
+2. "0" 不显示
+
+> width ==>引入文件在页面中显示的宽度
+>
+> height ==> 引入文件在页面中显示的高度
+>
+> scrolling ==>规定是否拥有滚动条
+
+1. yes ==>显示
+2. no ==>不显示
+
+**br / wbr:**
+
+> 换行 / 软换行
+
+**pre / code:**
+
+> 用来表示计算机的源代码
+
+**map / area:**
+
+> 图片热区
+
+**embed / object:**
+
+> 引入 flash 动画
+
+**ruby / rt:**
+
+> 显示文字的注解
+
+```html
+<ruby>
+  寒<rt>hán</rt>冬
+</ruby>
+```
