@@ -1,87 +1,127 @@
 @import "reset.min.less";
 
 html {
-    font-size: 100px;
+  font-size: 100px;
 }
 
-html,
-body {
-    height: 100%;
-    font-family: "Microsoft JhengHei";
-    background: #F4F4F4;
+html, body {
+  height: 100%;
+  max-width: 640px;
+  overflow: hidden;
 }
 
 #main-box {
-    height: 100%;
-    max-width: 640px;
-    position: relative;
-    background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 }
 
 .loading-box {
-    height: 100%;
-    position: relative;
+  position: relative;
+  background: #000;
+  height: 100%;
+  display: none;
 }
 
 .loading-box {
-    background: #000;
+  .title {
+    position: absolute;
+    width: 100%;
+    height: 1.4rem;
+    color: #fff;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -2.2rem auto 0 auto;
 
-    .title {
-        width: 100%;
-        height: 1.4rem;
-        position: absolute;
-        color: #ffffff;
-        top: 50%;
-        left: 0;
-        margin-top: -2.2rem;
-        text-align: center;
-
-        h1 {
-            font-size: 0.5rem;
-            line-height: 0.75rem;
-            margin-bottom: 0.2rem;
-        }
-
-        h2 {
-            font-size: 0.26rem;
-            line-height: 0.45rem;
-            letter-spacing: 0.04rem;
-
-        }
+    h1 {
+      font-size: 0.5rem;
+      line-height: 0.75rem;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .progress {
-        width: 4.6rem;
-        height: 0.3rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        background: #FFF;
-        margin: 0.85rem 0 0 -2.3rem;
-        border-radius: 0.06rem;
-
-        .current {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: -webkit-linear-gradient(left bottom, #5CB85C 0, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
-            background: linear-gradient(left bottom, #5CB85C 0, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
-            background-size: .3rem .3rem;
-            animation: loadingMove .5s linear 0s infinite both;
-            transition: .3s;
-            border-radius: 0.06rem;
-        }
-
-        @keyframes loadingMove {
-            0% {
-                background-position: 0 0
-            }
-
-            100% {
-                background-position: 0 -0.3rem
-            }
-        }
+    span {
+      display: block;
+      font-size: 0.26rem;
+      line-height: 0.45rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.04rem;
+      text-align: center;
     }
+  }
+
+  .progress {
+    width: 4.6rem;
+    height: 0.3rem;
+    background: #FFFFFF;
+    border-radius: 0.06rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 1rem auto 0 -2.3rem;
+    overflow: hidden;
+
+    .current {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: -webkit-linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+      background: linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+      background-size: .3rem .3rem;
+      animation: loadingMove .5s linear 0s infinite both;
+      transition: .3s;
+    }
+
+  }
+
+  @keyframes loadingMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 -.3rem;
+    }
+  }
+
+}
+
+.phone {
+  width: 100%;
+  height: 100%;
+  background: url("../img/zf_phoneBg.jpg");
+  background-size: cover;
+  position: relative;
+  padding-top: 50px;
+
+  .phone-title {
+    width: 100%;
+    height: 2.62rem;
+    margin: 0 auto auto;
+    color: #FFFFFF;
+
+    h2 {
+      font-size: 0.5rem;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    span {
+      display: block;
+      font-size: 0.26rem;
+      text-align: center;
+      margin: 0.1rem 0 0.05rem 0;
+    }
+
+    time {
+      display: block;
+      font-size: 0.2rem;
+      letter-spacing: 0.04rem;
+      text-align: center;
+
+    }
+  }
 }

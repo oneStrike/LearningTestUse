@@ -1,44 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet/less" href="../css/移动端.less">
+    <link rel="stylesheet" href="../css/iconfont.css">
     <script src="../js/less-2.5.3.min.js"></script>
     <script>
-        ~ function () {
-            function computedREM() {
+        ~function () {
+            let computedREM = function () {
                 let winW = document.documentElement.clientWidth;
-                if (winW >= 640) {
-                    document.documentElement.style.fontSize = 100 + 'px';
-                    return;
+                if (winW < 640) {
+                    document.documentElement.style.fontSize = winW / 640 * 100 + 'px';
                 }
-                document.documentElement.style.fontSize = winW / 640 * 100 + 'px';
             };
             computedREM();
-            window.addEventListener('resize', computedREM)
+            window.addEventListener('resize', computedREM);
         }();
     </script>
 </head>
-
 <body>
 
-    <main id="main-box">
-        <section class="loading-box clearfix">
-            <div class="title">
-                <h1>珠峰培训</h1>
-                <h2>H5场景交互型简历</h2>
+<main id="main-box">
+    <!--    加载页面-->
+    <section class="loading-box clearfix">
+        <div class="title">
+            <h1>个人简历</h1>
+            <span>H5场景交互性简历</span>
+        </div>
+        <div class="progress">
+            <div class="current"></div>
+        </div>
+    </section>
+<!--        电话页面-->
+    <section class="phone">
+        <div class="phone-title">
+            <h2>个人介绍</h2>
+            <span>河南-商丘</span>
+            <time>00:00</time>
+        </div>
+        <div class="answer">
+            <span class="remind"><i class="iconfont">&#xe62c;</i><br>提醒</span>
+            <span class="info"><i class="iconfont">&#xe633;</i><br>信息</span>
+            <div class="reject">
+                <span><i class="iconfont">&#xe605;</i><br>拒绝</span>
             </div>
-            <div class="progress">
-                <div class="current"></div>
+            <div class="agree">
+                <div class="phone-focus"></div>
+                <span><i class="iconfont">&#xe6d4;</i><br>来电</span>
             </div>
-        </section>
-    </main>
-    <script src="../zepto/zepto/dist/zepto.js"></script>
-    <script src="../js/移动端.js"></script>
-</body>
+        </div>
+        <div class="calling">
+            <ul>
+                <li class="iconfont">&#xe64a;<br>
+                    <span>mute</span>
+                </li>
+                <li class="iconfont">&#xe66e;<br>
+                    <span>keypad</span>
+                </li>
+                <li class="iconfont">&#xe68a;<br>
+                    <span>speaker</span>
+                </li>
+                <li class="iconfont">&#xe64a;<br>
+                    <span>mute</span>
+                </li>
+                <li class="iconfont">&#xe6e8;<br>
+                    <span>Facetime</span>
+                </li>
+                <li class="iconfont">&#xe514;<br>
+                    <span>contacts</span>
+                </li>
 
+            </ul>
+            <div class="hang">
+                <i class="iconfont">&#xe719;</i>
+                <span>挂断</span>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="../zepto/dist/zepto.js"></script>
+<script src="../js/移动端.js"></script>
+</body>
 </html>
