@@ -30,7 +30,7 @@ let loadingRender = (function () {
                 $current.css('width', '100%');
                 callback && callback();
             } else {
-                alert('Õ¯¬Á≤ªº—');
+                alert('ÁΩëÁªú‰∏ç‰Ω≥');
             }
         }, 10000);
     };
@@ -49,6 +49,63 @@ let loadingRender = (function () {
         }
     }
 })();
+
+let phoneRender = function () {
+
+    let $phone = $('.phone'),
+        $time = $phone.find('time'),
+        $answer = $phone.find('.answer'),
+        $agree = $answer.find('.agree'),
+        ring = $phone.find('audio')[0],
+        $calling = $phone.find('.calling'),
+        callContent = $phone.find('audio')[1],
+        $hang = $phone.find('.hang');
+
+
+    let autoTime = null,
+        second = 0,
+        minute = 00;
+    let confirmAswer = function () {
+        ring.pause();
+        callContent.play();
+        $answer.css('display', 'none');
+        $calling.css('transform', 'translateY(0rem)');
+        autoTime = setInterval(function () {
+            second++;
+            second === 60 ? (second = 0, minute++) : null;
+            // minute = minute < 10 ? '0' + minute : minute;
+            second = second < 10 ? '0' + second : second;
+            $time.html(`${minute} : ${second}`);
+
+        }, 1000);
+    };
+
+
+
+    return {
+        init: function () {
+            ring.play();
+            $agree.on('click', function () {
+                confirmAswer();
+            })
+        }
+    }
+
+}();
+phoneRender.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
 let url = window.location.href;
 let well = url.indexOf('#');
 let hash = well === -1 ? null : url.substr(well + 1);
@@ -56,4 +113,6 @@ switch (hash) {
     case "loading":
         loadingRender.init();
         break;
+    case "phone":
+        phoneRender.init();
 }
