@@ -213,7 +213,7 @@ HTML 称为超文本标记语言，是一种标识性的语言。它包括一系
 >
 > tFoot 语义化标签!表示表格的尾部
 
-### 表单
+### 新增表单
 
 ```html
 <form action="提交地址" method="提交方式">
@@ -324,190 +324,193 @@ HTML 称为超文本标记语言，是一种标识性的语言。它包括一系
 
 ### HTML5
 
-**语义化标签**
+**语义化标签：**
 
-**header**
+**header：**
 
 > 表示网页的头部,可以出现多次,一个完整的内容区也可以使用
 
-**nav**
+**nav：**
 
 > 表示导航栏
 
-**main**
+**main：**
 
-> 表示网页中的主要内容,且标签内的内容时唯一的,内容不能重复出现,网页中只能出现一个main标签
+> 表示网页中的主要内容,且标签内的内容时唯一的,内容不能重复出现,网页中只能出现一个 main 标签
 
-**article**
+**article：**
 
 > 表示一个独立的文章区域,例如一篇完整的文章,用户的评论等
 
-**aside**
+**aside：**
 
 > 表示一个独立的内容,例如侧边栏,广告等
 
-**section**
+**section：**
 
 > 表示一个完整内容区下细分的一个小内容区
 
-**figure**
+**figure：**
 
 > 表示独立的文档流内容,例如新闻中的缩略图等
 
-**figcaption**
+**figcaption：**
 
-> 表示figure的标题,例如新闻缩略图中的内容概要
+> 表示 figure 的标题,例如新闻缩略图中的内容概要
 
-**footer**
+**footer：**
 
 > 表示一个网页的页脚,可以出现多次,每一个完整的内容区的尾部都可以使用
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
+      * {
+        padding: 0;
+        margin: 0;
+      }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
 
-        header {
-            width: 100%;
-            height: 10%;
-            background: pink;
-        }
+      header {
+        width: 100%;
+        height: 10%;
+        background: pink;
+      }
 
-        nav {
-            width: 100%;
-            height: 10%;
-            background: #5CB85C;
-        }
+      nav {
+        width: 100%;
+        height: 10%;
+        background: #5cb85c;
+      }
 
-        .box {
-            width: 100%;
-            height: 70%;
-        }
+      .box {
+        width: 100%;
+        height: 70%;
+      }
 
-        .box > header {
-            width: 100%;
-            height: 10%;
-            background: brown;
-        }
+      .box > header {
+        width: 100%;
+        height: 10%;
+        background: brown;
+      }
 
-        article {
-            width: 80%;
-            height: 80%;
-            background: palegreen;
-        }
+      article {
+        width: 80%;
+        height: 80%;
+        background: palegreen;
+      }
 
-        section {
-            width: 80%;
-            height: 80%;
-            background: rebeccapurple;
-            position: relative;
-            top: 40px;
-            margin: 0 auto;
-        }
+      section {
+        width: 80%;
+        height: 80%;
+        background: rebeccapurple;
+        position: relative;
+        top: 40px;
+        margin: 0 auto;
+      }
 
-        aside {
-            display: block;
-            width: 20%;
-            height: 56%;
-            background: lightseagreen;
-            float: right;
-            position: absolute;
-            right: 0;
-            top: 222px;
-        }
+      aside {
+        display: block;
+        width: 20%;
+        height: 56%;
+        background: lightseagreen;
+        float: right;
+        position: absolute;
+        right: 0;
+        top: 222px;
+      }
 
-        figure {
-            width: 200px;
-            height: 200px;
-            background: orangered;
-        }
+      figure {
+        width: 200px;
+        height: 200px;
+        background: orangered;
+      }
 
-        .box > footer {
-            width: 100%;
-            height: 10%;
-            background: #DB192A;
-        }
+      .box > footer {
+        width: 100%;
+        height: 10%;
+        background: #db192a;
+      }
 
-        footer {
-            width: 100%;
-            height: 10%;
-            background: khaki;
-        }
+      footer {
+        width: 100%;
+        height: 10%;
+        background: khaki;
+      }
     </style>
-</head>
-<body>
-
-<header>网页头部 header</header>
-<nav>网页导航 nav</nav>
-<div class="box">
-    <header>内容头部 header</header>
-    <article>文章区 article
-        <section>细分的内容 section
-            <figure>流媒体 figure
-                <figcaption>流媒体标题 figcaption</figcaption>
-            </figure>
+  </head>
+  <body>
+    <header>网页头部 header</header>
+    <nav>网页导航 nav</nav>
+    <div class="box">
+      <header>内容头部 header</header>
+      <article>
+        文章区 article
+        <section>
+          细分的内容 section
+          <figure>
+            流媒体 figure
+            <figcaption>流媒体标题 figcaption</figcaption>
+          </figure>
         </section>
-
-    </article>
-    <aside>侧边栏 aside</aside>
-    <footer>内容尾部 footer</footer>
-</div>
-<footer>网页尾部 footer</footer>
-
-</body>
+      </article>
+      <aside>侧边栏 aside</aside>
+      <footer>内容尾部 footer</footer>
+    </div>
+    <footer>网页尾部 footer</footer>
+  </body>
 </html>
 ```
 
-> 大部分的现代浏览器都支持HTML5新增的语义化标签,IE9部分支持(但是会将其转化成行内元素),IE9以下都不支持
+> 大部分的现代浏览器都支持 HTML5 新增的语义化标签,IE9 部分支持(但是会将其转化成行内元素),IE9 以下都不支持
 
-- IE9可以使用display:block;解决,IE9以下需要使用第三方的插件或者使用js动态的创建同名的元素(默认创建的标签都是行内标签)
+- IE9 可以使用 display:block;解决,IE9 以下需要使用第三方的插件或者使用 js 动态的创建同名的元素(默认创建的标签都是行内标签)
 
 ```javascript
-document.createElement('ASIDE');
+document.createElement("ASIDE");
 //=> 创建的都是行内元素,无法直接设置宽高和内外的上下边距
 ```
 
-**表单**
+**表单：**
 
-**元素标签**
+**元素标签：**
 
 `datalist`
 
 > 可以将选项与输入框关联,每个浏览器显示的样式不一样,兼容性也不好
 
-1. datalist必须书写一个id
-2. 需要绑定的输入框通过list绑定datalist的id
-3. potion可以书写成单标签的形式
-4. 如果输入框的类型是url则必须添加`http://`
+1. datalist 必须书写一个 id
+2. 需要绑定的输入框通过 list 绑定 datalist 的 id
+3. potion 可以书写成单标签的形式
+4. 如果输入框的类型是 url 则必须添加`http://`
 
 ```html
-   <input type="text" list="txt">
-   <datalist id="txt">
-   <option value="百度" label="讲好才能"></option>
-   <option value="还好" label="谷歌"></option>
-   <option value="正在用" label="必应"></option>
+<input type="text" list="txt" />
+<datalist id="txt">
+  <option value="百度" label="讲好才能"></option>
+  <option value="还好" label="谷歌"></option>
+  <option value="正在用" label="必应"></option>
 </datalist>
 ```
 
 `output`
 
-> 用来放置输出的内容,只能显示不能修改,需要通过js动态的添加!语义化更强
+> 用来放置输出的内容,只能显示不能修改,需要通过 js 动态的添加!语义化更强
 
 `keygen`
 
@@ -516,25 +519,25 @@ document.createElement('ASIDE');
 - 表单属性
 
 ```html
-<input type="text" placeholder="请输入用户名">
+<input type="text" placeholder="请输入用户名" />
 <!--提供默认的提示信息,输入时提示信息自动消失-->
-<input type="text" autofocus>
+<input type="text" autofocus />
 <!--自动聚焦当前设置autofocus的输入框-->
-<input type="text" autocomplete="on">
+<input type="text" autocomplete="on" />
 <!--
     第一次提交时会记录,并在下次提交时提供提示信息
     自动提示功能,曾经提交过相关输入框的信息和设置name属性才可以使用
     on:打开
     off:关闭
 -->
-<input type="tel" required pattern="^(\+86)?\d{10}$">
+<input type="tel" required pattern="^(\+86)?\d{10}$" />
 <!--
     required:表示这个输入框必须输入
     pattern:正则表达式验证输入是否合法
 -->
 
 <form action="" id="my-form"></form>
-<input type="text" form="my-form">
+<input type="text" form="my-form" />
 <!--
     form: 属性,通过id将form标签之外的表达关联
     当form标签提交的时候,绑定的表单也会一起提交
@@ -544,38 +547,51 @@ document.createElement('ASIDE');
 - `type`属性
 
 ```html
-<input type="email">
+<input type="email" />
 <!--邮箱,提交时验证邮箱的,只能做简单的验证-->
-<input type="tel">
+<input type="tel" />
 <!--电话!对输入的字符没有要求,主要功能是在移动端调取虚拟键盘-->
-<input type="url">
+<input type="url" />
 <!--链接!提交时会验证链接的合法性,必须包含http://-->
-<input type="color">
+<input type="color" />
 <!--调取浏览器的色板-->
-<input type="number">
+<input type="number" />
 <!--数字! 只能输入数字字符,无法粘贴非数字字符
     max: 设置最大值
     min: 设置最小值
     value: 默认值
 -->
-<input type="range">
+<input type="range" />
 <!--范围!拖动条
     max:设置最大值
     min:设置最小值
     step:每次滑动的步伐
 -->
-<input type="time">
+<input type="time" />
 <!--时间:时分秒-->
-<input type="datetime">
+<input type="datetime" />
 <!--日期:年月日 (大部分浏览器都不支持)-->
-<input type="datetime-local">
+<input type="datetime-local" />
 <!--日期:年月日!可以调取浏览器的日历表-->
-<input type="month">
+<input type="month" />
 <!--月份-->
-<input type="week">
+<input type="week" />
 <!--星期-->
 ```
 
-**progress**
+**progress：**
 
-> 显示进度条
+> 显示任务的进度条
+
+1. max: 设置最大值
+2. value： 设置当前值
+
+**meter：**
+
+> 显示衡量条
+
+1. high ：范围最大值
+2. low ： 范围最小值
+3. max ： 最大值
+4. min : 最小值
+5. value ： 当前值（必填）

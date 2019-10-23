@@ -990,34 +990,33 @@ input.onkeydown = function(e) {
 
 ### 表单事件
 
-| 事件   | 描述           |
-| ------ | -------------- |
-| focus  | 文本框聚焦     |
-| blur   | 文本框失去焦点 |
-| change | 文本内容改变   |
-| reset  | 点击重置按钮   |
-| submit | 点击提交按钮   |
+| 事件    | 描述           |
+| ------- | -------------- |
+| focus   | 文本框聚焦     |
+| blur    | 文本框失去焦点 |
+| change  | 文本内容改变   |
+| reset   | 点击重置按钮   |
+| submit  | 点击提交按钮   |
 | input   | 当内容改变时   |
-| invalid| 验证不通过时  |
+| invalid | 验证不通过时   |
 
 - `change`和`input`都是用于监听文本框的内容改变,但还是有区别的
 
-1. `change`的兼容性更好,`input`只在IE9以上支持
+1. `change`的兼容性更好,`input`只在 IE9 以上支持
 2. `change`是在文本框失去焦点是才会触发,如果内容改变前和改变后的值相同则不会触发
 3. `input` 是实时触发,只要文本内容发生改变就会触发
 
-- `invalid`是在验证不通过时触发,也可以修改基于setCustomValidity()修改默认的提示信息
+- `invalid`是在验证不通过时触发,也可以修改基于 setCustomValidity()修改默认的提示信息
 
 ```html
-<input type="tel" required pattern="^$(+86)?\d{10}">
+<input type="tel" required pattern="^$(+86)?\d{10}" />
 <script>
-let tel=document.getElementsByTagName('input')[0];
-tel.oninvalid=function(){
-    console.log(1)
-}
+  let tel = document.getElementsByTagName("input")[0];
+  tel.oninvalid = function() {
+    console.log(1);
+  };
 </script>
 ```
-
 
 ### 其他事件
 
@@ -1032,6 +1031,31 @@ tel.oninvalid=function(){
 **事件类型参考：**
 
 <https://developer.mozilla.org/zh-CN/docs/Web/Events>
+
+### 移动端事件
+
+| 事件        | 描述                   |
+| ----------- | ---------------------- |
+| touchstart  | 手指刚接触屏幕时触发   |
+| touchmove   | 手指在屏幕上移动时触发 |
+| touchend    | 手指从屏幕上离开触发   |
+| touchcancel | 触摸中断时触发         |
+
+> `click`在移动端是单击事件,但是浏览器存在 300ms 左右的延迟,会通过这 300ms 的延迟研判当前的点击是单击还是双击,如果 300ms 再次点击则判断为双击,否则才会判断为点击,因此直接使用`click`点击事件存在 300ms 左右的延迟
+>
+> 在移动的点击事件,滑动时间,长按事件都是通过`touchstart` `touchmove` `touchend`模拟出来的
+
+**事件属性:**
+
+1. `changedTouches` ==>当前事件的触发的相关信息
+2. `touches` ==>事件触发时的相关信息
+3. `targetTouches` ==>记录当前事件源的相关信息
+
+> 当一个手指触摸屏幕,此时三个对象的值都是一样的
+>
+> 当第二个手指触摸时,`changedTouches`存储的是第二根手指的相关信息,如果触摸的元素是和`targetTouches`的`targetr`属性上存储的对象一样,那么`touches`和`targetTouches`的值是一样的,每一根手指都拥有单独的值
+>
+> 当手指离开时,`changeTouches`会记录最后 一次的信息,而`touches`和`targetTouches`的值则会消失
 
 ### 兼容处理
 

@@ -50,8 +50,7 @@ let loadingRender = (function () {
     }
 })();
 
-let phoneRender;
-phoneRender = function () {
+let phoneRender = function () {
 
     let $phone = $('.phone'),
         $time = $phone.find('time'),
@@ -103,28 +102,23 @@ phoneRender = function () {
     }
 
 }();
-loadingRender.init();
-phoneRender.init();
+let massageRender = (function () {
 
-
-
-
-
-
-
-
-
-
-
-
-//
-// let url = window.location.href;
-// let well = url.indexOf('#');
-// let hash = well === -1 ? null : url.substr(well + 1);
-// switch (hash) {
-//     case "loading":
-//         loadingRender.init();
-//         break;
-//     case "phone":
-//         phoneRender.init();
-// }
+    return {
+        init: function () {}
+    }
+})();
+let url = window.location.href;
+let well = url.indexOf('#');
+let hash = well === -1 ? null : url.substr(well + 1);
+switch (hash) {
+    case "loading":
+        loadingRender.init();
+        break;
+    case "phone":
+        phoneRender.init();
+        break;
+    case "massageRender":
+        massageRender.init();
+        break;
+}

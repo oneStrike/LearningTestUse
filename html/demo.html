@@ -1,20 +1,28 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-<body>
-<form action="#" method="get"><input type="tel" required pattern="^(\+86)?\d{10}$">
-    <input type="submit"></form>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: lightseagreen;
+        }
+    </style>
 
-<script>
-    let tel=document.getElementsByTagName('input')[0];
-    tel.oninvalid=function(){
-       this.setCustomValidity('123')
-    }
-</script>
+<body>
+    <div></div>
+    <script>
+        let div = document.getElementsByTagName('div')[0];
+        div.ontouchstart = function (e) {
+            console.log(e);
+        }
+    </script>
 </body>
+
 </html>
