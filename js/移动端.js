@@ -50,7 +50,8 @@ let loadingRender = (function () {
     }
 })();
 
-let phoneRender = function () {
+let phoneRender;
+phoneRender = function () {
 
     let $phone = $('.phone'),
         $time = $phone.find('time'),
@@ -64,34 +65,45 @@ let phoneRender = function () {
 
     let autoTime = null,
         second = 0,
-        minute = 00;
-    let confirmAswer = function () {
+        minute = 0;
+    let confirmAnswer = function () {
         ring.pause();
         callContent.play();
         $answer.css('display', 'none');
         $calling.css('transform', 'translateY(0rem)');
+        $time.css('display', 'block')
         autoTime = setInterval(function () {
             second++;
+            if (second >= callContent.duration) {
+                clearTimeout(autoTime);
+                closePhone();
+            }
             second === 60 ? (second = 0, minute++) : null;
-            // minute = minute < 10 ? '0' + minute : minute;
+            minute < 10 ? minute = '0' + minute : minute;
+            minute = minute.substr(minute.length - 2);
             second = second < 10 ? '0' + second : second;
             $time.html(`${minute} : ${second}`);
 
         }, 1000);
     };
 
+    let closePhone = function () {
+        callContent.pause();
+        $calling.css('transform', 'translateY(6.89rem)');
+        $phone.remove();
+    };
 
 
     return {
         init: function () {
             ring.play();
-            $agree.on('click', function () {
-                confirmAswer();
-            })
+            $agree.tap(confirmAnswer);
+            $hang.tap(closePhone)
         }
     }
 
 }();
+loadingRender.init();
 phoneRender.init();
 
 
@@ -105,14 +117,14 @@ phoneRender.init();
 
 
 
-
-let url = window.location.href;
-let well = url.indexOf('#');
-let hash = well === -1 ? null : url.substr(well + 1);
-switch (hash) {
-    case "loading":
-        loadingRender.init();
-        break;
-    case "phone":
-        phoneRender.init();
-}
+//
+// let url = window.location.href;
+// let well = url.indexOf('#');
+// let hash = well === -1 ? null : url.substr(well + 1);
+// switch (hash) {
+//     case "loading":
+//         loadingRender.init();
+//         break;
+//     case "phone":
+//         phoneRender.init();
+// }

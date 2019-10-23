@@ -1,38 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet/less" href="../css/demo.less">
-    <script src="../js/less-2.5.3.min.js"></script>
-    <link rel="stylesheet" href="../css/reset.min.css">
-    <style>
-        .box {
-            width: 500px;
-            height: 300px;
-            margin: 10px auto;
-            background: url("../images/default.gif") no-repeat center center #EEE;
-
-        }
-
-        .box img {
-            width: 500px;
-            height: 100%;
-            display: none;
-        }
-    </style>
-</head>
-
 <body>
-    <div class="box">
-        <!-- <img src="" data-src="../images/3.png" alt=""> -->
-    </div>
-    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- <script src="../jQuery/jquery1.11.3/dist/jquery.js"></script> -->
-    <script src="../js/图片延迟加载.js"></script>
-</body>
+<form action="#" method="get"><input type="tel" required pattern="^(\+86)?\d{10}$">
+    <input type="submit"></form>
 
+<script>
+    let tel=document.getElementsByTagName('input')[0];
+    tel.oninvalid=function(){
+       this.setCustomValidity('123')
+    }
+</script>
+</body>
 </html>

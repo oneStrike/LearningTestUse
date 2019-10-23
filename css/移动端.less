@@ -1,300 +1,301 @@
 @import "reset.min.less";
 
 html {
-  font-size: 100px;
+    font-size: 100px;
 }
 
 html,
 body {
-  height: 100%;
-  max-width: 640px;
-  overflow: hidden;
-  font-family: Arial, "Microsoft JhengHei";
+    height: 100%;
+    max-width: 640px;
+    overflow: hidden;
+    font-family: Arial, "Microsoft JhengHei";
 }
 
 #main-box {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-}
-
-.loading-box {
-  position: relative;
-  background: #000;
-  height: 100%;
-  display: none;
-}
-
-.loading-box {
-  .title {
-    position: absolute;
-    width: 100%;
-    height: 1.4rem;
-    color: #fff;
-    top: 50%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: -2.2rem auto 0 auto;
-
-    h1 {
-      font-size: 0.5rem;
-      line-height: 0.75rem;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    span {
-      display: block;
-      font-size: 0.26rem;
-      line-height: 0.45rem;
-      margin-top: 0.2rem;
-      letter-spacing: 0.04rem;
-      text-align: center;
-    }
-  }
-
-  .progress {
-    width: 4.6rem;
-    height: 0.3rem;
-    background: #FFFFFF;
-    border-radius: 0.06rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: 1rem auto 0 -2.3rem;
+    position: relative;
     overflow: hidden;
+    height: 100%;
+}
 
-    .current {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: -webkit-linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
-      background: linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
-      background-size: .3rem .3rem;
-      animation: loadingMove .5s linear 0s infinite both;
-      transition: .3s;
+.loading-box {
+    position: relative;
+    background: #000;
+    height: 100%;
+    display: block;
+}
+
+.loading-box {
+    .title {
+        position: absolute;
+        width: 100%;
+        height: 1.4rem;
+        color: #fff;
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: -2.2rem auto 0 auto;
+
+        h1 {
+            font-size: 0.5rem;
+            line-height: 0.75rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        span {
+            display: block;
+            font-size: 0.26rem;
+            line-height: 0.45rem;
+            margin-top: 0.2rem;
+            letter-spacing: 0.04rem;
+            text-align: center;
+        }
     }
 
-  }
+    .progress {
+        width: 4.6rem;
+        height: 0.3rem;
+        background: #FFFFFF;
+        border-radius: 0.06rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 1rem auto 0 -2.3rem;
+        overflow: hidden;
 
-  @keyframes loadingMove {
-    0% {
-      background-position: 0 0;
+        .current {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: -webkit-linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+            background: linear-gradient(left bottom, #5CB85C 0%, #5CB85C 25%, #74C274 25%, #74C274 50%, #5CB85C 50%, #5CB85C 75%, #74C274 75%, #74C274 100%);
+            background-size: .3rem .3rem;
+            animation: loadingMove .5s linear 0s infinite both;
+            transition: .3s;
+        }
+
     }
 
-    100% {
-      background-position: 0 -.3rem;
+    @keyframes loadingMove {
+        0% {
+            background-position: 0 0;
+        }
+
+        100% {
+            background-position: 0 -.3rem;
+        }
     }
-  }
 
 }
 
 .phone {
-  width: 100%;
-  height: 100%;
-  background: url("../img/zf_phoneBg.jpg");
-  background-size: cover;
-  position: relative;
-  padding-top: 50px;
-
-  .phone-title {
     width: 100%;
-    height: 2.62rem;
-    margin: 0 auto auto;
-    color: #FFFFFF;
+    height: 100%;
+    background: url("../img/zf_phoneBg.jpg");
+    background-size: cover;
+    position: relative;
+    padding-top: 50px;
 
-    h2 {
-      font-size: 0.5rem;
-      font-weight: normal;
-      text-align: center;
-    }
+    .phone-title {
+        width: 100%;
+        height: 2.62rem;
+        margin: 0 auto auto;
+        color: #FFFFFF;
 
-    span {
-      display: block;
-      font-size: 0.26rem;
-      text-align: center;
-      margin: 0.1rem 0 0.05rem 0;
-    }
-
-    time {
-      display: block;
-      font-size: 0.3rem;
-      letter-spacing: 0.05rem;
-      text-align: center;
-
-    }
-  }
-
-  .answer {
-    display: block;
-    width: 5.2rem;
-    height: 3.6rem;
-    position: absolute;
-    left: 50%;
-    bottom: 2rem;
-    margin-left: -2.6rem;
-    color: #fff;
-
-    .remind {
-      float: left;
-      font-size: 0.3rem;
-      margin: 0.3rem 0 0 0.4rem;
-    }
-
-    .info {
-      float: right;
-      font-size: 0.3rem;
-      margin: 0.3rem 0.6rem 0 0;
-    }
-
-    .reject {
-      background: rgb(211, 9, 9);
-      position: absolute;
-      width: 1.3rem;
-      height: 1.3rem;
-      border-radius: 50%;
-      bottom: 0.2rem;
-
-      span {
-        display: block;
-        width: 2rem;
-        font-size: 0.3rem;
-        position: absolute;
-        bottom: -0.7rem;
-        left: 0.28rem;
-        letter-spacing: 0.2rem;
-
-        i {
-          position: absolute;
-          left: 0.4rem;
-          bottom: 1.15rem;
-          left: -0.1rem;
-          font-size: 0.8rem;
+        h2 {
+            font-size: 0.5rem;
+            font-weight: normal;
+            text-align: center;
         }
-      }
-    }
 
-    .agree {
-      background: #32db08;
-      position: absolute;
-      bottom: 0.2rem;
-      right: 0.3rem;
-      width: 1.3rem;
-      height: 1.3rem;
-      border-radius: 50%;
-      cursor: pointer;
-      -moz-user-select: none;
-
-      .phone-focus {
-        width: 1.4rem;
-        height: 1.4rem;
-        border: 2px solid #32db08;
-        border-radius: 50%;
-        animation: answerMove 1s linear infinite both;
-        transition: .3s;
-        position: absolute;
-        bottom: -0.08rem;
-        left: -0.08rem;
-      }
-
-      span {
-        display: block;
-        width: 2rem;
-        font-size: 0.3rem;
-        position: absolute;
-        bottom: -0.7rem;
-        left: 0.28rem;
-        letter-spacing: 0.2rem;
-
-        i {
-          position: absolute;
-          left: 0.4rem;
-          bottom: 1.15rem;
-          left: -0.1rem;
-          font-size: 0.8rem;
+        span {
+            display: block;
+            font-size: 0.26rem;
+            text-align: center;
+            margin: 0.1rem 0 0.05rem 0;
         }
-      }
+
+        time {
+            display: block;
+            font-size: 0.3rem;
+            letter-spacing: 0.05rem;
+            text-align: center;
+            display: none;
+
+        }
     }
-  }
 
-  i {
-    display: block;
-    font-size: 0.5rem;
-    margin-left: 0.05rem;
-    margin-bottom: -0.3rem;
-  }
-
-  .calling {
-    display: block;
-    width: 5.2rem;
-    height: 6.59rem;
-    position: absolute;
-    bottom: 1.6rem;
-    left: 50%;
-    margin-left: -2.6rem;
-    transform: translateY(6.89rem);
-    transition: .3s;
-
-    li {
-      float: left;
-      width: 1.2rem;
-      height: 1.2rem;
-      border: 2px solid rgb(230, 218, 218);
-      border-radius: 50%;
-      margin: 0.55rem 0.2rem;
-      font-size: 0.6rem;
-      text-align: center;
-      line-height: 1.2rem;
-      color: #fff;
-
-      span {
+    .answer {
         display: block;
-        font-size: 0.3rem;
-        margin-top: -0.2rem;
-        color: rgb(231, 231, 231);
-      }
-    }
-  }
+        width: 5.2rem;
+        height: 3.6rem;
+        position: absolute;
+        left: 50%;
+        bottom: 2rem;
+        margin-left: -2.6rem;
+        color: #fff;
 
-  .hang {
-    background: rgb(218, 32, 16);
-    width: 1.3rem;
-    height: 1.3rem;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0.1rem;
-    left: 50%;
-    margin-left: -0.7rem;
-    color: #FFFFFF;
+        .remind {
+            float: left;
+            font-size: 0.3rem;
+            margin: 0.3rem 0 0 0.4rem;
+        }
+
+        .info {
+            float: right;
+            font-size: 0.3rem;
+            margin: 0.3rem 0.6rem 0 0;
+        }
+
+        .reject {
+            background: rgb(211, 9, 9);
+            position: absolute;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            bottom: 0.2rem;
+
+            span {
+                display: block;
+                width: 2rem;
+                font-size: 0.3rem;
+                position: absolute;
+                bottom: -0.7rem;
+                left: 0.28rem;
+                letter-spacing: 0.2rem;
+
+                i {
+                    position: absolute;
+                    left: 0.4rem;
+                    bottom: 1.15rem;
+                    left: -0.1rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .agree {
+            background: #32db08;
+            position: absolute;
+            bottom: 0.2rem;
+            right: 0.3rem;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            cursor: pointer;
+            -moz-user-select: none;
+
+            .phone-focus {
+                width: 1.4rem;
+                height: 1.4rem;
+                border: 2px solid #32db08;
+                border-radius: 50%;
+                animation: answerMove 1s linear infinite both;
+                transition: .3s;
+                position: absolute;
+                bottom: -0.08rem;
+                left: -0.08rem;
+            }
+
+            span {
+                display: block;
+                width: 2rem;
+                font-size: 0.3rem;
+                position: absolute;
+                bottom: -0.7rem;
+                left: 0.28rem;
+                letter-spacing: 0.2rem;
+
+                i {
+                    position: absolute;
+                    left: 0.4rem;
+                    bottom: 1.15rem;
+                    left: -0.1rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
 
     i {
-      font-size: 0.6rem;
-      text-align: center;
-      line-height: 1.3rem;
+        display: block;
+        font-size: 0.5rem;
+        margin-left: 0.05rem;
+        margin-bottom: -0.3rem;
     }
 
-    span {
-      width: 1rem;
-      display: block;
-      font-size: 0.3rem;
-      position: absolute;
-      bottom: -0.5rem;
-      letter-spacing: 0.06rem;
-      left: 50%;
-      margin-left: -0.4rem;
+    .calling {
+        display: block;
+        width: 5.2rem;
+        height: 6.59rem;
+        position: absolute;
+        bottom: 1.6rem;
+        left: 50%;
+        margin-left: -2.6rem;
+        transform: translateY(6.89rem);
+        transition: .3s;
+
+        li {
+            float: left;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid rgb(230, 218, 218);
+            border-radius: 50%;
+            margin: 0.55rem 0.2rem;
+            font-size: 0.6rem;
+            text-align: center;
+            line-height: 1.2rem;
+            color: #fff;
+
+            span {
+                display: block;
+                font-size: 0.3rem;
+                margin-top: -0.2rem;
+                color: rgb(231, 231, 231);
+            }
+        }
     }
-  }
+
+    .hang {
+        background: rgb(218, 32, 16);
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0.1rem;
+        left: 50%;
+        margin-left: -0.7rem;
+        color: #FFFFFF;
+
+        i {
+            font-size: 0.6rem;
+            text-align: center;
+            line-height: 1.3rem;
+        }
+
+        span {
+            width: 1rem;
+            display: block;
+            font-size: 0.3rem;
+            position: absolute;
+            bottom: -0.5rem;
+            letter-spacing: 0.06rem;
+            left: 50%;
+            margin-left: -0.4rem;
+        }
+    }
 }
 
 @keyframes answerMove {
-  from {
-    transform: scale(1.2);
-  }
+    from {
+        transform: scale(1.2);
+    }
 
-  to {
-    transform: scale(0);
-  }
+    to {
+        transform: scale(0);
+    }
 }

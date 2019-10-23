@@ -997,6 +997,27 @@ input.onkeydown = function(e) {
 | change | 文本内容改变   |
 | reset  | 点击重置按钮   |
 | submit | 点击提交按钮   |
+| input   | 当内容改变时   |
+| invalid| 验证不通过时  |
+
+- `change`和`input`都是用于监听文本框的内容改变,但还是有区别的
+
+1. `change`的兼容性更好,`input`只在IE9以上支持
+2. `change`是在文本框失去焦点是才会触发,如果内容改变前和改变后的值相同则不会触发
+3. `input` 是实时触发,只要文本内容发生改变就会触发
+
+- `invalid`是在验证不通过时触发,也可以修改基于setCustomValidity()修改默认的提示信息
+
+```html
+<input type="tel" required pattern="^$(+86)?\d{10}">
+<script>
+let tel=document.getElementsByTagName('input')[0];
+tel.oninvalid=function(){
+    console.log(1)
+}
+</script>
+```
+
 
 ### 其他事件
 
