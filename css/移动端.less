@@ -20,7 +20,7 @@ body {
 
 .loading-box,
 .phone,
-.messageBox {
+.message-box {
     position: relative;
     height: 100%;
     display: none;
@@ -325,8 +325,8 @@ body {
             opacity: 0;
         }
 
-        &.active {
-            animation: messageListMove 0.5s linear both;
+        & .active {
+            animation: messageListMove 0.3s linear both;
         }
 
         img {
@@ -406,6 +406,7 @@ body {
             position: absolute;
             right: 0.1rem;
             bottom: 0.6rem;
+            display: none;
         }
     }
 }

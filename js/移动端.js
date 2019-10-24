@@ -2,7 +2,7 @@ let loadingRender = (function () {
 
     let $loadBox = $('.loading-box'),
         $current = $loadBox.find('.current');
-
+    $loadBox.css('display', 'block');
     let imgData = ["../img/icon.png", "../img/zf_concatAddress.png", "../img/zf_concatInfo.png", "../img/zf_concatPhone.png", "../img/zf_course.png", "../img/zf_course1.png", "../img/zf_course2.png", "../img/zf_course3.png", "../img/zf_course4.png", "../img/zf_course5.png", "../img/zf_course6.png", "../img/zf_cube1.png", "../img/zf_cube2.png", "../img/zf_cube3.png", "../img/zf_cube4.png", "../img/zf_cube5.png", "../img/zf_cube6.png", "../img/zf_cubeBg.jpg", "../img/zf_cubeTip.png", "../img/zf_emploment.png", "../img/zf_messageArrow1.png", "../img/zf_messageArrow2.png", "../img/zf_messageChat.png", "../img/zf_messageKeyboard.png", "../img/zf_messageLogo.png", "../img/zf_messageStudent.png", "../img/zf_outline.png", "../img/zf_phoneBg.jpg", "../img/zf_phoneDetail.png", "../img/zf_phoneListen.png", "../img/zf_phoneLogo.png", "../img/zf_return.png", "../img/zf_style1.jpg", "../img/zf_style2.jpg", "../img/zf_style3.jpg", "../img/zf_styleTip1.png", "../img/zf_styleTip2.png", "../img/zf_teacher1.png", "../img/zf_teacher2.png", "../img/zf_teacher3.jpg", "../img/zf_teacher4.png", "../img/zf_teacher5.png", "../img/zf_teacher6.png", "../img/zf_teacherTip.png"];
 
     let n = 0,
@@ -39,6 +39,7 @@ let loadingRender = (function () {
         let timer = setTimeout(() => {
             $loadBox.remove();
             clearTimeout(timer);
+            phoneRender.init();
         }, 1000)
     };
 
@@ -50,7 +51,7 @@ let loadingRender = (function () {
     }
 })();
 
-let phoneRender = function () {
+let phoneRender = (function () {
 
     let $phone = $('.phone'),
         $time = $phone.find('time'),
@@ -61,7 +62,7 @@ let phoneRender = function () {
         callContent = $phone.find('audio')[1],
         $hang = $phone.find('.hang');
 
-
+    $phone.css('display', 'block');
     let autoTime = null,
         second = 0,
         minute = 0;
@@ -90,6 +91,7 @@ let phoneRender = function () {
         callContent.pause();
         $calling.css('transform', 'translateY(6.89rem)');
         $phone.remove();
+         messageRender.init();
     };
 
 
@@ -97,15 +99,103 @@ let phoneRender = function () {
         init: function () {
             ring.play();
             $agree.tap(confirmAnswer);
-            $hang.tap(closePhone)
+            $hang.tap(closePhone);
+           
         }
     }
 
-}();
-let massageRender = (function () {
+})();
+
+let messageRender = (function () {
+    let $messageBox = $('.message-box'),
+        $wrapper = $messageBox.find('.wrapper'),
+        $infoList = $wrapper.find('li'),
+        $keyborad = $messageBox.find('.keyboard'),
+        $textInp = $keyborad.find('span'),
+        $submit = $keyborad.find('.submit'),
+        audio = $messageBox.find('audio')[0];
+    let setp = -1,
+        len = $infoList.length,
+        autoTimer = null,
+        interval = 1000;
+    $messageBox.css('display', 'block');
+    let showInfo = function () {
+        ++setp;
+        if (setp === 1) {
+            clearInterval(autoTimer);
+            manuallySend();
+            return;
+        };
+        if (setp === len) {
+            clearInterval(autoTimer);
+            audio.pause();
+            $messageBox.remove();
+            return;
+        }
+        fitSize();
+        let $current = $infoList.eq(setp);
+        $current.addClass('active');
+    };
+
+    let manuallySend = function () {
+        $keyborad.css('transform', 'translateY(0rem)').one('transitionend', function () {
+            let num = 0;
+            let timer = setInterval(function () {
+                let str = "你好的介绍一个你自己",
+                    strLen = str.length,
+                    originCon = $textInp.html();
+                if (num === strLen) {
+                    clearInterval(timer);
+                    $submit.css('display', 'block');
+                    $submit.tap(sendMessage);
+                    return;
+                }
+                $textInp.html(originCon + str[num++])
+            }, 100)
+        })
+
+    }
+
+    let sendMessage = function () {
+        $(`<li class="inter">
+                    <span class="arrow"></span>
+                    <img src="../img/zf_messageLogo.png" alt="" class="pic">
+                   ${$textInp.html()}
+                </li>`).insertAfter($infoList.eq(0)).addClass('active');
+        $textInp.html('');
+        $submit.css('display', 'none');
+        $keyborad.css('transform', 'translateY(3.7rem)');
+        $infoList = $wrapper.find('li');
+        autoTimer = setInterval(showInfo, interval);
+    };
+
+    let result = 0;
+    let fitSize = function () {
+        let prev = $infoList.get(setp + 1).previousElementSibling;
+        let prevH = prev.offsetHeight,
+            prevBottom = 40,
+            curH = prevH + prevBottom,
+            winH = document.body.clientHeight * 0.9,
+            moveH = $infoList.get(setp).offsetHeight;
+
+        for (var i = 0; i < $infoList.length; i++) {
+            if (prev && prev.tagName === 'LI' && prev.previousElementSibling) {
+                prev = prev.previousElementSibling;
+                prevH = prev.offsetHeight;
+                curH += prevH + prevBottom;
+            }
+        };
+        if (curH >= winH) {
+            result -= moveH + prevBottom;
+            $wrapper.css('transform', `translateY(${result}px)`)
+        };
+    };
 
     return {
-        init: function () {}
+        init: function () {
+            audio.play();
+            autoTimer = setInterval(showInfo, interval);
+        },
     }
 })();
 let url = window.location.href;
@@ -118,7 +208,7 @@ switch (hash) {
     case "phone":
         phoneRender.init();
         break;
-    case "massageRender":
-        massageRender.init();
+    case "messageRender":
+        messageRender.init();
         break;
 }
