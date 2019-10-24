@@ -317,26 +317,43 @@ function prev(curEle) {
 > 设置/获取/删除 当前元素的某一个自定义属性
 
 ```javascript
-var oBox=document.getElementById('box');
+let oBox = document.getElementById("box");
 
 //=>把当前元素作为一个对象，在对象对应的堆内存中新增一个自定义的属性
-oBox.myIndex = 10;//=>设置
-console.log(oBox['myIndex']);//=>获取
+oBox.myIndex = 10; //=>设置
+console.log(oBox["myIndex"]); //=>获取
 delete oBox.myIndex; //=>删除
 
 //=>基于Attribute等DOM方法完成自定义属性的设置
-oBox.setAttribute('myColor','red'); //=>设置
-oBox.getAttribute('myColor'); //=>获取
-oBox.removeAttribute('myColor'); //=>删除
+oBox.setAttribute("myColor", "red"); //=>设置
+oBox.getAttribute("myColor"); //=>获取
+oBox.removeAttribute("myColor"); //=>删除
 
-上下两种机制属于独立的运作体制，不能互相混淆使用
-- 第一种是基于对象键值对操作方式，修改当前元素对象的堆内存空间来完成
-- 第二种是直接修改页面中HTML标签的结构来完成（此种办法设置的自定义属性可以在结构上呈现出来）
-
-基于setAttribute设置的自定义属性值都是字符串
+// 上下两种机制属于独立的运作体制，不能互相混淆使用
+// - 第一种是基于对象键值对操作方式，修改当前元素对象的堆内存空间来完成
+// - 第二种是直接修改页面中HTML标签的结构来完成（此种办法设置的自定义属性可以在结构上呈现出来）
+//
+// 基于setAttribute设置的自定义属性值都是字符串
 ```
 
 ![nN3JDU.png](https://s2.ax1x.com/2019/09/10/nN3JDU.png)
+
+**`dataset`**
+
+> 设置/获取/添加自定义属性名
+
+1. 开头必须使用`data-`命名
+2. 多个单词之间使用`-`进行连接
+3. 兼容性不如`getAttribute/setAttribute`
+
+```javascript
+element.dataset.name = "name";
+//==>设置或者添加自定义的属性名
+element.dataset.name;
+//==>获取自定义属性名的值
+element.dataset["age"];
+//==>使用属性表达式获取时需要使用驼峰命名法
+```
 
 ## 获取元素的属性
 
@@ -378,7 +395,32 @@ div.innerText += div.innerText;
 
 `id`获取元素的`id`名
 
-`className`获取元素的`class`名
+`className`获取设置元素的`class`名
+
+> 可以使用`+=`来为元素添加多个类名,
+
+```javascript
+element.className += " red pink";
+//如果不希望将先前的值替换,需要在第一个类名之前
+//添加空格,否则新添加的类名会和原有的重合,变成一个类名
+```
+
+`classList` 添加/删除/切换/查找/获取/替换`class`类名
+
+```javascript
+element.classList.add("class");
+//添加类名,一个只能添加一个,添加多个会报错,不会将原有的覆盖,
+element.classList.remove("class");
+//删除类名.只能删除一个
+element.classList.toggle("class");
+//切换类名,如有拥有则删除,如果没有则添加
+element.classList.contains("class");
+//查找类名,返回true或者false
+element.classList.item(1);
+//查找类名,使用索引查找类名,如果没有返回null,存在返回类名的字符串,
+element.classList.replace("oldClass", "newClass");
+//替换类名,第一参数是需要替换的老类名,第二个是替换后的新类名
+```
 
 `tagName`获取元素的标签名
 
@@ -1053,7 +1095,7 @@ input.onkeydown = function(e) {
 
 > 当一个手指触摸屏幕,此时三个对象的值都是一样的
 >
-> 当第二个手指触摸时,`changedTouches`存储的是第二根手指的相关信息,如果触摸的元素是和`targetTouches`的`targetr`属性上存储的对象一样,那么`touches`和`targetTouches`的值是一样的,每一根手指都拥有单独的值
+> 当第二个手指触摸时,`changedTouches`存储的是第二根手指的相关信息,如果触摸的元素是和`targetTouches`的`target`属性上存储的对象一样,那么`touches`和`targetTouches`的值是一样的,每一根手指都拥有单独的值
 >
 > 当手指离开时,`changeTouches`会记录最后 一次的信息,而`touches`和`targetTouches`的值则会消失
 
@@ -1273,4 +1315,86 @@ ul.onclick = function(e) {
      * */
   }
 };
+```
+
+## 拖放和释放
+
+> HTML5 中新增的一种特性,所有的元素都支持拖放,`img`和设置了`href`属性的`a`标签默认就支持拖放,其他的元素需要设置`draggable="true"`才可以今天拖放
+
+### 拖放/释放事件
+
+**拖拽元素的事件:**
+
+1. ondragstart ==>拖拽开始调用
+2. ondrag ==>拖拽过程中调用(与鼠标移动无关,只要不释放就会一直调用)
+3. ondragleave ==>鼠标离开拖拽元素时调用
+4. ondragend ==>拖拽结束时调用
+
+**拖拽目标元素的事件:**
+
+1. ondragenter ==>拖拽的元素进入目标元素时调用
+2. ondragover ==>拖拽元素停留在目标元素时调用(只要不释放会一直调用)
+3. ondrop ==>在目标元素中松开鼠标(释放拖拽元素)
+4. ondragleave ==>拖拽的元素离开目标元素调用
+
+**dataTransfer.setData():**
+
+> 可以在多个事件之间传递数据,需要传递两个参数!只允许在`ondragstart`中使用
+
+1. format: ==>传递的数据类型
+
+   - text/html
+   - text/uri-list
+   - text/xml
+   - text-plain
+
+2. data: ==>传递的数据
+
+**dataTransfer.clearData():**
+
+> 清空 dataTransfer 内存储的值,可以指定数据类型进行删除,不指定则清空存储的所有值!只能在`ondragstart`事件中使用
+
+**dataTransfer.getData():**
+
+> 通过数据类型获取`dataTransfer`内存储的值!只允许在`ondrop`中使用
+
+**浏览器默认阻止了`ondrop`事件,因此必须在`ondragover`事件中使用`preventDefault()`阻止浏览器的默认行为,否则`ondrop`事件不会生效**
+
+```html
+<div>
+  1
+  <p draggable="true">我要去找div2</p>
+</div>
+<div>2</div>
+<script>
+  let div1 = document.getElementsByTagName("div")[0],
+    div2 = document.getElementsByTagName("div")[1],
+    p = div1.querySelector("p"),
+    parent = document.documentElement,
+    obj = null;
+
+  function randomColor(min, max) {
+    return Math.floor(Math.random() * (max + 1 - min) + min);
+  }
+  parent.ondragstart = function(e) {
+    obj = e.target;
+    div1.style.borderWidth = 10 + "px";
+    e.target.innerText = "我要去哪?";
+  };
+  parent.ondrag = function(e) {
+    e.target.style.backgroundColor = `rgb(${randomColor(1, 255)},${randomColor(
+      1,
+      255
+    )},${randomColor(1, 255)})`;
+  };
+  parent.ondragend = function(e) {
+    e.target.innerText = "我进来了";
+  };
+  parent.ondragover = function(e) {
+    e.preventDefault();
+  };
+  parent.ondrop = function(e) {
+    e.target.appendChild(obj);
+  };
+</script>
 ```

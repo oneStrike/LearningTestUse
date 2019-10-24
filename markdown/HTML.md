@@ -579,6 +579,58 @@ document.createElement("ASIDE");
 <!--星期-->
 ```
 
+**音视频:**
+
+`audio` 音频标签
+
+`video` 视频标签
+
+```html
+<audio src="路径" loop autoplay controls preload></audio>
+<video
+  src="路径"
+  loop
+  autoplay
+  controls
+  preload
+  width="200"
+  height="200"
+></video>
+```
+
+1. loop ==>表示是否循环播放
+2. autoplay ==>是否在页面加载完毕后立即播放(大部分浏览器已经禁用)
+3. controls ==>是否显示播放控件(各个浏览器的播放控件样式不是统一的)
+4. preload ==>表示在页面加载是就开始加载音视频,并预准备播放(设置了 autoplay 会自动忽略这个属性)
+5. width ==>规定视频播放控件的宽度
+6. height ==>规定视频播放控件的高度
+
+> 单一的设置宽高浏览器会自动的等比例缩放,但同时设置宽高会导致视频无法等比例缩放(除非设置的值和视频的实际尺寸一样),会造成空白,因为大多数情况下都是只会设置一个值
+
+`source`
+
+> 每一个浏览器所支持的多媒体格式都是不一样的,因此一般都是准备多个不同格式的音视频,让浏览器自己选择支持的格式
+
+```html
+<video loop autoplay preload controls>
+  <source src="路径" type="video/MP4" />
+  <source src="路径" type="video/flv" />
+  <source src="路径" type="video.avi" />
+  <!--可以设置多个不同格式的文件,让浏览器自主选择支持的格式
+    音频标签也可以使用同样的操作
+--></video>
+```
+
+1. type ==> 规定音视频的格式
+
+**拖拽:**
+
+> html 中的任何元素都可以进行拖拽,是一种常见的特性,`img`和设置了`href`属性的`a`标签默认可以拖放,其他的标签需要设置`draggable="true"`
+
+```html
+<div draggable="true"></div>
+```
+
 **progress：**
 
 > 显示任务的进度条

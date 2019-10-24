@@ -6,21 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <!-- <link rel="styleshe    et" href="../css/reset.min.css"> -->
     <style>
-        .box {
-            width: 150px;
-            height: 100px;
-            background: orangered;
-            border-radius:90px/60px ;
+        div:nth-of-type(1) {
+            width: 200px;
+            height: 200px;
+            border: 2px solid orangered;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+
+        p {
+            background: pink;
+        }
+
+        div:nth-of-type(2) {
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            margin: 20px auto;
         }
     </style>
 </head>
 
 <body>
-    <div class="box">
-
+    <div>1
+        <p draggable="true">我要去找div2</p>
     </div>
+    <div>2</div>
+    <script>
+        let div1 = document.getElementsByTagName('div')[0],
+            div2 = document.getElementsByTagName('div')[1],
+            p = div1.querySelector('p'),
+            parent = document.documentElement,
+            obj = null;
+
+        function randomColor(min, max) {
+            return Math.floor(Math.random() * (max + 1 - min) + min);
+        };
+        parent.ondragstart = function (e) {
+            obj = e.target;
+            div1.style.borderWidth = 10 + "px";
+            e.target.innerText = "我要去哪?";
+        }
+        parent.ondrag = function (e) {
+            e.target.style.backgroundColor =
+                `rgb(${randomColor(1, 255)},${randomColor(1, 255)},${randomColor(1, 255)})`
+        }
+        parent.ondragend = function (e) {
+            e.target.innerText = "我进来了";
+        }
+        parent.ondragover = function (e) {
+            e.preventDefault();
+        }
+        parent.ondrop = function (e) {
+            e.target.appendChild(obj);
+        }
+    </script>
 </body>
 
 </html>
