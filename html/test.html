@@ -6,31 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    meta
+    <style>
+        .container {
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            margin: 150px auto;
+        }
+
+        .container:hover {
+            background: pink;
+            transform-origin: center center;
+            transform: scale(0.5, 0.5)
+        }
+    </style>
 </head>
 
 <body>
-    <form action="">
-        <input type="file">
-        <input type="submit" value="">
-    </form>
-    <img src="" alt="">
-    <script>
-        let inp = document.getElementsByTagName('input')[0],
-            img = document.getElementsByTagName('img')[0],
-            reader = new FileReader();
-
-        inp.onchange = function () {
-            let file = inp.files;
-            console.log(file);
-            reader.readAsDataURL(file[0]);
-
-            reader.onload = function () {
-                img.src = reader.result;
-
-            }
-        }
-    </script>
+    <div class="container">
+        123
+    </div>
 </body>
 
 </html>

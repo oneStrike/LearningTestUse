@@ -300,6 +300,65 @@ meta 主要是提供一些关于网站的元信息,例如网站的关键字描�
 >
 > label for 需要与 radio 的 id 属性捆绑
 
+**表单美化：**
+
+> 将需要美化的表单标签和一个`div`包裹进`label`标签中，然后将表单标签进行隐藏，通过给`div`设置背景图的方式实现美化，最后通过伪元素`:checkbox`设置点击时`div`背景图的位置
+
+```html
+<style>
+  input {
+    display: none;
+  }
+
+  input:checked + div {
+    background-position: 0 0;
+  }
+
+  div {
+    display: inline-block;
+    width: 40px;
+    height: 28px;
+    background: url(../images/checkbox.png) no-repeat left bottom;
+  }
+</style>
+<label>
+  <input type="checkbox" />
+  <div></div>
+  多选框
+</label>
+```
+
+> 使用一个父容器将表单标签和一个空的 `div` 包裹在一起，然后给空的 `div` 添加背景图，通过定位的方式将所有的元素重叠在一起，最后将表单元素设为`opacity:0;`透明就可以了
+
+```html
+<style>
+  input {
+    width: 100%;
+    height: 100;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .container {
+    width: 100px;
+    height: 40px;
+    position: relative;
+  }
+
+  .container div {
+    width: 100%;
+    height: 100%;
+    background: url(../images/upload.png) no-repeat left bottom;
+  }
+</style>
+<div class="container">
+  <input type="file" />
+  <div></div>
+</div>
+```
+
 ### div/span
 
 ```html

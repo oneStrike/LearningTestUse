@@ -4,6 +4,17 @@
 
 CSS 能够对网页中元素位置的排版进行像素级精确控制，支持几乎所有的字体字号样式，拥有对网页对象和模型样式编辑的能力
 
+## 浏览器的内核
+
+| 浏览器          | 内核    | 前缀     |
+| --------------- | ------- | -------- |
+| IE              | Trident | -ms-     |
+| firefox         | Gecko   | -moz-    |
+| Chrome          | Webkit  | -webkit- |
+| safari          | Webkit  | -webkit- |
+| opera           | Presto  | -o-      |
+| Chrome \| opera | Blink   |          |
+
 ## 选择器
 
 ```css
@@ -729,6 +740,34 @@ box {
 >
 > border-box IE 盒模型(怪异盒) ==> width / height = content + padding + border
 
+## BFC
+
+> 块级格式化上下文（Block formatting context），他是一块独立的渲染区域，BFC 区域中的所有元素产生的布局与外界的元素没有任何关系，同样，外部的布局也不会对内部产生影响
+
+**BFC 的产生：**
+
+1. 根元素
+2. float 不为 none 的元素
+3. overflow 不为 visible
+4. position 为 absolute，fixed
+5. display 为 inline-block,table-cell,flex,inline-flex
+
+**BFC 的布局规则：**
+
+1. 内部的盒子会按照垂直方向依次排列
+2. 处于同一个 BFC 内的元素上下 margin 也会重叠
+3. BFC 的区域不会与 float 元素重叠
+4. 计算高度时，浮动的元素也参与计算
+
+**BFC 的作用：**
+
+1. margin 重叠问题
+2. margin 传递问题
+3. 高度塌陷
+4. 自适应两栏布局
+
+> BFC 最主要的就是产生一个独立的渲染区域，而在这个区域内的元素产生的布局与外界没有任何的关系，只要了解了这个机制，就可以解决很多的问题，就像是一个二层的小楼房，格式化上下文就是这个楼房，BFC 就是处于二楼，普通的元素处在一楼
+
 ## 标签分类
 
 ### 类型分类
@@ -1139,13 +1178,13 @@ empty-label {
 
 > 可以设置盒子的四个圆角,也可以单独设置每一个
 
-| 属性 | 位置 |
-| --- | --- |
-| border-radius:10px | 四个角都设置 10px |
-| border-radius:10px 20px | 左上右下 10px ==右上左下 20px== |
-| border-radius:10px 20px 30px | 左上 10px==右上左下 20px== 右下 30px |
+| 属性                              | 位置                                            |
+| --------------------------------- | ----------------------------------------------- |
+| border-radius:10px                | 四个角都设置 10px                               |
+| border-radius:10px 20px           | 左上右下 10px ==右上左下 20px==                 |
+| border-radius:10px 20px 30px      | 左上 10px==右上左下 20px== 右下 30px            |
 | border-radius:10px 20px 30px 40px | 左上 10px ==右上 20px== 右下 30px ==左下 40px== |
-| border-radius:10px/20px | 水平半径 10px ==垂直半径 20px== |
+| border-radius:10px/20px           | 水平半径 10px ==垂直半径 20px==                 |
 
 **元素水平垂直居中:**
 
@@ -1163,6 +1202,121 @@ box {
   margin-top: -100px;
 }
 ```
+
+## 过渡 / 变形 / 动画
+
+### transtion
+
+1.transition-property ==>需要产生过渡的样式
+
+> 可以单独设置某一个样式,也可以设置多个或者全部设置
+
+- 如果只设置一个直接书写这个样式即可
+- 如果设置多个需要使用`,`分割
+- 如果书写为 all 或者复合写法中不书写则默认全部样式都产生过渡效果
+
+---
+
+2.transition-duration ==>过渡的持续时间
+
+> 可以设置为秒也可以设置为毫秒
+
+- s 代表秒
+- ms 代表毫秒
+
+---
+
+3.transition-delay ==>过渡的开始时间
+
+> 可以设置为负数,会省略掉过渡开始之前的效果,如果负的时间等于过渡的时间则不会产生过渡效果
+
+---
+
+4.transition-timing-function ==>过渡效果的运动曲线
+
+> 默认是 ease,可以使用贝塞尔曲线
+
+- linear ==>匀速运动
+- ease ==>先慢速后加速,以慢速结束效果
+- ease-in ==>以慢速开始
+- ease-out ==>以慢速结果效果
+- ease-in-out ==>以慢速开始和结束
+- cubic-bezier(n,n,n,n) =>使用贝塞尔曲线设置效果
+
+**贝塞尔曲线网站:**
+
+<http://yisibl.github.io/cubic-bezier/>
+
+**运动曲线:**
+
+![KwHzZT.png](https://s2.ax1x.com/2019/10/25/KwHzZT.png)
+
+```css
+.box {
+  width: 200px;
+  height: 200px;
+  background: pink;
+  transition-property: all;
+  /* 整个元素所有的样式都产生过度效果 */
+  transition-duration: 3s;
+  /* 过度效果持续3秒 */
+  transition-delay: 1s;
+  /* 延迟1秒之后再开始执行过渡效果 */
+  transition-timing-function: linear;
+  /* 过渡效果的运动曲线是匀速 */
+}
+.box:hover {
+  width: 400px;
+  height: 400px;
+  background: green;
+}
+
+/* 复合写法 */
+.box {
+  transition: all 2s 0s linear;
+  /* 第一个代表过渡的样式,可以省略,省略默认是全部样式产生过渡效果
+   * 第二个代表过渡效果的持续时间
+   * 第三个代表开始的事时间,可以省略,省略默认立即开始
+   * 第四个代表运动的曲线,可以省略,省略默认是ease
+   */
+}
+```
+
+### transform
+
+#### 2D 转换
+
+> 只有块级元素才可以应用此样式属性,内联元素如果要使用需要先转换为块级元素,转换的元素不会影响到其他的元素,如果书写的是复合样式,则执行顺序是从后向前,**translate 会受到 scale,rotate,skew 的影响,有时无法位移值正确的位置**
+
+**位移:**
+
+translate ==>根据给定的坐标,元素匀速向其位移
+
+| 属性                 | 样式                        |
+| -------------------- | --------------------------- |
+| translateX( )        | 设置位移的 X 轴坐标         |
+| translateY( )        | 设置位移的 Y 轴坐标         |
+| translate( x , y )   | 根据 x,y 轴进行 2D 位移     |
+| translate3D( x,y,z ) | 根据 x,y,z 轴进行 3D 位移   |
+| translateZ()         | 根据 z 轴的坐标进行 3D 位移 |
+
+**缩放:**
+
+scale ==>根据给定的 x(宽度)轴和 y 轴(高度)的数值进行缩放
+
+| 属性             | 样式               |
+| ---------------- | ------------------ |
+| scale( x,y )     | 2D 样式的缩放      |
+| scaleX()         | 2D 样式 X 轴的缩放 |
+| scaleY()         | 2D 样式 Y 轴的缩放 |
+| scaleZ()         | 3D 样式 Z 轴的缩放 |
+| scale3D( x,y,z ) | 3D 样式的缩放      |
+
+> 缩放的原始值大小是 1,即样式不做改变,0-1 之间为缩小,1-n 之间为放大,如果 x 轴和 y 轴的缩放是一样的则可以指书写一个值,设置的值都是原有大小的倍数
+
+**旋转:**
+
+rotate ==>根据给定的
 
 ## LESS
 
