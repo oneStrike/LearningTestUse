@@ -1317,7 +1317,7 @@ ul.onclick = function(e) {
 };
 ```
 
-## 拖放和释放
+## H5 新增接口
 
 > HTML5 中新增的一种特性,所有的元素都支持拖放,`img`和设置了`href`属性的`a`标签默认就支持拖放,其他的元素需要设置`draggable="true"`才可以今天拖放
 
@@ -1398,3 +1398,62 @@ ul.onclick = function(e) {
   };
 </script>
 ```
+
+### FileReader
+
+> 可以异步的读取存储在用户计算机上的文件,只能读取`<input type="file">`中上传的文件,或者拖拽中`dataTransfer`中存储的文件,再或者是`HTMLCanvasElement`中执行`mozGetAsFile()`方法返回的结果,并不能按照路径读取用户计算机上的文件
+
+**属性:**
+
+FileReader.error: 文件读取错误时的错误信息
+
+`var err = instanceofFileReader.error`
+
+FileReader.readyState: 表示 FileReader 的状态
+
+| 常量    | 值  | 状态                 |
+| ------- | --- | -------------------- |
+| EMPTY   | 0   | 没有加载任何数据     |
+| LOADING | 1   | 文件读取中           |
+| DONE    | 2   | 以完成全部的读取请求 |
+
+FileReader.result :读取的文件内容,仅在读取成功是有值,数据的格式取决于使用的那种方法启动读取操作
+
+**事件:**
+
+| 事件        | 描述                             |
+| ----------- | -------------------------------- |
+| onabort     | 读取中断时触发                   |
+| onload      | 读取成功是触发                   |
+| onerror     | 读取错误时触发                   |
+| onloadend   | 读取结束时触发(不论成功或者失败) |
+| onloadstart | 读取开始时触发                   |
+
+**方法:**
+
+1. FileReader.abort() ==>中断读取操作
+2. FileReader.readAsText() ==>开始读取指定的文件,成功后`result`中包含着以字符串形式存储的内容
+3. FileReader.readAsDatURL() ==>开始读取指定的文件,成功后`result`中包含着`data:`URL 格式的`Base64`字符串,
+4. FileReader.readAsArrayBuffer() ==>开始读取指定的文件,成功后`result`中保存的将是被读取文件的 `ArrayBuffer`数据对象
+
+用户选择照片后实现即时预览
+
+```html
+<input type="file" />
+<img src="" alt="" title="" />
+<script>
+  let inp=document.querySelector('input),
+      img=document.querySelector('img');
+      inp.onchange=function(){
+          let reader=new FileReader(),
+              file=inp.files;
+        reader.readAsDataURL(file[0]);
+        reader.onload=function(){
+            img.src=reader.result;
+        };
+      };
+</script>
+```
+
+### 地理位置
+

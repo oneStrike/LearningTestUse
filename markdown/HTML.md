@@ -4,6 +4,47 @@
 
 HTML 称为超文本标记语言，是一种标识性的语言。它包括一系列标签．通过这些标签可以将网络上的文档格式统一，使分散的 Internet 资源连接为一个逻辑整体。HTML 文本是由 HTML 命令组成的描述性文本，HTML 命令可以说明文字，图形、动画、声音、表格、链接等
 
+## link/meta
+
+**link:**
+
+link 的主要作用就是建立文档和外部资源的链接
+
+链接外部 css 文件
+
+`<link rel="stylesheet" type="text/css" href="style.css">`
+
+标题栏小图标
+
+`<link rel="icon" href="ico小图标路径" type="image/x-icon">`
+
+**meta:**
+
+meta 主要是提供一些关于网站的元信息,例如网站的关键字描述等
+
+然 IE 浏览器使用以最新的引擎渲染网页
+
+`<meta http-equiv="X-UA-Compatible" content="ie=edge">`
+
+`<meta name="description" content="网页的描述">`
+
+`<meta name="keywords" content="网页的关键词">`
+
+`<meta name="viewport"content="width=device-width, initial-scale=1.0">`
+
+> 此 META 标签就是在设置 VP(视口)的规则
+
+- width=device-width：让 HTML 页面的宽度等于设备的宽度
+- height=：设置 HTML 页面的高度（一般不用）
+- initial-scale=1.0：初始缩放比例是 1:1（也就是既不放大也不多小）
+- user-scalable=no：禁止用户手动缩放
+- maximum-scale=1.0
+- minimum-scale=1.0：设置最大最小的缩放比例 1:1(既不放大也不缩小 =>部分安卓机中只设置 user-scalable 是不起作用的，需要同这两个一起使用) ...
+
+1. layout viewport：布局（页面）视口（和开发 CSS 等相关）
+2. visual viewport：手机视口
+3. ideal viewport：理想视口
+
 ## 常用标签
 
 页面头部
@@ -361,6 +402,10 @@ HTML 称为超文本标记语言，是一种标识性的语言。它包括一系
 **footer：**
 
 > 表示一个网页的页脚,可以出现多次,每一个完整的内容区的尾部都可以使用
+
+**hgroup:**
+
+> 标题组合,一般用于嵌套拥有主副标题的区域
 
 ```html
 <!DOCTYPE html>

@@ -6,60 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        div:nth-of-type(1) {
-            width: 200px;
-            height: 200px;
-            border: 2px solid orangered;
-            margin: 20px auto;
-            box-sizing: border-box;
-        }
-
-        p {
-            background: pink;
-        }
-
-        div:nth-of-type(2) {
-            width: 200px;
-            height: 200px;
-            border: 2px solid green;
-            margin: 20px auto;
-        }
-    </style>
+    meta
 </head>
 
 <body>
-    <div>1
-        <p draggable="true">我要去找div2</p>
-    </div>
-    <div>2</div>
+    <form action="">
+        <input type="file">
+        <input type="submit" value="">
+    </form>
+    <img src="" alt="">
     <script>
-        let div1 = document.getElementsByTagName('div')[0],
-            div2 = document.getElementsByTagName('div')[1],
-            p = div1.querySelector('p'),
-            parent = document.documentElement,
-            obj = null;
+        let inp = document.getElementsByTagName('input')[0],
+            img = document.getElementsByTagName('img')[0],
+            reader = new FileReader();
 
-        function randomColor(min, max) {
-            return Math.floor(Math.random() * (max + 1 - min) + min);
-        };
-        parent.ondragstart = function (e) {
-            obj = e.target;
-            div1.style.borderWidth = 10 + "px";
-            e.target.innerText = "我要去哪?";
-        }
-        parent.ondrag = function (e) {
-            e.target.style.backgroundColor =
-                `rgb(${randomColor(1, 255)},${randomColor(1, 255)},${randomColor(1, 255)})`
-        }
-        parent.ondragend = function (e) {
-            e.target.innerText = "我进来了";
-        }
-        parent.ondragover = function (e) {
-            e.preventDefault();
-        }
-        parent.ondrop = function (e) {
-            e.target.appendChild(obj);
+        inp.onchange = function () {
+            let file = inp.files;
+            console.log(file);
+            reader.readAsDataURL(file[0]);
+
+            reader.onload = function () {
+                img.src = reader.result;
+
+            }
         }
     </script>
 </body>
