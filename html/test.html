@@ -1,80 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    .tip {
+        width: 200px;
+        height: 100px;
+        background: rgb(26, 26, 179);
+        border-radius: 20px;
+        position: relative
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        ul {
-            list-style: none;
-            position: relative;
-            left: 50%;
-            top: 50%;
-            margin: 200px auto;
-            transform-style: preserve-3d;
-            transform: rotateY(10deg);
-        }
-
-        li {
-            width: 100px;
-            height: 100px;
-            position: absolute;
-
-
-        }
-
-        li:nth-child(1) {
-            background: olive;
-        }
-
-        li:nth-child(2) {
-            background: lawngreen;
-            transform: translateX(100px);
-            transform-origin: left;
-            transform: rotateX(90deg);
-
-        }
-
-        li:nth-child(3) {
-            background: lightcoral;
-            transform: translateY(-100px);
-            transform-origin: bottom;
-            transform: rotateY(90deg)
-        }
-
-        li:nth-child(4) {
-            background: lightcoral;
-            transform: translateX(-100px);
-            transform-origin: right;
-            transform: rotateX(-90deg);
-        }
-
-        li:nth-child(5) {
-            background: gold;
-            transform: translateY(100px);
-            transform-origin: top;
-            transform: rotateY(-90deg);
-        }
-
-        li:nth-child(6) {
-            background: blueviolet;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-        </ul>
-    </div>
-</body>
-
-</html>
+    .tip:after {
+        content: "因为我们追加的图形整体旋转了90°。所以追加的文本也会旋转";
+        width: 70px;
+        height: 30px;
+        /* border: 0 solid transparent; */
+        border-bottom: 30px solid rgb(26, 26, 179);
+        border-radius: 0 0 0 230px;
+        margin-top: 20px;
+        position: absolute;
+        top: 50px;
+        left: 20px;
+        transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+</style>
+<div>
+    <div class="tip">鬼地方个梵蒂冈</div>
+</div>
