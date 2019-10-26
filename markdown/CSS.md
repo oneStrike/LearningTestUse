@@ -1178,13 +1178,13 @@ empty-label {
 
 > 可以设置盒子的四个圆角,也可以单独设置每一个
 
-| 属性                              | 位置                                            |
-| --------------------------------- | ----------------------------------------------- |
-| border-radius:10px                | 四个角都设置 10px                               |
-| border-radius:10px 20px           | 左上右下 10px ==右上左下 20px==                 |
-| border-radius:10px 20px 30px      | 左上 10px==右上左下 20px== 右下 30px            |
+| 属性 | 位置 |
+| --- | --- |
+| border-radius:10px | 四个角都设置 10px |
+| border-radius:10px 20px | 左上右下 10px ==右上左下 20px== |
+| border-radius:10px 20px 30px | 左上 10px==右上左下 20px== 右下 30px |
 | border-radius:10px 20px 30px 40px | 左上 10px ==右上 20px== 右下 30px ==左下 40px== |
-| border-radius:10px/20px           | 水平半径 10px ==垂直半径 20px==                 |
+| border-radius:10px/20px | 水平半径 10px ==垂直半径 20px== |
 
 **元素水平垂直居中:**
 
@@ -1284,9 +1284,15 @@ box {
 
 ### transform
 
-#### 2D 转换
-
 > 只有块级元素才可以应用此样式属性,内联元素如果要使用需要先转换为块级元素,转换的元素不会影响到其他的元素,如果书写的是复合样式,则执行顺序是从后向前,**translate 会受到 scale,rotate,skew 的影响,有时无法位移值正确的位置**
+
+**3D 空间:**
+
+transform-style:preserve-3D; ==>设置 3D 空间
+
+**景深:**
+
+perspective ==>设置景深效果,也就是元素被查看的位置,值越大元素的展示越小,值越小元素展示的就越大,使用 origin 可以改变观察的角度,只适用于 3D 效果,当元素添加景深效果时,子元素会获得透明效果,而不是元素本身
 
 **位移:**
 
@@ -1312,11 +1318,164 @@ scale ==>根据给定的 x(宽度)轴和 y 轴(高度)的数值进行缩放
 | scaleZ()         | 3D 样式 Z 轴的缩放 |
 | scale3D( x,y,z ) | 3D 样式的缩放      |
 
-> 缩放的原始值大小是 1,即样式不做改变,0-1 之间为缩小,1-n 之间为放大,如果 x 轴和 y 轴的缩放是一样的则可以指书写一个值,设置的值都是原有大小的倍数
+> 缩放的原始值大小是 1,即样式不做改变,0-1 之间为缩小,1-n 之间为放大,如果 x 轴和 y 轴的缩放是一样的则可以指书写一个值,设置的值都是原有大小的倍数,3D 效果下可以改变元素的厚度
 
 **旋转:**
 
-rotate ==>根据给定的
+rotate ==>根据给定的 x 和 y 轴的坐标进行旋转,默认为顺时针旋转,如果书写负值,则为逆时针旋转,使用的是角度单位 deg
+
+| 属性       | 样式           |
+| ---------- | -------------- |
+| rotate()   | 2D 旋转        |
+| rotate3D() | 3D 旋转        |
+| rotateX()  | X 轴的 3D 旋转 |
+| rotateY()  | Y 轴的 3D 旋转 |
+| rotateZ()  | Z 轴的 3D 旋转 |
+
+> rotate3D()并不能直接书写三个位置的值,只能三个轴都是用一个值,如果不希望当前的轴使用,书写 0 即可,使用则书写 1, `rotate3D(0,0,1,30deg)`,顺序是 X,Y,Z
+
+**倾斜:**
+
+skew ==>倾斜使用的也是角度单位 deg,且都为 2D 倾斜,没有 3D 倾斜,默认是向左倾斜,如果书写的是负值,则是向右
+
+| 属性  | 样式     |
+| ----- | -------- |
+| skewX | X 轴倾斜 |
+| skewY | Y 轴倾斜 |
+
+**基点:**
+
+origin ==>可以设置元素进行变化的基点,可以使用坐标单词,也可以使用百分比,默认是以元素的中心为基点
+
+| X 轴   | Y 轴   | Z 轴   |
+| ------ | ------ | ------ |
+| left   | top    | length |
+| right  | bottom |        |
+| center | center |        |
+| %      | %      |        |
+
+> Z 轴设置基点只能书写数值
+
+### animation
+
+通过@keyframes 关键字将动画效果与元素进行绑定,@keyframes 用于创建动画效果,通过自定义的名称将动画效果和元素绑定在一起
+
+> @keyframes 需要创建一个自定义的动画名称才能和元素进行绑定,动画使用 from 和 to 来规定动画的效果,也可以使用 % 进行设置,使用 % 可以将动画的效果设置的更加美观
+
+- from <==> 0%
+- to <==> 100%
+
+```css
+@keyframes my_name {
+  /* 使用from和to等价于0%和100% */
+  from {
+    background: red;
+  }
+  to {
+    background: pink;
+  }
+
+  /* 使用百分比可以更加细致的设置动画 */
+  0% {
+    background: red;
+  }
+  25% {
+    background: pink;
+  }
+  50% {
+    background: blue;
+  }
+  100% {
+    background: green;
+  }
+
+  /* 多个阶段如果使用的动画效果一样,可以书写在一起 */
+
+  0%,
+  30%,
+  60% {
+    background: red;
+  }
+  10%,
+  40%,
+  70% {
+    background: pink;
+  }
+  20%,
+  50%,
+  80% {
+    background: blue;
+  }
+  90%,
+  100% {
+    background: green;
+  }
+}
+```
+
+animation-name ==>动画的名称,和@keyframes 自定义的名称一致才可以执行动画效果
+
+animation-duration ==>动画的执行一个周期所需的时间,秒或者毫秒
+
+animation-delay ==>动画开始的时间,可以设置负数,负数时会跳过负数的执行阶段
+
+animation-timing-function ==>动画的运动曲线
+
+1. ease ==>默认,慢速开始,缓慢加速,在结束之前变慢
+2. linear ==>匀速,动画一直以相同的速度执行
+3. ease-in ==>慢速开始,匀速结束
+4. ease-out ==>匀速开始,慢速结束
+5. ease-in-out ==>慢速开始和结束,中间匀速运行
+6. cubic-bezier(n,n,n,n) ==>使用贝塞尔曲线
+
+animation-iteration-count ==>动画的播放次数,默认是 1,
+
+- infinite ==>无限次播放
+
+animation-direction ==>规定动画是否在播放完毕后进行反向播放
+
+- normal ==>默认,不进行反向播放
+- alternate ==>轮流反向播放
+
+animation-fill-mode ==>规定动画效果结束之后动画效果是否可见
+
+- none (默认值) : ==>在运动结束之后回到初始位置，在延迟的情况下，让 0%在延迟后生效
+- backwards : ==>在延迟的情况下，让 0%在延迟前生效
+- forwards : ==>在运动结束的之后，停到结束位置
+- both : ==>backwards 和 forwards 同时生效
+
+animation ==>复合写法,必须包含 animation-name 和 animation-duration 两个属性,其余不书写则是默认值
+
+> `animation:name duration timing-function delay iteration-count direction`
+
+```css
+.box {
+  animation: my_name 2s linear 1s infinite alternate both;
+  /*
+   * animation-name:my_name
+   * animation-duration:2s
+   * animation-timing-function:linear
+   * animation-delay:1s
+   * animation-iteration:infinite
+   * animation-direction:alternate
+   * animation-fill-mode:both
+   */
+}
+@keyframes my_name {
+  from {
+    background: red;
+  }
+  to {
+    background: pink;
+  }
+}
+```
+
+**动画库:**
+
+<https://daneden.github.io/animate.css/>
+
+> 将 animate.css 文件引入到当前的 HTML 文件中,然后给需要产生动画效果的元素添加类名 animated,其次添加类名,如动画的效果,持续的事件,延迟的事件等,都是通过添加类名的方式来给元素添加动画
 
 ## LESS
 

@@ -7,24 +7,73 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .container {
-            width: 200px;
-            height: 200px;
-            background: orangered;
-            margin: 150px auto;
+        ul {
+            list-style: none;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            margin: 200px auto;
+            transform-style: preserve-3d;
+            transform: rotateY(10deg);
         }
 
-        .container:hover {
-            background: pink;
-            transform-origin: center center;
-            transform: scale(0.5, 0.5)
+        li {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+
+
+        }
+
+        li:nth-child(1) {
+            background: olive;
+        }
+
+        li:nth-child(2) {
+            background: lawngreen;
+            transform: translateX(100px);
+            transform-origin: left;
+            transform: rotateX(90deg);
+
+        }
+
+        li:nth-child(3) {
+            background: lightcoral;
+            transform: translateY(-100px);
+            transform-origin: bottom;
+            transform: rotateY(90deg)
+        }
+
+        li:nth-child(4) {
+            background: lightcoral;
+            transform: translateX(-100px);
+            transform-origin: right;
+            transform: rotateX(-90deg);
+        }
+
+        li:nth-child(5) {
+            background: gold;
+            transform: translateY(100px);
+            transform-origin: top;
+            transform: rotateY(-90deg);
+        }
+
+        li:nth-child(6) {
+            background: blueviolet;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        123
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
     </div>
 </body>
 
