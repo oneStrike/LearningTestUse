@@ -303,6 +303,8 @@ div {
   background-repeat: no-repeat;
   /* 符合写法 */
   background: url(../img/1.png) no-repeat center center;
+  background-size: 100% 100%;
+  background-origin: border-box;
 }
 ```
 
@@ -338,6 +340,24 @@ div {
 2. 使用 % (第一个值是水平位置，第二个值是垂直。左上角是 0％0％。右下角是 100％100％。如果仅指定了一个值，其他值将是 50％。 。默认值为：0％0％)。
 
 3. 使用 px 第一个值是水平位置，第二个值是垂直。左上角是 0。单位可以是像素（0px0px）或任何其他 CSS 单位。如果仅指定了一个值，其他值将是 50％。你可以混合使用％和 positions
+
+> background-size: ==>设置背景图的大小
+
+1. px \| % 设置背景图的大小,设置的不合适图片将会被拉伸!同时设置 100%时,背景图将会被拉伸至整个容器的大小
+2. cover 将图片等比例放大,直至将容器全部铺满位置,如果等比例放大时有益处的部分,则会自动隐藏
+3. contain 将图片等比例放大,当有任何一个位置到达容器的边缘时,则会停止,有可能会出现空白区域
+
+> background-origin ==>规定 background-position 基于什么位置来定位背景图,如果设置了 baackground-attachment:fixed;则不起作用
+
+1. padding-box 默认,根据 padding 定位
+2. content-box 根据内容进行定位
+3. border-box 根据边框进行定位
+
+> background-clip ==>规定背景图的绘制区域
+
+1. padding-box 从内边距开始绘制
+2. content-box 从内容区域开始绘制
+3. border-box 默认! 从边框区域开始绘制
 
 **border.**
 
@@ -877,7 +897,7 @@ box {
 
 <https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories>
 
-## 布局
+## 布局属性
 
 **display:**
 
@@ -1178,13 +1198,13 @@ empty-label {
 
 > 可以设置盒子的四个圆角,也可以单独设置每一个
 
-| 属性 | 位置 |
-| --- | --- |
-| border-radius:10px | 四个角都设置 10px |
-| border-radius:10px 20px | 左上右下 10px ==右上左下 20px== |
-| border-radius:10px 20px 30px | 左上 10px==右上左下 20px== 右下 30px |
+| 属性                              | 位置                                            |
+| --------------------------------- | ----------------------------------------------- |
+| border-radius:10px                | 四个角都设置 10px                               |
+| border-radius:10px 20px           | 左上右下 10px ==右上左下 20px==                 |
+| border-radius:10px 20px 30px      | 左上 10px==右上左下 20px== 右下 30px            |
 | border-radius:10px 20px 30px 40px | 左上 10px ==右上 20px== 右下 30px ==左下 40px== |
-| border-radius:10px/20px | 水平半径 10px ==垂直半径 20px== |
+| border-radius:10px/20px           | 水平半径 10px ==垂直半径 20px==                 |
 
 **元素水平垂直居中:**
 
@@ -1318,7 +1338,7 @@ scale ==>根据给定的 x(宽度)轴和 y 轴(高度)的数值进行缩放
 | scaleZ()         | 3D 样式 Z 轴的缩放 |
 | scale3D( x,y,z ) | 3D 样式的缩放      |
 
-> 缩放的原始值大小是 1,即样式不做改变,0-1 之间为缩小,1-n 之间为放大,如果 x 轴和 y 轴的缩放是一样的则可以指书写一个值,设置的值都是原有大小的倍数,3D 效果下可以改变元素的厚度
+> 缩放的原始值大小是 1,即样式不做改变,0-1 之间为缩小,1-n 之间为放大,如果 x 轴和 y 轴的缩放是一样的则可以指书写一个值,设置的值都是原有大小的倍数,3D 效果下可以改变元素的厚度,如果 scale 的值设置为-1,则元素会翻转倒立
 
 **旋转:**
 
@@ -1354,7 +1374,7 @@ origin ==>可以设置元素进行变化的基点,可以使用坐标单词,也�
 | center | center |        |
 | %      | %      |        |
 
-> Z 轴设置基点只能书写数值
+> Z 轴设置基点只能书写数值,perspection 也可以设置基点
 
 ### animation
 
@@ -1476,6 +1496,235 @@ animation ==>复合写法,必须包含 animation-name 和 animation-duration 两
 <https://daneden.github.io/animate.css/>
 
 > 将 animate.css 文件引入到当前的 HTML 文件中,然后给需要产生动画效果的元素添加类名 animated,其次添加类名,如动画的效果,持续的事件,延迟的事件等,都是通过添加类名的方式来给元素添加动画
+
+### 渐变
+
+**线性渐变:**
+
+> linear-dradient ==>线性渐变 需要配合 background-image 使用,
+
+1. 可以使用角度单位进行设置渐变的角度
+2. 使用 to 制定渐变终止的位置
+3. 使用 % 规定每个颜色渐变的范围,如果两个颜色渐变的范围一样,则不会产生渐变效果
+
+```css
+.box {
+  width: 200px;
+  height: 200px;
+  background-image: linear-gradient(to top, red, pink);
+  /* to是指从另外一边到当前的位置,to top是指从底部开始渐变,一直渐变到顶部*/
+
+  background-image: linear-gradient(
+    lightblue 25%,
+    lightgreen 25%,
+    lightgreen 50%,
+    lightblue 50%,
+    lightblue 75%,
+    lightgreen 75%
+  );
+  /* 实现无渐变效果的颜色交替,可以模仿进度条,如果需要倾斜可以使用to top right或者deg角度进行设置 */
+}
+```
+
+**径向渐变:**
+
+radial-gradient ==>以中心开始向外进行渐变
+
+## 阴影
+
+**文本阴影:**
+
+text-shadow ==>可以向文本添加一个或者多个阴影效果,多个阴影效果之间使用 `,`分割,默认的阴影颜色和文本颜色相同
+
+1. 第一个值是水平位置的偏移量!必须是书写,支持负数
+2. 第二个值是垂直位置的偏移量!必须书写,支持负数
+3. 第三个值是阴影的距离!必须书写,0 或负数则没有效果
+4. 第四个值是阴影的颜色
+
+```css
+.font {
+  text-shadow: 10px 20px 10px pink;
+  /* 水平位置偏移10px
+   * 垂直位置偏移20px
+   * 阴影距离是10px
+   * 阴影颜色是pink
+   */
+}
+```
+
+**box-shadow:**
+
+box-shadow ==>设置一个或者多个阴影效果,多个阴影效果之间使用`,`隔开,默认的阴影颜色是黑色
+
+1. 第一个值为阴影的水平位置,必须书写,支持负数
+2. 第二个值为阴影的垂直位置,必须书写,支持负数
+3. 第三个值为阴影的模糊距离
+4. 第四个值为阴影的大小
+5. 第五个值为阴影的颜色,默认黑色
+6. 设置因为的内外层,默认为外层,设置为 inset 为内层
+
+```css
+.box {
+  width:200px
+  height:200px;
+  background:lightblue;
+  box-shadow:0 0 10px 5px blue;
+  /*  第一个值为阴影的水平位置
+   *  第二个值为阴影的垂直位置
+   *  第三个值是阴影的模糊度
+   *  第四个值是阴影的大小
+   *  第五个值是阴影的颜色
+   *  没有改变阴影的内外层
+   */
+}
+```
+
+## 布局
+
+### column
+
+> 该布局可以做出类似于报纸排版的内容
+
+1. clout 需要分割的列数
+2. width 规定每列的宽度
+3. gap 规定每列之间的间距
+4. rule 设置列之间的边框,不会占据布局空间
+5. span 设置跨列,all 表示跨越所有列,通常用于设置板块的标题
+
+> clout 和 width 不能同时设置,通常使用 columns 设置,
+
+```css
+.box {
+  columns: auto 3;
+  /* 分成三列,每列的宽度自适应 */
+}
+```
+
+## 兼容
+
+兼容性处理通常都是处理 IE 浏览器
+
+Hack 兼容处理法
+
+**属性过滤器:**
+
+> 给单一的样式添加特定的浏览器前缀,只让该浏览器解析这个样式,以达到兼容性的处理
+
+```css
+.box {
+  _animation-direction: alternate;
+  /* 只有IE6可以识别 */
+
+  +animation-fill-mode: both;
+  /* IE6和IE7可以识别 */
+
+  *animation-iteration-count: infinite;
+  /* IE6和IE7可以识别 */
+
+  transition-property: all\9;
+  /* IE6,7,8,9可以识别 */
+
+  transform-style: preserve-3d\0;
+  /* IE8,9,10,11可以识别 */
+}
+```
+
+**css 选择器前缀:**
+
+```css
+*html.box {
+  animation-timing-function: linear;
+}
+/* IE6可以识别 */
+
+* + html.box {
+  animation-leday: 2s;
+}
+/* IE7可以识别 */
+
+:root.box {
+  animation-duration: 2s;
+}
+/* IE9及现代浏览器可以识别 */
+```
+
+**条件注释法:**
+
+```html
+<!-- [if IE] -->
+<style>
+  /* IE浏览器执行的code */
+</style>
+<![endif]  -->
+
+<!-- [if IE 6] -->
+<style>
+  /* IE6执行的code */
+</style>
+<![endif]  -->
+
+<!-- [if gt IE 8] -->
+<style>
+  /* IE8以上code */
+</style>
+<![endif] -->
+
+<!-- [if gte IE 8] -->
+<style>
+  /* IE8及以上code */
+</style>
+<![endif] -->
+
+<!-- [if lt IE 8] -->
+<style>
+  /* IE8以下code */
+</style>
+<![endif] -->
+
+<!-- [if lte IE 8] -->
+<style>
+  /* IE8及以下code */
+</style>
+<![endif] -->
+
+<!-- [if ! IE 8] -->
+<style>
+  /* 非IE浏览器code */
+</style>
+<![endif] -->
+```
+
+## 伪元素和伪类
+
+**伪元素:**
+
+> 伪元素使用两个`::`隔开,伪元素可以创建一个虚拟的元素,创建的元素并不会存在于 DOM 树中,我们可以给这个虚拟的元素添加内容,也可以添加样式
+
+**常用的伪元素:**
+
+| 伪元素         | 作用                                     |
+| -------------- | ---------------------------------------- |
+| ::after        | 在元素内容的最前面添加新的内内容         |
+| ::before       | 在元素内容的最后面添加新的内容           |
+| ::first-line   | 将为元素的样式应用于元素文本的第一行     |
+| ::first-letter | 将伪元素的样式应用于元素文本的第一个字母 |
+
+> `::first-letter`和`::first-line`只能应用于块级元素
+
+**伪类:**
+
+> 伪类使用一个`:`,可以根据用户动态产生的一些行为添加一些额外的样式,例如鼠标滑过,鼠标点击等
+
+**常用的伪类:**
+
+| 伪类      | 作用                        |
+| --------- | --------------------------- |
+| :link     | 链接未访问(仅适用于 a 标签) |
+| :visited  | 链接访问后(仅使用后 a 标签) |
+| :hover    | 鼠标滑过                    |
+| :active   | 鼠标点击                    |
+| :checked  | 选中的元素(单选框和多选框)  |
+| :focus    | 变单元素聚焦                |
 
 ## LESS
 
