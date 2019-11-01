@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum=1.0,minimum=1.0,use-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./package/iconfont.css">
+    <link rel="stylesheet" href="./package/swiper.min.css">
+    <link rel="stylesheet/less" href="./css/移动端.less">
+    <script src="./package/less-2.5.3.min.js"></script>
+    <script>
+        ~ function () {
+            let setREM = function () {
+                let winW = document.documentElement.clientWidth,
+                    standard = 640;
+                if (winW >= standard) {
+                    document.documentElement.style.fontSize = 100 + 'px';
+                    return;
+                }
+                document.documentElement.style.fontSize = winW / standard * 100 + 'px';
+            };
+            setREM();
+            window.addEventListener('resize', setREM);
+        }();
+    </script>
+</head>
+
+<body>
+    <main id="main-box">
+        <!-- loading -->
+        <article class="loading">
+            <hgroup class="title">
+                <h1>珠峰培训</h1>
+                <h2>H5场景交互型简历</h2>
+            </hgroup>
+            <section class="progress">
+                <div>
+                    <span></span>
+                </div>
+            </section>
+        </article>
+        <!-- phone -->
+        <article class="phone">
+            <hgroup class="phone-title">
+                <h2>珠峰培训</h2>
+                <h3>www.zhufengpeixun.cn</h3>
+                <time>00:00</time>
+            </hgroup>
+            <section class="incoming-call">
+                <ul>
+                    <li>
+                        <i class="iconfont">&#xe614;</i><br>
+                        <span>提醒</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe626;</i><br>
+                        <span>信息</span>
+                    </li>
+                    <li class="reject">
+                        <i class="iconfont">&#xe605;</i><br>
+                        <span>拒接</span>
+                    </li>
+                    <li class="agree">
+                        <div class="circle"></div>
+                        <i class="iconfont">&#xe63a;</i><br>
+                        <span>接听</span>
+                    </li>
+                </ul>
+                <audio src="./audio/bell.mp3" loop preload></audio>
+            </section>
+            <section class="answer">
+                <ul>
+                    <li>
+                        <i class="iconfont">&#xe609;</i><br>
+                        <span>mute</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe63c;</i><br>
+                        <span>keypad</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe68a;</i><br>
+                        <span>speaker</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe615;</i><br>
+                        <span>addcall</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe6e8;</i><br>
+                        <span>FaceTime</span>
+                    </li>
+                    <li>
+                        <i class="iconfont">&#xe602;</i><br>
+                        <span>contacts</span>
+                    </li>
+                </ul>
+                <div class="hang">
+                    <div>
+                        <i class="iconfont">&#xe605;</i>
+                        <span>了解详情</span>
+                    </div>
+                </div>
+                <audio src="./audio/say.mp3" preload></audio>
+            </section>
+        </article>
+        <!-- message -->
+        <article class="message">
+            <section class="message-list clearfix">
+                <ul class="clearfix">
+                    <li class="left">
+                        <img src="./img/zf_messageStudent.png" alt="">
+                        <i></i>
+                        <p>哎,毕业了还是找不到工作啊</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>怎么会?认识我的毕业生一个月都拿一万多的好工作呢!</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>是不是没学HTML5和移动端啊</p>
+                    </li>
+                    <li class="left">
+                        <img src="./img/zf_messageStudent.png" alt="">
+                        <i></i>
+                        <p>哎,毕业了还是找不到工作啊</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>怎么会?认识我的毕业生一个月都拿一万多的好工作呢!</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>是不是没学HTML5和移动端啊</p>
+                    </li>
+                    <li class="left">
+                        <img src="./img/zf_messageStudent.png" alt="">
+                        <i></i>
+                        <p>哎,毕业了还是找不到工作啊</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>怎么会?认识我的毕业生一个月都拿一万多的好工作呢!</p>
+                    </li>
+                    <li class="right">
+                        <img src="./img/zf_messageLogo.png" alt="">
+                        <i></i>
+                        <p>是不是没学HTML5和移动端啊</p>
+                    </li>
+                </ul>
+                <div class="key-board">
+                    <span></span>
+                    <a href="#"></a>
+                </div>
+                <audio src="./audio/music.mp3" loop preload></audio>
+            </section>
+        </article>
+        <!-- cube -->
+        <article class="cube">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <img src="./img/zf_cubeTip.png" alt="">
+        </article>
+        <!-- details -->
+        <article class="details">
+            <div class="swiper container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide page1">
+                        <dl>
+                            <dt>课程大纲</dt>
+                            <dd>
+                                <em>01</em>
+                                <a href="#">HTML(5)+CSS(3)+移动端响应式布局开发及相关插件的使用</a>
+                            </dd>
+                            <dd>
+                                <em>02</em>
+                                <a href="#">JS中的闭包及堆栈内存以及THIS的处理</a>
+                            </dd>
+                            <dd>
+                                <em>03</em>
+                                <a href="#">JS中的面向对象编程，可以基于面向对象封装组件和插件等</a>
+                            </dd>
+                            <dd>
+                                <em>04</em>
+                                <a href="#">ES6中的新特性及数组对象里面的常用方法</a>
+                            </dd>
+                            <dd>
+                                <em>05</em>
+                                <a href="#">JS中的同步异步编程及Promise设计模式</a>
+                            </dd>
+                            <dd>
+                                <em>06</em>
+                                <a href="#">JS中的事件委托及事件池及发布订阅设计模式</a>
+                            </dd>
+                            <dd>
+                                <em>07</em>
+                                <a href="#">JS中的DOM操作以及重绘和回流的优化</a>
+                            </dd>
+                            <dd>
+                                <em>08</em>
+                                <a href="#">HTTP交互及AJAX库的封装以及跨域数据共享</a>
+                            </dd>
+                            <dd>
+                                <em>09</em>
+                                <a href="#">VUE:VUE-CLI/VUE-ROUTER/VUEX/VUE ELEMENT等全家桶</a>
+                            </dd>
+                            <dd>
+                                <em>10</em>
+                                <a href="#">REACT:REACT-ROUTER/REACT-REDUX/DVA/AXIOS/ANT等</a>
+                            </dd>
+                            <dd>
+                                <em>11</em>
+                                <a href="#">辅助技能：NODE/WEBPACK/GIT等</a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="swiper-slide"></div>
+                    <div class="swiper-slide"></div>
+                    <div class="swiper-slide"></div>
+                    <div class="swiper-slide"></div>
+                    <div class="swiper-slide"></div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <script src="./package/zepto.min.js"></script>
+    <script src="./package/swiper.jquery.min.js"></script>
+    <script src="./package/makisu.min.js"></script>
+    <script src="./js/移动端.js"></script>
+</body>
+
+</html>

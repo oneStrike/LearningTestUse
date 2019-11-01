@@ -1,27 +1,51 @@
-<style>
-    .tip {
-        width: 200px;
-        height: 100px;
-        background: rgb(26, 26, 179);
-        border-radius: 20px;
-        position: relative
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .tip:after {
-        content: "因为我们追加的图形整体旋转了90°。所以追加的文本也会旋转";
-        width: 70px;
-        height: 30px;
-        /* border: 0 solid transparent; */
-        border-bottom: 30px solid rgb(26, 26, 179);
-        border-radius: 0 0 0 230px;
-        margin-top: 20px;
-        position: absolute;
-        top: 50px;
-        left: 20px;
-        transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
-</style>
-<div>
-    <div class="tip">鬼地方个梵蒂冈</div>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 600px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left {
+            width: 100px;
+            height: 400px;
+            background: pink;
+        }
+
+        .right {
+            width: 100px;
+            height: 400px;
+            background: blue;
+        }
+
+        .conter {
+            width: 100%;
+            height: 100%;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="container">
+
+        <nav class="left"></nav>
+        <section class="conter"></section>
+        <aside class="right"></aside>
+    </article>
+</body>
+
+</html>
