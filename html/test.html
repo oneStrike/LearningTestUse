@@ -7,45 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            height: 600px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left {
-            width: 100px;
-            height: 400px;
-            background: pink;
-        }
-
-        .right {
-            width: 100px;
-            height: 400px;
-            background: blue;
-        }
-
-        .conter {
-            width: 100%;
-            height: 100%;
-            background: green;
+        p {
+            display: block;
+            position:fixed;
+            width: 40px;
+            height: 50px;
+            background: red;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
 
 <body>
-    <article class="container">
-
-        <nav class="left"></nav>
-        <section class="conter"></section>
-        <aside class="right"></aside>
-    </article>
+    <div>
+        <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+    </div>
 </body>
 
 </html>

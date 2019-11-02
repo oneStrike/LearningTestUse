@@ -565,6 +565,8 @@ box {
 > padding 不可以设置为负数,margin 可以设置为负数
 >
 > 背景图和背景颜色只会填充至 border 位置(border 有边框颜色则会覆盖),不会涵盖 margin
+>
+> 当 margin 超出元素的区域时,可以使用 overflow:hidden 可以将溢出的 margin 区域进行隐藏,
 
 **margin 重叠:**
 
@@ -1062,6 +1064,8 @@ li {
 ```
 
 ![KKggGF.png](https://s2.ax1x.com/2019/10/20/KKggGF.png)
+
+> 右浮动时有时候需要注意元素的顺序,可能会发生顺序颠倒,这时候需要在 HTML 中将元素的书写顺序进行颠倒,
 
 **清除浮动:**
 
@@ -2161,4 +2165,22 @@ background: url("@{bg-src}/news_1.png") no-repeat;
 @import (reference) "common";
 /*reference:只把内容导入过来使用,但是不会编译common中的内容*/
 
+```
+
+###　属性
+
+**darken:**
+
+> 按照百分比将原有的颜色加深
+
+```css
+color: darken(red, 10%);
+```
+
+**lighten:**
+
+> 按照百分比将原有的颜色变浅
+
+```css
+color: lighten(red, 10%);
 ```

@@ -221,20 +221,72 @@ let cubeRender = (function () {
             changY = null;
         }
     };
+
     return {
         init: function () {
             $cube.show();
             $rotateBox.on('touchstart', start);
             $rotateBox.on('touchmove', move);
             $rotateBox.on('touchend', end);
+            $eleList.tap(function () {
+                $cube.css('display', 'none');
+
+                //=>跳转到详情区域,通过传递点击LI的索引,让其定位到具体的SLIDE
+                let index = $(this).index();
+                detailsRender.init(index);
+            });
         }
     }
 })();
 
 let detailsRender = (function () {
+    let $details = $('.details'),
+        mySwiper = null,
+        $dl = $details.find('dl');
+    let swiperInit = function () {
+        mySwiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            onInit: move,
+            onTransitionEnd: move
+
+        });
+    };
+    let move = function (swiper) {
+        let activeIn = swiper.activeIndex,
+            allIn = swiper.slides;
+        if (activeIn === 0) {
+            $dl.makisu({
+                selector: 'dd',
+                overlap: 0.6,
+                speed: 0.8
+
+            });
+            $dl.makisu('open');
+        } else {
+            $dl.makisu({
+                selector: 'dd',
+                speed: 0
+            });
+            $dl.makisu('close');
+        };
+        allIn.forEach(function (item, index) {
+            if (activeIn === index) {
+                item.id = `page${index+1}`;
+                return;
+            }
+            item.id = null;
+        })
+
+    }
 
     return {
-        init: function () {}
+        init: function (index = 0) {
+            $details.show();
+            if (!mySwiper) {
+                swiperInit();
+            }
+            mySwiper.slideTo(index, 0);
+        }
     }
 })();
 
