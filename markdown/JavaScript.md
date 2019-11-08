@@ -2402,7 +2402,7 @@ str.toLowerCase();
 ```javascript
 let str = "hello word";
 let reg = /\b[a-z]/g;
-//=>\b匹配单词���界，通过正则获取到每个单词的首字母
+//=>\b匹配单词��������界，通过正则获取到每个单词的首字母
 
 str.replace(reg, item => item.toUpperCase());
 /**
@@ -4302,7 +4302,7 @@ A(6);
 
 ```javascript
 function test() {
-  let a="one";
+  let a = "one";
   function test2() {
     console.log(a);
   }
@@ -5180,7 +5180,7 @@ setInterval(function(){
 
 ```
 
-### 返回值
+### 返回
 
 定时器的返回值是一个正整数,返回值从数字 1 开始一次累加,无论是`setTimerout`还是`setInterval`共用一个编号池,因此增加任意一种的定时器都会使返回值自动累加 1
 
@@ -5383,13 +5383,13 @@ console.log(9);
 
 ## `Promise`
 
-`Promise`是一个对象,主要是管理异步编程,它代表的是一个异步操作的成功或者失败,`Promise`本身是同步的,
+`Promise`是一个对象,主要是管理异步编程,它代表的是一个异步操作的成功或者失败,而`Promise`本身是同步的
 
 语法:
 
 ```javascript
 let p = new Promise(function(resolve, reject) {
-  //=>异步操作
+  //=>resolve和reject作为创建的函数的参数被传递
 });
 ```
 
@@ -5403,7 +5403,16 @@ let p = new Promise(function(resolve, reject) {
 
 ### 参数
 
-在创建`Promise`对象的时候,同时也会创建一个函数,`Promise`在执行的时候回立即执行这个函数,同时将`resolve`和`reject`两个函数作为参数传递给这个函数
+在构建一个`Promise`实例的时候必须传入一个函数,如果不传递则会报错,构建实例的时候就会立即把这个函数执行,同时可以指定`resolve`和`reject`这两个函数作为参数传递给新创建的函数
+
+```javascript
+let promise = new Promise();
+// Promise resolver undefined is not a function at new Promise
+
+let promise = new Promise(resolve => {
+  //最少需要传递一个 函数
+});
+```
 
 **`resolve`**
 
@@ -5417,29 +5426,157 @@ let p = new Promise(function(resolve, reject) {
 
 **`then()`**
 
-`then()`会返回一个`Promise`对象,它最多拥有两个参数,分别代表`Promise`状态所执行的回调函数,`fulfilled`状态会执行第一个回调函数,`rejected`状态会执行第二个回调函数,
+`then()`会返回一个新的`Promise`对象,它最多拥有两个参数,分别代表`Promise`状态所执行的回调函数,`fulfilled`状态会执行第一个回调函数,`rejected`状态会执行第二个回调函数
+
+> 每一个`then`方法都会返回一个新的`Promise`实例，下一个`then`的执行状态则有返回的`Promise`实例的状态所决定,而一旦执行过程中遇到错误,则会立即返回一个`Promise`实例,实行下一个`then()`或者`catch()`,并不会执行徐错误下面的代码
+
+- 返回一个基础值，实例的状态就会变成`fulfilled`,作为下一个`then`的参数
 
 ```javascript
-new Promise(function(resolve, rejected) {
-  setTimerout(function() {
-    resolve(100);
-  }, 1000);
-}).then(
-  function(value) {
-    console.log(value);
-    //=>100
-    /**
-     * value接收的就是Peomise执行成功,resolve传递的参数
-     *Promise为fulfilled状态时作为回调函数被调用
-     *接收的是Promise执行成功resolve函数的返回值
-     */
-  },
-  function(value) {
-    /**
-     * Promise对为rejected状态时作为回调函数被调用
-     * 就收的是Promise执行失败rejected函数的返回值
-     * 该返回值返回的是失败的原因
-     */
-  }
-);
+new Promise((resolve, reject) => {
+  console.log("初始化");
+  throw new Error("抛出一个错误");
+})
+  .then(
+    resolve => {
+      //这里不会被执行,Promise的实例第一个rejected状态
+    },
+    reject => {
+      console.log(reject);
+      return 100;
+    }
+  )
+  .then(
+    resolve => {
+      console.log(
+        "上一个then返回的实例是fulfilled状态则执行此处,并且打印返回值,返回值是:" +
+          resolve
+      );
+    },
+    reject => {
+      console.log(
+        "上一个then返回的实例时rejected状态则执行此处,并且打印返回值,返回值是:" +
+          reject
+      );
+    }
+  );
 ```
+
+- 不返回任何值,实例的状态就会变成`fulfilled`,下一个`then`接收到的就会是`undefined`
+
+```javascript
+new Promise((resolve, reject) => {
+  console.log("初始化");
+  resolve("让Promise的实例变成fulfilled状态");
+})
+  .then(
+    resolve => {
+      console.log("实例是fulfilled状态时执行此处,并且不返回任何数据");
+    },
+    reject => {
+      console.log("实例是rejected状态时执行此处,并且不返回任何数据");
+    }
+  )
+  .then(
+    resolve => {
+      console.log(
+        "上一个then返回的实例是fulfilled状态执行此处,并且打印返回值,返回值是:" +
+          resolve
+      );
+    },
+    reject => {
+      console.log(
+        "上一个then返回的实例是rejected状态时执行此处,并且打印返回值,返回值是:" +
+          reject
+      );
+    }
+  );
+```
+
+- 如果抛出一个错误,实例的状态就会变成`rejected`,作为一个`then`的参数,代码执行中产生的错误,`Promise`实例的状态也会变成`rejected`
+
+```javascript
+new Promise((resolve, reject) => {
+  console.log("初始化");
+  1("让代码运行时产生一个错误");
+})
+  .then(
+    resolve => {
+      console.log("实例是fulfilled状态时执行此处");
+    },
+    reject => {
+      console.log("实例是rejected状态时执行此处,");
+      return 2("返回在一个错误");
+    }
+  )
+  .then(
+    resolve => {
+      console.log("上一个then返回的实例是fulfilled状态执行此处,");
+    },
+    reject => {
+      console.log("上一个then返回的实例是rejected状态时执行此处");
+    }
+  );
+```
+
+- 返回一个初始状态的实例,那么会将这个实例执行,并且执行后的状态将作为下一个`then`的参数
+
+```javascript   =
+new Promise((resolve, reject) => {
+  console.log("初始化");
+  resolve("初始化的实例为fulfilled状态");
+})
+  .then(
+    resolve => {
+      console.log("新创建一个Promise实例");
+      return new Promise((resolve, reject) => {
+        throw new Error("让新的Promise实例的状态为rejected");
+      });
+    },
+    reject => {
+      console.log("新创建一个Promise实例");
+      return new Promise((resolve, reject) => {
+        resolve("让新的Promie实例状态为fulfilled");
+      });
+    }
+  )
+  .then(
+    resolve => {
+      console.log("返回的Promise实例状态为fulfilled执行此处");
+    },
+    reject => {
+      console.log("返回的Promise实例状态为rejected执行此处");
+    }
+  );
+```
+
+**catch:**
+
+`catch()`方法同样时会返回一个`Promise`实例,但是和`then()`的区别就是他只会处理`rejected`状态,虽说`then()`也可以处理`rejected`状态,但是实际开发中通常是用`catch()`来管理`rejected`状态,而`then()`只是用来管理`fulfilled`状态,`catch()`只允许执行一个回调函数,那就是`rejexted`状态,并且错误信息具有类似于"冒泡"的特性,只要不被捕获,就会一直向后传递,直至被捕获为止
+
+```javascript
+new Promise((resolve, reject) => {
+  throw new Error("手动抛出一个错误");
+  resolve();
+})
+  .then(resolve => {
+    console.log(resolve);
+    //不会执行
+  })
+  .then(resolve => {
+    console.log(resolve);
+    //不会执行
+  })
+  .catch(resolv => {
+    console.log(resolve);
+    //打印错误信息
+  });
+```
+
+**finally:**
+
+`finally()`方法也会返回一个`Promise`实例,不同的是`finally()`执行的关键在于 Promise 的实例是否执行完毕,并不是取决于执行后的状态,因此只要是实例执行完毕后,无论状态是`fulfilled`还是`rejected`!`finally()`都会执行,但是由于不知道实例最终的状态,因此`finally()`的回调函数并不支持传递参数
+
+> `then()`方法虽然也可以书写两个回调函数用于支持两种状态下都可以调用,但还是有区别的
+
+1. `then()`的回调函数支持参数,`finally()`的回调函数不支持参数

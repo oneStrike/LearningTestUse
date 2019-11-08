@@ -334,7 +334,7 @@ meta 主要是提供一些关于网站的元信息,例如网站的关键字描�
 <style>
   input {
     width: 100%;
-    height: 100;
+    height: 100%;
     opacity: 0;
     position: absolute;
     top: 0;
