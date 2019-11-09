@@ -5567,7 +5567,11 @@ new Promise((resolve, reject) => {
     console.log(resolve);
     //不会执行
   })
+<<<<<<< HEAD
   .catch(resolve => {
+=======
+  .catch(resolv => {
+>>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     console.log(resolve);
     //打印错误信息
   });
