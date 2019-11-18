@@ -10,11 +10,7 @@ app.listen(8000, () => {
 
 //=>USE
 app.use(function (req, res, next) {
-<<<<<<< HEAD
     res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-=======
-    res.header("Access-Control-Allow-Origin", "http://localhost:63342");
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length,Authorization,Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -28,7 +24,6 @@ app.use(session({
     secret: 'zfpx',
     saveUninitialized: false,
     resave: false,
-<<<<<<< HEAD
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 30
     }
@@ -36,11 +31,6 @@ app.use(session({
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-=======
-    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}
-}));
-app.use(bodyParser.urlencoded({extended: false}));
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
 app.use((req, res, next) => {
     if (/^(POST|PUT|PATCH)$/i.test(req.method)) {
         let pass = '';
@@ -67,7 +57,6 @@ app.use(async function (req, res, next) {
 });
 
 app.get('/getMatchList', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         voteData,
@@ -77,10 +66,6 @@ app.get('/getMatchList', (req, res) => {
         page = 1,
         search = ''
     } = query;
-=======
-    let {userData, voteData, query} = req,
-        {limit = 10, page = 1, search = ''} = query;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
 
     //=>筛选合适人员
     userData = userData.slice(0).reverse();
@@ -134,17 +119,12 @@ app.get('/getMatchList', (req, res) => {
 });
 
 app.get('/vote', (req, res) => {
-<<<<<<< HEAD
     let {
         participantId
     } = req.query, {
         userData,
         voteData
     } = req;
-=======
-    let {participantId} = req.query,
-        {userData, voteData} = req;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     if (req.session.userID) {
         //=>向投票表中存放内容
         voteData.push({
@@ -176,7 +156,6 @@ app.get('/vote', (req, res) => {
 });
 
 app.get('/getUser', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         query
@@ -188,15 +167,6 @@ app.get('/getUser', (req, res) => {
         message: 'NO USER!',
         data: null
     };
-=======
-    let {userData, query} = req,
-        {userId = req.session.userID} = query,
-        result = {
-            code: 1,
-            message: 'NO USER!',
-            data: null
-        };
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     let item = userData.find(item => {
         return parseFloat(item['id']) === parseFloat(userId);
     });
@@ -211,7 +181,6 @@ app.get('/getUser', (req, res) => {
 });
 
 app.get('/checkUser', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         voteData,
@@ -223,14 +192,6 @@ app.get('/checkUser', (req, res) => {
         code: 1,
         message: 'NO!'
     };
-=======
-    let {userData, voteData, query} = req,
-        {checkId} = query,
-        result = {
-            code: 1,
-            message: 'NO!'
-        };
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     let item = voteData.find(item => {
         return parseFloat(item['voterId']) === parseFloat(req.session.userID) && parseFloat(item['participantId']) === parseFloat(checkId);
     });
@@ -244,7 +205,6 @@ app.get('/checkUser', (req, res) => {
 });
 
 app.get('/getMyVote', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         voteData
@@ -253,10 +213,6 @@ app.get('/getMyVote', (req, res) => {
             code: 1,
             message: 'NO LOGIN!'
         },
-=======
-    let {userData, voteData} = req,
-        result = {code: 1, message: 'NO LOGIN!'},
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
         ary = [];
     if (req.session.userID) {
         voteData.forEach(voteItem => {
@@ -277,22 +233,17 @@ app.get('/getMyVote', (req, res) => {
                 });
             }
         });
-<<<<<<< HEAD
         result = {
             code: 0,
             message: 'OK!',
             total: ary.length,
             list: ary
         };
-=======
-        result = {code: 0, message: 'OK!', total: ary.length, list: ary};
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     }
     res.send(result);
 });
 
 app.get('/getVoteMy', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         voteData
@@ -301,10 +252,6 @@ app.get('/getVoteMy', (req, res) => {
             code: 1,
             message: 'NO LOGIN!'
         },
-=======
-    let {userData, voteData} = req,
-        result = {code: 1, message: 'NO LOGIN!'},
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
         ary = [];
     if (req.session.userID) {
         voteData.forEach(voteItem => {
@@ -332,22 +279,17 @@ app.get('/getVoteMy', (req, res) => {
                 }
             });
         });
-<<<<<<< HEAD
         result = {
             code: 0,
             message: 'OK!',
             total: ary.length,
             list: ary
         };
-=======
-        result = {code: 0, message: 'OK!', total: ary.length, list: ary};
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     }
     res.send(result);
 });
 
 app.get('/checkPhone', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         query
@@ -365,15 +307,6 @@ app.get('/checkPhone', (req, res) => {
         code: 1,
         message: 'REGISTER!'
     } : null;
-=======
-    let {userData, query} = req,
-        {phone} = query,
-        result = {code: 0, message: 'NO REGISTER!'};
-    let flag = userData.find(item => {
-        return item['phone'] === phone;
-    });
-    flag ? result = {code: 1, message: 'REGISTER!'} : null;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     res.send(result);
 });
 
@@ -408,17 +341,12 @@ app.post('/match', (req, res) => {
         return;
     }
 
-<<<<<<< HEAD
     let {
         userData,
         voteData,
         body
     } = req,
     maxMatchId = 0;
-=======
-    let {userData, voteData, body} = req,
-        maxMatchId = 0;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     userData.forEach(item => {
         if (parseFloat(item['isMatch']) === 1) {
             maxMatchId = parseFloat(item['matchId']) > maxMatchId ? parseFloat(item['matchId']) : maxMatchId;
@@ -448,7 +376,6 @@ app.post('/match', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-<<<<<<< HEAD
     let {
         userData,
         voteData,
@@ -457,15 +384,10 @@ app.post('/login', (req, res) => {
         name = '',
         password = ''
     } = body;
-=======
-    let {userData, voteData, body} = req,
-        {name = '', password = ''} = body;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     password = utils.handMD5(password);
     let flag = userData.find(item => {
         return (item['name'] === name || item['phone'] === name) && item['password'] === password;
     });
-<<<<<<< HEAD
     flag ? (req.session.userID = flag['id'], res.send({
         code: 0,
         message: 'OK!'
@@ -481,13 +403,6 @@ app.post('/register', (req, res) => {
         voteData,
         body
     } = req;
-=======
-    flag ? (req.session.userID = flag['id'], res.send({code: 0, message: 'OK!'})) : res.send({code: 1, message: 'NO!'});
-});
-
-app.post('/register', (req, res) => {
-    let {userData, voteData, body} = req;
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     body = {
         id: userData.length === 0 ? 1 : parseFloat(userData[userData.length - 1]['id']) + 1,
         name: '',
@@ -523,9 +438,4 @@ app.use(function (req, res, next) {
     //=>404
     res.status(404);
     res.send('NOT FOUND!');
-<<<<<<< HEAD
 });
-=======
-});
-
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9

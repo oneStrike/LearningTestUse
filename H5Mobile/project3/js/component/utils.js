@@ -1,18 +1,16 @@
-let utils = (function anonymous() {
+let utils = (function () {
 
-    //=>URL地址解析
-    let queryURLParams = function (url = window.location.href) {
+    let queryURLParams = function (URL = window.location.href) {
         let obj = {},
             reg = /([^?=&#]+)=([^?=&#]+)/g;
-        url.replace(reg, (...arg) => {
-            let [, key, value] = arg;
-            obj[key] = value;
-        });
+        URL.replace(reg, (...arrs) => {
+            let [, key, val] = arrs;
+            obj[key] = val;
+        })
         return obj;
     };
 
-
     return {
-        queryURLParams
+        queryURLParams,
     }
 })();

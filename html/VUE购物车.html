@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			border: 2px solid black;
+			-moz-user-select: none;
+		}
+
+		tr,
+		td {
+			border: 2px solid black;
+			padding: 10px 18px;
+		}
+
+		th {
+			border: 2px solid black;
+			padding: 10px 18px;
+			background: #CCC;
+		}
+
+		span {
+			display: inline-block;
+			width: 10px;
+		}
+	</style>
+</head>
+<article class="container" v-cloak>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th v-for="item of headArr">{{item}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="(item,index) of bookData">
+				<td>{{index+1}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.time}}</td>
+				<td>{{item.price}}</td>
+				<td>
+					<button @click="computedNum(item.num,item.price,index,$event)">+</button>
+					<span>{{item.num}}</span>
+					<button @click="computedNum(item.num,item.price,index,$event)">-</button>
+				</td>
+				<td><button>移除</button></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="6">总价:{{totalCost}}</th>
+			</tr>
+		</tfoot>
+	</table>
+</article>
+
+<body>
+	<script src="../package/VUE2.6.10/vue.js"></script>
+	<script src="../package/axios/axios.js"></script>
+	<script>
+		(function () {
+			axios.get('../json/books.json').then(result => {
+				const app = new Vue({
+					el: '.container',
+					data: {
+						headArr: ['书籍', '时间', '单价', '数量', '操作'],
+						bookData: result.data,
+						totalPrice: 0,
+						in: 1,
+					},
+					methods: {
+						computedNum(num, pri, index, e) {
+							let target = e.target;
+							if (target.innerText === '+') {
+								this.bookData.forEach(function (item, i) {
+									if (i === index) {
+										item.num++;
+										item.price += 85;
+										this.totalPrice += item.price
+									}
+								});
+							}
+						},
+					},
+					computed: {
+						totalCost() {
+							this.totalPrice = this.bookData.reduce(function (accumulator, currentValue) {
+								return accumulator + currentValue.price;
+							}, 0);
+							return this.totalPrice
+						}
+
+					}
+				})
+			})
+		})();
+	</script>
+</body>
+
+</html>

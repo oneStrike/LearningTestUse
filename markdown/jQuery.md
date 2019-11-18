@@ -465,18 +465,43 @@ jQuery(function($) {
   <script>
     jQuery(function($) {
       $(function() {
-        $("div").addClass("current");
+      	let $ele=$('div');
+        $ele.addClass("current");
         //=>将一个类名添加到页面文档元素中
 
-        $("div").removeClass("current");
+        $ele.removeClass("current");
         //=>将页面文档元素中的类名删除
 
-        $("div").toggleClass("current");
+        $ele.toggleClass("current");
         //=>如果元素中有这个类名，则删除，没有则添加
       });
     });
   </script>
 </body>
+
+<!--快速实现选项卡-->
+<style>
+    .active{
+        color:red;
+    }
+</style>
+<ul>
+    <li>10</li>
+    <li>20</li>
+    <li>30</li>
+    <li>40</li>
+</ul>
+<script>
+    $(function(){
+    	    let $cur=$(e.target);
+    	   $cur.addClass('isRed').siblings('li').removeClass('isRed');
+           /**
+           * 让当前点击的元素增加一个类名,操作完成后返回一个行的Jq实例
+           * 继续调用siblings方法获取到处当前点击项以外的所有兄弟项
+           * 将所有兄弟项的类名移除
+           */
+    })
+</script>
 ```
 
 **`show`/`hide`/`toggle`**

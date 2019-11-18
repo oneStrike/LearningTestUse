@@ -8,20 +8,57 @@
     <title>Document</title>
     <style>
         article {
-            width: 800px;
-            height: 80px;
-            border: 2px solid #4e158f;
-            margin: 110px auto;
-            font-size: 30px;
+            width: 400px;
+            height: 60px;
+            border: 3px solid orangered;
+            margin: 100px auto;
             text-align: center;
-            line-height: 80px;
+        }
+
+        span {
+            width: 400px;
+            height: 60px;
+            font-size: 28px;
+            line-height: 60px;
         }
     </style>
 </head>
 
 <body>
+    <article>
+        <span>距离抢购开始: 00 : 00 : 00</span>
+    </article>
     <script>
-       
+        let span = document.querySelector('span'),
+            timer = null;
+        new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('HEAD', '../json/banner.json');
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 2) {
+                    resolve(xhr.getResponseHeader('date'));
+                }
+            }
+            xhr.send(null);
+        }).then(result => {
+            let serverTime = +(new Date(result)),
+                startTime = +(new Date(2019, 10, 22, 24, 60, 00)),
+                diffTime = startTime - serverTime;
+
+            timer = function () {
+                diffTime -= 1000;
+                let seconds = Math.floor(diffTime / 1000),
+                    second = Math.floor(seconds % 60),
+                    minute = Math.floor((seconds / 60) % 60),
+                    hour = Math.floor((seconds / 60 / 60) % 24),
+                    day = Math.floor((seconds / 60 / 60 - hour) / 24);
+                span.innerHTML =
+                    `距离抢购开始:${day>9?day:'0'+day}天 ${hour>9?hour:'0'+hour} : ${minute>9?minute:'0'+minute} : ${second>9?second:'0'+second}`;
+            }
+            return timer;
+        }).then((timer) => {
+            setInterval(timer, 1000);
+        });
     </script>
 </body>
 

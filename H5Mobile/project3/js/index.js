@@ -5,32 +5,22 @@ let matchRender = (function ($) {
 
     let limit = 10,
         page = 1,
-<<<<<<< HEAD
         pageNum = 1,
         togle = 10,
         isRun = false,
-=======
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
         search = '';
 
     // 基于axios发送请求获取数据
     let queryData = function queryData() {
-<<<<<<< HEAD
         axios.get('/getMatchList', {
-=======
-        axios.get('http://localhost:8080/getMatchList', {
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
             params: {
                 limit,
                 page,
                 search
             }
         }).then(result => {
-<<<<<<< HEAD
             pageNum = result['pageNum'];
             togle = result['togle'];
-=======
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
             return result;
         }).then(bindHTML);
     };
@@ -54,7 +44,6 @@ let matchRender = (function ($) {
         $tip.css('display', 'none');
         let $frag = $(document.createDocumentFragment());
         list.forEach((item, index) => {
-<<<<<<< HEAD
             let {
                 id,
                 name,
@@ -78,27 +67,11 @@ let matchRender = (function ($) {
                 <div class="vote">
                     <span class="voteNum">${voteNum}</span>
                     ${parseFloat(isVote)===0?`<a href="javascript:;" class="voteBtn">投他一票</a>`:``}
-=======
-            $frag.append(`<li>
-                <a href="detail.html?userId=0">
-                    <img src="img/man.png" alt="" class="picture">
-                    <p class="title">
-                        <span>canfoo</span>
-                        |
-                        <span>编号 #001</span>
-                    </p>
-                    <p class="slogan">同一个世界同一个梦想同一个世界同一个梦想</p>
-                </a>
-                <div class="vote">
-                    <span class="voteNum">7</span>
-                    <a href="javascript:;" class="voteBtn">投他一票</a>
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
                 </div>
             </li>`);
         });
         $wrapper.append($frag);
         $frag = null;
-<<<<<<< HEAD
         isRun = false;
     };
 
@@ -123,14 +96,11 @@ let matchRender = (function ($) {
             $empty.css('display', 'none');
             clearTimeout($empty.timer);
         }, 3000);
-=======
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
     };
 
     return {
         init: function () {
             queryData();
-<<<<<<< HEAD
             $(window).on('scroll', () => {
                 let {
                     clientHeight,
@@ -151,8 +121,6 @@ let matchRender = (function ($) {
                 }
             });
             $searchBtn.tap(searchStart);
-=======
->>>>>>> 1aa0060ee7f3c80b41b95966ae24de76afa1b5c9
         },
     }
 })(Zepto);
