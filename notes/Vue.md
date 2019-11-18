@@ -1432,11 +1432,3 @@ result  ==>父组件接收数据的自定义事件名
   -->
 </template>
 ```
-
-## VUE/CLI
-
-> `VUE`的脚手架
-
-###　 RunTimeCompiler
-
-### RunTime-only
