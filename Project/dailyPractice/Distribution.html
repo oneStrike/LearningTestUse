@@ -2,92 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/reset.min.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/reset.min.css">
+	<link rel="stylesheet" href="../css/index.css">
+	<script src="../jQuery/node_modules/jquery/dist/jquery.js"></script>
 </head>
 
 <body>
-    <ul class="flowBox">
-        <li>
-            <!-- <a href="${link}">
-        <div><img src="${pic}" alt=""></div>
-        <span>${title}</span>
-    </a> -->
-        </li>
-        <li></li>
-        <li></li>
+<ul class="flowBox">
+	<li>
+		<!-- <a href="${link}">
+<div><img src="${pic}" alt=""></div>
+<span>${title}</span>
+</a> -->
+	</li>
+	<li></li>
+	<li></li>
 
-    </ul>
+</ul>
 
-    <!--    <script src="../js/Distribution.js"></script>-->
-    <script>
-        $(function () {
-            //1.获取数据
-            let page = 0,
-                imgData = null,
-                isRun = false;
-            let queryData = () => {
-                page++;
-                $.ajax({
-                    url: `../json/data.json?page=${page}`,
-                    method: 'get',
-                    async: false,
-                    dataType: 'json',
-                    success: result => {
-                        imgData = result;
-                    }
-                });
-            };
-            queryData();
+<!--    <script src="../js/Distribution.js"></script>-->
+<script>
+	$(function () {
+		//1.获取数据
+		let page = 0,
+				imgData = null,
+				isRun = false;
+		let queryData = () => {
+			page++;
+			$.ajax({
+				url: `../json/data.json?page=${page}`,
+				method: 'get',
+				async: false,
+				dataType: 'json',
+				success: result => {
+					imgData = result;
+				}
+			});
+		};
+		queryData();
 
-            //2.数据绑定
-            let bindHTML = () => {
-                let $boxList = $('.flowBox > li');
-                for (let i = 0; i < imgData.length; i += 3) {
-                    $boxList.sort((a, b) => {
-                        return $(a).outerHeight() - $(b).outerHeight();
-                    }).each((index, curLi) => {
-                        let item = imgData[i + index];
-                        if (!item) return;
-                        let {
-                            id,
-                            pic,
-                            link,
-                            title
-                        } = item;
-                        $(`<a href="${link}">
+		//2.数据绑定
+		let bindHTML = () => {
+			let $boxList = $('.flowBox > li');
+			for (let i = 0; i < imgData.length; i += 3) {
+				$boxList.sort((a, b) => {
+					return $(a).outerHeight() - $(b).outerHeight();
+				}).each((index, curLi) => {
+					let item = imgData[i + index];
+					if (!item) return;
+					let {
+						id,
+						pic,
+						link,
+						title
+					} = item;
+					$(`<a href="${link}">
                     <div><img src="${pic}" alt=""></div>
                     <span>${title}</span>
                 </a>`).appendTo($(curLi));
-                    });
-                }
-                isRun = false;
-            };
-            bindHTML();
+				});
+			}
+			isRun = false;
+		};
+		bindHTML();
 
-            //3.当滚动到页面底部的时候，加载下一页的更多数据
-            $(window).on('scroll', () => {
-                let winH = $(window).outerHeight(),
-                    pageH = document.documentElement.scrollHeight || document.body.scrollHeight,
-                    scrollT = $(window).scrollTop();
-                if ((scrollT + 100) >= (pageH - winH)) {
-                    if (isRun) return;
-                    isRun = true;
-                    if (page > 5) {
-                        alert('没有更多数据了');
-                        return;
-                    }
-                    queryData();
-                    bindHTML();
-                }
-            });
-        });
-    </script>
+		//3.当滚动到页面底部的时候，加载下一页的更多数据
+		$(window).on('scroll', () => {
+			let winH = $(window).outerHeight(),
+					pageH = document.documentElement.scrollHeight || document.body.scrollHeight,
+					scrollT = $(window).scrollTop();
+			if ((scrollT + 100) >= (pageH - winH)) {
+				if (isRun) return;
+				isRun = true;
+				if (page > 5) {
+					alert('没有更多数据了');
+					return;
+				}
+				queryData();
+				bindHTML();
+			}
+		});
+	});
+</script>
 </body>
 
 </html>

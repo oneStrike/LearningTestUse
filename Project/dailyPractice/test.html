@@ -1,20 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport"
-				content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible"
-				content="ie=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 </head>
-
 <body>
-	<!-- <script type="module"
-					src="./test1.js"></script> -->
-	<script type="module"
-					src="./test2.js"></script>
+<script src="./package/jQuery1.11.3/jquery.js"></script>
+<script>
+	let data = null;
+ 	$(function () {
+		$.ajax({
+			url: './json/banner.json',
+			method: 'GET',
+			dataType: 'json',
+			async: false,
+			success: result => {
+				data = result
+			}
+		});
+		console.log(data);
+	})
+</script>
 </body>
-
 </html>

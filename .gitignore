@@ -1,5 +1,6 @@
 # dependencies
 node_modules
+explore
 
 # testing
 /coverage
@@ -31,4 +32,3 @@ launch.json
 .launch.json
 git
 !/html/test.html
-.

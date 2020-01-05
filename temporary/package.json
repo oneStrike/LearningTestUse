@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  //=>项目名称
+  "version": "1.0.0",
+  //=>项目版本号
+  "description": "",
+  // =>项目描述
+  "dependencies": {
+    //=>依赖的插件,模块,loader
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {},
+  //=>开发时依赖
+  "scripts": {
+    "build": "webpack"
+    //=>build  >>> 自定义命令  优先使用本地webpack开始打包项目
+  },
+  "author": "",
+  //=>作者
+  "license": "ISC"
+  //=>开源协议
+}

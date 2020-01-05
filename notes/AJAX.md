@@ -564,3 +564,75 @@ xhr.abort();
 **ontimeout:**
 
 请求超时时触发
+
+## Axios
+
+> 在项目中封装一个请求模块,以减少对第三方类库的依赖,直接将所有需要请求的操作封装在一个函数中,维护的时候只需要操作这一个就可以了
+
+```javascript
+export function request(config) {
+  const instance = axios.create({
+    baseURL: "", //=>当前实例公共的URL请求地址
+    timeout: 5000//=>请求超时时间
+  });
+  
+  instance.interceptors.request.use(config=>{
+  	config.params.a=1;
+  	config.data.b=2;
+  	config.headers.c=3;
+  	return config;
+    /**
+    * 设置请求拦截,获取到的是请求的配置信息
+    * 需要将配置信息return才可以成功发送请求
+    * 通常是将一些请求时公共的配置设置在请求拦截中
+    * get请求时params可以设置请求时携带的参数
+    * post请求时data可以设置请求时携带的参数
+    * heads可以设置请求头中携带的参数
+    **/
+  },err=>{
+  	console.log(err);
+  	//=>请求失败的操作
+  });
+  
+  instance.interceptors.use.response(res=>{ 
+  	return rse.data;
+  	/**
+  	* 设置响应拦截,可以获取的响应的数据,由于axios将获取的数据
+  	* 重新封装在一个对象中,响应的主体是在对象的data属性中,因此
+  	* 可以直接return出data属性,如果不进行return
+  	* then中将无法获取到响应的数据
+  	**/
+  },err=>{
+  	console.log(err);
+  	//=>响应失败处理的操作
+  });
+  
+  return instance(config);
+  /**
+  * 执行封装的函数就可以直接发发送AJAX请求,axios返回的是一个Promise实例
+  * 一次可以直接在调用函数之后直接进行then操作
+  **/
+}
+```
+
+> 可以将一个大功能区的请求操作再一次封装在一个单独的文件中,将封装后的文件直接导入操作中的文件中执行对应的函数即可,以便于以后的维护,只需要修改一个文件中的请求配置就可以了,不需要修改每一个文件中的请求操作,如果操作的数据适合后端进行关联的需要等后端处理完毕后前段才可以进行相应的操作,可以通过判断响应的状态码进行判断后端的操作是否成功,
+
+```javascript
+import request from '公共的请求函数文件'
+//=>导入公共的请求函数文件
+export function getHomeData(){
+	return request({
+	url:'请求的具体地址',
+	method:'请求的方法,get或者post等',
+	data:{
+		key:'value',
+		//=>post请求发送请求时需要传递的数据放入data对象中
+	},
+	params:{
+		key:'value',
+		//=>get请求发送请求时需要传递的数据方法放入params中
+	}
+	})
+}
+
+```

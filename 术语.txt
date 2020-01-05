@@ -1,3 +1,4 @@
 env ==> environment ==>环境
 e2e ==> end to end  ==>端到端测试
-VCS ==>version vontrol system  ==>版本控制系统
+VCS ==> version vontrol system  ==>版本控制系统
+SPA ==> simple page web application  ==>单页面富应用

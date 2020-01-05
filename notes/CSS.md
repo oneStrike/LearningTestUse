@@ -1771,7 +1771,7 @@ box-shadow ==>设置一个或者多个阴影效果,多个阴影效果之间使�
 
 - 弹性盒子内的子元素无法使用一下的属性
 
-1. flaot 属性无法使用,因为 float 会将子元素的 display 转换为 block
+1. float 属性无法使用,因为 float 会将子元素的 display 转换为 block
 2. column 属性无法使用
 3. clear 属性无效
 4. vertical-align 属性无效
@@ -1813,7 +1813,7 @@ box-shadow ==>设置一个或者多个阴影效果,多个阴影效果之间使�
 
 > direction 和 wrap 的缩写,默认是`flex-flow:row nowrap;`
 
-**just-content:**
+**justify-content:**
 
 > 定义弹性元素在主轴上的对其方式
 
