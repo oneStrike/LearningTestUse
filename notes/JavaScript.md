@@ -290,7 +290,11 @@ var ary = [
 当一个数组中的值仍然是一个数组，这种叫作**多维数组**
 
 ```javascript
-var arr = [[10, 20], [30, 40], [50, 60]];
+var arr = [
+  [10, 20],
+  [30, 40],
+  [50, 60]
+];
 
 /**
  * 数组之间的相互嵌套叫作多维数组，根据嵌套的层级分为
@@ -333,7 +337,7 @@ Boolean(1);
 
 !"珠峰培训";
 //=>false
-//=>先把其它数据类型转换为布尔类型，然后取反
+//=>先把其它数据类型转换为布尔类型，然后取反.
 
 !!null;
 //=>去两次反，等价于没取反，可以用作转换成Boolean类型
@@ -5480,7 +5484,7 @@ myArray.myMethod = function(str) {
 setTimeout(myArray.myMethod, 1000);
 ```
 
-**清除定时器****
+**清除定时器\*\***
 
 根据定时器的返回值清除定时器的两种方法,`clearTimeout`和`clearInterval`都可以清除`setTimerout`和`setInterval`这两个定时器,并没有区别,但是为了避免混淆,还是应该正确的使用
 
@@ -6198,7 +6202,11 @@ console.log(map);
 > 获取实例的属性,返回获取到的属性,如果获取的属性不存在,返回`undefiend`
 
 ```javascript
-let map = new Map([["1", "2"], ["2", "3"], ["3", "4"]]);
+let map = new Map([
+  ["1", "2"],
+  ["2", "3"],
+  ["3", "4"]
+]);
 console.log(map.get("2"));
 //=>'3'
 console.log(map.get(2));
@@ -6210,7 +6218,11 @@ console.log(map.get(2));
 > 检查是否包含某一个属性,返回一个`boolean`
 
 ```javascript
-let map = new Map([["1", "2"], ["2", "3"], ["3", "4"]]);
+let map = new Map([
+  ["1", "2"],
+  ["2", "3"],
+  ["3", "4"]
+]);
 console.log(map.has("2"));
 //=>true
 console.log(map.has(2));
@@ -6222,7 +6234,11 @@ console.log(map.has(2));
 > 删除特定的属性,返回一个`boolean`
 
 ```javascript
-let map = new Map([["1", "2"], ["2", "3"], ["3", "4"]]);
+let map = new Map([
+  ["1", "2"],
+  ["2", "3"],
+  ["3", "4"]
+]);
 console.log(map.delete("2"));
 //=>true
 console.log(map.delete(2));
@@ -6234,7 +6250,11 @@ console.log(map.delete(2));
 > 清空所有的属性,没有返回值
 
 ```javascript
-let map = new Map([["1", "2"], ["2", "3"], ["3", "4"]]);
+let map = new Map([
+  ["1", "2"],
+  ["2", "3"],
+  ["3", "4"]
+]);
 console.log(map.clear());
 ```
 
@@ -6255,7 +6275,11 @@ console.log(map.clear());
 > 为每一个成员项都执行一个回调函数
 
 ```javascript
-let map = new Map([["name", "绫"], ["age", 20], ["sex", "女"]]);
+let map = new Map([
+  ["name", "绫"],
+  ["age", 20],
+  ["sex", "女"]
+]);
 
 //=>keys()
 for (let key of map.keys()) {
@@ -6303,7 +6327,11 @@ map.forEach((value, key, map) => {
 Map.prototype[Symbol.iterator] === Map.prototype.entries;
 //=>true 默认就是使用的entries遍历接口
 
-let map = new Map([["name", "绫"], ["age", 20], ["sex", "女"]]);
+let map = new Map([
+  ["name", "绫"],
+  ["age", 20],
+  ["sex", "女"]
+]);
 for (let [key, value] of map) {
   console.log(key, value);
   //=>key代表的就是键
