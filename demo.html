@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-      <container></container>
-    </div>
-    <script src="Project/dailyPractice/package/VUE2.6.10/vue.js"></script>
-    <script src="Project/dailyPractice/package/VUE2.6.10/vue-router.js"></script>
-    <script>
-      let Room = {
-        template: `
+<head>
+  <meta charset="UTF-8"/>
+  <meta
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <container></container>
+</div>
+<script src="Project/dailyPractice/package/VUE2.6.10/vue.js"></script>
+<script src="Project/dailyPractice/package/VUE2.6.10/vue-router.js"></script>
+<script>
+  let Room = {
+    template: `
 			<div>房间</div>
 		`
-      };
-      const routes = [
-        {
-          path: "/room",
-          component: Room,
-          meta: { name: "word" }
-        }
-      ];
-      const router = new VueRouter({ routes });
-      new Vue({
-        router,
-        components: {
-          container: {
-            template: `
+
+  };
+  const routes = [
+    {
+      path: "/room",
+      component: Room,
+      meta: {name: "word"}
+    }
+  ];
+  const router = new VueRouter({routes});
+  new Vue({
+    router,
+    components: {
+      container: {
+        template: `
 					<div>
 						<router-link to="/room">{{$route.matched[0].meta}}</router-link>
 						<router-view></router-view>
 					</div>
 				`,
-            props: {
-              name: String
-            }
-          }
+        props: {
+          name: String
         }
-      }).$mount("#app");
-      console.log(2
-      );
-    </script>
-  </body>
+      }
+    }
+  }).$mount("#app");
+  console.log(2
+  );
+</script>
+</body>
 </html>

@@ -161,6 +161,7 @@ var f = undefined;
 ### 引用数据类型
 
 ```javascript
+```javascript
 var o = { name: "珠峰培训", age: 9 };
 //=>普通的对象：由大括号包裹起来，里面包含多组属性名和属性值
 //=>也叫做键值对
@@ -181,7 +182,7 @@ function fn() {}
 
 var a = Symbol("珠峰");
 var b = Symbol("珠峰");
-a == b; //=>false
+a === b; //=>false
 //=>[Symbol]：创建出来的是一个唯一的值
 ```
 
@@ -5560,7 +5561,7 @@ setTimeout(function() {
 while (1 === 1) {}
 /**
  * 定时器中的输出语句永远不会执行
- * 因为whiel是一个死循环,并不会结束运行
+ * 因为while是一个死循环,并不会结束运行
  * 主任务不结束,等待任务永远不会执行
  */
 ```
