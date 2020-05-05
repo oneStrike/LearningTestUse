@@ -575,7 +575,7 @@ export function request(config) {
     baseURL: "", //=>当前实例公共的URL请求地址
     timeout: 5000//=>请求超时时间
   });
-  
+
   instance.interceptors.request.use(config=>{
   	config.params.a=1;
   	config.data.b=2;
@@ -593,8 +593,8 @@ export function request(config) {
   	console.log(err);
   	//=>请求失败的操作
   });
-  
-  instance.interceptors.use.response(res=>{ 
+
+  instance.interceptors.use.response(res=>{
   	return rse.data;
   	/**
   	* 设置响应拦截,可以获取的响应的数据,由于axios将获取的数据
@@ -606,7 +606,7 @@ export function request(config) {
   	console.log(err);
   	//=>响应失败处理的操作
   });
-  
+
   return instance(config);
   /**
   * 执行封装的函数就可以直接发发送AJAX请求,axios返回的是一个Promise实例

@@ -1,12 +1,23 @@
-async function t() {
-  try {
-    let [result, result2] = await Promise.all([
-      Promise.resolve(1),
-      Promise.resolve(2),
-    ]);
-    return [result, result2];
-  } catch (err) {
-    //=>捕获错误
+(function () {
+  function Promise(executor) {
+    function resolve(value) {}
+
+    function reject(reason) {}
+
+    executor(resolve, reject);
   }
-}
-t().then((value) => console.log(value));
+
+  Promise.prototype.then = function (onResolved, onRejected) {};
+
+  Promise.prototype.catch = function (onRejected) {};
+
+  Promise.resolve = function (value) {};
+
+  Promise.reject = function (reason) {};
+
+  Promise.all = function (promiseArr) {};
+
+  Promise.race = function (promiseArr) {};
+
+  window.Promise = Promise;
+})();
