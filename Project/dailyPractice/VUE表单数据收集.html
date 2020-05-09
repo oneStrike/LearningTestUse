@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="demo">
+  <form action="xxx" method="get">
+    <p>
+      姓名：
+      <label>
+        <input type="text" v-model="user.username">
+      </label><br>
+    </p>
+    <p>
+      密码：
+      <label>
+        <input type="text" v-model="user.password">
+      </label><br>
+    </p>
+    <p>
+      性别：
+      <input type="radio" id="man" name="male" v-model="user.sex" value="man">
+      <label for="man">男</label>
+      <input type="radio" id="woman" name="male" v-model="user.sex" value="woman">
+      <label for="woman">女</label>
+    </p>
+    <p>
+      爱好：
+      <input type="checkbox" id="basket" v-model="user.likes" value="basket">
+      <label for="basket">篮球</label>
+      <input type="checkbox" id="foot" v-model="user.likes" value="foot">
+      <label for="foot">足球</label>
+      <input type="checkbox" id="pingpang" v-model="user.likes" value="pingpang">
+      <label for="pingpang">乒乓</label>
+    </p>
+    <p>
+      城市：
+      <label for="city"></label>
+      <select name="" id="city" v-model="user.cityId">
+        <option value="">未选择</option>
+        <option value="" v-for="(item,index) in allCitys" :key="item.id" :value="item.id">{{item.city}}</option>
+      </select>
+    </p>
+    <p>
+      介绍：
+      <label for="intro"></label>
+      <textarea rows="10" id="intro" v-model="user.info"></textarea>
+    </p>
+    <input type="submit" value="注册" @click.prevent="register">
+  </form>
+</div>
+<script src="./package/VUE2.6.10/vue.js"></script>
+<script>
+  const vm = new Vue({
+    data: {
+      allCitys: [
+        {id: 1, city: '北京'},
+        {id: 2, city: '上海'},
+        {id: 3, city: '广州'}
+      ],
+      user: {
+        username: '',
+        password: '',
+        sex: 'man',
+        likes: ['basket'],
+        cityId: 1,
+        info: '',
+      }
+    },
+    methods: {
+      register() {
+        console.log(JSON.stringify(this.user))
+      }
+    }
+  }).$mount('#demo')
+</script>
+</body>
+</html>
