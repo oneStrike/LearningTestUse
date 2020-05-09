@@ -16,6 +16,7 @@ module.explorts = {
   entry: "./src/js/index.js",
   //=>entry >>> 打包文件的入口,webpack会以设置的文件作为打包的起始文件
   output: {
+
     //=>output  >>> 设置webpack的出口目录,必须使用绝对路径
     path: path.resolve(__dirname, 'dist'),
     //=>path.resolve  >>> path中的一个方法

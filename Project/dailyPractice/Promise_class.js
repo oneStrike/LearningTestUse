@@ -2,6 +2,7 @@
   const PENDING = "pending";
   const RESOLVED = "resolved";
   const REJECTED = "rejected";
+
   class Promise {
     constructor(executor) {
       const self = this;
@@ -28,19 +29,20 @@
           callback.onRejected(self.data);
         });
       }
+
       executor(resolve, reject);
     }
 
     then(onReseolved, onRejected) {
       const self = this;
-      onResolved =
-        typeof onResolved === "function" ? onResolved : (value) => value;
+      onReseolved =
+        typeof onReseolved === "function" ? onReseolved : (value) => value;
       onRejected =
         typeof onRejected === "function"
           ? onRejected
           : (reason) => {
-              throw reason;
-            };
+            throw reason;
+          };
       return new Promise(function (resolve, reject) {
         function handle(callback) {
           try {
@@ -128,5 +130,6 @@
       });
     }
   }
+
   window.Promise = Promise;
 })();

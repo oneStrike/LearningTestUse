@@ -265,7 +265,7 @@ meta 主要是提供一些关于网站的元信息,例如网站的关键字描�
   <input type="checkbox" checked disabled />
   <!--    多选框-->
   <input type="radio" name="sex" id="man" /><label for="man">男</label>
-  <input type="radio" name="sex" id="woman" /><label for="woman">女</label>
+  <input type="radio" name="sex" id="woman" /><label for="woman"></label>
   <!--    单选框-->
   <input type="submit" />
   <!--    提交按钮-->

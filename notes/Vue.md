@@ -8,13 +8,43 @@
 - v>>> view >>> 识图
 - VM >>> ViewModel >>> 识图模块
 
-> `MVVM`使用的是数据驱动,并不是 DOM 驱动,普通的开发模式是通过操作 DOM 来改变页面中展示的效果,VUE 则是直接操作数据,通过响应式动态的改变页面,并不是直接的操作 DOM,但是并不是所有的数据都是响应式的,也有例外,比如通过数组索引的方式修改数据就不会触发响应式,页面也就不会产生变化
+> `MVVM`使用的是数据驱动,并不是 DOM 驱动,普通的开发模式是通过操作 DOM 来改变页面中展示的效果,VUE 则是直接操作数据,通过响应式动态的改变页面,并不是直接的操作 DOM,但是并不是所有的数据都是响应式的,
+
+在`VUE`中通过索引的方式修改数组并不会动态的更新页面，但是数据是可以修改成功的
+
+## 响应式原理
+
+### 对象
+
+如果对象不在`VUE`中`data`属性中，`VUE`就无法检测对象属性的变化
+
+```javascript
+const vm = new Vue({
+  data:{
+    a:'1'
+  }
+})
+vm.a;
+//=>数据是响应式的
+
+vm.b;
+//=>非响应式
+```
+
+在对对象修改的时候，`VUE`会将对象的所有属性遍历出来，同时依赖`Object.defineProperty()`方法将这些属性全部转为`getter`和`setter`，`VUE`就是通过`Object.defineProperty()`方法对对象的数据进行追踪从而实现数据的响应式更新
+
+### 数组
+
+1. 通过索引值修改数组`VUE`无法检测到数组的变化
+2. 修改数组的长度也无法检测到数组的变化
+
+对于数组通过`splice`,`push`,'reverse'等方法修改时是可以检测到数组的变化的，那是因为`VUE`重写了原生的这些方法，在`VUE`中使用这些方法其实使用的都是`VUE`重写后的方法
 
 ## 生命周期
 
 ![QuWfUA.png](https://s2.ax1x.com/2019/12/02/QuWfUA.png)
 
-> 生命函数中禁止使用箭头函数,因为`this`的指向会变得不明确,并不指向 VUE 的实例,所有的组件也都用于相同的生命周期函数,同时组件之间的声明周期函数并不通用,越靠近根节点的组件相同的声明周期函数执行的越靠后
+> 生命函数中禁止使用箭头函数,因为`this`的指向会变得不明确,并不指向 VUE 的实例,所有的组件也都用于相同的生命周期函数,同时组件之间的生命周期函数并不通用,越靠近根节点的组件相同的声明周期函数执行的越靠后
 
 **beforeCreate:**
 
@@ -22,7 +52,7 @@
 
 **created:**
 
-> 实例初始化之后挂载之前调用的声明周期函数,此时的`data`和`methods`的数据已经被初始化,
+> 实例初始化之后挂载之前调用的生命周期函数,此时的`data`和`methods`的数据已经被初始化,
 
 **beforeMount:**
 
@@ -160,6 +190,8 @@ DOM元素中的内容也会改变,通过索引改变的数据除外
 
 > `methods`可以完成大部分的`computed`中的任务,不过`methods`和`computed`仍然具有差别性,`methods`只要触发就会执行一次这个方法,(页面更新,用户行为)而`computed`则会将计算出的结果进行缓存,只要源数据不发生改变,那么`computed`会使用缓存的数据,并不会重新计算属性,这更加的利于性能的优化
 
+`computed`的缓存机制内部使用的是对象的结构，将`computed`中计算出的值以对象的形式存储
+
 ```html
 <div class="test">
   <!--只要被调用就会重新拉取数据,进行计算-->
@@ -264,11 +296,7 @@ new VUe({
   }
 });
 //=>使用方法
-{
-  {
-    message | 过滤器;
-  }
-}
+{{message | 过滤器;}}
 </script>
 ```
 
@@ -284,7 +312,7 @@ const vm = new Vue({
       { name: "ping", sex: 0 },
       { name: "ling", sex: 0 },
       { name: "ding", sex: 1 }
-    ]
+      ]
   },
   filters: {
     formatSex(value) {
@@ -293,6 +321,29 @@ const vm = new Vue({
     }
   }
 }).$mount("#app");
+</script>
+```
+
+在使用过滤器的时候可以传递零到多个值
+
+```vue
+<div id="demo">
+  <p>{{persons[0].sex | formatSex('性')}}</p>
+<!--  在使用过滤器时传递一个参数-->
+</div>
+<script>
+  new Vue({
+    data:{
+      persons:[
+        {id:1,sex:0}
+      ]
+    }，
+    filters:{
+      formatSe(value,a){
+        return value ? '男' + a : '女' + a;
+      }
+    }
+  }).$mount('#demo')
 </script>
 ```
 
@@ -413,7 +464,7 @@ const vm = new Vue({
 
 ### v-cloak
 
-> 这个指令会在`VUE`编译完成之前一直存在,在`VUE`编译结束之后会自动去除,可以结合`CSS`做一些特殊的效果
+> 这个指令会在`VUE`编译完直存在,在`VUE`编译结束之后会自动去除,可以结合`CSS`做一些特殊的效果
 
 ```html
 <style>
@@ -684,7 +735,7 @@ const vm = new Vue({
   可以增加性能
 -->
 ================================================
-<!--多个修饰符之间可以串联使用-->
+<!--多个修饰符之间可以串 修饰符之间可联使用-->
 <div class="test" v-on:click="test('123')">
   <a href="https://www.baidu.com" v-on:click.prevent.stop="test($event)"
     >{{content}}</a
@@ -884,7 +935,7 @@ const vm = new Vue({
     el: ".container",
     data: {
       picked: "男",
-      //=>单选框中此处书写选框值等于默认的选中值
+      //=>单选框中此处书写选框 框中此处书值等于默认的选中值
       hobbys: [],
       //=>多选框,数组中书写的值等于默认选中的值
       fruit: "",
@@ -920,6 +971,45 @@ const vm = new Vue({
       hobbys: []
     }
   });
+</script>
+```
+
+### 自定义指令
+
+`VUE`支持自定义指令以应对不同的使用开发需求
+
+1. `directive`注册全局指令
+2. `directives`注册局部指令
+
+```vue
+<div id="demo">
+  <p v-upper-text="msg"></p>
+</div>
+<script>
+  new Vue({
+    data:{
+      msg:'i love you'
+    },
+    //=>注册局部指令
+    directives:{
+        /**
+        * js 语法并不支持使用 - 作为函数或者变量的名称
+        * 但是可以使用字符串，无论这个字符串的字符是什么
+        * 在自定义指令的时候，由于指令名存在 -
+        * 可以使用字符串格式的函数名
+        */
+      'upper-text' (el,binding){
+        /**
+        * el == 指令绑定的元素，可以直接操作元素
+        * binding == 一个对象，包含指令的相关信息
+        **/
+        el.innerText = binding.value.toUpperCase();
+        //=>binding.value == 指令的绑定的信息
+      }
+    }
+  }).$mount('#demo');
+  Vue.directive('upper-text',function(el,binding){});
+  //=>注册全局自定义指令
 </script>
 ```
 
@@ -1125,16 +1215,7 @@ Vue.component("my_cpn", {
     data: {
       film: ["海王", "海尔兄弟", "加勒比海盗"]
     },
-    components: {
-      //=>注册一个组件
-      explore: {
-        //=>组件的名称
-        template: "#cpn",
-        //=>绑定组件模板中自定义的ID名
-        props: ["films"]
-        //=>定义需要接收的父组件中的数据,数组中可以接受任意个参数
-      }
-    }
++
   });
 </script>
 ```
